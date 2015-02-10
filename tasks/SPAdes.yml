@@ -1,0 +1,12 @@
+- name: Download SPAdes
+  get_url:
+    url=http://spades.bioinf.spbau.ru/release3.5.0/SPAdes-3.5.0-Linux.tar.gz
+    dest={{source_dir}}
+
+- name: Uncompress SPAdes
+  unarchive: src={{ source_dir }}/SPAdes-3.5.0-Linux.tar.gz dest={{ soft_dir }} copy=no
+
+- file: dest="{{modules_dir}}/modulefiles/SPAdes" state=directory mode=0755
+
+- name: SPAdes module definition
+  template: src=templates/SPAdes.lua.j2 dest={{ modules_dir }}/modulefiles/SPAdes/3.5.0.lua owner=root mode=644

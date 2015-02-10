@@ -1,0 +1,13 @@
+- name: Update APT cache
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Install packages
+  apt: pkg={{item}} state=present
+  with_items:
+    - lua5.2
+    - liblua5.2-dev
+    - lua-filesystem
+    - lua-posix
+    - gcc
+    - tcl
+    - zsh
