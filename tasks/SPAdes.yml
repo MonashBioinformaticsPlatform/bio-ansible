@@ -1,7 +1,7 @@
 - name: Download SPAdes
   get_url:
     url=http://spades.bioinf.spbau.ru/release3.5.0/SPAdes-3.5.0-Linux.tar.gz
-    dest={{source_dir}}
+    dest={{source_dir}}/SPAdes-3.5.0-Linux.tar.gz
 
 - name: Uncompress SPAdes
   unarchive: src={{ source_dir }}/SPAdes-3.5.0-Linux.tar.gz dest={{ soft_dir }} copy=no
