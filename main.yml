@@ -16,3 +16,4 @@
 
     - include: tasks/SPAdes.yml
     - include: tasks/BWA.yml
+    - include: tasks/STAR.yml
