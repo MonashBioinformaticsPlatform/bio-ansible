@@ -9,7 +9,7 @@
 - name: Download LMOD
   get_url:
     url=http://downloads.sourceforge.net/project/lmod/Lmod-{{ lmod_version }}.tar.bz2
-    dest={{source_dir}}
+    dest={{source_dir}}/Lmod-{{ lmod_version }}.tar.bz2
     mode=0444
 
 - name: Uncompress LMOD
