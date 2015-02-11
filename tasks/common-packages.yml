@@ -11,3 +11,4 @@
     - gcc
     - tcl
     - zsh
+    - r-base-core
