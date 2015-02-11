@@ -1,0 +1,11 @@
+help(
+[[
+{{ item.help_text }}
+]])
+
+local dir = "{{ item.dir }}"
+local base = pathJoin("{{soft_dir}}",dir)
+
+prepend_path("PATH", pathJoin(base, "bin"))
+LmodMessage("{{ item.msg }}")
+

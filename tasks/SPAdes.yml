@@ -9,4 +9,12 @@
 - file: dest="{{modules_dir}}/modulefiles/SPAdes" state=directory mode=0755
 
 - name: SPAdes module definition
-  template: src=templates/SPAdes.lua.j2 dest={{ modules_dir }}/modulefiles/SPAdes/3.5.0.lua owner=root mode=644
+  template: 
+    src: templates/sw-module.lua.j2 
+    dest: "{{ modules_dir }}/modulefiles/SPAdes/3.5.0.lua"
+    owner: root 
+    mode: 644
+  with_items:
+    - { help_text: 'This module loads the SPAdes genome assembler', dir: 'SPAdes-3.5.0-Linux', msg: 'Loaded SPAdes module.  Use: spades.py' }
+
+
