@@ -1,0 +1,26 @@
+
+# Check if it has been uncompressed.  The "creates" in the next section should do this, but it
+# seems to copy up the tarball anyway
+- stat: path={{ soft_dir}}/IGV_{{version}}/igv.sh
+  register: igv
+
+- name: Uncompress igv
+  unarchive: 
+    src=tarballs/IGV_{{version}}.zip
+    dest={{ soft_dir }}
+    copy=yes
+    creates={{ soft_dir}}/IGV_{{version}}/igv.sh
+  when: not igv.stat.exists
+
+- file: dest="{{modules_dir}}/bio/igv" state=directory mode=0755
+
+- name: igv module definition
+  template: 
+    src: templates/sw-module.lua.j2 
+    dest: "{{ modules_dir }}/bio/igv/{{version}}.lua"
+    owner: root 
+    mode: 644
+  with_items:
+    - { help_text: 'IGV genome browser', dir: 'IGV_{{version}}', skip_bin: true }
+
+

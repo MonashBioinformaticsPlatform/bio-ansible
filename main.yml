@@ -23,6 +23,8 @@
     - include: tasks/tophat.yml version=2.0.13
     - include: tasks/ncbi-blast.yml version=2.2.30
     - include: tasks/vcftools.yml version=0.1.12b
+    - include: tasks/igvtools.yml version=2.3.42
+    - include: tasks/igv.yml version=2.3.42
 
     - pip: name=htseq
     - pip: name=nesoni
