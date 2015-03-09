@@ -6,12 +6,12 @@
 - name: Uncompress SPAdes
   unarchive: src={{ source_dir }}/SPAdes-3.5.0-Linux.tar.gz dest={{ soft_dir }} copy=no
 
-- file: dest="{{modules_dir}}/modulefiles/SPAdes" state=directory mode=0755
+- file: dest="{{modules_dir}}/bio/SPAdes" state=directory mode=0755
 
 - name: SPAdes module definition
   template: 
     src: templates/sw-module.lua.j2 
-    dest: "{{ modules_dir }}/modulefiles/SPAdes/3.5.0.lua"
+    dest: "{{ modules_dir }}/bio/SPAdes/3.5.0.lua"
     owner: root 
     mode: 644
   with_items:

@@ -4,7 +4,8 @@
   - "{{ source_dir }}"
   - "{{ soft_dir }}"
   - "{{ modules_dir }}"
-  - "{{ modules_dir }}/modulefiles"
+  - "{{ modules_dir }}/all"
+  - "{{ modules_dir }}/bio"
 
 - name: Download LMOD
   get_url:
