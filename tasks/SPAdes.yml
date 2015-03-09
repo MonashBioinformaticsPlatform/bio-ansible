@@ -4,7 +4,11 @@
     dest={{source_dir}}/SPAdes-3.5.0-Linux.tar.gz
 
 - name: Uncompress SPAdes
-  unarchive: src={{ source_dir }}/SPAdes-3.5.0-Linux.tar.gz dest={{ soft_dir }} copy=no
+  unarchive: 
+    src={{ source_dir }}/SPAdes-3.5.0-Linux.tar.gz 
+    dest={{ soft_dir }}
+    copy=no
+    creates={{ soft_dir}}/SPAdes-3.5.0-Linux/bin/spades
 
 - file: dest="{{modules_dir}}/bio/SPAdes" state=directory mode=0755
 
