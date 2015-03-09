@@ -16,3 +16,8 @@
     - r-base-core
     - curl
     - python-pip
+    - htop
+    - python-matplotlib
+    - python-numpy
+    - python-pandas
+    - ipython-notebook
