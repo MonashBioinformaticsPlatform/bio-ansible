@@ -6,7 +6,11 @@ help(
 local dir = "{{ item.dir }}"
 local base = pathJoin("{{soft_dir}}",dir)
 
+{% if item.skip_bin is defined %}
+prepend_path("PATH", base)
+{% else %}
 prepend_path("PATH", pathJoin(base, "bin"))
+{% endif %}
 
 {% if item.msg is defined %}
 LmodMessage("{{ item.msg }}")

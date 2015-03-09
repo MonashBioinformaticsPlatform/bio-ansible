@@ -1,0 +1,24 @@
+- name: Download Cufflinks
+  get_url:
+    url=http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-{{version}}.Linux_x86_64.tar.gz
+    dest={{source_dir}}/cufflinks-{{version}}.Linux_x86_64.tar.gz
+
+- name: Uncompress Cufflinks
+  unarchive: 
+    src={{ source_dir }}/cufflinks-{{version}}.Linux_x86_64.tar.gz
+    dest={{ soft_dir }}
+    copy=no
+    creates={{ soft_dir}}/cufflinks-{{version}}.Linux_x86_64/cufflinks
+
+- file: dest="{{modules_dir}}/bio/cufflinks" state=directory mode=0755
+
+- name: Cufflinks module definition
+  template: 
+    src: templates/sw-module.lua.j2 
+    dest: "{{ modules_dir }}/bio/cufflinks/{{version}}.lua"
+    owner: root 
+    mode: 644
+  with_items:
+    - { help_text: 'Cufflinks : Transcriptome assembly and differential expression analysis for RNA-Seq', dir: 'cufflinks-{{version}}.Linux_x86_64', skip_bin: true}
+
+

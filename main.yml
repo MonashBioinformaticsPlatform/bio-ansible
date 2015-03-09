@@ -18,4 +18,4 @@
     - include: tasks/picard.yml version=1.129
     - include: tasks/htslib.yml version=1.2
     - include: tasks/samtools.yml version=1.2 htslib_version=1.2
-
+    - include: tasks/cufflinks.yml version=2.2.1
