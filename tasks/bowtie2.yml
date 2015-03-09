@@ -1,0 +1,25 @@
+- name: Download Bowtie2
+  get_url:
+    url=http://sourceforge.net/projects/bowtie-bio/files/bowtie2/{{version}}/bowtie2-{{version}}-linux-x86_64.zip
+    dest={{source_dir}}/bowtie2-{{version}}-linux-x86_64.zip
+
+- name: Uncompress Bowtie2
+  unarchive: 
+    src={{ source_dir }}/bowtie2-{{version}}-linux-x86_64.zip
+    dest={{ soft_dir }}
+    copy=no
+    mode=0644
+    creates={{ soft_dir}}/bowtie2-{{version}}/bowtie2
+
+- file: dest="{{modules_dir}}/bio/bowtie2" state=directory mode=0755
+
+- name: Bowtie2 module definition
+  template: 
+    src: templates/sw-module.lua.j2 
+    dest: "{{ modules_dir }}/bio/bowtie2/{{version}}.lua"
+    owner: root 
+    mode: 644
+  with_items:
+    - { help_text: 'Bowtie 2 is an ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences', dir: 'bowtie2-{{version}}', skip_bin: true}
+
+
