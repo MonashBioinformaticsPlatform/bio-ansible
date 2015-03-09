@@ -1,0 +1,29 @@
+
+- name: Download vcftools
+  get_url:
+    url=http://downloads.sourceforge.net/project/vcftools/vcftools_{{version}}.tar.gz
+    dest={{source_dir}}/vcftools_{{version}}.tar.gz
+
+- name: Uncompress vcftools
+  unarchive: 
+    src: "{{ source_dir }}/vcftools_{{version}}.tar.gz"
+    dest: "{{ source_dir }}"
+    copy: no
+    creates: "{{ source_dir }}//vcftools_{{version}}/README.txt"
+
+- name: Build and Install vcftools
+  shell: cd {{ source_dir }}/vcftools_{{version}}; make install PREFIX="{{ soft_dir }}/vcftools_{{version}}"
+  args:
+    creates: "{{ soft_dir }}/vcftools_{{version}}/bin/vcftools"
+
+- file: dest="{{modules_dir}}/bio/vcftools" state=directory mode=0755
+
+- name: vcftools module definition
+  template:
+    src: templates/sw-module.lua.j2
+    dest: "{{ modules_dir }}/bio/vcftools/{{version}}.lua"
+    owner: root
+    mode: 644
+  with_items:
+    - { help_text: 'This module loads the vcftools tool suite', dir: 'vcftools_{{version}}' }
+
