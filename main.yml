@@ -22,3 +22,4 @@
     - include: tasks/cufflinks.yml version=2.2.1
     - include: tasks/tophat.yml version=2.0.13
     - pip: name=htseq
+    - pip: name=nesoni
