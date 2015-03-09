@@ -1,0 +1,24 @@
+- name: Download TopHat
+  get_url:
+    url=http://ccb.jhu.edu/software/tophat/downloads/tophat-{{version}}.Linux_x86_64.tar.gz
+    dest={{source_dir}}/tophat-{{version}}.Linux_x86_64.tar.gz
+
+- name: Uncompress TopHat
+  unarchive: 
+    src={{ source_dir }}/tophat-{{version}}.Linux_x86_64.tar.gz
+    dest={{ soft_dir }}
+    copy=no
+    creates={{ soft_dir}}/tophat-{{version}}.Linux_x86_64/tophat
+
+- file: dest="{{modules_dir}}/bio/tophat" state=directory mode=0755
+
+- name: Tophat module definition
+  template: 
+    src: templates/sw-module.lua.j2 
+    dest: "{{ modules_dir }}/bio/tophat/{{version}}.lua"
+    owner: root 
+    mode: 644
+  with_items:
+    - { help_text: 'A spliced read mapper for RNA-Seq', dir: 'tophat-{{version}}.Linux_x86_64', skip_bin: true}
+
+
