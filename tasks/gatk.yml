@@ -1,0 +1,32 @@
+
+# Create a directory for extraction
+- file: dest="{{ soft_dir }}/GenomeAnalysisTK-{{version}}" state=directory mode=0755
+
+- name: Uncompress GATK
+  unarchive: 
+    src: tarballs/GenomeAnalysisTK-{{version}}.tar.bz2
+    dest: "{{ soft_dir }}/GenomeAnalysisTK-{{version}}"
+    copy: yes
+    creates: "{{ soft_dir }}/GenomeAnalysisTK-{{version}}/GenomeAnalysisTK.jar"
+
+- name: GATK wrapper script
+  template:
+    src: templates/java-wrapper.sh.j2
+    dest: "{{ soft_dir }}/GenomeAnalysisTK-{{version}}/gatk"
+    owner: root 
+    mode: 0755
+  with_items:
+    - { jar: '{{ soft_dir }}/GenomeAnalysisTK-{{version}}/GenomeAnalysisTK.jar' }
+
+- file: dest="{{modules_dir}}/bio/gatk" state=directory mode=0755
+
+- name: GATK module definition
+  template: 
+    src: templates/sw-module.lua.j2 
+    dest: "{{ modules_dir }}/bio/gatk/{{version}}.lua"
+    owner: root 
+    mode: 644
+  with_items:
+    - { help_text: 'The Genome Analysis Toolkit or GATK', dir: 'GenomeAnalysisTK-{{version}}', skip_bin: true }
+
+

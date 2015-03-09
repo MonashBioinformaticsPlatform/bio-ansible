@@ -12,5 +12,7 @@ load("samtools"
 
     ,"igv"
     ,"igvtools"
+    ,"gatk"
+
     ,"bowtie2"
     )
