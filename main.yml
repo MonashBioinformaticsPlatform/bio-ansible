@@ -18,3 +18,4 @@
     - include: tasks/BWA.yml
     - include: tasks/STAR.yml
     - include: tasks/picard.yml
+    - include: tasks/STAR.yml version=2.4.0j
