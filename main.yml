@@ -16,6 +16,6 @@
     - include: tasks/BWA.yml
     - include: tasks/STAR.yml version=2.4.0j
     - include: tasks/picard.yml version=1.129
-    - include: tasks/htslib.yml version=1.1
-    - include: tasks/samtools.yml version=1.1 htslib_version=1.1
+    - include: tasks/htslib.yml version=1.2
+    - include: tasks/samtools.yml version=1.2 htslib_version=1.2
 
