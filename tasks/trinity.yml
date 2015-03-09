@@ -1,0 +1,29 @@
+
+- name: Download Trinity
+  get_url:
+    url=https://github.com/trinityrnaseq/trinityrnaseq/archive/v{{version}}.tar.gz
+    dest={{source_dir}}/trinity-{{version}}.tar.gz
+
+- name: Uncompress Trinity
+  unarchive: 
+    src: "{{ source_dir }}//trinity-{{version}}.tar.gz"
+    dest: "{{ soft_dir }}"
+    copy: no
+    creates: "{{ soft_dir }}/trinityrnaseq-{{version}}/Trinity"
+
+- name: Build and Install Trinity
+  shell: cd {{ soft_dir }}/trinityrnaseq-{{version}}; make ; make plugins
+  args:
+    creates: "{{ soft_dir }}/trinityrnaseq-{{version}}/trinity-plugins/jellyfish/bin/jellyfish"
+
+- file: dest="{{modules_dir}}/bio/trinity" state=directory mode=0755
+
+- name: Trinity module definition
+  template:
+    src: templates/sw-module.lua.j2
+    dest: "{{ modules_dir }}/bio/trinity/{{version}}.lua"
+    owner: root
+    mode: 644
+  with_items:
+    - { help_text: 'Trinity : RNA-Seq De novo Assembly.  See http://trinityrnaseq.github.io/', dir: 'trinityrnaseq-{{version}}', skip_bin: true }
+

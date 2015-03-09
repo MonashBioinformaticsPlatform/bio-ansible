@@ -28,6 +28,8 @@
     - include: tasks/gatk.yml version=3.3-0
     - include: tasks/bowtie.yml version=1.1.1
     - include: tasks/bowtie2.yml version=2.2.5
+    - include: tasks/trinity.yml version=2.0.6
+    - include: tasks/velvet.yml version=1.2.10
 
     - pip: name=htseq
     - pip: name=nesoni
