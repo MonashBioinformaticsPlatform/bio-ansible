@@ -19,6 +19,6 @@
     owner: root 
     mode: 644
   with_items:
-    - { help_text: 'This module loads the SPAdes genome assembler', dir: 'SPAdes-3.5.0-Linux', msg: 'Loaded SPAdes module.  Use: spades.py' }
+    - { help_text: 'This module loads the SPAdes genome assembler', dir: 'SPAdes-3.5.0-Linux' }
 
 

@@ -6,6 +6,7 @@
   - "{{ modules_dir }}"
   - "{{ modules_dir }}/all"
   - "{{ modules_dir }}/bio"
+  - "{{ modules_dir }}/core"
 
 - name: Download LMOD
   get_url:
@@ -35,3 +36,25 @@
     dest=/etc/profile.d/lmod.csh
     owner=root
     mode=644
+
+- name: Copy lmod sh StdEnv init file to /etc/profile.d/
+  template:
+    src=templates/z00_StdEnv.sh
+    dest=/etc/profile.d/z00_StdEnv.sh
+    owner=root
+    mode=644
+
+- name: Copy lmod csh StdEnv init file to /etc/profile.d/
+  template:
+    src=templates/z00_StdEnv.csh
+    dest=/etc/profile.d/z00_StdEnv.csh
+    owner=root
+    mode=644
+
+- name: Copy StdEnv module definition
+  template:
+    src=templates/StdEnv.lua
+    dest={{ modules_dir }}/core
+    owner=root
+    mode=644
+
