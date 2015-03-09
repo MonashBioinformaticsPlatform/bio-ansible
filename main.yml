@@ -6,8 +6,6 @@
     - modules_dir: /software/modules
 
   tasks:
-
- 
     - include: tasks/common-packages.yml
     - include: tasks/zsh.yml
     - include: tasks/lmod.yml lmod_version=5.8.6
@@ -18,3 +16,6 @@
     - include: tasks/BWA.yml
     - include: tasks/STAR.yml version=2.4.0j
     - include: tasks/picard.yml version=1.129
+    - include: tasks/htslib.yml version=1.1
+    - include: tasks/samtools.yml version=1.1 htslib_version=1.1
+

@@ -1,0 +1,29 @@
+
+- name: Download samtools
+  get_url:
+    url=https://github.com/samtools/samtools/archive/{{version}}.tar.gz
+    dest={{source_dir}}/samtools-{{version}}.tar.gz
+
+- name: Uncompress samtools
+  unarchive: 
+    src: "{{ source_dir }}/samtools-{{version}}.tar.gz"
+    dest: "{{ source_dir }}"
+    copy: no
+    creates: "{{ source_dir }}/samtools-{{version}}/README"
+
+- name: Build and Install samtools
+  shell: cd {{ source_dir }}/samtools-{{version}}; make install prefix="{{ soft_dir }}/samtools-{{version}}" HTSDIR="../htslib-{{htslib_version}}"
+  args:
+    creates: "{{ soft_dir }}/samtools-{{version}}/bin/samtools"
+
+- file: dest="{{modules_dir}}/bio/samtools" state=directory mode=0755
+
+- name: samtools module definition
+  template:
+    src: templates/sw-module.lua.j2
+    dest: "{{ modules_dir }}/bio/samtools/{{version}}.lua"
+    owner: root
+    mode: 644
+  with_items:
+    - { help_text: 'This module loads the samtools tool suite', dir: 'samtools-{{version}}' }
+

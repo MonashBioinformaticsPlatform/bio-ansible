@@ -4,6 +4,8 @@
 - name: Install packages
   apt: pkg={{item}} state=present
   with_items:
+    - mosh
+    - tmux
     - lua5.2
     - liblua5.2-dev
     - lua-filesystem
@@ -12,3 +14,5 @@
     - tcl
     - zsh
     - r-base-core
+    - curl
+    - python-pip

@@ -1,0 +1,29 @@
+
+- name: Download htslib
+  get_url:
+    url=https://github.com/samtools/htslib/archive/{{version}}.tar.gz
+    dest={{source_dir}}/htslib-{{version}}.tar.gz
+
+- name: Uncompress htslib
+  unarchive: 
+    src: "{{ source_dir }}/htslib-{{version}}.tar.gz"
+    dest: "{{ source_dir }}"
+    copy: no
+    creates: "{{ source_dir }}/htslib-{{version}}/README"
+
+- name: Build and Install htslib
+  shell: cd {{ source_dir }}/htslib-{{version}}; make install prefix="{{ soft_dir }}/htslib-{{version}}"
+  args:
+    creates: "{{ soft_dir }}/htslib-{{version}}/bin/faidx"
+
+- file: dest="{{modules_dir}}/bio/htslib" state=directory mode=0755
+
+- name: htslib module definition
+  template:
+    src: templates/sw-module.lua.j2
+    dest: "{{ modules_dir }}/bio/htslib/{{version}}.lua"
+    owner: root
+    mode: 644
+  with_items:
+    - { help_text: 'This module loads the htslib tool suite', dir: 'htslib-{{version}}' }
+
