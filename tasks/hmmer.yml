@@ -1,0 +1,24 @@
+- name: Download hmmer
+  get_url:
+    url=http://selab.janelia.org/software/hmmer3/{{version}}/hmmer-{{version}}-linux-intel-x86_64.tar.gz
+    dest={{source_dir}}/hmmer-{{version}}-linux-intel-x86_64.tar.gz
+
+- name: Uncompress hmmer
+  unarchive: 
+    src={{source_dir}}/hmmer-{{version}}-linux-intel-x86_64.tar.gz
+    dest={{ soft_dir }}
+    copy=no
+    creates={{ soft_dir }}/hmmer-{{version}}-linux-intel-x86_64/binaries/nhmmer
+
+- file: dest="{{modules_dir}}/bio/hmmer" state=directory mode=0755
+
+- name: hmmer module definition
+  template: 
+    src: templates/sw-module.lua.j2 
+    dest: "{{ modules_dir }}/bio/hmmer/{{version}}.lua"
+    owner: root 
+    mode: 644
+  with_items:
+    - { help_text: 'biosequence analysis using profile hidden Markov models', dir: 'hmmer-3.1b2-linux-intel-x86_64/', bin: 'binaries'}
+
+

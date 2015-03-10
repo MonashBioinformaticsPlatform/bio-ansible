@@ -8,6 +8,8 @@ local base = pathJoin("{{soft_dir}}",dir)
 
 {% if item.skip_bin is defined %}
 prepend_path("PATH", base)
+{% elif item.bin is defined %}
+prepend_path("PATH", pathJoin(base, "{{item.bin}}"))
 {% else %}
 prepend_path("PATH", pathJoin(base, "bin"))
 {% endif %}
