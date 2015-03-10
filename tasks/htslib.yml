@@ -14,7 +14,7 @@
 - name: Build and Install htslib
   shell: cd {{ source_dir }}/htslib-{{version}}; make install prefix="{{ soft_dir }}/htslib-{{version}}"
   args:
-    creates: "{{ soft_dir }}/htslib-{{version}}/bin/faidx"
+    creates: "{{ soft_dir }}/htslib-{{version}}/bin/tabix"
 
 - file: dest="{{modules_dir}}/bio/htslib" state=directory mode=0755
 
