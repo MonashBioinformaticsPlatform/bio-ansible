@@ -4,6 +4,7 @@
     - source_dir: /software/source
     - soft_dir: /software/apps
     - modules_dir: /software/modules
+    - ref_dir: /references
 
   tasks:
     - include: tasks/common-packages.yml
@@ -31,6 +32,7 @@
     - include: tasks/trinity.yml version=2.0.6
     - include: tasks/velvet.yml version=1.2.10
     - include: tasks/hmmer.yml version=3.1b2
+    - include: tasks/bedops.yml version=2.4.11
 
     - pip: name=htseq
     - pip: name=nesoni

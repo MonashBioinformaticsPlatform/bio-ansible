@@ -19,6 +19,6 @@
     owner: root 
     mode: 644
   with_items:
-    - { help_text: 'biosequence analysis using profile hidden Markov models', dir: 'hmmer-3.1b2-linux-intel-x86_64/', bin: 'binaries'}
+    - { help_text: 'biosequence analysis using profile hidden Markov models', dir: 'hmmer-{{version}}-linux-intel-x86_64', bin: 'binaries'}
 
 
