@@ -1,0 +1,34 @@
+
+- name: Download blat
+  get_url:
+    url=https://users.soe.ucsc.edu/~kent/src/blatSrc{{version}}.zip
+    dest={{source_dir}}/blatSrc{{version}}.zip
+
+- file: dest="{{ source_dir }}/blatSrc{{version}}" state=directory mode=0755
+
+- name: Uncompress blat
+  unarchive: 
+    src: "{{ source_dir }}/blatSrc{{version}}.zip"
+    dest: "{{ source_dir }}/blatSrc{{version}}"
+    copy: no
+    creates: "{{ source_dir }}/blatSrc{{version}}/blatSrc/README"
+
+# Create directory for binaries
+- file: dest="{{ soft_dir }}/blat-{{version}}" state=directory mode=0755
+
+- name: Build and Install blat
+  shell: cd {{ source_dir }}/blatSrc{{version}}/blatSrc; make BINDIR="{{ soft_dir }}/blat-{{version}}" MACHTYPE=x86_64
+  args:
+    creates: "{{ soft_dir }}/blat-{{version}}/blat"
+
+- file: dest="{{modules_dir}}/bio/blat" state=directory mode=0755
+
+- name: blat module definition
+  template:
+    src: templates/sw-module.lua.j2
+    dest: "{{ modules_dir }}/bio/blat/{{version}}.lua"
+    owner: root
+    mode: 644
+  with_items:
+    - { help_text: 'Blat is an alignment tool like BLAST,', dir: 'blat-{{version}}', skip_bin: true }
+

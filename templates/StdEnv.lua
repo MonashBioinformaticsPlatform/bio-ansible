@@ -6,6 +6,7 @@ load("samtools"
 
     ,"picard"
     ,"blast"
+    ,"blat"
     ,"BWA"
     ,"STAR"
     ,"SPAdes"
