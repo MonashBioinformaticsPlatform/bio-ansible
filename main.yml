@@ -14,25 +14,25 @@
     - include: tasks/r-packages.yml
 
 
-    - include: tasks/SPAdes.yml
-    - include: tasks/BWA.yml
-    - include: tasks/STAR.yml version=2.4.0j
-    - include: tasks/picard.yml version=1.129
-    - include: tasks/htslib.yml version=1.2
-    - include: tasks/samtools.yml version=1.2 htslib_version=1.2
-    - include: tasks/cufflinks.yml version=2.2.1
-    - include: tasks/tophat.yml version=2.0.13
-    - include: tasks/ncbi-blast.yml version=2.2.30
-    - include: tasks/vcftools.yml version=0.1.12b
-    - include: tasks/igvtools.yml version=2.3.42
-    - include: tasks/igv.yml version=2.3.42
-    - include: tasks/gatk.yml version=3.3-0
-    - include: tasks/bowtie.yml version=1.1.1
-    - include: tasks/bowtie2.yml version=2.2.5
-    - include: tasks/trinity.yml version=2.0.6
-    - include: tasks/velvet.yml version=1.2.10
-    - include: tasks/hmmer.yml version=3.1b2
-    - include: tasks/bedops.yml version=2.4.11
+    - include: tasks/SPAdes.yml tags=spades
+    - include: tasks/bwa.yml tags=bwa
+    - include: tasks/STAR.yml tags=star version=2.4.0j
+    - include: tasks/picard.yml tags=picard version=1.129
+    - include: tasks/htslib.yml tags=htslib version=1.2
+    - include: tasks/samtools.yml tags=samtools version=1.2 htslib_version=1.2
+    - include: tasks/cufflinks.yml tags=cufflinks version=2.2.1
+    - include: tasks/tophat.yml tags=tophat version=2.0.13
+    - include: tasks/ncbi-blast.yml tags=ncbi-blast version=2.2.30
+    - include: tasks/vcftools.yml tags=vcftools version=0.1.12b
+    - include: tasks/igvtools.yml tags=igvtools version=2.3.42
+    - include: tasks/igv.yml tags=igv version=2.3.42
+    - include: tasks/gatk.yml tags=gatk version=3.3-0
+    - include: tasks/bowtie.yml tags=bowtie1 version=1.1.1
+    - include: tasks/bowtie2.yml tags=bowtie2 version=2.2.5
+    - include: tasks/trinity.yml tags=trinity version=2.0.6
+    - include: tasks/velvet.yml tags=velvet version=1.2.10
+    - include: tasks/hmmer.yml tags=hmmer version=3.1b2
+    - include: tasks/bedops.yml tags=bedops version=2.4.11
 
     - pip: name=htseq
     - pip: name=nesoni
