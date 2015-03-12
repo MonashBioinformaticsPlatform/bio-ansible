@@ -1,0 +1,16 @@
+
+artemis http://www.sanger.ac.uk/resources/software/artemis/#download
+MACS  https://github.com/taoliu/MACS
+SnpEff http://snpeff.sourceforge.net/download.html
+VEP http://www.ensembl.org/info/docs/tools/vep/index.html
+Gemini http://gemini.readthedocs.org/en/latest/content/installation.html#automated-installation
+
+
+
+Add categories tool categories so can load related tools together eg.
+  variants
+  chipseq
+  rnaseq
+  utils
+  cnv
+ 
