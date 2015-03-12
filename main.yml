@@ -34,6 +34,7 @@
     - include: tasks/hmmer.yml tags=hmmer version=3.1b2
     - include: tasks/bedops.yml tags=bedops version=2.4.11
     - include: tasks/blat.yml tags=blat version=35
+    - include: tasks/hisat.yml tags=hisat version=0.1.5-beta
 
     - pip: name=htseq
     - pip: name=nesoni
