@@ -37,6 +37,7 @@
     - include: tasks/blat.yml tags=blat version=35
     - include: tasks/hisat.yml tags=hisat version=0.1.5-beta
     - include: tasks/homer.yml tags=homer
+    - include: tasks/bamutil.yml tags=bamutil version=1.0.13
 
     - pip: name=htseq
     - pip: name=nesoni

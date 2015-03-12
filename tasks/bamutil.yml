@@ -1,0 +1,29 @@
+
+- name: Download bamUtil
+  get_url:
+    url=https://github.com/statgen/bamUtil/archive/v{{version}}.tar.gz
+    dest={{source_dir}}/bamUtil-{{version}}.tar.gz
+
+- name: Uncompress bamUtil
+  unarchive: 
+    src: "{{ source_dir }}/bamUtil-{{version}}.tar.gz"
+    dest: "{{ soft_dir }}"
+    copy: no
+    creates: "{{ soft_dir }}/bamUtil-{{version}}/README"
+
+- name: Build bamUtil
+  shell: cd {{ soft_dir }}/bamUtil-{{version}}; make cloneLib LIB_PATH_GENERAL=lib ; make LIB_PATH_GENERAL=lib
+  args:
+    creates: "{{ soft_dir }}/bamUtil-{{version}}/bin/bam"
+
+- file: dest="{{modules_dir}}/bio/bamUtil" state=directory mode=0755
+
+- name: bamUtil module definition
+  template:
+    src: templates/sw-module.lua.j2
+    dest: "{{ modules_dir }}/bio/bamUtil/{{version}}.lua"
+    owner: root
+    mode: 644
+  with_items:
+    - { help_text: 'bamUtil is a repository that contains several programs that perform operations on SAM/BAM files. All of these programs are built into a single executable, bam', dir: 'bamUtil-{{version}}' }
+
