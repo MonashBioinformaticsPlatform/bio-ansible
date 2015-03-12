@@ -1,5 +1,6 @@
 load("samtools"
     ,"vcftools"
+    ,"bcftools"
 
     ,"tophat"
     ,"cufflinks"
