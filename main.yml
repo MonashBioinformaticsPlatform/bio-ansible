@@ -39,6 +39,7 @@
     - include: tasks/homer.yml tags=homer
     - include: tasks/bamutil.yml tags=bamutil version=1.0.13
     - include: tasks/bamstats.yml tags=bamstats version=1.25
+    - include: tasks/trimmomatic.yml tags=trimmomatic version=0.33
 
     - pip: name=htseq
     - pip: name=nesoni

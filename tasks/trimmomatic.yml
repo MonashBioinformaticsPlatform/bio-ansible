@@ -1,0 +1,34 @@
+
+- name: Download Trimmomatic
+  get_url:
+    url=http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-{{version}}.zip
+    dest={{source_dir}}/Trimmomatic-{{version}}.zip
+
+- name: Uncompress Trimmomatic
+  unarchive: 
+    src: "{{ source_dir }}/Trimmomatic-{{version}}.zip"
+    dest: "{{ soft_dir }}"
+    copy: no
+    creates: "{{ soft_dir }}/Trimmomatic-{{version}}/trimmomatic{{version}}.jar"
+
+- name: Trimmomatic wrapper script
+  template:
+    src: templates/java-wrapper.sh.j2
+    dest: "{{ soft_dir }}/Trimmomatic-{{version}}/trimmomatic"
+    owner: root 
+    mode: 0755
+  with_items:
+    - { jar: '{{ soft_dir }}/Trimmomatic-{{version}}/trimmomatic-{{version}}.jar' }
+
+- file: dest="{{modules_dir}}/bio/trimmomatic" state=directory mode=0755
+
+- name: Trimmomatic module definition
+  template: 
+    src: templates/sw-module.lua.j2 
+    dest: "{{ modules_dir }}/bio/trimmomatic/{{version}}.lua"
+    owner: root 
+    mode: 644
+  with_items:
+    - { help_text: 'A flexible read trimming tool for Illumina NGS data', dir: 'Trimmomatic-{{version}}', skip_bin: true }
+
+
