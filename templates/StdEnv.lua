@@ -18,4 +18,6 @@ load("samtools"
     ,"bedops"
 
     ,"bowtie2"
+
+    ,"parallel"
     )

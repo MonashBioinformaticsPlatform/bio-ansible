@@ -20,6 +20,8 @@
     - python-matplotlib
     - python-numpy
     - python-pandas
+    - python-biopython
     - ipython-notebook
     - ruby
     - ghostscript
+    - cpanminus
