@@ -4,6 +4,7 @@
     - source_dir: /software/source
     - soft_dir: /software/apps
     - modules_dir: /software/modules
+    - brew_dir: /software/linuxbrew
     - ref_dir: /references
 
   tasks:
@@ -12,7 +13,8 @@
     - include: tasks/lmod.yml lmod_version=5.8.6
     - include: tasks/java.yml
     - include: tasks/r-packages.yml
-
+ 
+    - include: tasks/linuxbrew.yml tags=linuxbrew
 
     - include: tasks/SPAdes.yml tags=spades
     - include: tasks/bwa.yml tags=bwa
