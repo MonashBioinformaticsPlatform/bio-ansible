@@ -43,8 +43,10 @@
     - include: tasks/bamstats.yml tags=bamstats version=1.25
     - include: tasks/trimmomatic.yml tags=trimmomatic version=0.33
     - include: tasks/rstudio-server.yml tags=rstudio version=0.98.1103-amd64
+    - include: tasks/rna-seqc.yml tags=rna-seqc version=1.1.8
 
     - include: tasks/misc_utils.yml tags=misc_utils
 
     - pip: name=htseq
+    - pip: name=pysam
     - pip: name=nesoni
