@@ -3,5 +3,6 @@
 - include: brew_package.yml brew_name='homebrew/science/aragorn' lmod_name='aragorn'
 - include: brew_package.yml brew_name='homebrew/science/prodigal' lmod_name='prodigal'
 - include: brew_package.yml brew_name='homebrew/science/plink' lmod_name='plink'
+- include: brew_package.yml brew_name='homebrew/science/fastqc' lmod_name='fastqc'
 #- include: brew_package.yml brew_name='homebrew/science/plink2' lmod_name='plink2'
 #- include: brew_package.yml brew_name='homebrew/science/repeatmasker' lmod_name='repeatmasker'
