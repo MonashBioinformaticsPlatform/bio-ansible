@@ -1,0 +1,36 @@
+
+
+- name: Download RSeQC
+  get_url:
+    url=http://sourceforge.net/projects/rseqc/files/RSeQC-{{version}}.tar.gz/download
+    dest={{source_dir}}/RSeQC-{{version}}.tar.gz
+
+- name: Uncompress RSeQC
+  unarchive:
+    src: "{{source_dir}}/RSeQC-{{version}}.tar.gz"
+    dest: "{{source_dir}}"
+    copy: no
+    creates: "{{source_dir}}/RSeQC-{{version}}/setup.py"
+
+- name: Build and install RSeQC
+  shell: cd {{source_dir}}/RSeQC-{{version}}; python setup.py install --root={{soft_dir}}/RSeQC-{{version}}
+  args:
+    creates: "{{soft_dir}}/RSeQC-{{version}}/usr/local/bin/bam_stat.py"
+
+- file: dest="{{modules_dir}}/bio/RSeQC" state=directory mode=0755
+
+- name: RSeQC module definition
+  template:
+    src: templates/sw-module.lua.j2
+    dest: "{{ modules_dir }}/bio/RSeQC/{{version}}.lua"
+    owner: root
+    mode: 644
+  with_items:
+    - dir: 'RSeQC-{{version}}'
+      bin: 'usr/local/bin'
+      python_path: 'usr/local/lib/python2.7/dist-packages'
+      help_text: > 
+        RSeQC package provides a number of useful modules that can comprehensively evaluate high
+        throughput sequence data especially RNA-seq data
+
+

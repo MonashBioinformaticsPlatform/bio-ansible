@@ -14,6 +14,11 @@ prepend_path("PATH", pathJoin(base, "{{item.bin}}"))
 prepend_path("PATH", pathJoin(base, "bin"))
 {% endif %}
 
+{% if item.python_path is defined %}
+prepend_path("PYTHONPATH", pathJoin(base, "{{item.python_path}}"))
+{% endif %}
+
+
 {% if item.msg is defined %}
 LmodMessage("{{ item.msg }}")
 {% endif %}
