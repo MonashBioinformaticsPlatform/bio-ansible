@@ -1,0 +1,14 @@
+
+- name: Install prokka dependencies
+  cpanm: name=Bio::Perl
+
+- cpanm: name=XML::Simple
+
+- include: brew_package.yml brew_name='homebrew/science/prokka' lmod_name='prokka'
+
+- name: Setup prokka dbs
+  shell: source /etc/profile.d/lmod.sh ; module load prokka ; prokka --setupdb
+  args:
+    executable: /bin/bash
+  sudo: yes
+  sudo_user: sw-installer

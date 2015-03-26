@@ -47,6 +47,7 @@
     - include: tasks/big-data-script.yml tags=big-data-script version=0.999h
     - include: tasks/rseqc.yml tags=rseqc version=2.6.1
 
+    - include: tasks/prokka.yml tags=prokka
     - include: tasks/misc_utils.yml tags=misc_utils
 
     - pip: name=htseq
