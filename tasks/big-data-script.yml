@@ -1,0 +1,26 @@
+- name: Download BigDataScript
+  get_url:
+    url=https://github.com/pcingola/BigDataScript/releases/download/v{{version}}/bds_Linux.tgz
+    dest={{source_dir}}/bds_Linux-{{version}}.tgz
+
+- file: dest="{{soft_dir}}/BigDataScript-{{version}}" state=directory mode=0755
+
+- name: Uncompress BigDataScript
+  unarchive: 
+    src: "{{ source_dir }}/bds_Linux-{{version}}.tgz"
+    dest: "{{soft_dir}}/BigDataScript-{{version}}"
+    copy: no
+    creates: "{{soft_dir}}/BigDataScript-{{version}}/.bds/bds"
+
+- file: dest="{{modules_dir}}/bio/BigDataScript" state=directory mode=0755
+
+- name: BigDataScript module definition
+  template: 
+    src: templates/sw-module.lua.j2 
+    dest: "{{ modules_dir }}/bio/BigDataScript/{{version}}.lua"
+    owner: root 
+    mode: 644
+  with_items:
+    - { help_text: 'BigDataScript is intended as a scripting language for big data pipeline. ', dir: 'BigDataScript-{{version}}/.bds', skip_bin: true }
+
+
