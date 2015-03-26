@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:files="https://sourceforge.net/api/files.rdf#" xmlns:media="http://video.search.yahoo.com/mrss/" xmlns:doap="http://usefulinc.com/ns/doap#" xmlns:sf="https://sourceforge.net/api/sfelements.rdf#" version="2.0">
+  <channel xmlns:files="https://sourceforge.net/api/files.rdf#" xmlns:media="http://video.search.yahoo.com/mrss/" xmlns:doap="http://usefulinc.com/ns/doap#" xmlns:sf="https://sourceforge.net/api/sfelements.rdf#">
+    <title>RSeQC</title>
+    <link>https://sourceforge.net</link>
+    <description><![CDATA[Files from RSeQC RSeQC provides a number of functions to evaluate the quality of RNA-seq data.
+
+http://rseqc.sourceforge.net/]]></description>
+    <pubDate>Thu, 26 Mar 2015 12:39:53 UT</pubDate>
+    <managingEditor>noreply@sourceforge.net (SourceForge.net)</managingEditor>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens/Homo_sapiens.GRCh38.79.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/Homo_sapiens.GRCh38.79.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/Homo_sapiens.GRCh38.79.bed.gz/download</guid>
+      <pubDate>Wed, 18 Mar 2015 15:09:01 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens/Homo_sapiens.GRCh38.79.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">22684986</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/Homo_sapiens.GRCh38.79.bed.gz/download" filesize="8050464"><media:hash algo="md5">b1a9c0659882ec3a8d1e0f77871a65ba</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus/mm9.HouseKeepingGenes.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9.HouseKeepingGenes.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9.HouseKeepingGenes.bed.gz/download</guid>
+      <pubDate>Wed, 11 Feb 2015 05:44:34 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus/mm9.HouseKeepingGenes.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">21927446</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9.HouseKeepingGenes.bed.gz/download" filesize="243457"><media:hash algo="md5">da4e9338f0bb4798bee0c7c8da9c6a95</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus/mm10.HouseKeepingGenes.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10.HouseKeepingGenes.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10.HouseKeepingGenes.bed.gz/download</guid>
+      <pubDate>Wed, 11 Feb 2015 05:44:34 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus/mm10.HouseKeepingGenes.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">21927447</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10.HouseKeepingGenes.bed.gz/download" filesize="243347"><media:hash algo="md5">eb38c720051e9aa84d85cf2f2a1faaa2</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/README.txt]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/README.txt/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/README.txt/download</guid>
+      <pubDate>Tue, 10 Feb 2015 06:18:32 UT</pubDate>
+      <description><![CDATA[/BED/README.txt]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">21924069</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">English text</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="text/plain; charset=us-ascii" url="http://sourceforge.net/projects/rseqc/files/BED/README.txt/download" filesize="484"><media:hash algo="md5">cccde94f5dcc761550a80838433d490a</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens/hg38.HouseKeepingGenes.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38.HouseKeepingGenes.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38.HouseKeepingGenes.bed.gz/download</guid>
+      <pubDate>Tue, 10 Feb 2015 05:12:07 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens/hg38.HouseKeepingGenes.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">21924031</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38.HouseKeepingGenes.bed.gz/download" filesize="458357"><media:hash algo="md5">9b6280e1aec6e424648d43a78610cecb</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens/hg19_GENCODE_GENE_V19_comprehensive.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_GENCODE_GENE_V19_comprehensive.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_GENCODE_GENE_V19_comprehensive.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 23:45:34 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens/hg19_GENCODE_GENE_V19_comprehensive.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20255780</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_GENCODE_GENE_V19_comprehensive.bed.gz/download" filesize="7705126"><media:hash algo="md5">3ca07a9ed5da29194f2a3789c696efb7</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm10.GENCODE_VM3.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.GENCODE_VM3.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.GENCODE_VM3.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:21:01 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm10.GENCODE_VM3.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235971</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.GENCODE_VM3.union.bed.gz/download" filesize="1970536"><media:hash algo="md5">fad9de74c534945586b2080edbb8d4c6</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm10.GENCODE_VM3.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.GENCODE_VM3.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.GENCODE_VM3.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:21:02 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm10.GENCODE_VM3.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235972</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.GENCODE_VM3.union.transcript_id.txt.gz/download" filesize="416632"><media:hash algo="md5">da924e59dc5501903a3a021d4176dce0</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm10.RefSeq.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.RefSeq.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.RefSeq.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:21:02 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm10.RefSeq.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235974</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.RefSeq.union.transcript_id.txt.gz/download" filesize="214254"><media:hash algo="md5">59f25be8f33308adb6e1521c6c9fe625</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm10.RefSeq.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.RefSeq.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.RefSeq.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:21:02 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm10.RefSeq.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235973</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.RefSeq.union.bed.gz/download" filesize="1522151"><media:hash algo="md5">ffd3a3f9862f089224c64d90e252952c</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.Ensembl.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.Ensembl.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.Ensembl.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:21:00 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.Ensembl.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235962</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.Ensembl.union.transcript_id.txt.gz/download" filesize="473627"><media:hash algo="md5">1154ba747d87d0ea0cbbc5c6a534d601</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.UCSC_knownGene.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.UCSC_knownGene.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.UCSC_knownGene.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:21:01 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.UCSC_knownGene.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235967</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.UCSC_knownGene.union.bed.gz/download" filesize="1717383"><media:hash algo="md5">46ed0e45410f727acdf8c03636ca73ad</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.RefSeq.xls.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.RefSeq.xls.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.RefSeq.xls.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:21:01 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.RefSeq.xls.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235966</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.RefSeq.xls.union.transcript_id.txt.gz/download" filesize="214076"><media:hash algo="md5">5b6d8376dd0213a109e3c232eb4eeca1</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm10.Ensembl.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.Ensembl.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.Ensembl.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:21:01 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm10.Ensembl.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235969</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.Ensembl.union.bed.gz/download" filesize="1939008"><media:hash algo="md5">cc963459010c4940f49a69fc2afddf3b</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm10.Ensembl.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.Ensembl.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.Ensembl.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:21:01 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm10.Ensembl.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235970</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm10.Ensembl.union.transcript_id.txt.gz/download" filesize="474707"><media:hash algo="md5">1ea1cd3cef668ee1e78e1ef4717ab17c</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.RefSeq.xls.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.RefSeq.xls.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.RefSeq.xls.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:21:01 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.RefSeq.xls.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235965</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.RefSeq.xls.union.bed.gz/download" filesize="1521239"><media:hash algo="md5">d8e1a49989d61572baa9081591f4e2d7</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.MGC.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.MGC.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.MGC.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:21:01 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.MGC.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235964</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.MGC.union.transcript_id.txt.gz/download" filesize="214069"><media:hash algo="md5">8f59bb72403c1b306e803f4d4b8529a4</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.UCSC_knownGene.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.UCSC_knownGene.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.UCSC_knownGene.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:21:01 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.UCSC_knownGene.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235968</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.UCSC_knownGene.union.transcript_id.txt.gz/download" filesize="297909"><media:hash algo="md5">b8672d03b9f8b64bb83fadb6dd70543d</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.MGC.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.MGC.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.MGC.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:21:01 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.MGC.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235963</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.MGC.union.bed.gz/download" filesize="1521232"><media:hash algo="md5">f59ec1e705d3a7062818da7be3de2b9d</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.Ensembl.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.Ensembl.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.Ensembl.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:20:58 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/mm9.Ensembl.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235961</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/mm9.Ensembl.union.bed.gz/download" filesize="1911105"><media:hash algo="md5">af0268bfc4ddb8b5c202a4e52e8c1343</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/README.txt]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/README.txt/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/README.txt/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:19:02 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus_merge_transcripts/README.txt]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235939</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">English text</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="text/plain; charset=us-ascii" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus_merge_transcripts/README.txt/download" filesize="1136"><media:hash algo="md5">6ffda46b565ba84738ab01c8539c5a58</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/README.txt]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/README.txt/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/README.txt/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:15:38 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/README.txt]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235926</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">English text</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="text/plain; charset=us-ascii" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/README.txt/download" filesize="1051"><media:hash algo="md5">ac3f5bd18747f90e41e1d5c149bd6ee2</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.UCSC.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.UCSC.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.UCSC.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:03:09 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.UCSC.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235909</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.UCSC.union.bed.gz/download" filesize="1848521"><media:hash algo="md5">3f3e7adcc4638361884da197fde4d53f</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.RefSeq.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.RefSeq.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.RefSeq.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:03:09 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.RefSeq.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235908</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.RefSeq.union.transcript_id.txt.gz/download" filesize="277097"><media:hash algo="md5">2235273aaa1c2cf904bd33ebd4bebd32</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.RefSeq.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.RefSeq.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.RefSeq.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:03:08 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.RefSeq.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235907</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.RefSeq.union.bed.gz/download" filesize="1703277"><media:hash algo="md5">e6a637dd21606f44a29306e08e4ebe31</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.UCSC.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.UCSC.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.UCSC.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:03:09 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.UCSC.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235910</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.UCSC.union.transcript_id.txt.gz/download" filesize="394499"><media:hash algo="md5">1346af57efad5de30d835603c1f05dd8</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg38.RefSeq.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.RefSeq.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.RefSeq.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:03:09 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg38.RefSeq.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235913</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.RefSeq.union.bed.gz/download" filesize="1787660"><media:hash algo="md5">059a29811b924d02266195a34d265b21</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg38.ENCODE_GENE_V20.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.ENCODE_GENE_V20.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.ENCODE_GENE_V20.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:03:09 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg38.ENCODE_GENE_V20.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235911</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.ENCODE_GENE_V20.union.bed.gz/download" filesize="2712729"><media:hash algo="md5">8100d8429f3dfbce4da5e9c7c7abd306</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg38.ENCODE_GENE_V20.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.ENCODE_GENE_V20.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.ENCODE_GENE_V20.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:03:09 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg38.ENCODE_GENE_V20.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235912</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.ENCODE_GENE_V20.union.transcript_id.txt.gz/download" filesize="707563"><media:hash algo="md5">ae2b2fed0a2b43f53fd6172a37a7c4b8</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg38.RefSeq.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.RefSeq.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.RefSeq.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:03:09 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg38.RefSeq.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235914</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.RefSeq.union.transcript_id.txt.gz/download" filesize="285102"><media:hash algo="md5">4758d499eb82fcad72a5b283c2521d07</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg38.UCSC_knownGene.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.UCSC_knownGene.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.UCSC_knownGene.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:03:09 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg38.UCSC_knownGene.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235915</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.UCSC_knownGene.union.bed.gz/download" filesize="2107477"><media:hash algo="md5">0fa734a1223ab82b2da17fbf204dffc1</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg38.UCSC_knownGene.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.UCSC_knownGene.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.UCSC_knownGene.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:03:09 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg38.UCSC_knownGene.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235916</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg38.UCSC_knownGene.union.transcript_id.txt.gz/download" filesize="460189"><media:hash algo="md5">efe1ae5a12e446095886c518e69c1ad0</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg18.RefSeq.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.RefSeq.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.RefSeq.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:02:48 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg18.RefSeq.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235899</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.RefSeq.union.bed.gz/download" filesize="1677233"><media:hash algo="md5">5352ba99b407834b53cde8f165726287</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg18.RefSeq.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.RefSeq.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.RefSeq.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:02:53 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg18.RefSeq.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235900</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.RefSeq.union.transcript_id.txt.gz/download" filesize="275575"><media:hash algo="md5">abed309c7550ab7c2ad043989b9efee3</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg18.UCSC_knownGene.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.UCSC_knownGene.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.UCSC_knownGene.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:02:53 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg18.UCSC_knownGene.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235901</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.UCSC_knownGene.union.bed.gz/download" filesize="1871270"><media:hash algo="md5">7f8f948fb2cf0a10d675223709cf14f7</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.ENCODE_GENE.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.ENCODE_GENE.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.ENCODE_GENE.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:02:58 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.ENCODE_GENE.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235903</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.ENCODE_GENE.union.bed.gz/download" filesize="2274704"><media:hash algo="md5">3101f0ff19567f7a15a2ad3bf7d6acd2</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.ENCODE_GENE.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.ENCODE_GENE.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.ENCODE_GENE.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:03:03 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.ENCODE_GENE.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235904</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.ENCODE_GENE.union.transcript_id.txt.gz/download" filesize="614630"><media:hash algo="md5">ee514b8223ec63b9f9b71ae55a6289a6</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.Ensembl.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.Ensembl.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.Ensembl.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:03:03 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.Ensembl.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235905</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.Ensembl.union.bed.gz/download" filesize="2743143"><media:hash algo="md5">e63c3fc7a10b5f0beaab02b6e9c1021a</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.Ensembl.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.Ensembl.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.Ensembl.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:03:08 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg19.Ensembl.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235906</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg19.Ensembl.union.transcript_id.txt.gz/download" filesize="918509"><media:hash algo="md5">a0135d6dd926171bd42c4062e80ffbef</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg18.Ensembl.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.Ensembl.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.Ensembl.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:02:48 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg18.Ensembl.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235898</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.Ensembl.union.transcript_id.txt.gz/download" filesize="334637"><media:hash algo="md5">c1c9a7a1a7fc7cb6cb834927f7932eeb</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg18.UCSC_knownGene.union.transcript_id.txt.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.UCSC_knownGene.union.transcript_id.txt.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.UCSC_knownGene.union.transcript_id.txt.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:02:58 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg18.UCSC_knownGene.union.transcript_id.txt.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235902</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.UCSC_knownGene.union.transcript_id.txt.gz/download" filesize="332982"><media:hash algo="md5">d1020f84b8428810ac6c7a9a32704c4a</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg18.Ensembl.union.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.Ensembl.union.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.Ensembl.union.bed.gz/download</guid>
+      <pubDate>Wed, 10 Dec 2014 05:02:43 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens_merge_transcripts/hg18.Ensembl.union.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20235897</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens_merge_transcripts/hg18.Ensembl.union.bed.gz/download" filesize="1870565"><media:hash algo="md5">8974eb950a5db9cf5e4ac17202bb0b48</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus/mm10_Ensembl.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_Ensembl.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_Ensembl.bed.gz/download</guid>
+      <pubDate>Tue, 02 Dec 2014 04:47:56 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus/mm10_Ensembl.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">20108472</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_Ensembl.bed.gz/download" filesize="4063517"><media:hash algo="md5">ef0a8b64ef5ff493f3d0d6bd5eff8216</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens/hg19.HouseKeepingGenes.bed]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19.HouseKeepingGenes.bed/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19.HouseKeepingGenes.bed/download</guid>
+      <pubDate>Tue, 07 Oct 2014 17:26:38 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens/hg19.HouseKeepingGenes.bed]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">17776741</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="text/plain; charset=us-ascii" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19.HouseKeepingGenes.bed/download" filesize="626434"><media:hash algo="md5">7cbf990cc8cfffc1b57377551026e8d3</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus/mm10_GENCODE_GENE_vM3.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_GENCODE_GENE_vM3.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_GENCODE_GENE_vM3.bed.gz/download</guid>
+      <pubDate>Wed, 27 Aug 2014 06:05:33 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus/mm10_GENCODE_GENE_vM3.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">16093929</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_GENCODE_GENE_vM3.bed.gz/download" filesize="4042703"><media:hash algo="md5">149802046e6c04a7315c06050773a054</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Zebrafish_Danio_rerio/danRer7_Ensembl.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Zebrafish_Danio_rerio/danRer7_Ensembl.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Zebrafish_Danio_rerio/danRer7_Ensembl.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:32:32 UT</pubDate>
+      <description><![CDATA[/BED/Zebrafish_Danio_rerio/danRer7_Ensembl.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320657</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Zebrafish_Danio_rerio/danRer7_Ensembl.bed.gz/download" filesize="2822467"><media:hash algo="md5">7f8456c6dae63c1a19d5d7afe1072f8f</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Zebrafish_Danio_rerio/danRer7_RefSeq.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Zebrafish_Danio_rerio/danRer7_RefSeq.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Zebrafish_Danio_rerio/danRer7_RefSeq.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:32:31 UT</pubDate>
+      <description><![CDATA[/BED/Zebrafish_Danio_rerio/danRer7_RefSeq.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320655</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Zebrafish_Danio_rerio/danRer7_RefSeq.bed.gz/download" filesize="931712"><media:hash algo="md5">3e91a9754178fcf0aae1c817aa37150e</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Zebrafish_Danio_rerio/danRer7_ZGC.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Zebrafish_Danio_rerio/danRer7_ZGC.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Zebrafish_Danio_rerio/danRer7_ZGC.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:32:30 UT</pubDate>
+      <description><![CDATA[/BED/Zebrafish_Danio_rerio/danRer7_ZGC.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320653</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Zebrafish_Danio_rerio/danRer7_ZGC.bed.gz/download" filesize="905673"><media:hash algo="md5">3f7efd8688180c4e8cb726c0151ece86</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/fly_D.melanogaster/dm3_RefSeq.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/fly_D.melanogaster/dm3_RefSeq.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/fly_D.melanogaster/dm3_RefSeq.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:31:15 UT</pubDate>
+      <description><![CDATA[/BED/fly_D.melanogaster/dm3_RefSeq.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320643</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/fly_D.melanogaster/dm3_RefSeq.bed.gz/download" filesize="1044045"><media:hash algo="md5">0c5f006dd4741ed4dc76af6ee92b7424</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/fly_D.melanogaster/dm3_flyBase.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/fly_D.melanogaster/dm3_flyBase.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/fly_D.melanogaster/dm3_flyBase.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:31:14 UT</pubDate>
+      <description><![CDATA[/BED/fly_D.melanogaster/dm3_flyBase.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320641</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/fly_D.melanogaster/dm3_flyBase.bed.gz/download" filesize="705085"><media:hash algo="md5">e9adde76136b83c49d06eb9400717f24</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/fly_D.melanogaster/dm3_Ensembl.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/fly_D.melanogaster/dm3_Ensembl.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/fly_D.melanogaster/dm3_Ensembl.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:31:13 UT</pubDate>
+      <description><![CDATA[/BED/fly_D.melanogaster/dm3_Ensembl.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320639</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/fly_D.melanogaster/dm3_Ensembl.bed.gz/download" filesize="890209"><media:hash algo="md5">ee137885ea6d86ef949705c28fbfd84a</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus/mm10_UCSC_knownGene.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_UCSC_knownGene.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_UCSC_knownGene.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:29:56 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus/mm10_UCSC_knownGene.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320629</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_UCSC_knownGene.bed.gz/download" filesize="2544885"><media:hash algo="md5">a6bb281615c0172c079ab84742891532</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:29:53 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320625</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download" filesize="1750223"><media:hash algo="md5">c6f0b6baf5cfd0095681dd8306c4fd47</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus/mm10_GENCODE_GENE_VM2.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_GENCODE_GENE_VM2.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_GENCODE_GENE_VM2.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:29:52 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus/mm10_GENCODE_GENE_VM2.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320623</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_GENCODE_GENE_VM2.bed.gz/download" filesize="2709112"><media:hash algo="md5">05cb3ff0012e2e9077ddb7ec21c80085</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus/mm10_MGC_GENE.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_MGC_GENE.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_MGC_GENE.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:29:51 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus/mm10_MGC_GENE.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320621</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_MGC_GENE.bed.gz/download" filesize="1300357"><media:hash algo="md5">e680efe77c956cd7dba48c8c2139ee19</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus/mm9_UCSC_knownGene.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_UCSC_knownGene.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_UCSC_knownGene.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:29:50 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus/mm9_UCSC_knownGene.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320619</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_UCSC_knownGene.bed.gz/download" filesize="2413754"><media:hash algo="md5">f4d4bf73e9e7ba511f958c3f39b9e540</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus/mm9_Ensembl.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_Ensembl.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_Ensembl.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:29:49 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus/mm9_Ensembl.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320617</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_Ensembl.bed.gz/download" filesize="4174780"><media:hash algo="md5">b029b2abf190db38d1d616c5a181e01c</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus/mm9_RefSeq.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_RefSeq.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_RefSeq.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:29:47 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus/mm9_RefSeq.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320615</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_RefSeq.bed.gz/download" filesize="1748679"><media:hash algo="md5">7c32a96338a55a636078046c0d5c5bbd</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus/mm9_MGC_GENE.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_MGC_GENE.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_MGC_GENE.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:29:46 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus/mm9_MGC_GENE.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320613</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_MGC_GENE.bed.gz/download" filesize="1299222"><media:hash algo="md5">de0b281a8e795a3ddbb13519c5d35a22</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Mouse_Mus_musculus/mm9_AceView.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_AceView.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_AceView.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:29:45 UT</pubDate>
+      <description><![CDATA[/BED/Mouse_Mus_musculus/mm9_AceView.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320611</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm9_AceView.bed.gz/download" filesize="6552740"><media:hash algo="md5">353b2e37df6ada875deed8233ed18e26</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens/hg19_AceView.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_AceView.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_AceView.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:28:15 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens/hg19_AceView.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320599</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_AceView.bed.gz/download" filesize="9977380"><media:hash algo="md5">2da187e0ca77ed9c2802558e65e26118</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens/hg38_UCSC_knownGene.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_UCSC_knownGene.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_UCSC_knownGene.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:28:13 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens/hg38_UCSC_knownGene.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320597</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_UCSC_knownGene.bed.gz/download" filesize="3801320"><media:hash algo="md5">8eb69180e5bcaa73b6d3b3013654a0bb</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens/hg19_UCSC_knownGene.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_UCSC_knownGene.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_UCSC_knownGene.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:27:48 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens/hg19_UCSC_knownGene.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320595</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_UCSC_knownGene.bed.gz/download" filesize="3296443"><media:hash algo="md5">c3253df9cf2c080cbdfca0df7c5f64a3</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens/hg19_RefSeq.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_RefSeq.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_RefSeq.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:27:47 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens/hg19_RefSeq.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320593</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_RefSeq.bed.gz/download" filesize="2300231"><media:hash algo="md5">1b7bd3a6f074d37f659442591c20ca15</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens/hg19_Ensembl.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_Ensembl.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_Ensembl.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:27:44 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens/hg19_Ensembl.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320589</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg19_Ensembl.bed.gz/download" filesize="8024762"><media:hash algo="md5">590852c0035bdaac64d5bdc4676fdcdc</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens/hg38_RefSeq.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_RefSeq.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_RefSeq.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:27:40 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens/hg38_RefSeq.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320583</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_RefSeq.bed.gz/download" filesize="2417865"><media:hash algo="md5">5a4c197612aaa79550770be3db988596</media:hash></media:content>
+    </item>
+    <item>
+      <title><![CDATA[/BED/Human_Homo_sapiens/hg38_GENCODE_GENE_V19.bed.gz]]></title>
+      <link>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_GENCODE_GENE_V19.bed.gz/download</link>
+      <guid>http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_GENCODE_GENE_V19.bed.gz/download</guid>
+      <pubDate>Wed, 06 Aug 2014 20:27:39 UT</pubDate>
+      <description><![CDATA[/BED/Human_Homo_sapiens/hg38_GENCODE_GENE_V19.bed.gz]]></description>
+      <files:sf-file-id xmlns:files="https://sourceforge.net/api/files.rdf#">15320581</files:sf-file-id>
+      <files:extra-info xmlns:files="https://sourceforge.net/api/files.rdf#">text (gzip compressed data)</files:extra-info>
+      <media:content xmlns:media="http://video.search.yahoo.com/mrss/" type="application/x-gzip; charset=binary" url="http://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_GENCODE_GENE_V19.bed.gz/download" filesize="4555721"><media:hash algo="md5">891562961fa6b7bdca1774ccca02ac55</media:hash></media:content>
+    </item>
+  </channel>
+</rss>
