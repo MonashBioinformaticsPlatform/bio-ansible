@@ -1,0 +1,32 @@
+- name: Download artemis
+  get_url:
+    url=ftp://ftp.sanger.ac.uk/pub/resources/software/artemis/artemis.tar.gz
+    dest={{source_dir}}/artemis.tar.gz
+
+- file: dest="{{soft_dir}}/artemis-{{version}}" state=directory mode=0755
+
+- name: Uncompress artemis
+  unarchive: 
+    src: "{{ source_dir }}/artemis.tar.gz"
+    dest: "{{soft_dir}}/artemis-{{version}}"
+    copy: no
+    creates: "{{soft_dir}}/artemis-{{version}}/artemis/art"
+
+- file: dest="{{modules_dir}}/bio/artemis" state=directory mode=0755
+
+- name: Artemis module definition
+  template: 
+    src: templates/sw-module.lua.j2 
+    dest: "{{ modules_dir }}/bio/artemis/{{version}}.lua"
+    owner: root 
+    mode: 644
+  with_items:
+    - dir: 'artemis-{{version}}/artemis'
+      skip_bin: true
+      help_text: |
+        Artemis is a free genome browser and annotation tool that allows visualisation of sequence features, 
+        next generation data and the results of analyses within the context of the sequence, and also its
+        six-frame translation.
+
+
+

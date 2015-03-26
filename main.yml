@@ -46,6 +46,7 @@
     - include: tasks/rna-seqc.yml tags=rna-seqc version=1.1.8
     - include: tasks/big-data-script.yml tags=big-data-script version=0.999h
     - include: tasks/rseqc.yml tags=rseqc version=2.6.1
+    - include: tasks/artemis.yml tags=artemis version=16.0.0
 
     - include: tasks/prokka.yml tags=prokka
     - include: tasks/misc_utils.yml tags=misc_utils
