@@ -7,11 +7,17 @@ local dir = "{{ item.dir }}"
 local base = pathJoin("{{soft_dir}}",dir)
 
 {% if item.skip_bin is defined %}
-prepend_path("PATH", base)
+local path = base
 {% elif item.bin is defined %}
-prepend_path("PATH", pathJoin(base, "{{item.bin}}"))
+local path = pathJoin(base, "{{item.bin}}")
 {% else %}
-prepend_path("PATH", pathJoin(base, "bin"))
+local path = pathJoin(base, "bin")
+{% endif %}
+
+{% if item.append is defined %}
+append_path("PATH", path)
+{% else %}
+prepend_path("PATH", path)
 {% endif %}
 
 {% if item.python_path is defined %}
