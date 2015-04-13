@@ -21,6 +21,7 @@
     - python-numpy
     - python-pandas
     - python-biopython
+    - python-virtualenv
     - ipython-notebook
     - ruby
     - ghostscript

@@ -48,6 +48,8 @@
     - include: tasks/rseqc.yml tags=rseqc version=2.6.1
     - include: tasks/artemis.yml tags=artemis version=16.0.0
 
+    - include: tasks/macs2.yml tags=macs2 version=2.1.0.20140616
+
     - include: tasks/prokka.yml tags=prokka
     - include: tasks/misc_utils.yml tags=misc_utils
 
