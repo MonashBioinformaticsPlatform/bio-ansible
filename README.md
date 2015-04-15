@@ -1,4 +1,15 @@
+Requirements
+--
+
+You need a `ansible` installed locally
+
+    sudo pip install ansible
+    
+You need to manually download some packages that require license agreements.  See `tarballs/README`
+
+
 Example to run
+--
 
     ansible-playbook -K -s -u powell -i hosts main.yml
 
