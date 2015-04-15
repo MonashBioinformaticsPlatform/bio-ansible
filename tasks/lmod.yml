@@ -15,7 +15,11 @@
     mode=0444
 
 - name: Uncompress LMOD
-  unarchive: src={{ source_dir }}/Lmod-{{ lmod_version }}.tar.bz2 dest={{ source_dir }} copy=no
+  unarchive:
+    src={{ source_dir }}/Lmod-{{ lmod_version }}.tar.bz2
+    dest={{ source_dir }}
+    copy=no
+    creates={{source_dir}}/Lmod-{{ lmod_version }}/README
 
 - name: Compile and install Lmod
   shell: cd {{ source_dir }}/Lmod-{{ lmod_version }}; ./configure --prefix={{ soft_dir }} --with-mpathSearch=YES --with-caseIndependentSorting=YES && make install LUA_INCLUDE=/usr/include/lua5.2
