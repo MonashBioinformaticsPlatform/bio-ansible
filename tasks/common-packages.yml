@@ -11,6 +11,7 @@
     - lua-filesystem
     - lua-posix
     - gcc
+    - git
     - tcl
     - zsh
     - r-base-core
