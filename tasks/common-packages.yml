@@ -27,3 +27,4 @@
     - ruby
     - ghostscript
     - cpanminus
+    - pigz
