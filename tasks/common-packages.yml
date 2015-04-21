@@ -28,3 +28,5 @@
     - ghostscript
     - cpanminus
     - pigz
+    - bedtools
+    - emboss
