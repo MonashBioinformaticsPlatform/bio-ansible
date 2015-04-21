@@ -9,6 +9,8 @@ You need to manually download some packages that require license agreements.  Se
 
 By default software will be installed to /software.  So, if you want this to be on a separate mount, set that up before running ansible.
 
+So far this has only been developed on ubuntu 14.04
+
 Example to run
 --
 
@@ -19,6 +21,15 @@ or for only a specific task
     ansible-playbook -K -s -u powell -i hosts main.yml --tags samtools
 
 
+
+Extra files
+--
+
 There are scripts to download various databases in `scripts/`. These have deliberately not been added to ansible.
 
-So far this has only been developed on ubuntu 14.04
+Download blast databases
+
+    cd /references/blast
+    sudo -u sw-installer $(which update_blastdb.pl) --passive --verbose '.*'
+
+
