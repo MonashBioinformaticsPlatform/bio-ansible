@@ -24,6 +24,10 @@ prepend_path("PATH", path)
 prepend_path("PYTHONPATH", pathJoin(base, "{{item.python_path}}"))
 {% endif %}
 
+{% for e in item.env|default([]) %}
+setenv("{{e.name}}", "{{e.value}}")
+{% endfor %}
+
 
 {% if item.msg is defined %}
 LmodMessage("{{ item.msg }}")

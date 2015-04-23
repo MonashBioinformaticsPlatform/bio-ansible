@@ -19,6 +19,10 @@
     owner: root 
     mode: 644
   with_items:
-    - { help_text: 'The NCBI Blast suite', dir: 'ncbi-blast-{{version}}+' }
+    - help_text: 'The NCBI Blast suite'
+      dir: 'ncbi-blast-{{version}}+'
+      env:
+        - name: BLASTDB
+          value: '{{ref_dir}}/blast'
 
 
