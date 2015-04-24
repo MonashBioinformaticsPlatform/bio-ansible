@@ -16,8 +16,9 @@
     - zsh
     - r-base-core
     - curl
-    - python-pip
     - htop
+    - python-pip
+    - python-dev
     - python-matplotlib
     - python-numpy
     - python-pandas
@@ -30,3 +31,6 @@
     - pigz
     - bedtools
     - emboss
+    - nodejs-legacy
+    - npm
+    - novnc
