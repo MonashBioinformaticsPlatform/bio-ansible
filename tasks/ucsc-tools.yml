@@ -1,0 +1,44 @@
+
+- name: Install packages
+  apt: pkg={{item}} state=present
+  with_items:
+    - libmysqlclient-dev
+    - libssl-dev
+
+- name: Download UCSC tools
+  get_url:
+    url=http://hgdownload.cse.ucsc.edu/admin/exe/userApps.v{{version}}.src.tgz
+    dest={{source_dir}}/ucsc-userApps.v{{version}}.src.tgz
+
+- file: dest="{{ source_dir }}/UCSC-tools.v{{version}}" state=directory mode=0755
+
+- name: Uncompress UCSC tools
+  unarchive:
+    src: "{{ source_dir }}/ucsc-userApps.v{{version}}.src.tgz"
+    dest: "{{ source_dir }}/UCSC-tools.v{{version}}"
+    copy: no
+    creates: "{{ source_dir }}/UCSC-tools.v{{version}}/userApps/Makefile"
+
+- name: Build UCSC tools
+  shell: cd {{ source_dir }}/UCSC-tools.v{{version}}/userApps/; make 
+  args:
+    creates: "{{ source_dir }}/UCSC-tools.v{{version}}/userApps/bin/liftOver"
+
+- name: Install UCSC tools
+  shell: rsync -a {{ source_dir }}/UCSC-tools.v{{version}}/userApps/bin {{soft_dir}}/UCSC-tools.v{{version}}
+  args:
+    creates: "{{ soft_dir }}/UCSC-tools.v{{version}}/liftOver"
+
+
+- file: dest="{{modules_dir}}/bio/UCSC-tools" state=directory mode=0755
+
+- name: UCSC tools module definition
+  template: 
+    src: templates/sw-module.lua.j2 
+    dest: "{{ modules_dir }}/bio/UCSC-tools/{{version}}.lua"
+    owner: root 
+    mode: 644
+  with_items:
+    - { help_text: 'Collection of UCSC command line tools', dir: 'UCSC-tools.v{{version}}' }
+
+
