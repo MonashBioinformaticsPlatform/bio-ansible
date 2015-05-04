@@ -17,7 +17,7 @@
     src: templates/sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/hisat/{{version}}.lua"
     owner: root 
-    mode: 644
+    mode: 0644
   with_items:
     - { help_text: 'Hierarchical Indexing for Spliced Alignment of Transcripts', dir: 'hisat-{{version}}', skip_bin: true}
 

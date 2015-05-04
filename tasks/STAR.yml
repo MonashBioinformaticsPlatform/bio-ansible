@@ -16,7 +16,7 @@
     src: templates/sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/STAR/{{version}}.lua"
     owner: root 
-    mode: 644
+    mode: 0644
   with_items:
     - { help_text: 'This module loads the STAR aligner', dir: 'STAR-{{version}}' }
 

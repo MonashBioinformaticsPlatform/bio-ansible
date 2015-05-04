@@ -17,7 +17,7 @@
     src: templates/sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/cufflinks/{{version}}.lua"
     owner: root 
-    mode: 644
+    mode: 0644
   with_items:
     - { help_text: 'Cufflinks : Transcriptome assembly and differential expression analysis for RNA-Seq', dir: 'cufflinks-{{version}}.Linux_x86_64', skip_bin: true}
 

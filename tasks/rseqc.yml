@@ -24,7 +24,7 @@
     src: templates/sw-module.lua.j2
     dest: "{{ modules_dir }}/bio/RSeQC/{{version}}.lua"
     owner: root
-    mode: 644
+    mode: 0644
   with_items:
     - dir: 'RSeQC-{{version}}'
       bin: 'usr/local/bin'

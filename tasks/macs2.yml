@@ -9,7 +9,7 @@
     src: templates/sw-module.lua.j2
     dest: "{{ modules_dir }}/bio/macs2/{{version}}.lua"
     owner: root
-    mode: 644
+    mode: 0644
   with_items:
     - { help_text: 'MACS2 : Model-based Analysis of ChIP-Seq, for identifying transcript factor binding site', dir: 'macs2', append: true }
 

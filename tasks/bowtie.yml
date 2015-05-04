@@ -17,7 +17,7 @@
     src: templates/sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/bowtie/{{version}}.lua"
     owner: root 
-    mode: 644
+    mode: 0644
   with_items:
     - { help_text: 'Bowtie, an ultrafast, memory-efficient short read aligner for short DNA sequences (reads) from next-gen sequencers', dir: 'bowtie-{{version}}', skip_bin: true}
 

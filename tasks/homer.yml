@@ -18,7 +18,7 @@
     src: templates/sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/homer/default.lua"
     owner: root 
-    mode: 644
+    mode: 0644
   with_items:
     - { help_text: 'Software for motif discovery and next-gen sequencing analysis', dir: 'homer' }
 

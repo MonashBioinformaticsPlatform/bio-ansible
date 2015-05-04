@@ -30,7 +30,7 @@
     src: templates/sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/BAMStats/{{version}}.lua"
     owner: root 
-    mode: 644
+    mode: 0644
   with_items:
     - { help_text: 'BAMStats: an interactive desktop GUI tool for summarising Next Generation Sequencing alignments', dir: 'BAMStats-{{version}}' }
 

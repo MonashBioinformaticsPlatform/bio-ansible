@@ -19,7 +19,7 @@
     src: templates/sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/BWA/0.7.12.lua"
     owner: root 
-    mode: 644
+    mode: 0644
   with_items:
     - { help_text: 'This module loads the BWA aligner', dir: 'BWA-0.7.12' }
 
