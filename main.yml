@@ -27,8 +27,8 @@
     - include: tasks/tophat.yml tags=tophat version=2.0.13
     - include: tasks/ncbi-blast.yml tags=ncbi-blast version=2.2.30
     - include: tasks/vcftools.yml tags=vcftools version=0.1.12b
-    - include: tasks/igvtools.yml tags=igvtools version=2.3.42
-    - include: tasks/igv.yml tags=igv version=2.3.42
+    - include: tasks/igvtools.yml tags=igvtools version=2.3.52
+    - include: tasks/igv.yml tags=igv version=2.3.52
     - include: tasks/gatk.yml tags=gatk version=3.3-0
     - include: tasks/bowtie.yml tags=bowtie1 version=1.1.1
     - include: tasks/bowtie2.yml tags=bowtie2 version=2.2.5
