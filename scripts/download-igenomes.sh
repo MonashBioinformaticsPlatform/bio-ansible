@@ -87,3 +87,8 @@ process ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Drosophila_melanogaster/En
 process ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Drosophila_melanogaster/NCBI/build5.41/Drosophila_melanogaster_NCBI_build5.41.tar.gz
 process ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Drosophila_melanogaster/UCSC/dm3/Drosophila_melanogaster_UCSC_dm3.tar.gz
 
+# Rat
+process ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Rattus_norvegicus/Ensembl/Rnor_5.0/Rattus_norvegicus_Ensembl_Rnor_5.0.tar.gz
+process ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Rattus_norvegicus/NCBI/Rnor_5.0/Rattus_norvegicus_NCBI_Rnor_5.0.tar.gz
+process ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Rattus_norvegicus/UCSC/rn5/Rattus_norvegicus_UCSC_rn5.tar.gz
+
