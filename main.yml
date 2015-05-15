@@ -13,7 +13,7 @@
     - include: tasks/lmod.yml lmod_version=5.8.6
     - include: tasks/java.yml
     - include: tasks/r-packages.yml
- 
+
     - include: tasks/linuxbrew.yml tags=linuxbrew
 
     - include: tasks/SPAdes.yml tags=spades
@@ -48,6 +48,7 @@
     - include: tasks/rseqc.yml tags=rseqc version=2.6.1
     - include: tasks/artemis.yml tags=artemis version=16.0.0
     - include: tasks/mummer.yml tags=mummer version=3.23
+    - include: tasks/abacas.yml tags=abacas version=1.3.1
 
     - include: tasks/macs2.yml tags=macs2 version=2.1.0.20140616
     - include: tasks/cutadapt.yml tags=cutadapt version=1.8
