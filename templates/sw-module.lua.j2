@@ -20,6 +20,10 @@ append_path("PATH", path)
 prepend_path("PATH", path)
 {% endif %}
 
+{% if item.perl_path is defined %}
+prepend_path("PERL5LIB", pathJoin(base, "{{item.perl_path}}"))
+{% endif %}
+
 {% if item.python_path is defined %}
 prepend_path("PYTHONPATH", pathJoin(base, "{{item.python_path}}"))
 {% endif %}

@@ -25,5 +25,8 @@
     owner: root
     mode: 0644
   with_items:
-    - { help_text: 'This module loads the vcftools tool suite', dir: 'vcftools_{{version}}' }
+    - dir: 'vcftools_{{version}}' 
+      perl_path: 'lib/perl5/site_perl'
+      help_text: >
+        This module loads the vcftools tool suite
 
