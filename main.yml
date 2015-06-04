@@ -18,7 +18,7 @@
 
     - include: tasks/SPAdes.yml tags=spades
     - include: tasks/bwa.yml tags=bwa
-    - include: tasks/STAR.yml tags=star version=2.4.0j
+    - include: tasks/STAR.yml tags=star version=2.4.1d
     - include: tasks/picard.yml tags=picard version=1.129
     - include: tasks/htslib.yml tags=htslib version=1.2
     - include: tasks/samtools.yml tags=samtools version=1.2 htslib_version=1.2
