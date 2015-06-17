@@ -8,6 +8,7 @@
     - ref_dir: /references
 
   tasks:
+    - include: tasks/cran-r.yml
     - include: tasks/common-packages.yml
     - include: tasks/zsh.yml
     - include: tasks/lmod.yml lmod_version=5.8.6
