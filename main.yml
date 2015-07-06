@@ -38,7 +38,7 @@
     - include: tasks/hmmer.yml tags=hmmer version=3.1b2
     - include: tasks/bedops.yml tags=bedops version=2.4.11
     - include: tasks/blat.yml tags=blat version=35
-    - include: tasks/hisat.yml tags=hisat version=0.1.5-beta
+    - include: tasks/hisat.yml tags=hisat version=0.1.6-beta
     - include: tasks/homer.yml tags=homer
     - include: tasks/bamutil.yml tags=bamutil version=1.0.13
     - include: tasks/bamstats.yml tags=bamstats version=1.25
@@ -48,6 +48,8 @@
     - include: tasks/big-data-script.yml tags=big-data-script version=0.999h
     - include: tasks/rseqc.yml tags=rseqc version=2.6.1
     - include: tasks/artemis.yml tags=artemis version=16.0.0
+    - include: tasks/snippy.yml tags=snippy version=2.5
+    - include: tasks/ngsutils.yml tags=ngsutils version=0.5.7
 
     - include: tasks/macs2.yml tags=macs2 version=2.1.0.20140616
     - include: tasks/cutadapt.yml tags=cutadapt version=1.8
