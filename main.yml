@@ -50,6 +50,7 @@
     - include: tasks/artemis.yml tags=artemis version=16.0.0
     - include: tasks/snippy.yml tags=snippy version=2.5
     - include: tasks/ngsutils.yml tags=ngsutils version=0.5.7
+    - include: tasks/qiime.yml tags=qiime version=1.9.1
 
     - include: tasks/macs2.yml tags=macs2 version=2.1.0.20140616
     - include: tasks/cutadapt.yml tags=cutadapt version=1.8
