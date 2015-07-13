@@ -34,3 +34,7 @@
     - nodejs-legacy
     - npm
     - novnc
+    - cmake
+    - texlive-xetex
+    - texlive-latex-recommended
+    - texlive-fonts-recommended
