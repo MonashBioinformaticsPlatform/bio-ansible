@@ -1,24 +1,24 @@
 - name: Download SPAdes
   get_url:
-    url=http://spades.bioinf.spbau.ru/release3.5.0/SPAdes-3.5.0-Linux.tar.gz
-    dest={{source_dir}}/SPAdes-3.5.0-Linux.tar.gz
+    url=http://spades.bioinf.spbau.ru/release{{version}}/SPAdes-{{version}}-Linux.tar.gz
+    dest={{source_dir}}/SPAdes-{{version}}-Linux.tar.gz
 
 - name: Uncompress SPAdes
   unarchive: 
-    src={{ source_dir }}/SPAdes-3.5.0-Linux.tar.gz 
+    src={{ source_dir }}/SPAdes-{{version}}-Linux.tar.gz 
     dest={{ soft_dir }}
     copy=no
-    creates={{ soft_dir}}/SPAdes-3.5.0-Linux/bin/spades
+    creates={{ soft_dir}}/SPAdes-{{version}}-Linux/bin/spades
 
 - file: dest="{{modules_dir}}/bio/SPAdes" state=directory mode=0755
 
 - name: SPAdes module definition
   template: 
     src: templates/sw-module.lua.j2 
-    dest: "{{ modules_dir }}/bio/SPAdes/3.5.0.lua"
+    dest: "{{ modules_dir }}/bio/SPAdes/{{version}}.lua"
     owner: root 
     mode: 0644
   with_items:
-    - { help_text: 'This module loads the SPAdes genome assembler', dir: 'SPAdes-3.5.0-Linux' }
+    - { help_text: 'This module loads the SPAdes genome assembler', dir: 'SPAdes-{{version}}-Linux' }
 
 
