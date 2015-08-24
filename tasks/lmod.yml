@@ -1,5 +1,5 @@
 - name: Create required directories
-  file: dest={{item}} state=directory mode=0755
+  file: dest={{item}} state=directory mode=0755 owner=sw-installer
   with_items:
   - "{{ source_dir }}"
   - "{{ soft_dir }}"
