@@ -26,7 +26,7 @@
     - include: tasks/bcftools.yml tags=bcftools version=1.2
     - include: tasks/cufflinks.yml tags=cufflinks version=2.2.1
     - include: tasks/tophat.yml tags=tophat version=2.0.13
-    - include: tasks/ncbi-blast.yml tags=ncbi-blast version=2.2.30
+    - include: tasks/ncbi-blast.yml tags=ncbi-blast version=2.2.31
     - include: tasks/vcftools.yml tags=vcftools version=0.1.12b
     - include: tasks/igvtools.yml tags=igvtools version=2.3.52
     - include: tasks/igv.yml tags=igv version=2.3.52
@@ -45,7 +45,7 @@
     - include: tasks/trimmomatic.yml tags=trimmomatic version=0.33
     - include: tasks/rstudio-server.yml tags=rstudio version=0.98.1103-amd64
     - include: tasks/rna-seqc.yml tags=rna-seqc version=1.1.8
-    - include: tasks/big-data-script.yml tags=big-data-script version=0.999h
+    - include: tasks/big-data-script.yml tags=big-data-script version=0.999k
     - include: tasks/rseqc.yml tags=rseqc version=2.6.1
     - include: tasks/artemis.yml tags=artemis version=16.0.0
     - include: tasks/snippy.yml tags=snippy version=2.5
