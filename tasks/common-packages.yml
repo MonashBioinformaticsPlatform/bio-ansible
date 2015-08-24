@@ -24,7 +24,7 @@
     - python-pandas
     - python-biopython
     - python-virtualenv
-    - ipython-notebook
+    - libpython3.4-dev
     - ruby
     - ghostscript
     - cpanminus
@@ -38,3 +38,4 @@
     - texlive-xetex
     - texlive-latex-recommended
     - texlive-fonts-recommended
+    - libzmq3-dev
