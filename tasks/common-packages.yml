@@ -26,6 +26,7 @@
     - python-virtualenv
     - libpython3.4-dev
     - ruby
+    - ruby-dev
     - ghostscript
     - cpanminus
     - pigz
