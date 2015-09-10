@@ -20,4 +20,6 @@ load("samtools"
     ,"bowtie2"
 
     ,"parallel"
+
+    ,"java"
     )

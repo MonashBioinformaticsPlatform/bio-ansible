@@ -12,7 +12,8 @@
     - include: tasks/common-packages.yml tags=common
     - include: tasks/zsh.yml
     - include: tasks/lmod.yml lmod_version=5.8.6
-    - include: tasks/java.yml
+    - include: tasks/java.yml 
+    - include: tasks/java-link.yml tags=java-link
     - include: tasks/r-packages.yml
  
     - include: tasks/linuxbrew.yml tags=linuxbrew

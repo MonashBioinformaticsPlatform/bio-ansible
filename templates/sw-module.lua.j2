@@ -3,8 +3,11 @@ help(
 {{ item.help_text }}
 ]])
 
-local dir = "{{ item.dir }}"
-local base = pathJoin("{{soft_dir}}",dir)
+{% if item.base %}
+local base = "{{ item.base }}"
+{% else %}
+local base = pathJoin("{{soft_dir}}", "{{ item.dir }}")
+{% endif %}
 
 {% if item.skip_bin is defined %}
 local path = base
