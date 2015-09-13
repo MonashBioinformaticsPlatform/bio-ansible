@@ -3,7 +3,7 @@ help(
 {{ item.help_text }}
 ]])
 
-{% if item.base %}
+{% if item.base is defined %}
 local base = "{{ item.base }}"
 {% else %}
 local base = pathJoin("{{soft_dir}}", "{{ item.dir }}")
