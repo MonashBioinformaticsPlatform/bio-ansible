@@ -8,24 +8,26 @@
     - ref_dir: /references
 
   tasks:
-    - include: tasks/common-packages.yml
+    - include: tasks/cran-r.yml
+    - include: tasks/common-packages.yml tags=common
     - include: tasks/zsh.yml
     - include: tasks/lmod.yml lmod_version=5.8.6
-    - include: tasks/java.yml
+    - include: tasks/java.yml 
+    - include: tasks/java-link.yml tags=java-link
     - include: tasks/r-packages.yml
 
     - include: tasks/linuxbrew.yml tags=linuxbrew
 
-    - include: tasks/SPAdes.yml tags=spades
+    - include: tasks/SPAdes.yml tags=spades version=3.6.0
     - include: tasks/bwa.yml tags=bwa
-    - include: tasks/STAR.yml tags=star version=2.4.0j
+    - include: tasks/STAR.yml tags=star version=2.4.2a
     - include: tasks/picard.yml tags=picard version=1.129
     - include: tasks/htslib.yml tags=htslib version=1.2
     - include: tasks/samtools.yml tags=samtools version=1.2 htslib_version=1.2
     - include: tasks/bcftools.yml tags=bcftools version=1.2
     - include: tasks/cufflinks.yml tags=cufflinks version=2.2.1
     - include: tasks/tophat.yml tags=tophat version=2.0.13
-    - include: tasks/ncbi-blast.yml tags=ncbi-blast version=2.2.30
+    - include: tasks/ncbi-blast.yml tags=ncbi-blast version=2.2.31
     - include: tasks/vcftools.yml tags=vcftools version=0.1.12b
     - include: tasks/igvtools.yml tags=igvtools version=2.3.52
     - include: tasks/igv.yml tags=igv version=2.3.52
@@ -37,25 +39,31 @@
     - include: tasks/hmmer.yml tags=hmmer version=3.1b2
     - include: tasks/bedops.yml tags=bedops version=2.4.11
     - include: tasks/blat.yml tags=blat version=35
-    - include: tasks/hisat.yml tags=hisat version=0.1.5-beta
+    - include: tasks/hisat.yml tags=hisat version=0.1.6-beta
     - include: tasks/homer.yml tags=homer
     - include: tasks/bamutil.yml tags=bamutil version=1.0.13
     - include: tasks/bamstats.yml tags=bamstats version=1.25
     - include: tasks/trimmomatic.yml tags=trimmomatic version=0.33
     - include: tasks/rstudio-server.yml tags=rstudio version=0.98.1103-amd64
     - include: tasks/rna-seqc.yml tags=rna-seqc version=1.1.8
-    - include: tasks/big-data-script.yml tags=big-data-script version=0.999h
+    - include: tasks/big-data-script.yml tags=big-data-script version=0.999k
     - include: tasks/rseqc.yml tags=rseqc version=2.6.1
     - include: tasks/artemis.yml tags=artemis version=16.0.0
     - include: tasks/mummer.yml tags=mummer version=3.23
     - include: tasks/abacas.yml tags=abacas version=1.3.1
+    - include: tasks/snippy.yml tags=snippy version=2.5
+    - include: tasks/ngsutils.yml tags=ngsutils version=0.5.7
+    - include: tasks/qiime.yml tags=qiime version=1.9.1
 
     - include: tasks/macs2.yml tags=macs2 version=2.1.0.20140616
     - include: tasks/cutadapt.yml tags=cutadapt version=1.8
     - include: tasks/ucsc-tools.yml tags=ucsc-tools version=314
+    - include: tasks/jupyter.yml tags=jupyter version=1.0.0
 
     - include: tasks/prokka.yml tags=prokka
     - include: tasks/misc_utils.yml tags=misc_utils
+
+    - include: tasks/rnasik-pipe.yml tags=rnasik-pipe
 
     - pip: name=htseq
     - pip: name=pysam

@@ -4,7 +4,10 @@
     dest={{source_dir}}/bwa-0.7.12.tar.bz2
 
 - name: Uncompress BWA
-  unarchive: src={{ source_dir }}/bwa-0.7.12.tar.bz2 dest={{ source_dir }} copy=no
+  unarchive:
+    src={{ source_dir }}/bwa-0.7.12.tar.bz2
+    dest={{ source_dir }}
+    copy=no
 
 - file: dest="{{modules_dir}}/bio/BWA" state=directory mode=0755
 

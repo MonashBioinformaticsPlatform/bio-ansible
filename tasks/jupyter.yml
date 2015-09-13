@@ -1,0 +1,36 @@
+
+- name: Create virtualenv for jupyter
+  command: creates={{soft_dir}}/jupyter virtualenv -p python3 {{soft_dir}}/jupyter
+  sudo: yes
+  sudo_user: sw-installer
+
+- name: jupyter
+  pip: name=jupyter version={{version}} virtualenv={{soft_dir}}/jupyter virtualenv_site_packages=no
+  sudo: yes
+  sudo_user: sw-installer
+
+- name: bash kernel for jupyter
+  pip: name=bash_kernel virtualenv={{soft_dir}}/jupyter virtualenv_site_packages=no
+  sudo: yes
+  sudo_user: sw-installer
+
+- name: jupyterhub
+  pip: name=jupyterhub virtualenv={{soft_dir}}/jupyter virtualenv_site_packages=no
+  sudo: yes
+  sudo_user: sw-installer
+
+- name: Install configurable-http-proxy for jupyterhub
+  npm: name=configurable-http-proxy global=yes
+
+- file: dest="{{modules_dir}}/bio/jupyter" state=directory mode=0755
+
+- name: jupyter module definition
+  template:
+    src: templates/sw-module.lua.j2
+    dest: "{{ modules_dir }}/bio/jupyter/{{version}}.lua"
+    owner: root
+    mode: 0644
+  with_items:
+    - { help_text: 'The Jupyter Notebook is a web application for interactive data science and scientific computing', dir: 'jupyter', append: true }
+
+

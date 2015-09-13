@@ -3,8 +3,11 @@ help(
 {{ item.help_text }}
 ]])
 
-local dir = "{{ item.dir }}"
-local base = pathJoin("{{soft_dir}}",dir)
+{% if item.base is defined %}
+local base = "{{ item.base }}"
+{% else %}
+local base = pathJoin("{{soft_dir}}", "{{ item.dir }}")
+{% endif %}
 
 {% if item.skip_bin is defined %}
 local path = base
@@ -20,6 +23,10 @@ append_path("PATH", path)
 prepend_path("PATH", path)
 {% endif %}
 
+{% if item.perl_path is defined %}
+prepend_path("PERL5LIB", pathJoin(base, "{{item.perl_path}}"))
+{% endif %}
+
 {% if item.python_path is defined %}
 prepend_path("PYTHONPATH", pathJoin(base, "{{item.python_path}}"))
 {% endif %}
@@ -27,6 +34,10 @@ prepend_path("PYTHONPATH", pathJoin(base, "{{item.python_path}}"))
 {% for e in item.env|default([]) %}
 setenv("{{e.name}}", "{{e.value}}")
 {% endfor %}
+
+{% if item.depend is defined %}
+load({{ item.depend }})
+{% endif %}
 
 
 {% if item.msg is defined %}

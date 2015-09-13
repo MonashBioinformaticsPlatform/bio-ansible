@@ -5,7 +5,7 @@
        version=STAR_{{version}}
 
 - name: Install STAR
-  shell: cd {{ source_dir }}/STAR-{{version}}/bin/Linux_x86_64_static; mkdir -p "{{ soft_dir }}/STAR-{{version}}/bin" && cp STAR "{{ soft_dir }}/STAR-{{version}}/bin"
+  shell: cd {{ source_dir }}/STAR-{{version}}/bin/Linux_x86_64_static; mkdir -p "{{ soft_dir }}/STAR-{{version}}/bin" && cp STAR STARlong "{{ soft_dir }}/STAR-{{version}}/bin"
   args:
     creates: "{{ soft_dir }}/STAR-{{version}}/bin/STAR"
 

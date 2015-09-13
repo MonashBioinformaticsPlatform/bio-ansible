@@ -11,6 +11,8 @@
 - include: brew_package.yml brew_name='homebrew/science/tbl2asn' lmod_name='tbl2asn'
 - include: brew_package.yml brew_name='homebrew/science/freec' lmod_name='freec'
 - include: brew_package.yml brew_name='homebrew/science/seqtk' lmod_name='seqtk'
+- include: brew_package.yml brew_name='homebrew/science/mrbayes' lmod_name='mrbayes'
+- include: brew_package.yml brew_name='homebrew/science/trimmomatic' lmod_name='trimmomatic'
 
 #- include: brew_package.yml brew_name='homebrew/science/plink2' lmod_name='plink2'
 #- include: brew_package.yml brew_name='homebrew/science/repeatmasker' lmod_name='repeatmasker'
