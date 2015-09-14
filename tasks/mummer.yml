@@ -1,0 +1,42 @@
+- name: Install packages
+  apt: pkg={{item}} state=present
+  with_items:
+    - make
+    - perl
+    - csh
+    - g++
+    - sed
+    - slang-xfig
+    - gnuplot
+    - xfig
+
+- name: Download MUMmer
+  get_url:
+    url=http://internode.dl.sourceforge.net/project/mummer/mummer/{{version}}/MUMmer{{version}}.tar.gz
+    dest={{source_dir}}/MUMmer{{version}}.tar.gz
+
+- name: Uncompress MUMmer
+  unarchive: 
+    src: "{{ source_dir }}/MUMmer{{version}}.tar.gz"
+    dest: "{{ source_dir }}"
+    copy: no
+    creates: "{{ source_dir }}/MUMmer{{version}}/README"
+
+- file: dest="{{ soft_dir }}/MUMmer{{version}}/bin" state=directory mode=0755
+
+- name: Build and Install MUMmer
+  shell: cd {{ source_dir }}/MUMmer{{version}}; make install BIN_DIR={{ soft_dir }}/MUMmer{{version}}/bin prefix="{{ soft_dir }}/MUMmer{{version}}"
+  args:
+    creates: "{{ soft_dir }}/MUMmer{{version}}/bin/mummer"
+
+- file: dest="{{modules_dir}}/bio/MUMmer" state=directory mode=0755
+
+- name: MUMmer module definition
+  template:
+    src: templates/sw-module.lua.j2
+    dest: "{{ modules_dir }}/bio/MUMmer/{{version}}.lua"
+    owner: root
+    mode: 0644
+  with_items:
+    - { help_text: 'MUMmer', dir: 'MUMmer{{version}}' }
+

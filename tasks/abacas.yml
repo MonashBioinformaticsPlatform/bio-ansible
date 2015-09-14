@@ -1,0 +1,21 @@
+- file: dest="{{ soft_dir }}/ABACAS.{{version}}/bin" state=directory mode=0755
+
+- name: Download ABACAS
+  get_url:
+    url=http://internode.dl.sourceforge.net/project/abacas/abacas.{{version}}.pl
+    dest="{{ soft_dir }}/ABACAS.{{version}}/bin"
+
+- file: dest="{{ soft_dir }}/ABACAS.{{version}}/bin/abacas.{{version}}.pl" state=file mode=0755
+
+- file: src=/usr/bin/perl dest=/usr/local/bin/perl state=link   
+
+- file: dest="{{modules_dir}}/bio/ABACAS" state=directory mode=0755
+
+- name: MUMmer module definition
+  template:
+    src: templates/sw-module.lua.j2
+    dest: "{{ modules_dir }}/bio/ABACAS/{{version}}.lua"
+    owner: root
+    mode: 0644
+  with_items:
+    - { help_text: 'run: perl {{ soft_dir }}/ABACAS.{{version}}/bin/abacas.{{version}}.pl', dir: 'ABACAS.{{version}}' }
