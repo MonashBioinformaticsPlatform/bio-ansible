@@ -1,6 +1,6 @@
 - name: Download BigDataScript
   get_url:
-    url=https://github.com/pcingola/BigDataScript/releases/download/v{{version}}/bds_Linux.tgz
+    url=http://bioinformatics.erc.monash.edu/home/steve/host/bds_kirill_build_v{{version}}.tar.gz
     dest={{source_dir}}/bds_Linux-{{version}}.tgz
 
 - file: dest="{{soft_dir}}/BigDataScript-{{version}}" state=directory mode=0755
