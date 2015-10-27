@@ -10,7 +10,7 @@
     copy=no
 
 - name: Move FastQC to a version specific directory
-  command: mv {{ soft_dir }}/FastQC {{ soft_dir }}/FastQC-{{ version }}
+  command: mv {{ soft_dir }}/FastQC {{ soft_dir }}/FastQC-{{ version }} creates={{ soft_dir }}/FastQC-{{ version }}
 
 - file: path="{{ soft_dir }}/FastQC-{{ version }}/fastqc" mode="a+x"
 - file: dest="{{ modules_dir }}/bio/fastqc" state=directory mode=0755
