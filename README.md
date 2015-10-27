@@ -9,7 +9,11 @@ You need to manually download some packages that require license agreements.  Se
 
 By default software will be installed to /software.  So, if you want this to be on a separate mount, set that up before running ansible.
 
-So far this has only been developed on ubuntu 14.04
+On your target host(s), you must create a user sw-installer in the sudo group.
+
+    server:~$ sudo adduser --ingroup sudo sw-installer
+
+So far this has only been developed on Ubuntu 14.04
 
 Example to run
 --
