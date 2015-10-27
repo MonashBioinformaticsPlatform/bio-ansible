@@ -8,8 +8,6 @@
     src={{ source_dir }}/fastqc_v{{ version }}.zip
     dest={{ soft_dir }}
     copy=no
-    mode=0644
-    creates={{ soft_dir }}/FastQC/fastqc
 
 - name: Move FastQC to a version specific directory
   command: mv {{ soft_dir }}/FastQC {{ soft_dir }}/FastQC-{{ version }}
