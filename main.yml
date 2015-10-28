@@ -59,6 +59,7 @@
     - include: tasks/ngsutils.yml tags=ngsutils version=0.5.7
     - include: tasks/qiime.yml tags=qiime version=1.9.1
     - include: tasks/bbmap.yml tags=bbmap version=35.43
+    - include: tasks/fastqc.yml tags=fastqc version=0.11.4
 
     - include: tasks/macs2.yml tags=macs2 version=2.1.0.20140616
     - include: tasks/cutadapt.yml tags=cutadapt version=1.8
