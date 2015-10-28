@@ -7,7 +7,13 @@
     - brew_dir: /software/linuxbrew
     - ref_dir: /references
 
+  pre_tasks:
+    - name: Create sw-installer user
+      user: name=sw-installer comment="Software install user" group=adm
+
   tasks:
+    - include: tasks/linuxbrew.yml tags=linuxbrew
+
     - include: tasks/cran-r.yml
     - include: tasks/common-packages.yml tags=common
     - include: tasks/zsh.yml
@@ -15,8 +21,6 @@
     - include: tasks/java.yml 
     - include: tasks/java-link.yml tags=java-link
     - include: tasks/r-packages.yml
-
-    - include: tasks/linuxbrew.yml tags=linuxbrew
 
     - include: tasks/SPAdes.yml tags=spades version=3.6.0
     - include: tasks/bwa.yml tags=bwa
