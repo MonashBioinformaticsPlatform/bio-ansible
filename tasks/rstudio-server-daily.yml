@@ -1,0 +1,13 @@
+- name: Install packages
+  apt: pkg={{item}} state=present
+  with_items:
+    - gdebi-core
+    - libapparmor1
+
+- name: Download Rstudio server daily
+  get_url:
+    url=https://s3.amazonaws.com/rstudio-dailybuilds/rstudio-server-{{version}}.deb
+    dest={{source_dir}}/rstudio-server-{{version}}.deb
+
+- name: Install Rstudio server daily
+  shell: gdebi -n {{source_dir}}/rstudio-server-{{version}}.deb
