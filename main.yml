@@ -71,7 +71,9 @@
     - include: tasks/misc_utils.yml tags=misc_utils
 
     - include: tasks/rnasik-pipe.yml tags=rnasik-pipe version=1.2
+    - include: tasks/nginx.yml tags=nginx
 
     - pip: name=htseq
     - pip: name=pysam
     - pip: name=nesoni
+    - pip: name=gffutils
