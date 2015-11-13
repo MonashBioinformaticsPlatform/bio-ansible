@@ -1,0 +1,21 @@
+# List of servers, ansible refers to them as systems
+
+bioplat1       ansible_ssh_host=bioinformatics.erc.monash.edu
+bioplat2       ansible_ssh_host=bioinformatics2.erc.monash.edu
+bioplat3       ansible_ssh_host=bioinformatics3.erc.monash.edu
+biotrain       ansible_ssh_host=115.146.85.14
+ansible-test   ansible_ssh_host=146.118.99.235
+
+# List of different groups, the same system can be added to multiple groups
+
+[bioinformatics]
+bioplat1
+biotrain
+
+[interactive]
+bioplat3
+
+[webserver]
+bioplat1
+bioplat2
+biotrain
