@@ -3,20 +3,23 @@
 
 #- name: apply common configurations to all nodes
 #  hosts: all
-#  remote_user: root
+#  remote_user: ubuntu
 #
 #  roles:
 #          - common
 #  
 #- name: set up all bioinformatics tools
 #  hosts: bioinformatics
-#  remote_user: root
+## In theory once "common" had run sw-installer guy should be there
+## and therefore remote_user can become sw-installer
+#  remote_user: sw-installer
 #
 #  roles:
 #          - bioessentials
 #
 #- name: configure and deplay the webserver
 #  hosts: webserver
+#  remote_user: ubuntu
 #
 #  roles:
 #          - nginx 
