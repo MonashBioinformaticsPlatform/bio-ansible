@@ -50,3 +50,11 @@ Download blast databases
 1. Make `.yml` file inside `tasks/` directory, describing what needs done
 2. Include that `.yml` file in `main.yml` file using `include` statement
 3. You are all good to go now !
+
+## Notes
+
+According to [ansiblel docs](http://docs.ansible.com/ansible/playbooks_intro.html)
+
+> Modules are ‘idempotent’, meaning if you run them again, they will make only the changes they must in order to bring the system to the desired state. This makes it very safe to rerun the same playbook multiple times. They won’t change things unless they have to change things.
+
+It is safe to re-run the same playbook.

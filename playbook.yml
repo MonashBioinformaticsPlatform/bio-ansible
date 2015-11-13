@@ -15,7 +15,7 @@
 #  remote_user: sw-installer
 #
 #  roles:
-#          - bioessentials
+#          - bio_tools
 #
 #- name: configure and deplay the webserver
 #  hosts: webserver

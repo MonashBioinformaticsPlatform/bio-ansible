@@ -1,8 +1,5 @@
 ---
 
-- name: Create sw-installer user
-  user: name=sw-installer comment="Software install user" group=adm
-
 - include: common_apt.yml 
 - include: linuxbrew.yml tags=linuxbrew
 - include: zsh.yml
