@@ -1,22 +1,30 @@
 ---
 # This playbook deploys bioinformatics server
 
-- name: apply common configurations to all nodes
-  hosts: all
-  remote_user: root
-
-  roles:
-          - common
-  
-- name: set up all bioinformatics tools
+#- name: apply common configurations to all nodes
+#  hosts: all
+#  remote_user: root
+#
+#  roles:
+#          - common
+#  
+#- name: set up all bioinformatics tools
+#  hosts: bioinformatics
+#  remote_user: root
+#
+#  roles:
+#          - bioessentials
+#
+#- name: configure and deplay the webserver
+#  hosts: webserver
+#
+#  roles:
+#          - nginx 
+#
+- name: Testing the server
   hosts: bioinformatics
-  remote_user: root
+  remote_user: ubuntu
 
   roles:
-          - bioessentials
-
-- name: configure and deplay the webserver
-  hosts: webserver
-
-  roles:
-          - nginx 
+          - server_update 
+          - common

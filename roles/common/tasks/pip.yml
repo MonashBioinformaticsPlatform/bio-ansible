@@ -1,0 +1,6 @@
+---
+
+- pip: name=htseq
+- pip: name=pysam
+- pip: name=nesoni
+- pip: name=gffutils

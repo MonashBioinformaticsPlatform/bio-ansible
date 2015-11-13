@@ -1,0 +1,26 @@
+---
+
+- name: Server update throught apt-get update
+  apt: update_cache=yes
+
+- name: Server upgrage throught apt-get upgrade
+  apt: upgrade=full
+
+- name: Server dist-upgrage throught apt-get dist-upgrade
+  apt: upgrade=dist
+
+- name: Server restart after apt-get dist-upgrade
+  command: shutdown -r now "Ansible updates triggered"
+  async: 0
+  poll: 0
+  ignore_errors: true
+
+- name: Waiting for the server to boot up after updates
+  local_action:
+          module: wait_for host=ansible-test
+                  state=started
+                  port=22
+                  delay=30
+                  timeout=300
+                  connect_timeout=15
+          sudo: false

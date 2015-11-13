@@ -3,7 +3,7 @@
 
 # List of different groups, the same system can be added to multiple groups
 
-ansible-test ansible_ssh_host=146.118.99.235
+ansible-test ansible_ssh_host=146.118.99.235 ansiblee_ssh_port=22
 
 [bioinformatics]
 ansible-test

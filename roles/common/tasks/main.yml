@@ -8,3 +8,4 @@
 - include: java_link.yml
 - include: java.yml
 - include: lmod.yml
+- include: pip.yml
