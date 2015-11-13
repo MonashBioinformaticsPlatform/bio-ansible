@@ -1,5 +1,8 @@
 ---
 
+- name: Create sw-installer user
+  user: name=sw-installer comment="Software install user" group=adm
+
 - include: abacas.yml
 - include: artemis.yml
 - include: bamstats.yml
