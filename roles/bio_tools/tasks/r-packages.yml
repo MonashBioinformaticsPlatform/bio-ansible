@@ -1,3 +1,4 @@
+---
 
 - name: Install R packages
   apt: pkg={{item}} state=present

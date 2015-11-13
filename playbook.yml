@@ -31,3 +31,5 @@
   roles:
           - server_update 
           - common
+          - bio_tools
+          - check

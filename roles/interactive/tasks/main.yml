@@ -1,0 +1,8 @@
+---
+
+- name: Create sw-installer user
+  user: name=sw-installer comment="Software install user" group=adm
+
+# - include: rstudio-server.yml tags=rstudio version=0.98.1103-amd64
+- include: rstudio-server-daily.yml tags=rstudio version=0.99.752-amd64
+- include: jupyter.yml tags=jupyter version=1.0.0

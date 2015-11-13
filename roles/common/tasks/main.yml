@@ -3,12 +3,13 @@
 - name: Create sw-installer user
   user: name=sw-installer comment="Software install user" group=adm
 
-- include: common_apt.yml
+- include: common_apt.yml 
+- include: linuxbrew.yml tags=linuxbrew
 - include: zsh.yml
 # Commented out java_link because it errored out
 # and there might be better way of doing that task
 # more notes in the java_link.yml file
 #- include: java_link.yml
 - include: java.yml
-- include: lmod.yml
+- include: lmod.yml lmod_version=5.8.6
 - include: pip.yml
