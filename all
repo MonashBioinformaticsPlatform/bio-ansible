@@ -1,0 +1,7 @@
+---
+
+source_dir: /software/source
+soft_dir: /software/apps
+modules_dir: /software/modules
+brew_dir: /software/linuxbrew
+ref_dir: /references
