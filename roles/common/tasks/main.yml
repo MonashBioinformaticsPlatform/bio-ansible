@@ -5,7 +5,10 @@
 
 - include: common_apt.yml
 - include: zsh.yml
-- include: java_link.yml
+# Commented out java_link because it errored out
+# and there might be better way of doing that task
+# more notes in the java_link.yml file
+#- include: java_link.yml
 - include: java.yml
 - include: lmod.yml
 - include: pip.yml
