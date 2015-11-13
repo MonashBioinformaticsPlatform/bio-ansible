@@ -29,7 +29,6 @@
 - include: igv.yml
 - include: jupyter.yml
 - include: linuxbrew.yml
-- include: lmod.yml
 - include: macs2.yml
 - include: main.yml
 - include: misc_utils.yml

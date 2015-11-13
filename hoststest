@@ -1,0 +1,12 @@
+# List of servers, ansible refers to them as systems
+
+
+# List of different groups, the same system can be added to multiple groups
+
+ansible-test ansible_ssh_host=146.118.99.235
+
+[bioinformatics]
+ansible-test
+#[interactive]
+#
+#[webserver]
