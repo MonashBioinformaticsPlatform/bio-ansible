@@ -1,3 +1,4 @@
+---
 
 - name: Download bamUtil
   get_url:

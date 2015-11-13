@@ -1,3 +1,4 @@
+---
 
 - name: Download bcftools
   get_url:

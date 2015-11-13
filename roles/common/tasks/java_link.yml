@@ -16,7 +16,7 @@
 
 - name: java module definition
   template:
-    src: templates/sw-module.lua.j2
+    src: sw-module.lua.j2
     dest: "{{ modules_dir }}/core/java/{{item.version}}.lua"
     owner: root
     mode: 0644

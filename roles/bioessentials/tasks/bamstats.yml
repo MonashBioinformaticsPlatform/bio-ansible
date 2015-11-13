@@ -1,3 +1,4 @@
+---
 
 - name: Download BAMStats
   get_url:

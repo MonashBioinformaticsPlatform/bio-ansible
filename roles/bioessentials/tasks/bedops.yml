@@ -1,3 +1,5 @@
+---
+
 - name: Download bedops
   get_url:
     url=https://github.com/bedops/bedops/releases/download/v{{version}}/bedops_linux_x86_64-v{{version}}.tar.bz2

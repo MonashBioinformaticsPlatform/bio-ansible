@@ -3,12 +3,17 @@
 
 - name: apply common configurations to all nodes
   hosts: all
-  roles:
   remote_user: root
 
   roles:
           - common
   
+- name: set up all bioinformatics tools
+  hosts: bioinformatics
+  remote_user: root
+
+  roles:
+          - bioessential
 
 - name: configure and deplay the webserver
   hosts: webserver

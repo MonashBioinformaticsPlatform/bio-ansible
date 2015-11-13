@@ -1,3 +1,4 @@
+---
 
 - name: Install prokka dependencies
   cpanm: name=Bio::Perl

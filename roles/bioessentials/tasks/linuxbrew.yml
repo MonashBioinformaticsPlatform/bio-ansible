@@ -1,3 +1,5 @@
+---
+# Installs linuxbrew, makes it easier to install some tools using linuxbrew 
 
 - file: path={{brew_dir}} owner=sw-installer state=directory mode=0755
 

@@ -4,3 +4,4 @@
 - include: zsh.yml
 - include: java_link.yml
 - include: java.yml
+- include: lmod.yml
