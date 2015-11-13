@@ -1,3 +1,4 @@
+---
 
 - name: Install {{brew_name}}
   shell: "{{brew_dir}}/bin/brew ls {{brew_name}} || {{brew_dir}}/bin/brew install {{brew_name}}"

@@ -1,3 +1,4 @@
+---
 
 # Ensure the unarchive directory exists (the zip file has no version info)
 - file: dest="{{ soft_dir }}/IGVTools-{{version}}" state=directory mode=0755
@@ -19,7 +20,7 @@
 
 - name: igvtools module definition
   template: 
-    src: templates/sw-module.lua.j2 
+    src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/igvtools/{{version}}.lua"
     owner: root 
     mode: 0644

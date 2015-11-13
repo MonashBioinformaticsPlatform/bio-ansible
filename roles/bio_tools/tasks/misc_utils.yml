@@ -1,3 +1,4 @@
+---
 
 - include: brew_package.yml brew_name='parallel' lmod_name='parallel'
 - include: brew_package.yml brew_name='homebrew/science/plink' lmod_name='plink'

@@ -1,3 +1,4 @@
+---
 
 - name: Install packages
   apt: pkg={{item}} state=present
@@ -34,7 +35,7 @@
 
 - name: UCSC tools module definition
   template: 
-    src: templates/sw-module.lua.j2 
+    src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/UCSC-tools/{{version}}.lua"
     owner: root 
     mode: 0644

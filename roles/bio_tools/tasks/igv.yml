@@ -1,3 +1,4 @@
+---
 
 # Check if it has been uncompressed.  The "creates" in the next section should do this, but it
 # seems to copy up the tarball anyway
@@ -16,7 +17,7 @@
 
 - name: igv module definition
   template: 
-    src: templates/sw-module.lua.j2 
+    src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/igv/{{version}}.lua"
     owner: root 
     mode: 0644

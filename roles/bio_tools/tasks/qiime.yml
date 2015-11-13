@@ -1,3 +1,4 @@
+---
 
 - name: qiime
   pip: name=qiime version={{version}} virtualenv={{soft_dir}}/qiime-{{version}} virtualenv_site_packages=yes
@@ -9,7 +10,7 @@
 
 - name: qiime module definition
   template:
-    src: templates/sw-module.lua.j2
+    src: sw-module.lua.j2
     dest: "{{ modules_dir }}/bio/qiime/{{version}}.lua"
     owner: root
     mode: 0644

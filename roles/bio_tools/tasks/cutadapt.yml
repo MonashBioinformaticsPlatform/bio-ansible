@@ -1,3 +1,4 @@
+---
 
 - name: cutadapt
   pip: name=cutadapt version={{version}} virtualenv={{soft_dir}}/cutadapt virtualenv_site_packages=yes
@@ -6,11 +7,9 @@
 
 - name: cutadapt module definition
   template:
-    src: templates/sw-module.lua.j2
+    src: sw-module.lua.j2
     dest: "{{ modules_dir }}/bio/cutadapt/{{version}}.lua"
     owner: root
     mode: 0644
   with_items:
     - { help_text: 'cutadapt removes adapter sequences from high-throughput sequencing data. This is usually necessary when the read length of the sequencing machine is longer than the molecule that is sequenced, for example when sequencing microRNAs', dir: 'cutadapt', append: true }
-
-

@@ -1,3 +1,5 @@
+---
+
 - name: Download Bowtie
   get_url:
     url=http://sourceforge.net/projects/bowtie-bio/files/bowtie/{{version}}/bowtie-{{version}}-linux-x86_64.zip
@@ -14,7 +16,7 @@
 
 - name: Bowtie module definition
   template: 
-    src: templates/sw-module.lua.j2 
+    src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/bowtie/{{version}}.lua"
     owner: root 
     mode: 0644

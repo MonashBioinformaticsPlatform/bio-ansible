@@ -1,3 +1,5 @@
+---
+
 - name: Download Cufflinks
   get_url:
     url=http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-{{version}}.Linux_x86_64.tar.gz
@@ -16,7 +18,7 @@
 
 - name: Cufflinks module definition
   template: 
-    src: templates/sw-module.lua.j2 
+    src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/cufflinks/{{version}}.lua"
     owner: root 
     mode: 0644

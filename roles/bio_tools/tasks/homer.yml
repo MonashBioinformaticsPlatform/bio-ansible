@@ -1,3 +1,4 @@
+---
 
 - file: dest="{{soft_dir}}/homer" state=directory mode=0755
 
@@ -15,7 +16,7 @@
 
 - name: Homer module definition
   template: 
-    src: templates/sw-module.lua.j2 
+    src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/homer/default.lua"
     owner: root 
     mode: 0644

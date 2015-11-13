@@ -1,3 +1,5 @@
+---
+
 - name: Download FastQC
   get_url:
     url=http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v{{version}}.zip
@@ -17,7 +19,7 @@
 
 - name: FastQC module definition
   template:
-    src: templates/sw-module.lua.j2
+    src: sw-module.lua.j2
     dest: "{{ modules_dir }}/bio/fastqc/{{ version }}.lua"
     owner: root
     mode: 0644

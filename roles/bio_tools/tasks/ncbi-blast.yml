@@ -1,3 +1,5 @@
+---
+
 - name: Download NCBI Blast
   get_url:
     url=ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-{{version}}+-x64-linux.tar.gz
@@ -14,7 +16,7 @@
 
 - name: NCBI Blast module definition
   template: 
-    src: templates/sw-module.lua.j2 
+    src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/blast/{{version}}.lua"
     owner: root 
     mode: 0644

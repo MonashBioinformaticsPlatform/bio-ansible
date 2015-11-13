@@ -21,7 +21,7 @@
 
 - name: bcftools module definition
   template:
-    src: templates/sw-module.lua.j2
+    src: sw-module.lua.j2
     dest: "{{ modules_dir }}/bio/bcftools/{{version}}.lua"
     owner: root
     mode: 0644

@@ -1,4 +1,4 @@
-
+---
 
 - name: Download RSeQC
   get_url:
@@ -21,7 +21,7 @@
 
 - name: RSeQC module definition
   template:
-    src: templates/sw-module.lua.j2
+    src: sw-module.lua.j2
     dest: "{{ modules_dir }}/bio/RSeQC/{{version}}.lua"
     owner: root
     mode: 0644

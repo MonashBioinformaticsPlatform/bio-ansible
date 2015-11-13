@@ -16,7 +16,7 @@
 
 - name: BAMStats wrapper script
   template:
-    src: templates/java-wrapper.sh.j2
+    src: java-wrapper.sh.j2
     dest: "{{ soft_dir }}/BAMStats-{{version}}/bin/{{item.bin}}"
     owner: root 
     mode: 0755
@@ -28,7 +28,7 @@
 
 - name: BAMStats module definition
   template: 
-    src: templates/sw-module.lua.j2 
+    src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/BAMStats/{{version}}.lua"
     owner: root 
     mode: 0644

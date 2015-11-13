@@ -1,3 +1,4 @@
+---
 
 - name: Download Trinity
   get_url:
@@ -20,7 +21,7 @@
 
 - name: Trinity module definition
   template:
-    src: templates/sw-module.lua.j2
+    src: sw-module.lua.j2
     dest: "{{ modules_dir }}/bio/trinity/{{version}}.lua"
     owner: root
     mode: 0644

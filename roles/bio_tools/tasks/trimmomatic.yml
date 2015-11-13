@@ -1,3 +1,4 @@
+---
 
 - name: Download Trimmomatic
   get_url:
@@ -13,7 +14,7 @@
 
 - name: Trimmomatic wrapper script
   template:
-    src: templates/java-wrapper.sh.j2
+    src: java-wrapper.sh.j2
     dest: "{{ soft_dir }}/Trimmomatic-{{version}}/trimmomatic"
     owner: root 
     mode: 0755
@@ -24,7 +25,7 @@
 
 - name: Trimmomatic module definition
   template: 
-    src: templates/sw-module.lua.j2 
+    src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/trimmomatic/{{version}}.lua"
     owner: root 
     mode: 0644

@@ -1,3 +1,4 @@
+---
 
 - name: Download Picard
   get_url:
@@ -15,7 +16,7 @@
 
 - name: Picard wrapper script
   template:
-    src: templates/java-wrapper.sh.j2
+    src: java-wrapper.sh.j2
     dest: "{{ soft_dir }}/picard-tools-{{version}}/bin/picard"
     owner: root 
     mode: 0755
@@ -26,7 +27,7 @@
 
 - name: Picard module definition
   template: 
-    src: templates/sw-module.lua.j2 
+    src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/picard/{{version}}.lua"
     owner: root 
     mode: 0644
