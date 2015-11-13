@@ -8,6 +8,7 @@
 - [Example to run](#example-to-run)
 - [Extra files](#extra-files)
 - [Adding more stuff](#adding-more-stuff)
+- [Notes](#notes)
 
 ## Requirements
 
