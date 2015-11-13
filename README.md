@@ -48,9 +48,83 @@ Download blast databases
 
 ## Adding more stuff
 
-1. Make `.yml` file inside `tasks/` directory, describing what needs done
-2. Include that `.yml` file in `main.yml` file using `include` statement
-3. You are all good to go now !
+The `roles/` directory hierarchy as follows
+
+```
+roles/
+    
+    common/
+        
+        tasks/
+
+            main.yml
+            *.yml
+
+        templates/
+
+    bio_tools/
+
+        tasks/
+
+            main.yml
+            *.yml
+
+        templates/
+
+    nginx/
+
+        tasks/
+
+            main.yml
+
+        templates/
+
+    interactive/
+
+        tasks/
+
+            main.yml
+            *.yml
+
+    server_update/
+
+        tasks/
+
+            main.yml
+```
+
+You can refere to each role in your `playbook.yml` file as follow
+
+```
+
+- name: Testing the server
+  hosts: bioinformatics
+  remote_user: ubuntu
+
+  roles:
+          - common
+          - bio_tools
+```
+
+And then execute your `playbook.yml` as follows
+
+```
+ansible-playbook -vvvv -K -s -i hosts playbook.yml
+```
+
+Where your `hosts` file should look something link this
+
+```
+ansible-test ansible_ssh_host=146.118.99.235 ansiblee_ssh_port=22
+
+[bioinformatics]
+ansible-test
+```
+
+### Housekeeping 
+
+- `main.yml` file are special, ansible looks for them by default
+- please start evey `.yml` file with `---` at the top, for more [YMAL](http://www.yaml.org/spec/1.2/spec.html)
 
 ## Notes
 
