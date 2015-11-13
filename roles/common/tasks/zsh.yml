@@ -1,6 +1,8 @@
+---
+# Set up zsh 
+
 - name: Install zsh
   apt: pkg=zsh state=present
 
 - name: Ensure zsh login executes /etc/profile
   lineinfile: dest=/etc/zsh/zprofile line=". /etc/profile"
-

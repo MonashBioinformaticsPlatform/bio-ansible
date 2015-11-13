@@ -38,7 +38,8 @@ server {
         location ~ ^/(.+?)(/.*)?$ {
           alias /home/$1/www$2;
           index  index.html index.htm;
-          autoindex on;
+          # autoindex will enable you to browser throught directory tree
+          autoindex off;
         }
 
 	# Only for nginx-naxsi used with nginx-naxsi-ui : process denied requests

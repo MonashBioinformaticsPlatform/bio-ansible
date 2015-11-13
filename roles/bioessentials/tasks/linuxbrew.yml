@@ -5,9 +5,9 @@
   git: repo=https://github.com/Homebrew/linuxbrew.git
        update=no
        dest={{brew_dir}}
+
   sudo: yes
   sudo_user: sw-installer
 
 - name: Copy brew2lmod
   copy: src=scripts/brew2lmod.rb dest={{brew_dir}} owner=sw-installer mode=0755
-

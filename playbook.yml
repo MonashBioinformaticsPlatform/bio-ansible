@@ -1,0 +1,17 @@
+---
+# This playbook deploys bioinformatics server
+
+- name: apply common configurations to all nodes
+  hosts: all
+  roles:
+  remote_user: root
+
+  roles:
+          - common
+  
+
+- name: configure and deplay the webserver
+  hosts: webserver
+
+  roles:
+          - nginx 

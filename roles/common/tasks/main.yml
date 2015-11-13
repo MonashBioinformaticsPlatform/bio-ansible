@@ -1,0 +1,6 @@
+---
+
+- include: common_apt.yml
+- include: zsh.yml
+- include: java_link.yml
+- include: java.yml

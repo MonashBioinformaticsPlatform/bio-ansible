@@ -1,3 +1,5 @@
+---
+# These checks and installs java
 
 - name: Check if java license accepted
   command: debconf-show oracle-java8-installer | grep 'shared/accepted-oracle-license-v1-1:'

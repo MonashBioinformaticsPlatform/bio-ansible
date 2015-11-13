@@ -9,5 +9,4 @@
   #        owner=root group=root mode=0644
 
 - name: Set the default config file
-  template: src=templates/nginx-default-config dest=/etc/nginx/sites-available/
-#- replace: dest=/etc/nginx/sites-available/default regex='location\s\/\s{[]
+  template: src=nginx-default-config dest=/etc/nginx/sites-available/
