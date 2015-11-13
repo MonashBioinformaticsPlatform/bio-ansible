@@ -26,5 +26,3 @@
     mode: 0644
   with_items:
     - { help_text: 'Tools for use with the IGV browser', dir: 'IGVTools-{{version}}/IGVTools', skip_bin: true }
-
-
