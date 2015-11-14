@@ -1,0 +1,4 @@
+---
+
+- name: Create sw-installer user
+  user: name=sw-installer comment="Software install user" group=adm

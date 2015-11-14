@@ -1,13 +1,15 @@
 ---
 # This playbook deploys bioinformatics server
 
-#- name: apply common configurations to all nodes
-#  hosts: all
-#  remote_user: ubuntu
-#
-#  roles:
-#          - common
-#  
+- name: apply common configurations to all nodes
+  # This block should really be `all`. I replaced it with 'bioifnformatics' for testing purposes
+  #hosts: all
+  hosts: bioinformatics
+  remote_user: ubuntu
+  roles:
+          - make_sw_guy
+          - common
+
 #- name: set up all bioinformatics tools
 #  hosts: bioinformatics
 ## In theory once "common" had run sw-installer guy should be there
@@ -26,9 +28,8 @@
 #
 - name: Testing the server
   hosts: bioinformatics
-  remote_user: ubuntu
-
+  remote_user: sw-installer
   roles:
-          - common
-          - bio_tools
+          - server_update
           - check
+          - bio_tools

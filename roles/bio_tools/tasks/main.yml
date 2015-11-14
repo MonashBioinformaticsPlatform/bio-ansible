@@ -1,7 +1,7 @@
 ---
 
-- name: Create sw-installer user
-  user: name=sw-installer comment="Software install user" group=adm
+#- name: Create sw-installer user
+#  user: name=sw-installer comment="Software install user" group=adm
 
 - include: igvtools.yml tags=igvtools version=2.3.52
 - include: igv.yml tags=igv version=2.3.52
