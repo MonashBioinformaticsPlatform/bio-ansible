@@ -1,4 +1,10 @@
 ---
 
 - name: Create sw-installer user
-  user: name=sw-installer comment="Software install user" group=adm
+  user: name=sw-installer
+        comment="Software install user"
+        group=adm
+
+- name: Add public key to the authorised_key
+  authorized_key: user=sw-installer
+                  key="{{ lookup('file', '/home/kirill/.ssh/train.pub') }}"
