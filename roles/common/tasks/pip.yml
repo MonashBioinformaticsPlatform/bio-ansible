@@ -1,6 +1,10 @@
 ---
 
-- pip: name=htseq
-- pip: name=pysam
-- pip: name=nesoni
-- pip: name=gffutils
+- name: Install python packages with pip
+  pip: name={{ item }} state=latest
+  with_items:
+      - htseq
+      - pysam
+      - nesoni
+      - gffutils
+  sudo: yes
