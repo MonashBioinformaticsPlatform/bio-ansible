@@ -3,12 +3,17 @@
 # Create a directory for extraction
 - file: dest="{{ soft_dir }}/GenomeAnalysisTK-{{version}}" state=directory mode=0755
 
+- name: Check if zip file exists
+  stat: path=GenomeAnalysisTK-{{version}}.tar.bz2
+  register: tar
+
 - name: Uncompress GATK
   unarchive: 
-    src: tarballs/GenomeAnalysisTK-{{version}}.tar.bz2
+    src: GenomeAnalysisTK-{{version}}.tar.bz2
     dest: "{{ soft_dir }}/GenomeAnalysisTK-{{version}}"
     copy: yes
     creates: "{{ soft_dir }}/GenomeAnalysisTK-{{version}}/GenomeAnalysisTK.jar"
+  when: tar.stat.exists
 
 - name: GATK wrapper script
   template:

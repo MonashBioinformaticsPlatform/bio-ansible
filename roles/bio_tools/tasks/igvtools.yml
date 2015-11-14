@@ -11,15 +11,15 @@
 - name: Check if zip file exists
   stat: path=igvtools_{{version}}.zip
   register: zip
-  debug: msg="Insure that `roles/bio_tools/files/` has appropriate files"
+  # debug message dosen't belong here. I'm not sure where to put it at this stage
+  #debug: msg="Insure that `roles/bio_tools/files/` has appropriate files"
 
 - name: Uncompress igvtools
   unarchive: 
-          #src=tarballs/igvtools_{{version}}.zip
-    src=igvtools_{{version}}.zip
-    dest={{ soft_dir }}/IGVTools-{{version}}
-    copy=yes
-    creates={{ soft_dir }}/IGVTools-{{version}}/IGVTools/igvtools
+    src: igvtools_{{version}}.zip
+    dest: "{{ soft_dir }}/IGVTools-{{version}}"
+    copy: yes
+    creates: "{{ soft_dir }}/IGVTools-{{version}}/IGVTools/igvtools"
   when: zip.stat.exists and not igvtools.stat.exists
 
 - file: dest="{{modules_dir}}/bio/igvtools" state=directory mode=0755
