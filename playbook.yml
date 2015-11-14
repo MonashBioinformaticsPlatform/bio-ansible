@@ -29,6 +29,6 @@
   remote_user: ubuntu
 
   roles:
-          #- common
+          - common
           - bio_tools
           - check
