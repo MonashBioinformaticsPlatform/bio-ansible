@@ -10,6 +10,7 @@
           - server_update
           - make_sw_guy
           - common
+  sudo: yes
 
 - name: Testing the server
   hosts: bioinformatics
@@ -17,6 +18,7 @@
   roles:
           - bio_tools
           - check
+  sudo: yes
 
 #- name: set up all bioinformatics tools
 #  hosts: bioinformatics
@@ -25,7 +27,7 @@
 #  roles:
 #          - bio_tools
 #
-#- name: configure and deplay the webserver
+#- name: configure and deploy webserver
 #  hosts: webserver
 #  remote_user: ubuntu
 #
