@@ -1,0 +1,19 @@
+---
+# This playbook deploys bioinformatics server
+
+- name: apply common configurations to all nodes
+  hosts: all
+  remote_user: ubuntu
+  roles:
+          - server_update
+          - make_sw_guy
+          - common
+  sudo: yes
+
+- name: Set up bioinformatiky tools
+  hosts: bioinformatics
+  remote_user: sw-installer
+  roles:
+          - bio_tools
+          - check
+  sudo: yes

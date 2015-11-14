@@ -1,0 +1,10 @@
+---
+# This playbook deploys bioinformatics server
+
+- name: Configure and deploy webserver
+  hosts: interactive
+  remote_user: ubuntu
+
+  roles:
+          - interactive 
+  sudo: yes

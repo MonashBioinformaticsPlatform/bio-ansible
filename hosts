@@ -9,7 +9,8 @@ ansible-test   ansible_ssh_host=146.118.99.235
 # List of different groups, the same system can be added to multiple groups
 
 [bioinformatics]
-ansible-test
+bioplat1
+bioplat2
 
 [interactive]
 bioplat3
@@ -18,3 +19,6 @@ bioplat3
 bioplat1
 bioplat2
 biotrain
+
+[test]
+ansible-test
