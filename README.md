@@ -70,6 +70,9 @@ The `roles/` directory hierarchy as follows
 
 ```
 roles/
+    make_sw_guy/
+        tasks/
+            main.yml
     common/
         tasks/
             main.yml
