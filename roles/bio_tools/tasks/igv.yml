@@ -5,13 +5,18 @@
 - stat: path={{ soft_dir}}/IGV_{{version}}/igv.sh
   register: igv
 
+- name: Check if zip file exists
+  stat: path=IGV_{{version}}.zip
+  register: zip
+  debug: msg="Insure that `roles/bio_tools/files/` has appropriate files"
+
 - name: Uncompress igv
   unarchive: 
-    src=tarballs/IGV_{{version}}.zip
+    src=IGV_{{version}}.zip
     dest={{ soft_dir }}
     copy=yes
     creates={{ soft_dir}}/IGV_{{version}}/igv.sh
-  when: not igv.stat.exists
+  when: zip.stat.exists and not igv.stat.exists
 
 - file: dest="{{modules_dir}}/bio/igv" state=directory mode=0755
 
@@ -23,5 +28,3 @@
     mode: 0644
   with_items:
     - { help_text: 'IGV genome browser', dir: 'IGV_{{version}}', skip_bin: true }
-
-

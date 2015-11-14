@@ -3,6 +3,8 @@
 - name: Create sw-installer user
   user: name=sw-installer comment="Software install user" group=adm
 
+- include: igvtools.yml tags=igvtools version=2.3.52
+- include: igv.yml tags=igv version=2.3.52
 - include: cran-r.yml
 - include: r-packages.yml
 - include: SPAdes.yml tags=spades version=3.6.0
@@ -16,8 +18,6 @@
 - include: tophat.yml tags=tophat version=2.0.13
 - include: ncbi-blast.yml tags=ncbi-blast version=2.2.31
 - include: vcftools.yml tags=vcftools version=0.1.12b
-- include: igvtools.yml tags=igvtools version=2.3.52
-- include: igv.yml tags=igv version=2.3.52
 - include: gatk.yml tags=gatk version=3.3-0
 - include: bowtie.yml tags=bowtie1 version=1.1.1
 - include: bowtie2.yml tags=bowtie2 version=2.2.5

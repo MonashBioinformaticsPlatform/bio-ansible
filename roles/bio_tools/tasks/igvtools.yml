@@ -8,13 +8,19 @@
 - stat: path={{ soft_dir }}/IGVTools-{{version}}/IGVTools/igvtools
   register: igvtools
 
+- name: Check if zip file exists
+  stat: path=igvtools_{{version}}.zip
+  register: zip
+  debug: msg="Insure that `roles/bio_tools/files/` has appropriate files"
+
 - name: Uncompress igvtools
   unarchive: 
-    src=tarballs/igvtools_{{version}}.zip
+          #src=tarballs/igvtools_{{version}}.zip
+    src=igvtools_{{version}}.zip
     dest={{ soft_dir }}/IGVTools-{{version}}
     copy=yes
     creates={{ soft_dir }}/IGVTools-{{version}}/IGVTools/igvtools
-  when: not igvtools.stat.exists
+  when: zip.stat.exists and not igvtools.stat.exists
 
 - file: dest="{{modules_dir}}/bio/igvtools" state=directory mode=0755
 
