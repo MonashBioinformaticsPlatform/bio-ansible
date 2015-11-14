@@ -9,15 +9,10 @@
 - name: Server dist-upgrage throught apt-get dist-upgrade
   apt: upgrade=dist
 
-#- name: Server restart after apt-get dist-upgrade
-#  command: shutdown -r now "Ansible updates triggered"
-#  
-#
-#- name: Waiting for the server to boot up after updates
-#  local_action: wait_for host=ansible-test
-#                state=started
-#                port=22
-#                delay=30
-#                timeout=300
-#                connect_timeout=15
-#  sudo: false
+- name: Server restart after apt-get dist-upgrade
+  command: shutdown -r now "Ansible updates triggered"
+
+- name: Waiting for the server to boot up after updates
+  local_action:
+          wait_for host=ansible-test state=started
+  sudo: no
