@@ -10,3 +10,5 @@
 - include: java.yml
 - include: lmod.yml lmod_version=5.8.6
 - include: pip.yml
+- include: cran-r.yml
+- include: r-packages.yml
