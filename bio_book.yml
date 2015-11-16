@@ -12,8 +12,7 @@
 
 - name: Set up bioinformatiky tools
   hosts: bioinformatics
-  remote_user: sw-installer
+  remote_user: "{{ sw_installer }}"
   roles:
           - bio_tools
           - check
-  sudo: yes

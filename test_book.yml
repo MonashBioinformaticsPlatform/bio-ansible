@@ -2,9 +2,6 @@
 # This playbook deploys bioinformatics server
 
 - name: apply common configurations to all nodes
-  # This block should really be `all`. I replaced it with 'bioifnformatics' for testing purposes
-  # This block should really be `all`. I replaced it with 'bioifnformatics' for testing purposes
-  #hosts: all
   hosts: test
   remote_user: ubuntu
   roles:
@@ -15,8 +12,7 @@
 
 - name: Set up bioinformatiky tools
   hosts: test
-  remote_user: sw-installer
+  remote_user: "{{ sw_installer }}"
   roles:
           - bio_tools
           - check
-  sudo: yes
