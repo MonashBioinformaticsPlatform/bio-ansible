@@ -7,10 +7,10 @@
 
 - name: Uncompress Bowtie
   unarchive: 
-    src={{ source_dir }}/bowtie-{{version}}-linux-x86_64.zip
-    dest={{ soft_dir }}
-    copy=no
-    creates={{ soft_dir}}/bowtie-{{version}}/bowtie-align-s
+    src: "{{ source_dir }}/bowtie-{{version}}-linux-x86_64.zip"
+    dest: "{{ soft_dir }}"
+    copy: no
+    creates: "{{ soft_dir }}/bowtie-{{version}}/bowtie-align-s"
 
 - file: dest="{{modules_dir}}/bio/bowtie" state=directory mode=0755
 

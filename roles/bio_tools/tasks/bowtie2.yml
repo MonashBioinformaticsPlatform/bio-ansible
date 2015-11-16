@@ -7,15 +7,11 @@
 
 - name: Uncompress Bowtie2
   unarchive: 
-    src={{ source_dir }}/bowtie2-{{version}}-linux-x86_64.zip
-    dest={{ soft_dir }}
-    copy=no
-    mode=0644
-    creates={{ soft_dir}}/bowtie2-{{version}}/bowtie2
-
-# Fix file permissions
-- file: dest="{{ soft_dir}}/bowtie2-{{version}}" mode=0755
-- shell: find {{ soft_dir }}/bowtie2-{{version}} -type d -exec chmod 0755 {} \; ; find {{ soft_dir }}/bowtie2-{{version}} -type f -exec chmod 0644 {} \; ; chmod 0755 {{ soft_dir }}/bowtie2-{{version}}/bowtie2*
+    src: "{{ source_dir }}/bowtie2-{{version}}-linux-x86_64.zip"
+    dest: "{{ soft_dir }}"
+    copy: no
+    creates: "{{ soft_dir }}/bowtie2-{{version}}/bowtie2"
+    mode: 0755
 
 - file: dest="{{modules_dir}}/bio/bowtie2" state=directory mode=0755
 
