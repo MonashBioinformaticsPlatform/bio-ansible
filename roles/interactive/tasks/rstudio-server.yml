@@ -1,9 +1,14 @@
+---
+# Can run this as a sw-installer guy
 
 - name: Install packages
   apt: pkg={{item}} state=present
   with_items:
     - gdebi-core
     - libapparmor1
+# I think I'll need those two lines in
+#  sudo: yes
+#  sudo_user: ubuntu
 
 - name: Download Rstudio server
   get_url:
