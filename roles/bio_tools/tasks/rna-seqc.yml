@@ -11,7 +11,7 @@
   template:
     src: java-wrapper.sh.j2
     dest: "{{ soft_dir }}/RNA-SeQC_v{{version}}/rna-seqc"
-    owner: root 
+    owner: "{{ sw_installer }}" 
     mode: 0755
   with_items:
     - { jar: '{{ soft_dir }}/RNA-SeQC_v{{version}}/RNA-SeQC_v{{version}}.jar' }
@@ -22,7 +22,7 @@
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/RNA-SeQC/{{version}}.lua"
-    owner: root 
+    owner: "{{ sw_installer }}" 
     mode: 0644
   with_items:
     - { help_text: 'RNA-SeQC is a java program which computes a series of quality control metrics for RNA-seq data', dir: 'RNA-SeQC_v{{version}}', skip_bin: true }

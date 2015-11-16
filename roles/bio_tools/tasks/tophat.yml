@@ -18,7 +18,7 @@
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/tophat/{{version}}.lua"
-    owner: root 
+    owner: "{{ sw_installer }}" 
     mode: 0644
   with_items:
     - { help_text: 'A spliced read mapper for RNA-Seq', dir: 'tophat-{{version}}.Linux_x86_64', skip_bin: true}

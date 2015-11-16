@@ -5,8 +5,6 @@
 
 - include: igvtools.yml tags=igvtools version=2.3.52
 - include: igv.yml tags=igv version=2.3.52
-- include: cran-r.yml
-- include: r-packages.yml
 - include: SPAdes.yml tags=spades version=3.6.0
 - include: bwa.yml tags=bwa
 - include: STAR.yml tags=star version=2.4.2a

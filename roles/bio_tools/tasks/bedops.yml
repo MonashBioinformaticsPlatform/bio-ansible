@@ -20,7 +20,7 @@
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/bedops/{{version}}.lua"
-    owner: root 
+    owner: "{{ sw_installer }}" 
     mode: 0644
   with_items:
     - { help_text: 'BEDOPS: high-performance genomic feature operations https://bedops.readthedocs.org/', dir: 'bedops-{{version}}'}

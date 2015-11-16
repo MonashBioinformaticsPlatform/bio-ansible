@@ -12,7 +12,7 @@
   template:
     src: sw-module.lua.j2
     dest: "{{ modules_dir }}/bio/qiime/{{version}}.lua"
-    owner: root
+    owner: "{{ sw_installer }}"
     mode: 0644
   with_items:
     - { help_text: 'QIIME is an open-source bioinformatics pipeline for performing microbiome analysis from raw DNA sequencing data', dir: 'qiime-{{version}}', append: true }

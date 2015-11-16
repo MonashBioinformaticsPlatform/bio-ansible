@@ -16,7 +16,7 @@
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/ngsutils/{{version}}.lua"
-    owner: root 
+    owner: "{{ sw_installer }}" 
     mode: 0644
   with_items:
     - help_text: 'NGSUtils is a suite of software tools for working with next-generation sequencing datasets.  Separated in 4 modules: bamutils, bedutils, fastqutils, gtfutils'

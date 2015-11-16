@@ -23,7 +23,7 @@
   template:
     src: sw-module.lua.j2
     dest: "{{ modules_dir }}/bio/RSeQC/{{version}}.lua"
-    owner: root
+    owner: "{{ sw_installer }}"
     mode: 0644
   with_items:
     - dir: 'RSeQC-{{version}}'

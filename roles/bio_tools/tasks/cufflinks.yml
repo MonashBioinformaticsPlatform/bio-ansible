@@ -12,7 +12,7 @@
     copy=no
     creates={{ soft_dir}}/cufflinks-{{version}}.Linux_x86_64/cufflinks
 
-- file: path={{ soft_dir}}/cufflinks-{{version}}.Linux_x86_64 group=root owner=sw-installer recurse=yes state=directory
+- file: path={{ soft_dir}}/cufflinks-{{version}}.Linux_x86_64 group={{ sw_installer }} owner={{ sw_installer }} recurse=yes state=directory
 
 - file: dest="{{modules_dir}}/bio/cufflinks" state=directory mode=0755
 
@@ -20,7 +20,7 @@
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bio/cufflinks/{{version}}.lua"
-    owner: root 
+    owner: "{{ sw_installer }}" 
     mode: 0644
   with_items:
     - { help_text: 'Cufflinks : Transcriptome assembly and differential expression analysis for RNA-Seq', dir: 'cufflinks-{{version}}.Linux_x86_64', skip_bin: true}
