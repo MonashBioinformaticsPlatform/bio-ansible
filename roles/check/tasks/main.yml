@@ -1,4 +1,0 @@
----
-
-- name: Copying check file
-  template: src=CHECK dest=/home/ubuntu

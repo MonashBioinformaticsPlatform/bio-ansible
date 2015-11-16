@@ -15,4 +15,3 @@
   remote_user: "{{ sw_installer }}"
   roles:
           - bio_tools
-          - check

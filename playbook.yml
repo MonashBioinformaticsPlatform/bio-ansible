@@ -1,5 +1,6 @@
 ---
 
-- include: bio_book.yml
-- include: interactive_book.yml
-- include: server_book.yml
+- include: playbooks/test_book.yml
+#- include: playbooks/bio_book.yml
+#- include: playbooks/interactive_book.yml
+#- include: playbooks/server_book.yml
