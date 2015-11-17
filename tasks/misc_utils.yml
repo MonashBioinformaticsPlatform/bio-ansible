@@ -14,6 +14,7 @@
 - include: brew_package.yml brew_name='homebrew/science/mrbayes' lmod_name='mrbayes'
 - include: brew_package.yml brew_name='homebrew/science/trimmomatic' lmod_name='trimmomatic'
 - include: brew_package.yml brew_name='homebrew/science/snpeff' lmod_name='snpeff'
+- include: brew_package.yml brew_name='homebrew/science/sratoolkit' lmod_name='sratoolkit'
 
 #- include: brew_package.yml brew_name='homebrew/science/plink2' lmod_name='plink2'
 #- include: brew_package.yml brew_name='homebrew/science/repeatmasker' lmod_name='repeatmasker'
