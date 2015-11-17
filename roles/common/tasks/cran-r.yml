@@ -1,4 +1,0 @@
----
-
-- name: Adding apt repo
-  apt_repository: repo='deb http://cran.ms.unimelb.edu.au/bin/linux/ubuntu trusty/' state=present
