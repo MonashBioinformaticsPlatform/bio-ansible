@@ -1,0 +1,13 @@
+
+---
+# Use this playbook to set up ansible launching instance
+# Use that instance to set up any other instances
+# Leave ansile running in tmux session 
+
+- name: apply common configurations to all nodes
+  hosts: launcher
+  remote_user: ubuntu
+  roles:
+          - server_update
+          - setup_launcher
+  sudo: yes
