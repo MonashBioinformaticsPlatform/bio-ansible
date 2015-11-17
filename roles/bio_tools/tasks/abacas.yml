@@ -9,13 +9,13 @@
 
 - file: dest="{{ soft_dir }}/ABACAS.{{version}}/bin/abacas.{{version}}.pl" state=file mode=0755
 
-- file: src=/usr/bin/perl dest=/usr/local/bin/perl state=link   
+#- file: src=/usr/bin/perl dest=/usr/local/bin/perl state=link   
 
 - file: dest="{{modules_dir}}/bio/ABACAS" state=directory mode=0755
 
 - name: MUMmer module definition
   template:
-    src: templates/sw-module.lua.j2
+    src: sw-module.lua.j2
     dest: "{{ modules_dir }}/bio/ABACAS/{{version}}.lua"
     owner: "{{ sw_installer }}"
     mode: 0644

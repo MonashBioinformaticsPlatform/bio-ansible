@@ -1,17 +1,5 @@
 ---
 
-- name: Install packages
-  apt: pkg={{item}} state=present
-  with_items:
-    - make
-    - perl
-    - csh
-    - g++
-    - sed
-    - slang-xfig
-    - gnuplot
-    - xfig
-
 - name: Download MUMmer
   get_url:
     url=http://internode.dl.sourceforge.net/project/mummer/mummer/{{version}}/MUMmer{{version}}.tar.gz

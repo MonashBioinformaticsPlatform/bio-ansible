@@ -7,21 +7,18 @@
 - name: Install packages
   apt: pkg={{item}} state=present
   with_items:
+    #------------------------------
+    # General stuff
+    #------------------------------
     - mosh
     - tmux
-    - byobu
-    - lua5.2
-    - liblua5.2-dev
-    - lua-filesystem
-    - lua-posix
-    - gcc
-    - git
-    - tcl
-    - zsh
     - vim
-    - r-base-core
     - curl
     - htop
+    - zsh
+    #------------------------------
+    # Python stuff 
+    #------------------------------
     - python-pip
     - python-dev
     - python-matplotlib
@@ -30,6 +27,30 @@
     - python-biopython
     - python-virtualenv
     - libpython3.4-dev
+    #------------------------------
+    # LinuxBrew dependencies
+    #------------------------------
+    - build-essential
+    - curl
+    - git
+    - m4
+    - ruby
+    - texinfo
+    - libbz2-dev
+    - libcurl4-openssl-dev
+    - libexpat-dev
+    - libncurses-dev
+    - zlib1g-dev
+    #------------------------------
+    - byobu
+    - lua5.2
+    - liblua5.2-dev
+    - lua-filesystem
+    - lua-posix
+    - gcc
+    - git
+    - tcl
+    - r-base-core
     - ruby
     - ruby-dev
     - ghostscript
@@ -45,3 +66,17 @@
     - texlive-latex-recommended
     - texlive-fonts-recommended
     - libzmq3-dev
+    #------------------------------
+    # Dependencies for MUMmer
+    #------------------------------
+    - make
+    - perl
+    - csh
+    - g++
+    - sed
+    - slang-xfig
+    - gnuplot
+    - xfig
+    #------------------------------
+    # Cutadapt dependency
+    - libmysqlclient-dev
