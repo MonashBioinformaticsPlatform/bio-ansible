@@ -1,6 +1,9 @@
 ---
 
 - include: common_apt.yml 
+- include: pip.yml
+- include: cran-r.yml
+- include: r-packages.yml
 - include: linuxbrew.yml tags=linuxbrew
 - include: zsh.yml
 # Commented out java_link because it errored out
@@ -9,6 +12,3 @@
 #- include: java_link.yml
 - include: java.yml
 - include: lmod.yml lmod_version=5.8.6
-- include: pip.yml
-- include: cran-r.yml
-- include: r-packages.yml
