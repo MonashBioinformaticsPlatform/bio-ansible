@@ -1,5 +1,8 @@
 ---
 
+- name: Adding cran mirror to sources.list
+  apt_repository: repo='deb http://cran.ms.unimelb.edu.au/bin/linux/ubuntu trusty/' state=present update_cache=yes
+
 - name: Install R packages
   apt: pkg={{item}} state=present
   with_items:

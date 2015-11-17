@@ -7,5 +7,4 @@
       - pysam
       - nesoni
       - gffutils
-      - virtualenv
   sudo: yes

@@ -2,7 +2,6 @@
 
 - include: common_apt.yml 
 - include: pip.yml
-- include: cran-r.yml
 - include: r-packages.yml
 - include: linuxbrew.yml tags=linuxbrew
 - include: zsh.yml
