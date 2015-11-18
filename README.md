@@ -37,6 +37,8 @@ Or if you only after particular task
 ansible-playbook -i hosts main.yml --tags samtools
 ```
 
+You can add `-v` or `-vvv` options in for verbose, to get `stderr` messages printed out
+
 ## Extra files
 
 ### Manual handling
@@ -102,7 +104,7 @@ roles/
             main.yml
 ```
 
-You can refer to each role in your `playbook.yml` file as follow
+You can refer to each role in your `playbook.yml` file as follows
 
 ```
 - name: Testing the server
@@ -113,14 +115,6 @@ You can refer to each role in your `playbook.yml` file as follow
           - common
           - bio_tools
 ```
-
-And then execute your `playbook.yml` as follows
-
-```
-ansible-playbook hosts playbook.yml
-```
-
-You can add `-v` or `-vvv` options in for verbose, to get `stderr` messages printed out
 
 Where your `hosts` file should look something link this
 
@@ -133,7 +127,7 @@ ansible-test
 
 ### Housekeeping 
 
-- `main.yml` file are special, ansible looks for them by default
+- `main.yml` is a special file, ansible will assume defaul behaviour from it.
 - please start evey `.yml` file with `---` at the top, for more [YMAL](http://www.yaml.org/spec/1.2/spec.html)
 
 ## Notes
