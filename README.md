@@ -14,7 +14,7 @@
 
 ## Requirements
 
-You need a [ansible](http://docs.ansible.com/ansible/index.html) installed locally
+You will need to install [ansible](http://docs.ansible.com/ansible/index.html) locally
 
 ```BASH
 sudo pip install ansible
@@ -26,9 +26,9 @@ According to [ansible docs](http://docs.ansible.com/ansible/playbooks_intro.html
 
 > Modules are ‘idempotent’, meaning if you run them again, they will make only the changes they must in order to bring the system to the desired state. This makes it very safe to rerun the same playbook multiple times. They won’t change things unless they have to change things.
 
-It is safe to re-run the same playbook.
+**It is safe to re-run the same playbook**
 
-Please note you can control what gets executed where through `hosts` file but bear in mind that `all` inside `playbook.yml` files under `hosts: all` means all servers ! I think you can specify multiple hosts/groups separating them by space
+Please note you can control what gets executed where through `hosts` file, but bear in mind that `all` inside `playbook.yml` files under `hosts: all` means ALL servers ! I think you can specify multiple hosts/groups separating them by space e.g `hosts: ansible-test bioinformatics`
 
 By default software will be installed under root `/software` directory.
 
