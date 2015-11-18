@@ -5,6 +5,7 @@
 ## Content 
 
 - [Requirements](#requirements)
+- [Installation](#installation)
 - [General notes](#general-notes)
 - [Quick start](#quick-start)
 - [Extra files](#extra-files)
@@ -19,6 +20,11 @@ You will need to install [ansible](http://docs.ansible.com/ansible/index.html) l
 ```BASH
 sudo pip install ansible
 ```
+## Installation
+
+`git clone https://github.com/MonashBioinformaticsPlatform/bio-ansible.git .`
+
+Be sure to change `pub_keys` value in `groups_vars/all` file to your public key in order to run ansible playbook
 
 ## General notes
 
@@ -33,6 +39,9 @@ Please note you can control what gets executed where through `hosts` file, but b
 By default software will be installed under root `/software` directory.
 
 So far this has only been developed on Ubuntu 14.04 (Trusty)
+
+The default `root` user on Ubuntu is `ubuntu` all "common" software gets installed as `ubuntu`
+The other user that gets created is `sw-installer` who instals all of the bioinformatiky tools including linuxbrew and all associated brew packages.
 
 ## Quick start
 
