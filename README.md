@@ -19,22 +19,22 @@ You need a [ansible](http://docs.ansible.com/ansible/index.html) installed local
 sudo pip install ansible
 ```
 
-You need to manually download some packages that require license agreements.  See `tarballs/README`
+By default software will be installed under root `/software` directory.
 
-By default software will be installed to /software.  So, if you want this to be on a separate mount, set that up before running ansible.
-
-So far this has only been developed on Ubuntu 14.04
+So far this has only been developed on Ubuntu 14.04 (Trusty)
 
 ## Quick start
 
+Given that you have access to the server and you have your ssh keys set up, it will be just the matter of running this line:
+
 ```BASH
-ansible-playbook -K -s -u powell -i hosts main.yml
+ansible-playbook -i hosts playbook.yml
 ```
 
-or for only a specific task
+Or if you only after particular task
 
 ```BASH
-ansible-playbook -K -s -u powell -i hosts main.yml --tags samtools
+ansible-playbook -i hosts main.yml --tags samtools
 ```
 
 ## Extra files
@@ -117,7 +117,7 @@ You can refer to each role in your `playbook.yml` file as follow
 And then execute your `playbook.yml` as follows
 
 ```
-ansible-playbook -K -s -i hosts playbook.yml
+ansible-playbook hosts playbook.yml
 ```
 
 You can add `-v` or `-vvv` options in for verbose, to get `stderr` messages printed out
