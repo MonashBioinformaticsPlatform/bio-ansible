@@ -7,9 +7,10 @@
 - [Requirements](#requirements)
 - [Quick start](#quick-start)
 - [Extra files](#extra-files)
+  - [Manual handling](#manual-handling)
+  - [Manual scripts](#manual-scripts)
 - [Adding more stuff](#adding-more-stuff)
 - [Notes](#notes)
-- [Manual handling](#manual-handling)
 
 ## Requirements
 
@@ -127,13 +128,15 @@ ansible-test
 
 ### Housekeeping 
 
-- `main.yml` is a special file, ansible will assume defaul behaviour from it.
-- please start evey `.yml` file with `---` at the top, for more [YMAL](http://www.yaml.org/spec/1.2/spec.html)
+- `main.yml` is a special file, ansible will assume default behaviour from it.
+- please start every `.yml` file with `---` at the top, for more [YAML](http://www.yaml.org/spec/1.2/spec.html)
 
 ## Notes
 
-According to [ansibel docs](http://docs.ansible.com/ansible/playbooks_intro.html)
+According to [ansible docs](http://docs.ansible.com/ansible/playbooks_intro.html)
 
 > Modules are ‘idempotent’, meaning if you run them again, they will make only the changes they must in order to bring the system to the desired state. This makes it very safe to rerun the same playbook multiple times. They won’t change things unless they have to change things.
 
 It is safe to re-run the same playbook.
+
+Please note you can control what gets executed where through `hosts` file but bear in mind that `all` inside `playbook.yml` files under `hosts: all` means all servers ! I think you can specify multiple hosts/groups separating them by space
