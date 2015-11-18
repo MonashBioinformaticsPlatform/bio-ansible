@@ -27,4 +27,4 @@
     #------------------------------
 
 - name: get bio-ansible from git
-  git: repo=https://github.com/serine/bio-ansible.git dest=/home/ubuntu/gitrepos/
+  git: repo=https://github.com/serine/bio-ansible.git dest=/home/ubuntu/gitrepos/bio-ansible
