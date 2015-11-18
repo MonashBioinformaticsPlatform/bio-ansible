@@ -5,7 +5,7 @@
   # Apparently `build-essential` is now under different repository thats needs to be added to the
   # sources.list, for more into refer to 
   # http://askubuntu.com/questions/520999/problem-installing-build-essential-on-14-04-1-lts
-  apt_repository: repo="deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe" state=present
+  apt_repository: repo="deb http://archive.ubuntu.com/ubuntu trusty main universe" state=present
 
 - name: Update APT cache
   apt: update_cache=yes cache_valid_time=3600

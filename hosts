@@ -10,19 +10,19 @@ ansible-launcher  ansible_ssh_host=146.118.100.91
 # List of different groups, the same system can be added to multiple groups
 
 [bioinformatics]
-bioplat1
-bioplat2
+#bioplat1
+#bioplat2
 
 [interactive]
-bioplat3
+#bioplat3
 
 [webserver]
-bioplat1
-bioplat2
-biotrain
+#bioplat1
+#bioplat2
+#biotrain
 
 [test]
 ansible-test
 
 [launcher]
-ansible-launcher
+#ansible-launcher
