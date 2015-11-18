@@ -12,6 +12,7 @@
   - [Manual handling](#manual-handling)
   - [Manual scripts](#manual-scripts)
 - [Adding more stuff](#adding-more-stuff)
+- [Housekeeping](#housekeeping)
 
 ## Requirements
 
@@ -145,7 +146,7 @@ ansible-test ansible_ssh_host=146.118.99.235 ansiblee_ssh_port=22
 ansible-test
 ```
 
-### Housekeeping 
+## Housekeeping 
 
 - `main.yml` is a special file, ansible will assume default behaviour from it.
 - please start every `.yml` file with `---` at the top, for more [YAML](http://www.yaml.org/spec/1.2/spec.html)
