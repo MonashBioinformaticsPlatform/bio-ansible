@@ -5,7 +5,8 @@
 - include: igv.yml tags=igv version=2.3.52
 - include: SPAdes.yml tags=spades version=3.6.0
 - include: bwa.yml tags=bwa
-- include: STAR.yml tags=star version=2.4.2a
+#- include: STAR.yml tags=star version=2.4.2a
+- include: STAR.yml tags=star version=2.5.0a
 - include: picard.yml tags=picard version=1.129
 - include: htslib.yml tags=htslib version=1.2
 - include: samtools.yml tags=samtools version=1.2 htslib_version=1.2
