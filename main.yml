@@ -31,7 +31,7 @@
     - include: tasks/bcftools.yml tags=bcftools version=1.2
     - include: tasks/cufflinks.yml tags=cufflinks version=2.2.1
     - include: tasks/tophat.yml tags=tophat version=2.0.13
-    - include: tasks/ncbi-blast.yml tags=ncbi-blast version=2.2.31
+    - include: tasks/ncbi-blast.yml tags=ncbi-blast version=2.3.0
     - include: tasks/vcftools.yml tags=vcftools version=0.1.12b
     - include: tasks/igvtools.yml tags=igvtools version=2.3.52
     - include: tasks/igv.yml tags=igv version=2.3.52
