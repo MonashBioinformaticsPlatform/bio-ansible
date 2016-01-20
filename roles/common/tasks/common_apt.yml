@@ -85,4 +85,12 @@
     - xfig
     #------------------------------
     # Cutadapt dependency
+    #------------------------------
     - libmysqlclient-dev
+    #------------------------------
+    # cwutadapt dependency
+    #------------------------------
+    # BigDataScript dependencies
+    #------------------------------
+    - golang-go
+    - ant

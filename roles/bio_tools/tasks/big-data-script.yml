@@ -1,26 +1,30 @@
 ---
 
-- name: Download BigDataScript
-  get_url:
-    url=http://bioinformatics.erc.monash.edu/home/steve/host/bds_kirill_build_v{{version}}.tar.gz
-    dest={{source_dir}}/bds_Linux-{{version}}.tgz
+# Installing BigDataScript
+- name: Downloading BigDataScript
+  git: repo=https://github.com/pcingola/BigDataScript.git
+       dest={{ source_dir }}/BigDataScript-{{ version }}
+       version={{ version }}
 
-- file: dest="{{soft_dir}}/BigDataScript-{{version}}" state=directory mode=0755
+- name: Installing BigDataScript
+  shell: cd {{ source_dir }}/BigDataScript-{{version}}/; ./scripts/install.sh
 
-- name: Uncompress BigDataScript
-  unarchive: 
-    src: "{{ source_dir }}/bds_Linux-{{version}}.tgz"
-    dest: "{{soft_dir}}/BigDataScript-{{version}}"
-    copy: no
-    creates: "{{soft_dir}}/BigDataScript-{{version}}/.bds/bds"
+- file: dest="{{ soft_dir }}/BigDataScript-{{version}}" state=directory mode=0755
 
-- file: dest="{{modules_dir}}/bio/BigDataScript" state=directory mode=0755
+- name: Moving .bds file into global environment
+  shell: mv $HOME/.bds "{{ soft_dir }}/BigDataScript-{{ version }}"
+  args:
+    creates: "{{ soft_dir }}/BigDataScript-{{ version }}/.bds/bds"
+        
+- file: dest={{ modules_dir }}/bio/BigDataScript state=directory mode=0755
 
 - name: BigDataScript module definition
   template: 
     src: sw-module.lua.j2 
-    dest: "{{ modules_dir }}/bio/BigDataScript/{{version}}.lua"
+    dest: "{{ modules_dir }}/bio/BigDataScript/{{ version }}.lua"
     owner: "{{ sw_installer }}" 
     mode: 0644
   with_items:
     - { help_text: 'BigDataScript is intended as a scripting language for big data pipeline. ', dir: 'BigDataScript-{{version}}/.bds', skip_bin: true }
+
+  tags: bds

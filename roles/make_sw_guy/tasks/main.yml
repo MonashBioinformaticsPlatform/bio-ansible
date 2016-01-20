@@ -17,4 +17,4 @@
 # Adding public key
 - name: Add public key to the authorised_key
   authorized_key: user={{ sw_installer }}
-                  key="{{ pub_key }}"
+                  key={{ pub_key }}
