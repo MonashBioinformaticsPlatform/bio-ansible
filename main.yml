@@ -22,7 +22,7 @@
     - include: tasks/java-link.yml tags=java-link
     - include: tasks/r-packages.yml
 
-    - include: tasks/SPAdes.yml tags=spades version=3.6.0
+    - include: tasks/SPAdes.yml tags=spades version=3.7.0
     - include: tasks/bwa.yml tags=bwa
     - include: tasks/STAR.yml tags=star version=2.4.2a
     - include: tasks/picard.yml tags=picard version=1.129
