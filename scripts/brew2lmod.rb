@@ -77,8 +77,15 @@ class FormulaInfo
       ]])
       
       local base = "#{base(ver)}"
+      local path = pathJoin(base, "bin")
       
-      prepend_path("PATH", pathJoin(base, "bin"))
+      prepend_path("PATH", path)
+
+      -- On load, list binaries
+      if (mode() == "load") then
+        local r = capture("ls " .. path)
+        LmodMessage("Loaded " .. myModuleName() .. " : " .. string.gsub(r,'\\n',' '))
+      end
     eos
   end
 

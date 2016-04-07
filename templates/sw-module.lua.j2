@@ -44,3 +44,9 @@ load({{ item.depend }})
 LmodMessage("{{ item.msg }}")
 {% endif %}
 
+-- On load, list binaries
+if (mode() == "load") then
+  local r = capture("ls " .. path)
+  LmodMessage("Loaded " .. myModuleName() .. " : " .. string.gsub(r,'\n',' '))
+end
+
