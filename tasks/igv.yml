@@ -1,4 +1,7 @@
 
+- stat: path=tarballs/IGV_{{version}}.zip
+  register: igvzip
+
 # Check if it has been uncompressed.  The "creates" in the next section should do this, but it
 # seems to copy up the tarball anyway
 - stat: path={{ soft_dir}}/IGV_{{version}}/igv.sh
@@ -10,7 +13,10 @@
     dest={{ soft_dir }}
     copy=yes
     creates={{ soft_dir}}/IGV_{{version}}/igv.sh
-  when: not igv.stat.exists
+  when: not igv.stat.exists and igvzip.stat.exists
+
+- debug: msg="Didn't find tarballs/IGV_{{version}}.zip - not installing IGV"
+  when: not igvzip.stat.exists
 
 - file: dest="{{modules_dir}}/bio/igv" state=directory mode=0755
 

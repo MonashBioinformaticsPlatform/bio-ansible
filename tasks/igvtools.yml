@@ -2,6 +2,9 @@
 # Ensure the unarchive directory exists (the zip file has no version info)
 - file: dest="{{ soft_dir }}/IGVTools-{{version}}" state=directory mode=0755
 
+- stat: path=tarballs/igvtools_{{version}}.zip
+  register: igvtoolszip
+
 # Check if it has been uncompressed.  The "creates" in the next section should do this, but it
 # seems to copy up the tarball anyway
 - stat: path={{ soft_dir }}/IGVTools-{{version}}/IGVTools/igvtools
@@ -13,7 +16,10 @@
     dest={{ soft_dir }}/IGVTools-{{version}}
     copy=yes
     creates={{ soft_dir }}/IGVTools-{{version}}/IGVTools/igvtools
-  when: not igvtools.stat.exists
+  when: not igvtools.stat.exists and igvtoolszip.stat.exists
+
+- debug: msg="Didn't find tarballs/igvtools_{{version}}.zip - not installing igvtools"
+  when: not igvtoolszip.stat.exists
 
 - file: dest="{{modules_dir}}/bio/igvtools" state=directory mode=0755
 

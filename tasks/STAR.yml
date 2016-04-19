@@ -3,6 +3,7 @@
   git: repo=https://github.com/alexdobin/STAR
        dest={{source_dir}}/STAR-{{version}}
        version=STAR_{{version}}
+       update=yes
 
 - name: Install STAR
   shell: cd {{ source_dir }}/STAR-{{version}}/bin/Linux_x86_64_static; mkdir -p "{{ soft_dir }}/STAR-{{version}}/bin" && cp STAR STARlong "{{ soft_dir }}/STAR-{{version}}/bin"
