@@ -42,3 +42,4 @@
     - texlive-latex-recommended
     - texlive-fonts-recommended
     - libzmq3-dev
+    - libncurses5-dev
