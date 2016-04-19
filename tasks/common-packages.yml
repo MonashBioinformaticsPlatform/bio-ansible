@@ -11,6 +11,7 @@
     - liblua5.2-dev
     - lua-filesystem
     - lua-posix
+    - build-essential
     - gcc
     - git
     - tcl
