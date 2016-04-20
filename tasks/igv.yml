@@ -1,4 +1,9 @@
 
+- name: Download IGV - you should register here https://www.broadinstitute.org/software/igv/?q=registration and agree with the license terms (LGPL, http://www.opensource.org/licenses/lgpl-2.1.php)
+  get_url:
+    url=http://data.broadinstitute.org/igv/projects/downloads/IGV_{{version}}.zip
+    dest=tarballs/IGV_{{version}}.zip
+
 - stat: path=tarballs/IGV_{{version}}.zip
   register: igvzip
 
