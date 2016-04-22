@@ -5,7 +5,7 @@
     dest={{source_dir}}/splitstree4_unix_{{version}}.sh
 
 - name: Install SplitsTee
-  shell: cd {{source_dir}}; echo "o\n1\n{{soft_dir}}/SplitsTree-{{version}}\n\nn\n" | sh splitstree4_unix_{{version}}.sh
+  shell: cd {{source_dir}}; echo "o\n\n1\n{{soft_dir}}/SplitsTree-{{version}}\n1\nn\n5\n65535\n" | sh splitstree4_unix_{{version}}.sh
   args:
     creates: "{{soft_dir}}/SplitsTree-{{version}}/SplitsTree"
 
