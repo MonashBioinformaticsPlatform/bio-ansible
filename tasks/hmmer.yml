@@ -1,6 +1,6 @@
 - name: Download hmmer
   get_url:
-    url=http://selab.janelia.org/software/hmmer3/{{version}}/hmmer-{{version}}-linux-intel-x86_64.tar.gz
+    url=http://eddylab.org/software/hmmer3/{{version}}/hmmer-{{version}}-linux-intel-x86_64.tar.gz
     dest={{source_dir}}/hmmer-{{version}}-linux-intel-x86_64.tar.gz
 
 - name: Uncompress hmmer
