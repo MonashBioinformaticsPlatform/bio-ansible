@@ -6,6 +6,12 @@
     - XML::Simple
     - Bio::Perl
 
+# from https://github.com/Homebrew/homebrew-science/issues/3508 to fix blast install problem
+- name: Install prokka dep blast from custom source
+  shell: "{{brew_dir}}/bin/brew pull https://github.com/Homebrew/homebrew-science/pull/3537; {{brew_dir}}/bin/brew install --build-from-source -dv blast"
+  sudo: yes
+  sudo_user: sw-installer
+
 - include: brew_package.yml brew_name='homebrew/science/prokka' lmod_name='prokka'
 
 - name: Setup prokka dbs
