@@ -1,12 +1,16 @@
-- name: Download artemis
-  get_url:
-    url=ftp://ftp.sanger.ac.uk/pub/resources/software/artemis/artemis.tar.gz
-    dest={{source_dir}}/artemis.tar.gz
-    timeout=30
-  register: get_url_result
-  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
-  retries: 5
-  delay: 10
+#- name: Download artemis
+#  get_url:
+#    url=ftp://ftp.sanger.ac.uk/pub/resources/software/artemis/artemis.tar.gz
+#    dest={{source_dir}}/artemis.tar.gz
+#    timeout=30
+#  register: get_url_result
+#  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
+#  retries: 5
+#  delay: 10
+
+# get_url seems notoriously unreliable for ftp:// urls. So we use wget :/
+- name: Download artemis via wget
+  shell: wget -O {{source_dir}}/artemis.tar.gz --tries 5 --timeout 30 ftp://ftp.sanger.ac.uk/pub/resources/software/artemis/artemis.tar.gz
 
 - file: dest="{{soft_dir}}/artemis-{{version}}" state=directory mode=0755
 
