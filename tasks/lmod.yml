@@ -13,6 +13,11 @@
     url=http://downloads.sourceforge.net/project/lmod/Lmod-{{ lmod_version }}.tar.bz2
     dest={{source_dir}}/Lmod-{{ lmod_version }}.tar.bz2
     mode=0444
+    timeout=30
+  register: get_url_result
+  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
+  retries: 5
+  delay: 10
 
 - name: Uncompress LMOD
   unarchive:

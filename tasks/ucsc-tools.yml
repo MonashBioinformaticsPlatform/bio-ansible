@@ -9,6 +9,11 @@
   get_url:
     url=http://hgdownload.cse.ucsc.edu/admin/exe/userApps.v{{version}}.src.tgz
     dest={{source_dir}}/ucsc-userApps.v{{version}}.src.tgz
+    timeout=30
+  register: get_url_result
+  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
+  retries: 5
+  delay: 10
 
 - file: dest="{{ source_dir }}/UCSC-tools.v{{version}}" state=directory mode=0755
 

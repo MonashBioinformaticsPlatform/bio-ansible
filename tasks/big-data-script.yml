@@ -2,6 +2,11 @@
   get_url:
     url=http://bioinformatics.erc.monash.edu/home/steve/host/bds_kirill_build_v{{version}}.tar.gz
     dest={{source_dir}}/bds_Linux-{{version}}.tgz
+    timeout=30
+  register: get_url_result
+  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
+  retries: 5
+  delay: 10
 
 - file: dest="{{soft_dir}}/BigDataScript-{{version}}" state=directory mode=0755
 

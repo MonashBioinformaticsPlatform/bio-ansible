@@ -2,6 +2,11 @@
   get_url:
     url=https://github.com/bedops/bedops/releases/download/v{{version}}/bedops_linux_x86_64-v{{version}}.tar.bz2
     dest={{source_dir}}/bedops_linux_x86_64-v{{version}}.tar.bz2
+    timeout=30
+  register: get_url_result
+  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
+  retries: 5
+  delay: 10
 
 - file: dest="{{soft_dir}}/bedops-{{version}}" state=directory mode=0755
 

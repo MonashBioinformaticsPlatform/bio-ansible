@@ -4,6 +4,11 @@
   get_url:
     url=http://sourceforge.net/projects/rseqc/files/RSeQC-{{version}}.tar.gz/download
     dest={{source_dir}}/RSeQC-{{version}}.tar.gz
+    timeout=30
+  register: get_url_result
+  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
+  retries: 5
+  delay: 10
 
 - name: Uncompress RSeQC
   unarchive:

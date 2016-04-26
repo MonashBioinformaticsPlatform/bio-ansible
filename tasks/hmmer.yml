@@ -2,6 +2,11 @@
   get_url:
     url=http://eddylab.org/software/hmmer3/{{version}}/hmmer-{{version}}-linux-intel-x86_64.tar.gz
     dest={{source_dir}}/hmmer-{{version}}-linux-intel-x86_64.tar.gz
+    timeout=30
+  register: get_url_result
+  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
+  retries: 5
+  delay: 10
 
 - name: Uncompress hmmer
   unarchive: 

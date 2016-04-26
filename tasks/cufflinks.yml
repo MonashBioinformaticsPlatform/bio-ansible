@@ -2,6 +2,11 @@
   get_url:
     url=http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-{{version}}.Linux_x86_64.tar.gz
     dest={{source_dir}}/cufflinks-{{version}}.Linux_x86_64.tar.gz
+    timeout=30
+  register: get_url_result
+  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
+  retries: 5
+  delay: 10
 
 - name: Uncompress Cufflinks
   unarchive: 

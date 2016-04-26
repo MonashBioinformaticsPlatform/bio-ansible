@@ -8,6 +8,11 @@
   get_url:
     url=https://s3.amazonaws.com/rstudio-dailybuilds/rstudio-server-{{version}}.deb
     dest={{source_dir}}/rstudio-server-{{version}}.deb
+    timeout=30
+  register: get_url_result
+  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
+  retries: 5
+  delay: 10
 
 - name: Install Rstudio server daily
   shell: gdebi -n {{source_dir}}/rstudio-server-{{version}}.deb
