@@ -1,0 +1,35 @@
+- name: Update APT cache
+  tags: ['bcl2fastq2-2.17']
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Install packages
+  tags: ['bcl2fastq2-2.17']
+  apt: pkg={{item}} state=present
+  with_items:
+    - libexpat1-dev
+    - libexpat1
+    - expat
+    - alien
+    - build-essential
+    - xsltproc
+    - imagemagick
+    - gnuplot
+
+- name: Download bcl2fastq2-2.17
+  tags: ['bcl2fastq2-2.17']
+  get_url:
+    url=ftp://webdata2:webdata2@ussd-ftp.illumina.com/downloads/software/bcl2fastq/bcl2fastq2-v2.17.1.14-Linux-x86_64.zip
+    dest={{ source_dir }}/bcl2fastq2-v2.17.1.14-Linux-x86_64.zip
+    # checksum="sha256:b7c802e3a24fec07a1fbb583fa273ee64cf2a0fad1830f3feb638b7232be268e"
+
+- name: Uncompress bcl2fastq-2.17 package
+  unarchive:
+    src: "{{ source_dir }}/bcl2fastq2-v2.17.1.14-Linux-x86_64.zip"
+    dest: "{{ source_dir }}"
+    copy: no
+    creates: "{{ source_dir }}/bcl2fastq2-v2.17.1.14-Linux-x86_64.rpm"
+
+- name: Install bcl2fastq2 RPM via alien
+  tags: ['bcl2fastq2-2.17']
+  become: true
+  command: alien -iv {{ source_dir }}/bcl2fastq2-v2.17.1.14-Linux-x86_64.rpm creates=/usr/local/bin/bcl2fastq
