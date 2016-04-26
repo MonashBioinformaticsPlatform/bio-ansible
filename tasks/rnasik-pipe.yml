@@ -14,6 +14,6 @@
     owner: root
     mode: 0644
   with_items:
-    - { help_text: 'This module loads Kirill RNAsik-pipe release version {{RNAsik-pipe-version1.1}}',
-    dir: '{{version}}', skip_bin: true,
-    base: '{{ soft_dir }}/{{version}}/src' }
+    - { help_text: 'This module loads Kirill RNAsik-pipe release version RNAsik-pipe-{{version}}',
+        dir: '{{version}}', skip_bin: true,
+        base: '{{ soft_dir }}/{{version}}/src' }
