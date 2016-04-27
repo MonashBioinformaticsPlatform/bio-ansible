@@ -44,3 +44,4 @@
     - texlive-fonts-recommended
     - libzmq3-dev
     - libncurses5-dev
+    - libfreetype6-dev
