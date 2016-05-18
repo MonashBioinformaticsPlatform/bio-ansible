@@ -1,0 +1,10 @@
+---
+
+- include: STAR.yml version=2.5.1b
+- include: htslib.yml version=1.3
+- include: samtools.yml version=1.3 htslib_version=1.3
+- include: picard.yml version=1.129
+- include: featureCounts.yml version=1.5.0-p1
+- include: rna-seqc.yml version=1.1.8
+- include: rnasik-pipe.yml version=1.3-beta
+- include: fastqc.yml version=0.11.4

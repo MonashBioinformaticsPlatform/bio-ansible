@@ -1,0 +1,24 @@
+---
+
+- name: Download STAR
+  git:
+    repo: https://github.com/alexdobin/STAR
+    dest: "{{ source_dir }}/STAR-{{ version }}"
+    version: "{{ version }}"
+
+- file:
+    dest: "{{modules_dir}}/STAR"
+    state: directory
+    mode: 0755
+
+- name: STAR module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_dir }}/STAR/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'STAR-{{ version }}'
+      help_text: 'This module loads the STAR aligner'
+
+  tags: star

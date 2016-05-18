@@ -1,0 +1,23 @@
+---
+# This to install BigDataScript with all required dependencies
+
+- name: Update APT cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Installing common packages
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - gcc
+    - make
+    - unzip
+    # htslib dependencies
+    - zlib1g-dev
+    - libncurses-dev
+    # BigDataScript dependencies
+    - golang-go
+    - ant

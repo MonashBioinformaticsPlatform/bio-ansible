@@ -1,0 +1,13 @@
+---
+
+- name: Create required directories
+  file:
+    dest: "{{ item }}"
+    state: directory
+    mode: 0755
+    owner: "{{ main_guy }}"
+    group: "{{ main_guy }}"
+  with_items:
+    - "{{ source_dir }}"
+    - "{{ soft_dir }}"
+    - "{{ modules_dir }}"

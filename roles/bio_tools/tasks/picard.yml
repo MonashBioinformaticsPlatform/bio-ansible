@@ -1,0 +1,38 @@
+---
+
+- name: Download Picard
+  get_url:
+    url=https://github.com/broadinstitute/picard/releases/download/{{version}}/picard-tools-{{version}}.zip
+    dest={{source_dir}}/picard-tools-{{version}}.zip
+
+- name: Uncompress Picard
+  unarchive: 
+    src: "{{ source_dir }}/picard-tools-{{version}}.zip"
+    dest: "{{ soft_dir }}"
+    copy: no
+    creates: "{{ soft_dir }}/picard-tools-{{version}}/picard.jar"
+
+- file: dest="{{ soft_dir }}/picard-tools-{{version}}/bin" state=directory mode=0755
+
+- name: Picard wrapper script
+  template:
+    src: java-wrapper.sh.j2
+    dest: "{{ soft_dir }}/picard-tools-{{version}}/bin/picard"
+    owner: "{{ main_guy }}" 
+    mode: 0755
+  with_items:
+    - { jar: '{{ soft_dir }}/picard-tools-{{version}}/picard.jar' }
+
+- file: dest="{{modules_dir}}/picard" state=directory mode=0755
+
+- name: Picard module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_dir }}/picard/{{version}}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'picard-tools-{{version}}'
+      help_text: 'This module loads the Picard tool suite'
+
+  tags: picard 

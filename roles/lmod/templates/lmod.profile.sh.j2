@@ -1,0 +1,13 @@
+shell=`basename $SHELL`
+
+if [ -f {{ soft_dir }}/lmod/lmod/init/$shell ]
+then
+
+    export PATH={{ soft_dir }}/lmod/lmod/libexec:$PATH
+    . {{ soft_dir }}/lmod/lmod/init/$shell
+
+    export MODULEPATH="{{ modules_dir }}/"
+
+    #export LMOD_PAGER="/usr/bin/less -E -F -R"
+
+fi

@@ -1,0 +1,18 @@
+---
+
+# Setting up a host
+#remote_host: ansible-launcher
+
+#----------------
+# Users variable
+#----------------
+main_guy: ubuntu
+
+#---------------------------------
+# Different directories variables
+#---------------------------------
+local_home: "{{ ansible_env.HOME }}"
+source_dir: "{{ local_home }}/software/source"
+modules_dir: "{{ local_home }}/software/modules"
+have_root: false
+bds_version: master

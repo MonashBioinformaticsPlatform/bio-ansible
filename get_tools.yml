@@ -1,0 +1,21 @@
+---
+# This playbook deploys RNAsik-pipe with all relevant tools
+
+- name: Installing dependencies, Java and lmod
+  hosts: home
+  remote_user: "{{ main_guy }}"
+  roles:
+            - common
+            - lmod
+            - java
+
+  become: have_root
+  when: have_root:
+
+- name: Installing BigDataScript, RNAsik-pipe and bioinformatc's tools
+  hosts: home
+  remote_user: "{{ main_guy }}"
+  roles:
+          - make_dirs
+          - bds
+          - bio_tools

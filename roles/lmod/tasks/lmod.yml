@@ -1,0 +1,26 @@
+---
+
+- name: Download LMOD
+  get_url:
+    url: http://downloads.sourceforge.net/project/lmod/Lmod-{{ version }}.tar.bz2
+    dest: "{{source_dir}}/Lmod-{{ version }}.tar.bz2"
+    mode: 0444
+
+- name: Uncompress LMOD
+    unarchive:
+    src: "{{ source_dir }}/Lmod-{{ version }}.tar.bz2"
+    dest: "{{ source_dir }}"
+    copy: no
+    creates: "{{source_dir}}/Lmod-{{ version }}/README"
+
+- name: Compile and install Lmod
+  shell: cd {{ source_dir }}/Lmod-{{ version }}; ./configure --prefix={{ soft_dir }} --with-mpathSearch=YES --with-caseIndependentSorting=YES && make install LUA_INCLUDE=/usr/include/lua5.2
+  args:
+    creates: "{{ soft_dir }}/lmod/{{ version }}"
+
+- name: Copy lmod bash init file to /etc/profile.d/lmod.sh
+  template:
+    src: lmod.profile.sh.j2
+    dest: etc/profile.d/lmod.sh
+    owner: root
+    mode: 0444
