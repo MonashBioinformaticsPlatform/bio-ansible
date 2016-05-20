@@ -6,6 +6,8 @@
     dest: "/opt/Lmod-{{ version }}.tar.bz2"
     mode: 0444
 
+  when: have_root
+
 - name: Uncompress LMOD
   unarchive:
     src: "/opt/Lmod-{{ version }}.tar.bz2"
@@ -13,10 +15,14 @@
     copy: no
     creates: "/opt/Lmod-{{ version }}/README"
 
+  when: have_root
+
 - name: Compile and install Lmod
   shell: cd /opt/Lmod-{{ version }}; ./configure --prefix=/opt --with-mpathSearch=YES --with-caseIndependentSorting=YES && make install LUA_INCLUDE=/usr/include/lua5.2
   args:
     creates: "/opt/{{ version }}"
+
+  when: have_root
 
 - name: Copy lmod bash init file to /etc/profile.d/lmod.sh
   template:
@@ -25,5 +31,7 @@
     owner: root
     #owner: "{{ main_guy }}"
     mode: 0444
+
+  when: have_root
 
   tags: lmod

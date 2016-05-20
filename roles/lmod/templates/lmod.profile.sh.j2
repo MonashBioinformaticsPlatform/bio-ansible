@@ -6,7 +6,10 @@ then
     export PATH=/opt/lmod/lmod/libexec:$PATH
     . /opt/lmod/lmod/init/$shell
 
-    export MODULEPATH="{{ modules_dir }}/"
+    #export MODULEPATH="{{ modules_dir }}/"
+    # this is dodgy since it won't work of any other distros
+    # if users aren't located in /home/$USER, but should work for most linux
+    export MODULEPATH="/home/{{ main_guy }}/software/modules"
 
     #export LMOD_PAGER="/usr/bin/less -E -F -R"
 
