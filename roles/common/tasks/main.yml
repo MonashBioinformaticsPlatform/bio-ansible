@@ -5,6 +5,7 @@
   apt:
     update_cache: yes
     cache_valid_time: 3600
+  when: have_root
 
 - name: Installing common packages
   apt:
@@ -29,3 +30,4 @@
     # BigDataScript dependencies
     - golang-go
     - ant
+  when: have_root
