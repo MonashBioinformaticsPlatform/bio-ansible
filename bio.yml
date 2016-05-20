@@ -13,10 +13,12 @@
 
   become: true
 
-  #- name: Installing BigDataScript, RNAsik-pipe and bioinformatc's tools
-  #  hosts: home
-  #  remote_user: "{{ main_guy }}"
-  #  roles:
-  #          - make_dirs
-  #          - bds
-  #          - bio_tools
+- name: Installing BigDataScript, RNAsik-pipe and bioinformatc's tools
+  hosts: home
+  remote_user: "{{ main_guy }}"
+  roles:
+          # make container for all other installation
+          - make_dirs
+            #- bds
+          # install everyting into one container
+          - bio_tools

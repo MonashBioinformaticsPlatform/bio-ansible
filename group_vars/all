@@ -18,6 +18,5 @@ modules_dir: "{{ local_home }}/software/modules"
 # Other global variables
 #------------------------------
 have_root: true
-get_tools: false
 
 bds_version: master
