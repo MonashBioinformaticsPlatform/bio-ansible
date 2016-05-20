@@ -1,26 +1,26 @@
 ---
 
-- name: Download STAR
+- name: Download bwa
   git:
     repo: https://github.com/lh3/bwa/
     dest: "{{ source_dir }}/bwa-{{ version }}"
     version: "{{ version }}"
 
-- name: Uncompress BWA
-  unarchive:
-    src: "{{ source_dir }}/bwa-{{ version }}.tar.bz2"
-    dest: "{{ source_dir }}"
-    copy: no
+  tags: get_bwa
+
+- name: Build and Install BWA
+  shell: cd {{ source_dir }}/bwa-{{ version }}; make && mkdir bin && mv bwa qualfa2fq.pl xa2multi.pl bin
+  args:
+    creates: "{{ source_dir }}/bwa-{{ version }}/bin/bwa"
+
+  tags: install_bwa
 
 - file:
-    dest: "{{modules_dir}}/bwa"
+    dest: "{{ modules_dir }}/bwa"
     state: directory
     mode: 0755
 
-  #- name: Build and Install BWA
-  #  shell: cd {{ source_dir }}/bwa-0.7.12; make && mkdir -p "{{ soft_dir }}/BWA-0.7.12/bin" && cp bwa qualfa2fq.pl xa2multi.pl "{{ soft_dir }}/BWA-0.7.12/bin"
-  #  args:
-  #    creates: "{{ soft_dir }}/BWA-0.7.12/bin/bwa"
+  tags: lmod_bwa
 
 - name: BWA module definition
   template: 
@@ -29,6 +29,7 @@
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:
-    - { help_text: 'This module loads the BWA aligner', dir: 'bwa-{{ version }}' }
+    - dir: 'bwa-{{ version }}'
+      help_text: 'This module loads the BWA aligner'
 
-  tags: bwa
+  tags: lmod_bwa
