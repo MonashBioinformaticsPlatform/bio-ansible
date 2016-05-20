@@ -1,9 +1,0 @@
----
-
-- name: Install {{brew_name}}
-  shell: "{{brew_dir}}/bin/brew ls {{brew_name}} || {{brew_dir}}/bin/brew install {{brew_name}}"
-#  sudo: yes
-#  sudo_user: sw-installer
-
-- name: Create module def
-  shell: "{{brew_dir}}/brew2lmod.rb -m {{modules_dir}}/bio -b {{brew_dir}}/bin/brew {{lmod_name}}"

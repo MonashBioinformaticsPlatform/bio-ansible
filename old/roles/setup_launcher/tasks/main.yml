@@ -1,4 +1,0 @@
----
-
-- include: common_apt.yml
-- include: ansible.yml
