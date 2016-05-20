@@ -14,7 +14,15 @@
     - git
     - gcc
     - make
+    - cmake
     - unzip
+    # installing lua and dependencies
+    - lua5.2
+    - liblua5.2-dev
+    - lua-filesystem
+    - lua-posix
+    # lmos dep
+    - tcl
     # htslib dependencies
     - zlib1g-dev
     - libncurses-dev

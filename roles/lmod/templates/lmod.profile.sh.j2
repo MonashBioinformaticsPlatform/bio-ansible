@@ -1,10 +1,10 @@
 shell=`basename $SHELL`
 
-if [ -f {{ soft_dir }}/lmod/lmod/init/$shell ]
+if [ -f /opt/lmod/lmod/init/$shell ]
 then
 
-    export PATH={{ soft_dir }}/lmod/lmod/libexec:$PATH
-    . {{ soft_dir }}/lmod/lmod/init/$shell
+    export PATH=/opt/lmod/lmod/libexec:$PATH
+    . /opt/lmod/lmod/init/$shell
 
     export MODULEPATH="{{ modules_dir }}/"
 
