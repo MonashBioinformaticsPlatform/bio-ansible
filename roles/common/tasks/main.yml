@@ -1,0 +1,33 @@
+---
+# This to install BigDataScript with all required dependencies
+
+- name: Update APT cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: have_root
+
+- name: Installing common packages
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - gcc
+    - make
+    - cmake
+    - unzip
+    # installing lua and dependencies
+    - lua5.2
+    - liblua5.2-dev
+    - lua-filesystem
+    - lua-posix
+    # lmos dep
+    - tcl
+    # htslib dependencies
+    - zlib1g-dev
+    - libncurses-dev
+    # BigDataScript dependencies
+    - golang-go
+    - ant
+  when: have_root

@@ -1,0 +1,35 @@
+---
+
+- name: Download bwa
+  git:
+    repo: https://github.com/lh3/bwa/
+    dest: "{{ source_dir }}/bwa-{{ version }}"
+    version: "{{ version }}"
+
+  tags: get_bwa
+
+- name: Build and Install BWA
+  shell: cd {{ source_dir }}/bwa-{{ version }}; make && mkdir bin && mv bwa qualfa2fq.pl xa2multi.pl bin
+  args:
+    creates: "{{ source_dir }}/bwa-{{ version }}/bin/bwa"
+
+  tags: install_bwa
+
+- file:
+    dest: "{{ modules_dir }}/bwa"
+    state: directory
+    mode: 0755
+
+  tags: lmod_bwa
+
+- name: BWA module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_dir }}/bwa/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'bwa-{{ version }}'
+      help_text: 'This module loads the BWA aligner'
+
+  tags: lmod_bwa

@@ -1,0 +1,35 @@
+---
+
+- name: Download FastQC
+  get_url:
+    url=http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v{{version}}.zip
+    dest={{ source_dir }}/fastqc_v{{ version }}.zip
+
+- name: Uncompress FastQC
+  unarchive:
+    src={{ source_dir }}/fastqc_v{{ version }}.zip
+    dest={{ soft_dir }}
+    copy=no
+
+
+- name: Move FastQC to a version specific directory
+  command: mv {{ soft_dir }}/FastQC {{ soft_dir }}/FastQC-{{ version }}
+  args:
+    creates: "{{ soft_dir }}/FastQC-{{ version }}"
+
+
+- file: path="{{ soft_dir }}/FastQC-{{ version }}/fastqc" mode="a+x"
+- file: dest="{{ modules_dir }}/fastqc" state=directory mode=0755
+
+- name: Set FastQC globaly throught PATH new bashrc
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_dir }}/fastqc/{{ version }}.lua"
+    owner: "{{ main_guy }}"
+    mode: 0644
+  with_items:
+    - dir: 'FastQC-{{ version }}'
+      skip_bin: true
+      help_text: 'A quality control application for high throughput sequence data'
+
+  tags: fastqc

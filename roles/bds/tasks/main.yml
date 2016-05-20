@@ -1,0 +1,3 @@
+---
+
+- include: bds.yml version=v0.9999c bin_dir=BigDataScript-{{ version }}
