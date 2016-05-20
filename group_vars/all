@@ -14,5 +14,10 @@ main_guy: ubuntu
 local_home: "{{ ansible_env.HOME }}"
 source_dir: "{{ local_home }}/software/source"
 modules_dir: "{{ local_home }}/software/modules"
-have_root: false
+#------------------------------
+# Other global variables
+#------------------------------
+have_root: true
+get_tools: false
+
 bds_version: master
