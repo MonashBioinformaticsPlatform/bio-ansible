@@ -44,3 +44,11 @@
     - texlive-fonts-recommended
     - libzmq3-dev
     - libncurses5-dev
+    - r-base
+    - fort77
+    - xorg-dev
+    - liblzma-dev
+    - libblas-dev
+    - gfortran
+    - gobjc++
+    - libcurl4-openssl-dev
