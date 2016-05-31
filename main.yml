@@ -70,6 +70,7 @@
     - include: tasks/jupyter.yml tags=jupyter version=1.0.0
 
     - include: tasks/prokka.yml tags=prokka
+    - include: tasks/r.yml tags=r version=3.3.0
     - include: tasks/misc_utils.yml tags=misc_utils
 
     - include: tasks/rnasik-pipe.yml tags=rnasik-pipe version=1.2

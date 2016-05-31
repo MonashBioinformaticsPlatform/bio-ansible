@@ -1,0 +1,29 @@
+- name: Download R
+  get_url:
+    url=http://cran.r-project.org/src/base/R-3/R-{{ version }}.tar.gz
+    dest={{source_dir}}/R-{{ version }}.tar.gz
+    mode=0444
+
+- name: Uncompress R
+  unarchive:
+    src={{ source_dir }}/R-{{ version }}.tar.gz
+    dest={{ source_dir }}
+    copy=no
+    creates={{source_dir}}/R-{{ version }}/README
+
+- name: Compile and install R
+  shell: cd {{ source_dir }}/R-{{ version }}; ./configure --prefix={{ soft_dir }} --enable-R-shlib && make; make install BIN_DIR={{ soft_dir }}/R-{{version}}/bin prefix="{{ soft_dir }}/R-{{version}}"
+  args:
+    creates: "{{ soft_dir }}/R/{{ version }}"
+
+- file: dest="{{modules_dir}}/bio/R" state=directory mode=0755
+
+- name: MUMmer module definition
+  template:
+    src: templates/sw-module.lua.j2
+    dest: "{{ modules_dir }}/bio/R/{{version}}.lua"
+    owner: root
+    mode: 0644
+  with_items:
+    - { help_text: 'R', dir: 'R-{{version}}' }
+
