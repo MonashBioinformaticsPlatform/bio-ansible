@@ -1,0 +1,29 @@
+
+- name: Download subread
+  get_url:
+    url=https://sourceforge.net/projects/subread/files/subread-{{version}}/subread-{{version}}-Linux-x86_64.tar.gz/download
+    dest={{source_dir}}/subread-{{version}}.tar.gz
+
+- name: Uncompress subread
+  unarchive:
+    src: "{{source_dir}}/subread-{{version}}.tar.gz"
+    dest: "{{soft_dir}}"
+    copy: no
+    creates: "{{soft_dir}}/subread-{{version}}-Linux-x86_64/README.txt"
+
+- file: dest="{{modules_dir}}/bio/subread" state=directory mode=0755
+
+- name: subread module definition
+  template:
+    src: templates/sw-module.lua.j2
+    dest: "{{ modules_dir }}/bio/subread/{{version}}.lua"
+    owner: root
+    mode: 0644
+  with_items:
+    - dir: 'subread-{{version}}-Linux-x86_64'
+      bin: 'bin'
+      help_text: > 
+        Subread includes the subread aligner, and featureCounts for counting RNA-seq reads
+        
+
+

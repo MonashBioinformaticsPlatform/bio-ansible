@@ -62,6 +62,7 @@
     - include: tasks/bbmap.yml tags=bbmap version=35.43
     - include: tasks/fastqc.yml tags=fastqc version=0.11.4
     - include: tasks/splitstree.yml tags=splitstree version=4_14_2
+    - include: tasks/subread.yml tags=subread version=1.5.0-p3
 
     - include: tasks/macs2.yml tags=macs2 version=2.1.0.20140616
     - include: tasks/cutadapt.yml tags=cutadapt version=1.8
