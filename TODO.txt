@@ -14,3 +14,7 @@ Add categories tool categories so can load related tools together eg.
   utils
   cnv
  
+
+## Notes
+
+This ansible for linux machine, if other machine will be in mind, don't forget to switch featureCounts make file type
