@@ -1,22 +1,25 @@
 ---
 
-- name: Download htslib
-  get_url:
-    url=https://github.com/samtools/htslib/archive/{{version}}.tar.gz
-    dest={{source_dir}}/htslib-{{version}}.tar.gz
+- name: git clone htslib
+  git:
+    repo: https://github.com/samtools/htslib/
+    dest: "{{ source_dir }}/htslib-{{ version }}"
+    version: "{{ version }}"
+    # this should prevent git clone error if directory already exist
+    update: no
 
-- name: Uncompress htslib
-  unarchive: 
-    src: "{{ source_dir }}/htslib-{{version}}.tar.gz"
-    dest: "{{ source_dir }}"
-    copy: no
-    creates: "{{ source_dir }}/htslib-{{version}}/README"
+  tags: get_htslib
 
-- name: Build and Install htslib
-  shell: cd {{ source_dir }}/htslib-{{version}}; make install prefix="{{ soft_dir }}/htslib-{{version}}"
+- name: build htslib
+  shell: cd {{ source_dir }}/htslib-{{ version }}; make install prefix={{ source_dir }}/htslib-{{ version }}
   args:
-    creates: "{{ soft_dir }}/htslib-{{version}}/bin/tabix"
+    creates: "{{ source_dir }}/htslib-{{ version }}/bin/tabix"
 
-- file: dest="{{modules_dir}}/htslib" state=directory mode=0755
+  tags: build_htslib
 
-  tags: htslib
+- file:
+    dest: "{{ modules_dir }}/htslib"
+    state: directory
+    mode: 0755
+
+  tags: lmod_htslib

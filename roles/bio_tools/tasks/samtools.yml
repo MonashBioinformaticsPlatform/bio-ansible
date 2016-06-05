@@ -1,32 +1,37 @@
 ---
 
-- name: Download samtools
-  get_url:
-    url=https://github.com/samtools/samtools/archive/{{version}}.tar.gz
-    dest={{source_dir}}/samtools-{{version}}.tar.gz
+- name: git clone samtools
+  git:
+    repo: https://github.com/samtools/samtools
+    dest: "{{ source_dir }}/samtools-{{ version }}"
+    version: "{{ version }}"
+    # this should prevent git clone error if directory already exist
+    update: no
 
-- name: Uncompress samtools
-  unarchive: 
-    src: "{{ source_dir }}/samtools-{{version}}.tar.gz"
-    dest: "{{ source_dir }}"
-    copy: no
-    creates: "{{ source_dir }}/samtools-{{version}}/README"
+  tags: get_samtools
 
-- name: Build and Install samtools
-  shell: cd {{ source_dir }}/samtools-{{version}}; make install prefix="{{ soft_dir }}/samtools-{{version}}" HTSDIR="../htslib-{{htslib_version}}"
+- name: build samtools
+  shell: cd {{ source_dir }}/samtools-{{ version }}; make install prefix={{ source_dir }}/samtools-{{version}} HTSDIR=../htslib-{{ htslib_version }}
   args:
-    creates: "{{ soft_dir }}/samtools-{{version}}/bin/samtools"
+    creates: "{{ source_dir }}/samtools-{{ version }}/bin/samtools"
 
-- file: dest="{{modules_dir}}/samtools" state=directory mode=0755
+  tags: build_samtools
 
-- name: Set samtools globaly throught PATH new bashrc
+- file:
+    dest: "{{ modules_dir }}/samtools"
+    state: directory
+    mode: 0755
+
+  tags: lmod_samtools
+
+- name: samtools lmod definition
   template:
     src: sw-module.lua.j2
-    dest: "{{ modules_dir }}/samtools/{{version}}.lua"
+    dest: "{{ modules_dir }}/samtools/{{ version }}.lua"
     owner: "{{ main_guy }}"
     mode: 0644
   with_items:
     - dir: 'samtools-{{version}}'
       help_text: 'This module loads the samtools tool suite'
 
-  tags: samtools
+  tags: lmod_samtools

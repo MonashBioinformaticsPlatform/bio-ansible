@@ -5,11 +5,12 @@
     repo: https://github.com/alexdobin/STAR
     dest: "{{ source_dir }}/STAR-{{ version }}"
     version: "{{ version }}"
+    update: no
 
   tags: get_star
 
 - file:
-    dest: "{{modules_dir}}/STAR"
+    dest: "{{ modules_dir }}/STAR"
     state: directory
     mode: 0755
 

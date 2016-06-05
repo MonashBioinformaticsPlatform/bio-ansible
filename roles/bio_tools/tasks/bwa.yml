@@ -1,19 +1,20 @@
 ---
 
-- name: Download bwa
+- name: git clone bwa
   git:
     repo: https://github.com/lh3/bwa/
     dest: "{{ source_dir }}/bwa-{{ version }}"
     version: "{{ version }}"
+    update: no
 
   tags: get_bwa
 
-- name: Build and Install BWA
+- name: build bwa
   shell: cd {{ source_dir }}/bwa-{{ version }}; make && mkdir bin && mv bwa qualfa2fq.pl xa2multi.pl bin
   args:
     creates: "{{ source_dir }}/bwa-{{ version }}/bin/bwa"
 
-  tags: install_bwa
+  tags: build_bwa
 
 - file:
     dest: "{{ modules_dir }}/bwa"
@@ -22,7 +23,7 @@
 
   tags: lmod_bwa
 
-- name: BWA module definition
+- name: bwa module definition
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bwa/{{ version }}.lua"
