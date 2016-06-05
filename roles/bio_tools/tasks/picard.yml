@@ -1,38 +1,54 @@
 ---
 
-- name: Download Picard
+- name: download picard tools
   get_url:
-    url=https://github.com/broadinstitute/picard/releases/download/{{version}}/picard-tools-{{version}}.zip
-    dest={{source_dir}}/picard-tools-{{version}}.zip
+    url: "https://github.com/broadinstitute/picard/releases/download/{{ version }}/picard-tools-{{ version }}.zip"
+    dest: "{{ source_dir }}/picard-tools-{{ version }}.zip"
 
-- name: Uncompress Picard
+  tags: get_picard
+
+- name: uncompress picard
   unarchive: 
-    src: "{{ source_dir }}/picard-tools-{{version}}.zip"
-    dest: "{{ soft_dir }}"
+    src: "{{ source_dir }}/picard-tools-{{ version }}.zip"
+    dest: "{{ source_dir }}"
     copy: no
-    creates: "{{ soft_dir }}/picard-tools-{{version}}/picard.jar"
+    creates: "{{ source_dir }}/picard-tools-{{ version }}/picard.jar"
 
-- file: dest="{{ soft_dir }}/picard-tools-{{version}}/bin" state=directory mode=0755
+  tags: unpack_picard
 
-- name: Picard wrapper script
+- file:
+    dest: "{{ source_dir }}/picard-tools-{{ version }}/bin"
+    state: directory
+    mode: 0755
+
+  tags: unpack_picard
+
+- name: picard wrapper script
   template:
     src: java-wrapper.sh.j2
-    dest: "{{ soft_dir }}/picard-tools-{{version}}/bin/picard"
+    dest: "{{ source_dir }}/picard-tools-{{ version }}/bin/picard"
     owner: "{{ main_guy }}" 
     mode: 0755
   with_items:
-    - { jar: '{{ soft_dir }}/picard-tools-{{version}}/picard.jar' }
+    - jar: "{{ source_dir }}/picard-tools-{{ version }}/picard.jar"
 
-- file: dest="{{modules_dir}}/picard" state=directory mode=0755
+  tags: wrap_picard
 
-- name: Picard module definition
+- file:
+    dest: "{{ modules_dir }}/picard"
+    state: directory
+    mode: 0755
+
+  tags: lmod_picard
+
+- name: picard module definition
   template: 
     src: sw-module.lua.j2 
-    dest: "{{ modules_dir }}/picard/{{version}}.lua"
+    dest: "{{ modules_dir }}/picard/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:
-    - dir: 'picard-tools-{{version}}'
+    - dir: 'picard-tools-{{ version }}'
       help_text: 'This module loads the Picard tool suite'
 
-  tags: picard 
+  tags: lmod_picard 

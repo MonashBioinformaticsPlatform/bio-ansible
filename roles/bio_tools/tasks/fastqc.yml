@@ -2,34 +2,49 @@
 
 - name: Download FastQC
   get_url:
-    url=http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v{{version}}.zip
-    dest={{ source_dir }}/fastqc_v{{ version }}.zip
+    url: "http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v{{ version }}.zip"
+    dest: "{{ source_dir }}/fastqc_v{{ version }}.zip"
+
+  tags: get_fastqc
 
 - name: Uncompress FastQC
   unarchive:
-    src={{ source_dir }}/fastqc_v{{ version }}.zip
-    dest={{ soft_dir }}
-    copy=no
+    src: "{{ source_dir }}/fastqc_v{{ version }}.zip"
+    dest: "{{ source_dir }}"
+    copy: no
+    creates: "{{ source_dir }}/FastQC/fastqc"
 
+  tags: unpack_fastqc
 
-- name: Move FastQC to a version specific directory
-  command: mv {{ soft_dir }}/FastQC {{ soft_dir }}/FastQC-{{ version }}
+- name: fix fastqc direectory name
+  shell: mv {{ source_dir }}/FastQC {{ source_dir }}/fastqc-{{ version }}
   args:
-    creates: "{{ soft_dir }}/FastQC-{{ version }}"
+    creates: "{{ source_dir }}/fastqc-{{ version }}/fastqc"
 
+  tags: unpack_fastqc
 
-- file: path="{{ soft_dir }}/FastQC-{{ version }}/fastqc" mode="a+x"
-- file: dest="{{ modules_dir }}/fastqc" state=directory mode=0755
+- file:
+    path: "{{ source_dir }}/fastqc-{{ version }}/fastqc"
+    mode: "a+x"
 
-- name: Set FastQC globaly throught PATH new bashrc
+  tags: unpack_fastqc
+
+- file:
+    dest: "{{ modules_dir }}/fastqc"
+    state: directory
+    mode: 0755
+
+  tags: lmod_fastqc
+
+- name: FastQC module definition
   template:
     src: sw-module.lua.j2
     dest: "{{ modules_dir }}/fastqc/{{ version }}.lua"
     owner: "{{ main_guy }}"
     mode: 0644
   with_items:
-    - dir: 'FastQC-{{ version }}'
+    - dir: 'fastqc-{{ version }}'
       skip_bin: true
       help_text: 'A quality control application for high throughput sequence data'
 
-  tags: fastqc
+  tags: lmod_fastqc
