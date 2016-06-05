@@ -9,11 +9,12 @@
             - common
             # lmod installed in /opt directory
             - lmod
-              #- java
+            # java installed throught ppa
+            - java
 
   become: true
 
-- name: Installing BigDataScript, RNAsik-pipe and bioinformatc's tools
+- name: Installing bioinformatics tools
   hosts: home
   remote_user: "{{ main_guy }}"
   roles:
