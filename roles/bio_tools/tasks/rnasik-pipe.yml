@@ -7,14 +7,14 @@
     version: "{{ version }}"
     update: no
 
-  tags: sik
+  tags: get_sik
 
 - name: Copy RNAsik-pipe configuration file
   template:
     src: sik.config
     dest: "{{ source_dir }}/RNAsik-pipe-{{ version }}"
 
-  tags: sik-config
+  tags: get_sik
 
 - name: Edit path to bds interpreter
   lineinfile: 
@@ -22,4 +22,25 @@
     regexp: "/usr/bin/env bds"
     line: "#!{{ source_dir }}/BigDataScript-{{ bds_version }}/build/bds"
 
-  tags: sik-config 
+  tags: get_sik
+
+- file:
+    dest: "{{ modules_dir }}/RNAsik-pipe"
+    state: directory
+    mode: 0755
+
+  tags: lmod_sik
+
+- name: RNAsik-pipe module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_dir }}/RNAsik-pipe/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'RNAsik-pipe-{{ version }}'
+      bin: 'src'
+      sik: true
+      help_text: 'This module loads RNAsik-pipe and all requried modules for RNAsik-pipe to run'
+
+  tags: lmod_sik

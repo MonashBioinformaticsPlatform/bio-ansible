@@ -11,7 +11,7 @@ local base = pathJoin("{{ source_dir }}", "{{ item.dir }}")
 
 {% if item.sik is defined %}
 load("STAR",
-     "featureCounts",
+     "subread",
      "picard",
      "RNA-SeQC",
      "fastqc",
@@ -21,35 +21,35 @@ load("STAR",
 {% endif %}
 
 {% if item.skip_bin is defined %}
-local path = base
+  local path = base
 {% elif item.bin is defined %}
-local path = pathJoin(base, "{{item.bin}}")
+  local path = pathJoin(base, "{{ item.bin }}")
 {% else %}
-local path = pathJoin(base, "bin")
+  local path = pathJoin(base, "bin")
 {% endif %}
 
 {% if item.append is defined %}
-append_path("PATH", path)
+  append_path("PATH", path)
 {% else %}
-prepend_path("PATH", path)
+  prepend_path("PATH", path)
 {% endif %}
 
 {% if item.perl_path is defined %}
-prepend_path("PERL5LIB", pathJoin(base, "{{item.perl_path}}"))
+  prepend_path("PERL5LIB", pathJoin(base, "{{item.perl_path}}"))
 {% endif %}
 
 {% if item.python_path is defined %}
-prepend_path("PYTHONPATH", pathJoin(base, "{{item.python_path}}"))
+  prepend_path("PYTHONPATH", pathJoin(base, "{{item.python_path}}"))
 {% endif %}
 
 {% for e in item.env|default([]) %}
-setenv("{{e.name}}", "{{e.value}}")
+  setenv("{{e.name}}", "{{e.value}}")
 {% endfor %}
 
 {% if item.depend is defined %}
-load({{ item.depend }})
+  load({{ item.depend }})
 {% endif %}
 
 {% if item.msg is defined %}
-LmodMessage("{{ item.msg }}")
+  LmodMessage("{{ item.msg }}")
 {% endif %}
