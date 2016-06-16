@@ -11,6 +11,8 @@
 
 - name: build BigDataScript
   shell: cd {{ source_dir }}/BigDataScript-{{ version }}/; ./scripts/install.sh
+  args:
+    creates: "{{ source_dir }}/BigDataScript-{{ version }}/build/bds"
 
   tags: build_bds
 
