@@ -1,31 +1,48 @@
 ---
 
-- name: Downloading BigDataScript
-  git: repo=https://github.com/pcingola/BigDataScript.git
-       dest={{ source_dir }}/BigDataScript-{{ version }}
-       version={{ version }}
+- name: download BigDataScript
+  git:
+    repo: https://github.com/pcingola/BigDataScript.git
+    dest: "{{ source_dir }}/BigDataScript-{{ version }}"
+    version: "{{ version }}"
+    update: no
 
-- name: Installing BigDataScript
-  shell: cd {{ source_dir }}/BigDataScript-{{version}}/; ./scripts/install.sh
+  tags: get_bds
 
-- file: dest="{{ soft_dir }}/BigDataScript-{{version}}" state=directory mode=0755
+- name: build BigDataScript
+  shell: cd {{ source_dir }}/BigDataScript-{{ version }}/; ./scripts/install.sh
 
-- name: Movin bds directory to apps
-  shell: mv "{{ local_home }}/.bds" "{{ soft_dir }}/BigDataScript-{{ version }}"
+  tags: build_bds
+
+- file:
+    dest: "{{ source_dir }}/BigDataScript-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: build_bds
+
+- name: build BigDataScript
+  shell: mv "{{ local_home }}/.bds" "{{ source_dir }}/BigDataScript-{{ version }}/build"
   args:
-    creates: "{{ soft_dir }}/BigDataScript-{{ version }}/.bds/bds"
+    creates: "{{ source_dir }}/BigDataScript-{{ version }}/build/bds"
 
-- file: dest={{ modules_dir }}/BigDataScript state=directory mode=0755
+  tags: build_bds
 
-- name: BigDataScript module definition
-  template: 
-    src: sw-module.lua.j2 
+- file:
+    dest: "{{ modules_dir }}/BigDataScript"
+    state: directory
+    mode: 0755
+
+  tags: lmod_bds
+
+- name: BigDataScript lmod definition
+  template:
+    src: sw-module.lua.j2
     dest: "{{ modules_dir }}/BigDataScript/{{ version }}.lua"
-    owner: "{{ main_guy }}" 
+    owner: "{{ main_guy }}"
     mode: 0644
   with_items:
-    - dir: 'BigDataScript-{{version}}/.bds'
-      help_text: 'BigDataScript is intended as a scripting language for big data pipeline.'
-      skip_bin: true
+    - dir: 'BigDataScript-{{ version }}'
+      help_text: 'This module loads BigDataScript'
 
-  tags: bds
+  tags: lmod_bds

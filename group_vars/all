@@ -6,7 +6,7 @@
 #----------------
 # Users variable
 #----------------
-main_guy: ubuntu
+main_guy: check
 
 #---------------------------------
 # Different directories variables
@@ -18,5 +18,3 @@ modules_dir: "{{ local_home }}/software/modules"
 # Other global variables
 #------------------------------
 have_root: true
-
-bds_version: master

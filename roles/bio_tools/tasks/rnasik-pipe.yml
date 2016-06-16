@@ -1,24 +1,25 @@
 ---
 
 - name: Git Clone RNAsik-pipe
-  git: repo=https://github.com/monashbioinformaticsplatform/RNAsik-pipe.git
-       dest={{ soft_dir }}/RNAsik-pipe-{{ version }}
-       version={{ version }}
-       update=no
+  git:
+    repo: https://github.com/monashbioinformaticsplatform/RNAsik-pipe.git
+    dest: "{{ source_dir }}/RNAsik-pipe-{{ version }}"
+    version: "{{ version }}"
+    update: no
 
-- file: dest="{{ modules_dir }}/RNAsik-pipe" state=directory mode=0755
+  tags: sik
 
-- name: RNAsik-pipe module definition
-  template: 
-    src: sw-module.lua.j2 
-    dest: "{{ modules_dir }}/RNAsik-pipe/{{version}}.lua"
-    owner: "{{ main_guy }}"
-    mode: 0644
-  with_items:
-      - dir: "{{ version }}"
-        help_text: 'This module loads Kirill RNAsik-pipe release version {{ version }}'
-        skip_bin: true
-        base: "{{ soft_dir }}/RNAsik-pipe-{{ version }}/src"
-        sik: true
+- name: Copy RNAsik-pipe configuration file
+  template:
+    src: sik.config
+    dest: "{{ source_dir }}/RNAsik-pipe-{{ version }}"
 
-  tags: rnasik-pipe 
+  tags: sik-config
+
+- name: Edit path to bds interpreter
+  lineinfile: 
+    dest: "{{ source_dir }}/RNAsik-pipe-{{ version }}/src/RNAsik-pipe"
+    regexp: "/usr/bin/env bds"
+    line: "#!{{ source_dir }}/BigDataScript-{{ bds_version }}/build/bds"
+
+  tags: sik-config 

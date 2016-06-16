@@ -8,4 +8,4 @@
 - include: picard.yml version=2.4.1
 - include: fastqc.yml version=0.11.4
 - include: rna-seqc.yml version=1.1.8
-  #- include: rnasik-pipe.yml version=1.3-beta
+- include: rnasik-pipe.yml version=1.3.x bds_version=master
