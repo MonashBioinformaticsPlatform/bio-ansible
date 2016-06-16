@@ -1,0 +1,14 @@
+---
+# This playbook install common dependencies
+- name: Installing dependencies, Java and lmod
+  hosts: home
+  remote_user: "{{ sudo_guy }}"
+  roles:
+            # apt-get installation
+            - common
+            # lmod installed in /opt directory
+            - lmod
+            # java installed throught ppa
+            - java
+
+  become: true

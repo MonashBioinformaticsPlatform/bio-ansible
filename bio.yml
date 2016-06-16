@@ -1,18 +1,4 @@
 ---
-#This playbook deploys RNAsik-pipe with all relevant tools
-
-- name: Installing dependencies, Java and lmod
-  hosts: home
-  remote_user: "{{ main_guy }}"
-  roles:
-            # apt-get installation
-            - common
-            # lmod installed in /opt directory
-            - lmod
-            # java installed throught ppa
-            - java
-
-  become: true
 
 - name: Installing bioinformatics tools
   hosts: home
@@ -20,6 +6,7 @@
   roles:
           # make container for all other installation
           - make_dirs
-            #- bds
+          # installing BigDataScript
+          - bds
           # install everyting into one container
           - bio_tools

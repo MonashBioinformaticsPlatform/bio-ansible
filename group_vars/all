@@ -1,12 +1,10 @@
 ---
 
-# Setting up a host
-#remote_host: ansible-launcher
-
 #----------------
 # Users variable
 #----------------
 main_guy: check
+sudo_guy: "{{ main_guy }}"
 
 #---------------------------------
 # Different directories variables
@@ -17,4 +15,3 @@ modules_dir: "{{ local_home }}/software/modules"
 #------------------------------
 # Other global variables
 #------------------------------
-have_root: true
