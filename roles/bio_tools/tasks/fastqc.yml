@@ -12,22 +12,23 @@
     src: "{{ source_dir }}/fastqc_v{{ version }}.zip"
     dest: "{{ source_dir }}"
     copy: no
-    creates: "{{ source_dir }}/FastQC/fastqc"
+  args:
+    creates: "{{ source_dir }}/fastqc-{{ version }}/fastqc"
 
-  tags: unpack_fastqc
+  tags: build_fastqc
 
 - name: fix fastqc direectory name
   shell: mv {{ source_dir }}/FastQC {{ source_dir }}/fastqc-{{ version }}
   args:
     creates: "{{ source_dir }}/fastqc-{{ version }}/fastqc"
 
-  tags: unpack_fastqc
+  tags: build_fastqc
 
 - file:
     path: "{{ source_dir }}/fastqc-{{ version }}/fastqc"
     mode: "a+x"
 
-  tags: unpack_fastqc
+  tags: build_fastqc
 
 - file:
     dest: "{{ modules_dir }}/fastqc"
