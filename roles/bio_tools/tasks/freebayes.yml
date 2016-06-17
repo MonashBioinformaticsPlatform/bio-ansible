@@ -1,6 +1,6 @@
 ---
 
-- name: download freebayes
+- name: git clone freebayes
   git:
     repo: git://github.com/ekg/freebayes.git
     dest: "{{ source_dir }}/freebayes-{{ version }}"

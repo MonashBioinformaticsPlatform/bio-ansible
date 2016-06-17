@@ -1,6 +1,6 @@
 ---
 
-- name: Git Clone RNAsik-pipe
+- name: git clone RNAsik-pipe
   git:
     repo: https://github.com/monashbioinformaticsplatform/RNAsik-pipe.git
     dest: "{{ source_dir }}/RNAsik-pipe-{{ version }}"

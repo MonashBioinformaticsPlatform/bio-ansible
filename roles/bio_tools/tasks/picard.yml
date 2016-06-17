@@ -14,14 +14,14 @@
     copy: no
     creates: "{{ source_dir }}/picard-tools-{{ version }}/picard.jar"
 
-  tags: unpack_picard
+  tags: build_picard
 
 - file:
     dest: "{{ source_dir }}/picard-tools-{{ version }}/bin"
     state: directory
     mode: 0755
 
-  tags: unpack_picard
+  tags: build_picard
 
 - name: picard wrapper script
   template:
@@ -32,7 +32,7 @@
   with_items:
     - jar: "{{ source_dir }}/picard-tools-{{ version }}/picard.jar"
 
-  tags: wrap_picard
+  tags: build_picard
 
 - file:
     dest: "{{ modules_dir }}/picard"

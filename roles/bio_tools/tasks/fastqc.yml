@@ -1,13 +1,13 @@
 ---
 
-- name: Download FastQC
+- name: download FastQC
   get_url:
     url: "http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v{{ version }}.zip"
     dest: "{{ source_dir }}/fastqc_v{{ version }}.zip"
 
   tags: get_fastqc
 
-- name: Uncompress FastQC
+- name: uncompress FastQC
   unarchive:
     src: "{{ source_dir }}/fastqc_v{{ version }}.zip"
     dest: "{{ source_dir }}"

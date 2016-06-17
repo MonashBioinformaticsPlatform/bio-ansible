@@ -1,6 +1,6 @@
 ---
 
-- name: Download STAR
+- name: download STAR
   git:
     repo: https://github.com/alexdobin/STAR
     dest: "{{ source_dir }}/STAR-{{ version }}"
