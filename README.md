@@ -4,61 +4,71 @@
 
 ## Content 
 
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [General notes](#general-notes)
 - [Quick start](#quick-start)
+- [Introduction](#introduction)
 - [Extra files](#extra-files)
   - [Manual handling](#manual-handling)
   - [Manual scripts](#manual-scripts)
-- [Adding more stuff](#adding-more-stuff)
-- [Housekeeping](#housekeeping)
-
-## Requirements
-
-You will need to install [ansible](http://docs.ansible.com/ansible/index.html) locally
-
-```BASH
-sudo pip install ansible
-```
-## Installation
-
-`git clone https://github.com/MonashBioinformaticsPlatform/bio-ansible.git .`
-
-Be sure to change `pub_keys` value in `groups_vars/all` file to your public key in order to run ansible playbook
-
-## General notes
-
-According to [ansible docs](http://docs.ansible.com/ansible/playbooks_intro.html)
-
-> Modules are ‘idempotent’, meaning if you run them again, they will make only the changes they must in order to bring the system to the desired state. This makes it very safe to rerun the same playbook multiple times. They won’t change things unless they have to change things.
-
-**It is safe to re-run the same playbook**
-
-Please note you can control what gets executed where through `hosts` file, but bear in mind that `all` inside `playbook.yml` files under `hosts: all` means ALL servers ! I think you can specify multiple hosts/groups separating them by space e.g `hosts: ansible-test bioinformatics`
-
-By default software will be installed under root `/software` directory.
-
-So far this has only been developed on Ubuntu 14.04 (Trusty)
-
-The default `root` user on Ubuntu is `ubuntu` all "common" software gets installed as `ubuntu`
-The other user that gets created is `sw-installer` who instals all of the bioinformatiky tools including linuxbrew and all associated brew packages.
 
 ## Quick start
 
-Given that you have access to the server and you have your ssh keys set up, it will be just the matter of running this line:
+Assume you know how to start new [virtual machine (vm)](https://en.wikipedia.org/wiki/Virtual_machine) instance and how to install and operate [ansible](http://docs.ansible.com/ansible/intro.html).
+
+- bring up a vm (AWS, NeCTAR, OpenStack, etc)
+
+_depending on how you want to run this playbook the order of the next couple of steps will change, but I can see you are a smart cookie, so you'll be fine_
+
+- set up your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
+- edit `host` file to add vm ip address, edit `groups_vars/all` files to change vm username
+- [run ansible](#running-ansible)
+```BASH
+ansible-playbook -i hosts all.yml
+```
+- all done !
+
+## Introduction
+
+This ansible script is multi-potent as it can set up from scratch the whole army of server for bioinformatics (genomic focused) work or this ansible can be used to install selected tools only. This ansible script can be used by user without `sudo` privilege for installing tools, this assuming all of the common dependencies have been installed (which is usually the case on the running server). If you are missing some or all of the dependencies point your system administrator [to these dependencies](roles/common/tasks/main.yml) plus Java 8. One can use `common.yml` to install all of the dependencies at once.
+
+Also note that modules are ‘idempotent’, meaning if you run them again, they will make only the changes they must in order to bring the system to the desired state. This makes it very safe to rerun the same playbook multiple times. They won’t change things unless they have to change things.
+
+**It is safe to re-run the same playbook**
+
+#### Running ansible
+
+1. [Install ansible](http://docs.ansible.com/ansible/intro_installation.html)
+2. set up your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
+3. `git clone https://github.com/serine/bio-ansible.git`
+4. edit `hosts` file to include your IP address
+5. edit `group/all` file to include your username as `main_guy` variable
+6. To install:
+
+    - everything you'll need `sudo` privilege
+
+    ```
+    ansible-playbook -i hosts all.yml
+    ```
+
+    - just the tools - don't need `sudo`
+
+    ```
+    ansible-playbook -i hosts bio.yml
+    ```
+
+    - just the dependencies - need `sudo`
+
+    ```
+    ansible-playbook -i hosts common.yml
+    ```
+
+7. Alternatively you can install only particular tool
 
 ```BASH
-ansible-playbook -i hosts playbook.yml
+ansible-playbook -i hosts main.yml --tags get_samtools,build_samtools
 ```
 
-Or if you only after particular task
+_You can always add `-v` or `-vvv` options for verbose mode_
 
-```BASH
-ansible-playbook -i hosts main.yml --tags samtools
-```
-
-You can add `-v` or `-vvv` options in for verbose, to get `stderr` messages printed out
 
 ## Extra files
 
@@ -86,68 +96,3 @@ Download blast databases
 cd /references/blast
 sudo -u sw-installer $(which update_blastdb.pl) --passive --verbose '.*'
 ```
-
-## Adding more stuff
-
-The `roles/` directory hierarchy as follows
-
-```
-roles/
-    make_sw_guy/
-        tasks/
-            main.yml
-    common/
-        tasks/
-            main.yml
-            *.yml
-        templates/
-            *.js2
-    bio_tools/
-        tasks/
-            main.yml
-            *.yml
-        templates/
-            *.js2
-        files/
-            *.zip
-            *.tar.bz2
-    nginx/
-        tasks/
-            main.yml
-        templates/
-            *.js2
-    interactive/
-        tasks/
-            main.yml
-            *.yml
-    server_update/
-        tasks/
-            main.yml
-```
-
-You can refer to each role in your `playbook.yml` file as follows
-
-```
-- name: Testing the server
-  hosts: bioinformatics
-  remote_user: ubuntu
-
-  roles:
-          - common
-          - bio_tools
-```
-
-Where your `hosts` file should look something link this
-
-```
-ansible-test ansible_ssh_host=146.118.99.235 ansiblee_ssh_port=22
-
-[bioinformatics]
-ansible-test
-```
-
-## Housekeeping 
-
-- `main.yml` is a special file, ansible will assume default behaviour from it.
-- please start every `.yml` file with `---` at the top, for more [YAML](http://www.yaml.org/spec/1.2/spec.html)
-
