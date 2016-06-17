@@ -42,25 +42,19 @@ Also note that modules are ‘idempotent’, meaning if you run them again, they
 4. edit `hosts` file to include your IP address
 5. edit `group/all` file to include your username as `main_guy` variable
 6. To install:
-
-    - everything you'll need `sudo` privilege
-
+    - everything - need `sudo` privilege
     ```
     ansible-playbook -i hosts all.yml
     ```
-
     - just the tools - don't need `sudo`
-
     ```
     ansible-playbook -i hosts bio.yml
     ```
-
     - just the dependencies - need `sudo`
 
     ```
     ansible-playbook -i hosts common.yml
     ```
-
 7. Alternatively you can install only particular tool
 
 ```BASH
