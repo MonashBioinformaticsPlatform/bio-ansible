@@ -1,0 +1,36 @@
+---
+
+- name: download SRA ToolKit
+  get_url:
+    url: "http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/{{ version }}/sratoolkit.{{ version }}-ubuntu64.tar.gz"
+    dest: "{{ source_dir }}"
+
+  tags: get_sratoolkit
+
+- name: uncompress sratoolkit
+  unarchive: 
+    src: "{{ source_dir }}/sratoolkit.{{ version }}-ubuntu64.tar.gz"
+    dest: "{{ source_dir }}"
+    copy: no
+    creates: "{{ source_dir }}/sratoolkit.{{ version }}-ubuntu64/README-vdb-config"
+
+  tags: build_sratoolkit
+
+- file:
+    dest: "{{ modules_dir }}/sratoolkit"
+    state: directory
+    mode: 0755
+
+  tags: lmod_sratoolkit
+
+- name: SRA ToolKit module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_dir }}/sratoolkit/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'sratoolkit.{{ version }}-ubuntu64'
+      help_text: 'This module loads SRA tools'
+
+  tags: lmod_sratoolkit 
