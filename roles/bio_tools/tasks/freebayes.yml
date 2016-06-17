@@ -1,0 +1,37 @@
+---
+
+- name: download freebayes
+  git:
+    repo: git://github.com/ekg/freebayes.git
+    dest: "{{ source_dir }}/freebayes-{{ version }}"
+    version: "{{ version }}"
+    update: no
+    recursive: yes
+
+  tags: get_freebayes
+
+- name: build freebayes
+  shell: cd {{ source_dir }}/freebayes-{{ version }}; make
+  args:
+    creates: "{{ source_dir }}/freebayes-{{ version }}/bin/freebayes"
+
+  tags: build_freebayes
+
+- file:
+    dest: "{{ modules_dir }}/freebayes"
+    state: directory
+    mode: 0755
+
+  tags: lmod_freebayes
+
+- name: freebayes module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_dir }}/freebayes/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'freebayes-{{ version }}'
+      help_text: 'This module loads the freebayes variant detector'
+
+  tags: lmod_freebayes
