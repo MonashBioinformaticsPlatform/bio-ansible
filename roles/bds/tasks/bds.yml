@@ -45,6 +45,7 @@
     mode: 0644
   with_items:
     - dir: 'BigDataScript-{{ version }}'
+      bin: 'build'
       help_text: 'This module loads BigDataScript'
 
   tags: lmod_bds
