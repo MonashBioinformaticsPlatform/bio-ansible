@@ -3,6 +3,11 @@
   get_url:
     url=http://ab.inf.uni-tuebingen.de/data/software/splitstree4/download/splitstree4_unix_{{version}}.sh
     dest={{source_dir}}/splitstree4_unix_{{version}}.sh
+    timeout=30
+  register: get_url_result
+  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
+  retries: 5
+  delay: 10
 
 - name: Install SplitsTee
   shell: cd {{source_dir}}; echo "o\n\n1\n{{soft_dir}}/SplitsTree-{{version}}\n1\nn\n5\n65535\n" | sh splitstree4_unix_{{version}}.sh

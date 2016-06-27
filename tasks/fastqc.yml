@@ -2,6 +2,11 @@
   get_url:
     url=http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v{{version}}.zip
     dest={{ source_dir }}/fastqc_v{{ version }}.zip
+    timeout=30
+  register: get_url_result
+  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
+  retries: 5
+  delay: 10
 
 - name: Uncompress FastQC
   unarchive:

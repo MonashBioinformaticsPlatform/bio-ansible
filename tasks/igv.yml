@@ -3,6 +3,11 @@
   get_url:
     url=http://data.broadinstitute.org/igv/projects/downloads/IGV_{{version}}.zip
     dest=tarballs/IGV_{{version}}.zip
+    timeout=30
+  register: get_url_result
+  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
+  retries: 5
+  delay: 10
 
 - stat: path=tarballs/IGV_{{version}}.zip
   register: igvzip

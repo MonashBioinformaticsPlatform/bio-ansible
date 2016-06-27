@@ -3,6 +3,11 @@
   get_url:
     url=https://users.soe.ucsc.edu/~kent/src/blatSrc{{version}}.zip
     dest={{source_dir}}/blatSrc{{version}}.zip
+    timeout=30
+  register: get_url_result
+  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
+  retries: 5
+  delay: 10
 
 - file: dest="{{ source_dir }}/blatSrc{{version}}" state=directory mode=0755
 

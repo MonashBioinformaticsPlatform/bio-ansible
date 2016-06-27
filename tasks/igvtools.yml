@@ -3,6 +3,11 @@
   get_url:
     url=http://data.broadinstitute.org/igv/projects/downloads/igvtools_{{version}}.zip
     dest=tarballs/igvtools_{{version}}.zip
+    timeout=30
+  register: get_url_result
+  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
+  retries: 5
+  delay: 10
 
 # Ensure the unarchive directory exists (the zip file has no version info)
 - file: dest="{{ soft_dir }}/IGVTools-{{version}}" state=directory mode=0755
