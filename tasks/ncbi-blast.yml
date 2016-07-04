@@ -1,6 +1,6 @@
 - name: Download NCBI Blast
   get_url:
-    url=ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-{{version}}+-x64-linux.tar.gz
+    url=ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/{{version}}/ncbi-blast-{{version}}+-x64-linux.tar.gz
     dest={{source_dir}}/ncbi-blast-{{version}}+-x64-linux.tar.gz
 
 - name: Uncompress NCBI Blast
