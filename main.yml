@@ -76,5 +76,5 @@
     - include: tasks/rnasik-pipe.yml tags=rnasik-pipe version=1.2
 
     - pip: name=htseq
-    - pip: name=pysam
+    # - pip: name=pysam
     - pip: name=nesoni
