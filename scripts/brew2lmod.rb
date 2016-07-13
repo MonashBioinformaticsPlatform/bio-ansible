@@ -82,7 +82,7 @@ class FormulaInfo
       prepend_path("PATH", path)
 
       -- On load, list binaries
-      if (mode() == "load") then
+      if (mode() == "load" and os.getenv("LMOD_LOG")) then
         local r = capture("ls " .. path)
         LmodMessage("Loaded " .. myModuleName() .. " : " .. string.gsub(r,'\\n',' '))
       end
