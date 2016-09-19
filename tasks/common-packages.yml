@@ -27,7 +27,6 @@
     - python-pandas
     - python-biopython
     - python-virtualenv
-    - libpython3.4-dev
     - ruby
     - ruby-dev
     - ghostscript
@@ -52,3 +51,5 @@
     - gfortran
     - gobjc++
     - libcurl4-openssl-dev
+    - libcgi-session-perl
+    - libfcgi-perl

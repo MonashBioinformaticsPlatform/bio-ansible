@@ -8,6 +8,11 @@
   sudo: yes
   sudo_user: sw-installer
 
+- name: tap science
+  shell: "{{brew_dir}}/bin/brew tap homebrew/science"
+  sudo: yes
+  sudo_user: sw-installer
+
 - name: Copy brew2lmod
   copy: src=scripts/brew2lmod.rb dest={{brew_dir}} owner=sw-installer mode=0755
 
