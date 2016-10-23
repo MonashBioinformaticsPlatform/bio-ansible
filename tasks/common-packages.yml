@@ -52,3 +52,5 @@
     - gfortran
     - gobjc++
     - libcurl4-openssl-dev
+    - ant
+    - golang
