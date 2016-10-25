@@ -20,6 +20,7 @@
 - include: brew_package.yml brew_name='homebrew/science/flash' lmod_name='flash'
 - include: brew_package.yml brew_name='homebrew/science/muscle' lmod_name='muscle'
 - include: brew_package.yml brew_name='homebrew/science/beast' lmod_name='beast'
+- include: brew_package.yml brew_name='homebrew/science/beagle' lmod_name='beagle' libdir='lib'
 
 #- include: brew_package.yml brew_name='homebrew/science/plink2' lmod_name='plink2'
 #- include: brew_package.yml brew_name='homebrew/science/repeatmasker' lmod_name='repeatmasker'
