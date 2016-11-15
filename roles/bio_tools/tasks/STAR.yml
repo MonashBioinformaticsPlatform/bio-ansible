@@ -7,14 +7,28 @@
     version: "{{ version }}"
     update: no
 
-  tags: get_star
+  tags: star
+
+- file:
+    dest: "{{ apps_dir }}/STAR-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: star
+
+- name: Move executables to apps directory
+  shell: mv {{ source_dir }}/STAR-{{ version }}/bin/Linux_x86_64_static/STAR {{ apps_dir }}/STAR-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/STAR-{{ version }}/STAR"
+
+  tags: star
 
 - file:
     dest: "{{ modules_dir }}/STAR"
     state: directory
     mode: 0755
 
-  tags: lmod_star
+  tags: star
 
 - name: STAR module definition
   template: 
@@ -24,7 +38,23 @@
     mode: 0644
   with_items:
     - dir: 'STAR-{{ version }}'
-      bin: "bin/Linux_x86_64_static"
+      skip_bin: true
+      #bin: "bin/Linux_x86_64_static"
       help_text: 'This module loads the STAR aligner'
 
-  tags: lmod_star
+  tags: star
+
+- name: Setting register
+  stat:
+    path: "{{ apps_dir }}/STAR-{{ version }}/STAR"
+  register: s
+
+  tags: star
+
+- name: Removing source STAR directory
+  file:
+    dest: "{{ source_dir }}/STAR-{{ version }}"
+    state: absent
+  when: s.stat.exists 
+
+  tags: star

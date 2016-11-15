@@ -6,7 +6,7 @@ help(
 {% if item.base is defined %}
 local base = "{{ item.base }}"
 {% else %}
-local base = pathJoin("{{ source_dir }}", "{{ item.dir }}")
+local base = pathJoin("{{ apps_dir }}", "{{ item.dir }}")
 {% endif %}
 
 {% if item.sik is defined %}
