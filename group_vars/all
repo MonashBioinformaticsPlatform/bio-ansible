@@ -12,6 +12,7 @@ sudo_guy: "{{ main_guy }}"
 local_home: "{{ ansible_env.HOME }}"
 source_dir: "{{ local_home }}/software/source"
 modules_dir: "{{ local_home }}/software/modules"
+apps_dir: "{{ local_home }}/software/apps"
 #------------------------------
 # Other global variables
 #------------------------------

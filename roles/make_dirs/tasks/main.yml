@@ -10,3 +10,6 @@
   with_items:
     - "{{ source_dir }}"
     - "{{ modules_dir }}"
+    - "{{ apps_dir }}"
+
+  tags: dirs
