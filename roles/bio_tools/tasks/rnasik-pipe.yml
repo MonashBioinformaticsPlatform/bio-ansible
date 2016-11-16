@@ -18,7 +18,7 @@
 
 - name: Edit path to bds interpreter
   lineinfile: 
-    dest: "{{ source_dir }}/RNAsik-pipe-{{ version }}/src/RNAsik-pipe"
+    dest: "{{ source_dir }}/RNAsik-pipe-{{ version }}/src/RNAsik"
     regexp: "/usr/bin/env bds"
     line: "#!{{ source_dir }}/BigDataScript-{{ bds_version }}/build/bds"
 
