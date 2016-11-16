@@ -44,3 +44,18 @@
       help_text: 'This module loads RNAsik-pipe and all requried modules for RNAsik-pipe to run'
 
   tags: rnasik
+
+- file:
+    dest: "{{ apps_dir }}/RNAsik-pipe-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: rnasik
+
+- file:
+    src: "{{ source_dir }}/RNAsik-pipe-{{ version }}/src"
+    dest: "{{ apps_dir }}/RNAsik-pipe-{{ version }}/src"
+    state: link
+    mode: 0755
+
+  tags: rnasik
