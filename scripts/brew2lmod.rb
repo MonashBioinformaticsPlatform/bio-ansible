@@ -17,6 +17,10 @@ optparse = OptionParser.new do |opts|
   opts.on("-b", "--brew <BREW BINARY>", "Specifiy the brew binary, otherwise look in PATH") do |b|
     options[:brew] = b
   end
+
+  opts.on("-l", "--lib <LIB DIR>", "Directory to add to LD_LIBRARY_PATH") do |b|
+    options[:libdir] = b
+  end
 end
 optparse.parse!
 
@@ -35,9 +39,10 @@ if options[:module_dir].nil?
 end
 
 class FormulaInfo
-  def initialize(formula, brew="brew")
+  def initialize(formula, libdir,brew="brew")
     @formula=formula
     @brew=brew
+    @libdir=libdir
   end
 
   def cellar
@@ -69,7 +74,7 @@ class FormulaInfo
   end
 
   def lmod_def(ver)
-    <<-eos.gsub(/^\s+/, '')
+    str = <<-eos.gsub(/^\s+/, '')
       help(
       [[
       This module loads #{@formula}
@@ -87,6 +92,10 @@ class FormulaInfo
         LmodMessage("Loaded " .. myModuleName() .. " : " .. string.gsub(r,'\\n',' '))
       end
     eos
+    if (@libdir.length>0)
+      str += "prepend_path('LD_LIBRARY_PATH', pathJoin(base, '#{@libdir}'))\n"
+    end
+    str
   end
 
   def write_lmod_def(dir, ver)
@@ -105,7 +114,7 @@ class FormulaInfo
 end
 
 
-f = FormulaInfo.new(formula, options[:brew])
+f = FormulaInfo.new(formula, options[:libdir], options[:brew])
 
 f.versions.each do |v|
   f.write_lmod_def(options[:module_dir],v)

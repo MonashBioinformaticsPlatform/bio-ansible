@@ -53,3 +53,5 @@
     - libcurl4-openssl-dev
     - libcgi-session-perl
     - libfcgi-perl
+    - ant
+    - golang

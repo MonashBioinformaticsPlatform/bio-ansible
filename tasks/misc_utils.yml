@@ -18,6 +18,9 @@
 - include: brew_package.yml brew_name='seqtk' lmod_name='seqtk'
 - include: brew_package.yml brew_name='fasta' lmod_name='fasta'
 - include: brew_package.yml brew_name='flash' lmod_name='flash'
+- include: brew_package.yml brew_name='muscle' lmod_name='muscle'
+- include: brew_package.yml brew_name='beast' lmod_name='beast'
+- include: brew_package.yml brew_name='beagle' lmod_name='beagle' libdir='lib'
 
 #- include: brew_package.yml brew_name='plink2' lmod_name='plink2'
 #- include: brew_package.yml brew_name='repeatmasker' lmod_name='repeatmasker'
