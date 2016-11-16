@@ -45,7 +45,7 @@
   tags: freebayes
 
 - name: Move freebayes executables to apps directory
-  shell: mv {{ source_dir }}/freebayes-{{ version }}/bin {{ apps_dir }}/freebayes-{{ version }}/
+  shell: cp -r {{ source_dir }}/freebayes-{{ version }}/bin {{ apps_dir }}/freebayes-{{ version }}/
   args:
     creates: "{{ apps_dir }}/freebayes-{{ version }}/bin/freebayes"
 

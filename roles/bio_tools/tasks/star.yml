@@ -17,7 +17,7 @@
   tags: star
 
 - name: Move STAR executables to apps directory
-  shell: mv {{ source_dir }}/STAR-{{ version }}/bin/Linux_x86_64_static/STAR {{ source_dir }}/STAR-{{ version }}/bin/Linux_x86_64_static/STARlong {{ apps_dir }}/STAR-{{ version }}/
+  shell: cp {{ source_dir }}/STAR-{{ version }}/bin/Linux_x86_64_static/STAR {{ source_dir }}/STAR-{{ version }}/bin/Linux_x86_64_static/STARlong {{ apps_dir }}/STAR-{{ version }}/
   args:
     creates: "{{ apps_dir }}/STAR-{{ version }}/STAR"
 
@@ -62,6 +62,6 @@
   file:
     dest: "{{ source_dir }}/STAR-{{ version }}"
     state: absent
-  when: "{{ del_src }} s.stat.exists and {{ keep_src }} slong.stat.exists"
+  when: "{{ del_src }} s.stat.exists and {{ del_src }} slong.stat.exists"
 
   tags: star

@@ -31,7 +31,7 @@
   tags: bwa
 
 - name: Move bwa executables to apps directory
-  shell: mv {{ source_dir }}/bwa-{{ version }}/bwa {{ source_dir }}/bwa-{{ version }}/qualfa2fq.pl {{ source_dir }}/bwa-{{ version }}/xa2multi.pl {{ apps_dir }}/bwa-{{ version }}
+  shell: cp {{ source_dir }}/bwa-{{ version }}/bwa {{ source_dir }}/bwa-{{ version }}/qualfa2fq.pl {{ source_dir }}/bwa-{{ version }}/xa2multi.pl {{ apps_dir }}/bwa-{{ version }}
   args:
     creates: "{{ apps_dir }}/bwa-{{ version }}/bwa"
 

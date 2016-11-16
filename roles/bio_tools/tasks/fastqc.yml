@@ -25,7 +25,7 @@
   tags: fastqc
 
 - name: Move fastqc executable to apps directory
-  shell: mv {{ source_dir }}/FastQC/fastqc {{ apps_dir }}/fastqc-{{ version }}
+  shell: cp {{ source_dir }}/FastQC/fastqc {{ apps_dir }}/fastqc-{{ version }}
   args:
     creates: "{{ apps_dir }}/fastqc-{{ version }}/fastqc"
 

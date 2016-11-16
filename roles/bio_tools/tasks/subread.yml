@@ -4,31 +4,31 @@
   get_url:
     url: http://sourceforge.net/projects/subread/files/latest/download?source=files
     timeout: 30
-    dest: "{{ source_dir }}/subread-{{ version }}.tar.gz"
+    dest: "{{ source_dir }}/subread-{{ version }}-source.tar.gz"
 
-  tags: get_subread
+  tags: subread
 
 - name: Uncompress subread
   unarchive:
-      src: "{{ source_dir }}/subread-{{ version }}.tar.gz"
+      src: "{{ source_dir }}/subread-{{ version }}-source.tar.gz"
       dest: "{{ source_dir }}"
       copy: no
 
-  tags: build_subread
+  tags: subread
 
 - name: build subread tools
-  shell: cd {{ source_dir }}/subread-{{ version }}-source/src; make -f Makefile.Linux
+  shell: cd {{ source_dir }}/subread-{{ version }}-source/src; make -j {{ threads }} -f Makefile.Linux
   args:
     creates: "{{ source_dir }}/subread-{{ version }}-source/bin/featureCounts"
 
-  tags: build_subread
+  tags: subread
 
 - file:
     dest: "{{ modules_dir }}/subread"
     state: directory
     mode: 0755
 
-  tags: lmod_subread
+  tags: subread
 
 - name: subread module definition
   template: 
@@ -37,7 +37,44 @@
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:
-    - dir: 'subread-{{version}}-source'
+    - dir: 'subread-{{ version }}'
       help_text: 'This module loads the subread packages including featureCounts'
 
-  tags: lmod_subread
+  tags: subread
+
+- file:
+    dest: "{{ apps_dir }}/subread-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: subread
+
+- name: Move subread executable to apps directory
+  shell: cp -r {{ source_dir }}/subread-{{ version }}-source/bin {{ apps_dir }}/subread-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/subread-{{ version }}/subread/bin"
+
+  tags: subread
+
+- name: Setting register for subread
+  stat:
+    path: "{{ apps_dir }}/subread-{{ version }}/bin/featureCounts"
+  register: s
+
+  tags: subread
+
+- name: Removing subread source directory
+  file:
+    dest: "{{ source_dir }}/subread-{{ version }}-source"
+    state: absent
+  when: "{{ del_src }} s.stat.exists"
+
+  tags: subread
+
+- name: Removing subread tar file
+  file:
+    dest: "{{ source_dir }}/subread-{{ version }}-source.tar.gz"
+    state: absent
+  when: "{{ del_src }} s.stat.exists"
+
+  tags: subread

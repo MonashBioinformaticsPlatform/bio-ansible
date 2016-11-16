@@ -43,7 +43,7 @@
   tags: sratoolkit
 
 - name: Move SRAtoolKit library to apps directory
-  shell: mv {{ source_dir }}/sratoolkit.{{ version }}-ubuntu64/bin {{ apps_dir }}/sratoolkit-{{ version }}
+  shell: cp -r {{ source_dir }}/sratoolkit.{{ version }}-ubuntu64/bin {{ apps_dir }}/sratoolkit-{{ version }}
   args:
     creates: "{{ apps_dir }}/sratoolkit-{{ version }}/bin/illumina-dump"
 

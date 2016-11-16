@@ -44,7 +44,7 @@
   tags: vcflib
 
 - name: Move vcflib library to apps directory
-  shell: mv {{ source_dir }}/vcflib-{{ version }}/bin {{ apps_dir }}/vcflib-{{ version }}/
+  shell: cp {{ source_dir }}/vcflib-{{ version }}/bin {{ apps_dir }}/vcflib-{{ version }}/
   args:
     creates: "{{ apps_dir }}/vcflib-{{ version }}/bin/vcfstats"
 

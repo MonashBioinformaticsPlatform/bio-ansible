@@ -45,7 +45,7 @@
   tags: samtools
 
 - name: Move samtools executables to apps directory
-  shell: mv {{ source_dir }}/samtools-{{ version }}/samtools {{ apps_dir }}/samtools-{{ version }}/
+  shell: cp {{ source_dir }}/samtools-{{ version }}/samtools {{ apps_dir }}/samtools-{{ version }}/
   args:
     creates: "{{ apps_dir }}/samtools-{{ version }}/samtools"
 
