@@ -1,10 +1,10 @@
 - hosts: all
 
   vars:
-    - source_dir: /software/source
-    - soft_dir: /software/apps
-    - modules_dir: /software/modules
-    - brew_dir: /software/linuxbrew
+    - source_dir: /mnt/software/source
+    - soft_dir: /mnt/software/apps
+    - modules_dir: /mnt/software/modules
+    - brew_dir: /mnt/software/linuxbrew
     - ref_dir: /references
 
   pre_tasks:
