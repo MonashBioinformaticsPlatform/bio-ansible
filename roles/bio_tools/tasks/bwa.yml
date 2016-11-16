@@ -61,6 +61,6 @@
   file:
     dest: "{{ source_dir }}/bwa-{{ version }}"
     state: absent
-  when: "{{ keep_src }} b.stat.exists"
+  when: "{{ del_src }} b.stat.exists"
 
   tags: bwa

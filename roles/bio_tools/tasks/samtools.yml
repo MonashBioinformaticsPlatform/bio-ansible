@@ -62,6 +62,6 @@
   file:
     dest: "{{ source_dir }}/samtools-{{ version }}"
     state: absent
-  when: "{{ keep_src }} s.stat.exists"
+  when: "{{ del_src }} s.stat.exists"
 
   tags: samtools
