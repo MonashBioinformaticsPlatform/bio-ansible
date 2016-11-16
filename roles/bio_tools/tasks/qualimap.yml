@@ -1,0 +1,53 @@
+---
+
+- name: download qualimap
+  get_url:
+    url: "https://bitbucket.org/kokonech/qualimap/downloads/qualimap_{{ version }}.zip"
+    dest: "{{ source_dir }}"
+
+  tags: qualimap
+
+- name: build qualimap
+  unarchive:
+    src: "{{ source_dir }}/qualimap_{{ version }}.zip"
+    dest: "{{ apps_dir }}"
+    copy: no
+  args:
+    creates: "{{ apps_dir }}/qualimap_{{ version }}/qualimap"
+
+  tags: qualimap
+
+- file:
+    dest: "{{ modules_dir }}/qualimap"
+    state: directory
+    mode: 0755
+
+  tags: qualimap
+
+- name: qualimap module definition
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_dir }}/qualimap/{{ version }}.lua"
+    owner: "{{ main_guy }}"
+    mode: 0644
+  with_items:
+    - dir: 'qualimap_{{ version }}'
+      skip_bin: true
+      help_text: 'A quality control application for high throughput sequence data'
+
+  tags: qualimap
+
+- name: Setting register for qualimap
+  stat:
+    path: "{{ apps_dir }}/qualimap_{{ version }}/qualimap"
+  register: q
+
+  tags: qualimap
+
+- name: Removing qualimap zip file
+  file:
+    dest: "{{ source_dir }}/qualimap_{{ version }}.zip"
+    state: absent
+  when: "{{ del_src }} q.stat.exists"
+
+  tags: qualimap
