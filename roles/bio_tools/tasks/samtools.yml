@@ -1,6 +1,6 @@
 ---
 
-- name: git clone samtools
+- name: download samtools
   git:
     repo: https://github.com/samtools/samtools
     dest: "{{ source_dir }}/samtools-{{ version }}"
@@ -8,21 +8,21 @@
     # this should prevent git clone error if directory already exist
     update: no
 
-  tags: get_samtools
+  tags: samtools
 
 - name: build samtools
-  shell: cd {{ source_dir }}/samtools-{{ version }}; make install prefix={{ source_dir }}/samtools-{{version}} HTSDIR=../htslib-{{ htslib_version }}
+  shell: cd {{ source_dir }}/samtools-{{ version }}; make -j {{ threads }} install prefix={{ source_dir }}/samtools-{{ version }} HTSDIR=../htslib-{{ htslib_version }}
   args:
     creates: "{{ source_dir }}/samtools-{{ version }}/bin/samtools"
 
-  tags: build_samtools
+  tags: samtools
 
 - file:
     dest: "{{ modules_dir }}/samtools"
     state: directory
     mode: 0755
 
-  tags: lmod_samtools
+  tags: samtools
 
 - name: samtools lmod definition
   template:
@@ -32,6 +32,36 @@
     mode: 0644
   with_items:
     - dir: 'samtools-{{version}}'
+      skip_bin: true
       help_text: 'This module loads the samtools tool suite'
 
-  tags: lmod_samtools
+  tags: samtools
+
+- file:
+    dest: "{{ apps_dir }}/samtools-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: samtools
+
+- name: Move samtools executables to apps directory
+  shell: mv {{ source_dir }}/samtools-{{ version }}/samtools {{ apps_dir }}/samtools-{{ version }}/
+  args:
+    creates: "{{ apps_dir }}/samtools-{{ version }}/samtools"
+
+  tags: samtools
+
+- name: Setting register for samtools
+  stat:
+    path: "{{ apps_dir }}/samtools-{{ version }}/samtools"
+  register: s
+
+  tags: samtools
+
+- name: Removing samtools source directory
+  file:
+    dest: "{{ source_dir }}/samtools-{{ version }}"
+    state: absent
+  when: "{{ keep_src }} s.stat.exists"
+
+  tags: samtools

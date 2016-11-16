@@ -8,21 +8,21 @@
     update: no
     recursive: yes
 
-  tags: get_vcflib
+  tags: vcflib
 
 - name: build vcflib
-  shell: cd {{ source_dir }}/vcflib-{{ version }}; make
+  shell: cd {{ source_dir }}/vcflib-{{ version }}; make -j {{ threads }}
   args:
     creates: "{{ source_dir }}/vcflib-{{ version }}/bin/vcfstats"
 
-  tags: build_vcflib
+  tags: vcflib
 
 - file:
     dest: "{{ modules_dir }}/vcflib"
     state: directory
     mode: 0755
 
-  tags: lmod_vcflib
+  tags: vcflib
 
 - name: vcflib module definition
   template: 
@@ -34,4 +34,33 @@
     - dir: 'vcflib-{{ version }}'
       help_text: 'This module loads the vcflib - library for working with vcf files'
 
-  tags: lmod_vcflib
+  tags: vcflib
+
+- file:
+    dest: "{{ apps_dir }}/vcflib-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: vcflib
+
+- name: Move vcflib library to apps directory
+  shell: mv {{ source_dir }}/vcflib-{{ version }}/bin {{ apps_dir }}/vcflib-{{ version }}/
+  args:
+    creates: "{{ apps_dir }}/vcflib-{{ version }}/bin/vcfstats"
+
+  tags: vcflib
+
+- name: Setting register for vcflib
+  stat:
+    path: "{{ apps_dir }}/vcflib-{{ version }}/bin"
+  register: v
+
+  tags: vcflib
+
+- name: Removing vcflib source directory
+  file:
+    dest: "{{ source_dir }}/vcflib-{{ version }}"
+    state: absent
+  when: "{{ keep_src }} v.stat.isdir"
+
+  tags: vcflib

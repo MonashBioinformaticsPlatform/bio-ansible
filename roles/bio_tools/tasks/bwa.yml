@@ -1,27 +1,41 @@
 ---
 
-- name: git clone bwa
+- name: download bwa
   git:
     repo: https://github.com/lh3/bwa/
     dest: "{{ source_dir }}/bwa-{{ version }}"
     version: "{{ version }}"
     update: no
 
-  tags: get_bwa
+  tags: bwa
 
 - name: build bwa
-  shell: cd {{ source_dir }}/bwa-{{ version }}; make && mkdir bin && mv bwa qualfa2fq.pl xa2multi.pl bin
+  shell: cd {{ source_dir }}/bwa-{{ version }}; make -j {{ threads }}
   args:
-    creates: "{{ source_dir }}/bwa-{{ version }}/bin/bwa"
+    creates: "{{ source_dir }}/bwa-{{ version }}/bwa"
 
-  tags: build_bwa
+  tags: bwa
 
 - file:
     dest: "{{ modules_dir }}/bwa"
     state: directory
     mode: 0755
 
-  tags: lmod_bwa
+  tags: bwa
+
+- file:
+    dest: "{{ apps_dir }}/bwa-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: bwa
+
+- name: Move bwa executables to apps directory
+  shell: mv {{ source_dir }}/bwa-{{ version }}/bwa {{ source_dir }}/bwa-{{ version }}/qualfa2fq.pl {{ source_dir }}/bwa-{{ version }}/xa2multi.pl {{ apps_dir }}/bwa-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/bwa-{{ version }}/bwa"
+
+  tags: bwa
 
 - name: bwa module definition
   template: 
@@ -31,6 +45,22 @@
     mode: 0644
   with_items:
     - dir: 'bwa-{{ version }}'
+      skip_bin: true
       help_text: 'This module loads the BWA aligner'
 
-  tags: lmod_bwa
+  tags: bwa
+
+- name: Setting register for bwa
+  stat:
+    path: "{{ apps_dir }}/bwa-{{ version }}/bwa"
+  register: b
+
+  tags: bwa
+
+- name: Removing bwa source directory
+  file:
+    dest: "{{ source_dir }}/bwa-{{ version }}"
+    state: absent
+  when: "{{ keep_src }} b.stat.exists"
+
+  tags: bwa

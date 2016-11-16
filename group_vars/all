@@ -16,3 +16,5 @@ apps_dir: "{{ local_home }}/software/apps"
 #------------------------------
 # Other global variables
 #------------------------------
+threads: 4
+keep_src: "" # empty string means true and "not" negates that

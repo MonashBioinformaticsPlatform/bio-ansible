@@ -1,6 +1,6 @@
 ---
 
-- name: git clone htslib
+- name: download htslib
   git:
     repo: https://github.com/samtools/htslib/
     dest: "{{ source_dir }}/htslib-{{ version }}"
@@ -8,7 +8,7 @@
     # this should prevent git clone error if directory already exist
     update: no
 
-  tags: get_htslib
+  tags: htslib
 
 - name: build htslib
   shell: cd {{ source_dir }}/htslib-{{ version }}; make install prefix={{ source_dir }}/htslib-{{ version }}
@@ -22,4 +22,4 @@
     state: directory
     mode: 0755
 
-  tags: lmod_htslib
+  tags: htslib

@@ -16,8 +16,8 @@
 
   tags: star
 
-- name: Move executables to apps directory
-  shell: mv {{ source_dir }}/STAR-{{ version }}/bin/Linux_x86_64_static/STAR {{ apps_dir }}/STAR-{{ version }}
+- name: Move STAR executables to apps directory
+  shell: mv {{ source_dir }}/STAR-{{ version }}/bin/Linux_x86_64_static/STAR {{ source_dir }}/STAR-{{ version }}/bin/Linux_x86_64_static/STARlong {{ apps_dir }}/STAR-{{ version }}/
   args:
     creates: "{{ apps_dir }}/STAR-{{ version }}/STAR"
 
@@ -44,17 +44,24 @@
 
   tags: star
 
-- name: Setting register
+- name: Setting register for STAR
   stat:
     path: "{{ apps_dir }}/STAR-{{ version }}/STAR"
   register: s
 
   tags: star
 
-- name: Removing source STAR directory
+- name: Setting register for STARlong
+  stat:
+    path: "{{ apps_dir }}/STAR-{{ version }}/STARlong"
+  register: slong
+
+  tags: star
+
+- name: Removing STAR source directory
   file:
     dest: "{{ source_dir }}/STAR-{{ version }}"
     state: absent
-  when: s.stat.exists 
+  when: "{{ keep_src }} s.stat.exists and {{ keep_src }} slong.stat.exists"
 
   tags: star

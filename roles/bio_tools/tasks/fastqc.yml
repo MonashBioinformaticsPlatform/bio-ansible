@@ -5,37 +5,44 @@
     url: "http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v{{ version }}.zip"
     dest: "{{ source_dir }}/fastqc_v{{ version }}.zip"
 
-  tags: get_fastqc
+  tags: fastqc
 
-- name: uncompress FastQC
+- name: build FastQC
   unarchive:
     src: "{{ source_dir }}/fastqc_v{{ version }}.zip"
     dest: "{{ source_dir }}"
     copy: no
   args:
-    creates: "{{ source_dir }}/fastqc-{{ version }}/fastqc"
+    creates: "{{ source_dir }}/FastQC/fastqc"
 
-  tags: build_fastqc
-
-- name: fix fastqc direectory name
-  shell: mv {{ source_dir }}/FastQC {{ source_dir }}/fastqc-{{ version }}
-  args:
-    creates: "{{ source_dir }}/fastqc-{{ version }}/fastqc"
-
-  tags: build_fastqc
+  tags: fastqc
 
 - file:
-    path: "{{ source_dir }}/fastqc-{{ version }}/fastqc"
-    mode: "a+x"
+    dest: "{{ apps_dir }}/fastqc-{{ version }}"
+    state: directory
+    mode: 0755
 
-  tags: build_fastqc
+  tags: fastqc
+
+- name: Move fastqc executable to apps directory
+  shell: mv {{ source_dir }}/FastQC/fastqc {{ apps_dir }}/fastqc-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/fastqc-{{ version }}/fastqc"
+
+  tags: fastqc
+
+- file:
+    path: "{{ apps_dir }}/fastqc-{{ version }}/fastqc"
+    mode: 0755
+
+  tags: fastqc
 
 - file:
     dest: "{{ modules_dir }}/fastqc"
     state: directory
     mode: 0755
 
-  tags: lmod_fastqc
+  tags: fastqc
 
 - name: FastQC module definition
   template:
@@ -48,4 +55,27 @@
       skip_bin: true
       help_text: 'A quality control application for high throughput sequence data'
 
-  tags: lmod_fastqc
+  tags: fastqc
+
+- name: Setting register for fastqc
+  stat:
+    path: "{{ apps_dir }}/fastqc-{{ version }}/fastqc"
+  register: f
+
+  tags: fastqc
+
+- name: Removing fastqc source directory
+  file:
+    dest: "{{ source_dir }}/FastQC"
+    state: absent
+  when: "{{ keep_src }} f.stat.exists"
+
+  tags: fastqc
+
+- name: Removing fastqc zip file
+  file:
+    dest: "{{ source_dir }}/fastqc_v{{ version }}.zip"
+    state: absent
+  when: "{{ keep_src }} f.stat.exists"
+
+  tags: fastqc

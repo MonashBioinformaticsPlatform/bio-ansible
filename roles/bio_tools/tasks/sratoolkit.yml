@@ -5,7 +5,7 @@
     url: "http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/{{ version }}/sratoolkit.{{ version }}-ubuntu64.tar.gz"
     dest: "{{ source_dir }}"
 
-  tags: get_sratoolkit
+  tags: sratoolkit
 
 - name: uncompress sratoolkit
   unarchive: 
@@ -14,14 +14,14 @@
     copy: no
     creates: "{{ source_dir }}/sratoolkit.{{ version }}-ubuntu64/README-vdb-config"
 
-  tags: build_sratoolkit
+  tags: sratoolkit
 
 - file:
     dest: "{{ modules_dir }}/sratoolkit"
     state: directory
     mode: 0755
 
-  tags: lmod_sratoolkit
+  tags: sratoolkit
 
 - name: SRA ToolKit module definition
   template: 
@@ -33,4 +33,41 @@
     - dir: 'sratoolkit.{{ version }}-ubuntu64'
       help_text: 'This module loads SRA tools'
 
-  tags: lmod_sratoolkit 
+  tags: sratoolkit 
+
+- file:
+    dest: "{{ apps_dir }}/sratoolkit-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: sratoolkit
+
+- name: Move SRAtoolKit library to apps directory
+  shell: mv {{ source_dir }}/sratoolkit.{{ version }}-ubuntu64/bin {{ apps_dir }}/sratoolkit-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/sratoolkit-{{ version }}/bin/illumina-dump"
+
+  tags: sratoolkit
+
+- name: Setting register for SRA ToolKit
+  stat:
+    path: "{{ apps_dir }}/sratoolkit-{{ version }}/bin"
+  register: s
+
+  tags: sratoolkit
+
+- name: Removing SRA ToolKit source directory
+  file:
+    dest: "{{ source_dir }}/sratoolkit.{{ version }}-ubuntu64"
+    state: absent
+  when: "{{ keep_src }} s.stat.exists"
+
+  tags: sratoolkit
+
+- name: Removing SRA ToolKit zip file
+  file:
+    dest: "{{ source_dir }}/sratoolkit.{{ version }}-ubuntu64.tar.gz"
+    state: absent
+  when: "{{ keep_src }} s.stat.exists"
+
+  tags: sratoolkit

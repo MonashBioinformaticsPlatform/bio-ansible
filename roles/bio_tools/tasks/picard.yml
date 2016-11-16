@@ -1,45 +1,36 @@
 ---
 
-- name: download picard tools
-  get_url:
-    url: "https://github.com/broadinstitute/picard/releases/download/{{ version }}/picard-tools-{{ version }}.zip"
-    dest: "{{ source_dir }}/picard-tools-{{ version }}.zip"
-
-  tags: get_picard
-
-- name: uncompress picard
-  unarchive: 
-    src: "{{ source_dir }}/picard-tools-{{ version }}.zip"
-    dest: "{{ source_dir }}"
-    copy: no
-    creates: "{{ source_dir }}/picard-tools-{{ version }}/picard.jar"
-
-  tags: build_picard
-
 - file:
-    dest: "{{ source_dir }}/picard-tools-{{ version }}/bin"
+    dest: "{{ apps_dir }}/picard-{{ version }}"
     state: directory
     mode: 0755
 
-  tags: build_picard
+  tags: picard
+
+- name: download picard tools
+  get_url:
+    url: "https://github.com/broadinstitute/picard/releases/download/{{ version }}/picard.jar"
+    dest: "{{ apps_dir }}/picard-{{ version }}"
+
+  tags: picard
 
 - name: picard wrapper script
   template:
     src: java-wrapper.sh.j2
-    dest: "{{ source_dir }}/picard-tools-{{ version }}/bin/picard"
+    dest: "{{ apps_dir }}/picard-{{ version }}/picard"
     owner: "{{ main_guy }}" 
     mode: 0755
   with_items:
-    - jar: "{{ source_dir }}/picard-tools-{{ version }}/picard.jar"
+    - jar: "{{ apps_dir }}/picard-{{ version }}/picard.jar"
 
-  tags: build_picard
+  tags: picard
 
 - file:
     dest: "{{ modules_dir }}/picard"
     state: directory
     mode: 0755
 
-  tags: lmod_picard
+  tags: picard
 
 - name: picard module definition
   template: 
@@ -48,7 +39,8 @@
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:
-    - dir: 'picard-tools-{{ version }}'
+    - dir: 'picard-{{ version }}'
+      skip_bin: true
       help_text: 'This module loads the Picard tool suite'
 
-  tags: lmod_picard 
+  tags: picard 

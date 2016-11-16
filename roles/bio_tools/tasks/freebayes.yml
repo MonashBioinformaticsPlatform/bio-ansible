@@ -1,28 +1,29 @@
 ---
 
-- name: git clone freebayes
+- name: download freebayes
   git:
     repo: git://github.com/ekg/freebayes.git
     dest: "{{ source_dir }}/freebayes-{{ version }}"
     version: "{{ version }}"
     update: no
     recursive: yes
-
-  tags: get_freebayes
+  tags: freebayes
 
 - name: build freebayes
-  shell: cd {{ source_dir }}/freebayes-{{ version }}; make
+  shell: cd {{ source_dir }}/freebayes-{{ version }}; make -j {{ threads }}
   args:
     creates: "{{ source_dir }}/freebayes-{{ version }}/bin/freebayes"
+  tags: freebayes
 
-  tags: build_freebayes
+- debug: msg="check that cmake is installed"
+  tags: freebayes
 
 - file:
     dest: "{{ modules_dir }}/freebayes"
     state: directory
     mode: 0755
 
-  tags: lmod_freebayes
+  tags: freebayes
 
 - name: freebayes module definition
   template: 
@@ -34,4 +35,18 @@
     - dir: 'freebayes-{{ version }}'
       help_text: 'This module loads the freebayes variant detector'
 
-  tags: lmod_freebayes
+  tags: freebayes
+
+- file:
+    dest: "{{ apps_dir }}/freebayes-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: freebayes
+
+- name: Move freebayes executables to apps directory
+  shell: mv {{ source_dir }}/freebayes-{{ version }}/bin {{ apps_dir }}/freebayes-{{ version }}/
+  args:
+    creates: "{{ apps_dir }}/freebayes-{{ version }}/bin/freebayes"
+
+  tags: freebayes
