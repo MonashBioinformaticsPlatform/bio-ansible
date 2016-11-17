@@ -36,7 +36,7 @@
     - include: tasks/vcftools.yml tags=vcftools version=0.1.12b
     - include: tasks/igvtools.yml tags=igvtools version=2.3.72
     - include: tasks/igv.yml tags=igv version=2.3.72
-    - include: tasks/gatk.yml tags=gatk version=3.5
+    - include: tasks/gatk.yml tags=gatk version=3.6
     - include: tasks/bowtie.yml tags=bowtie1 version=1.1.1
     - include: tasks/bowtie2.yml tags=bowtie2 version=2.2.5
     - include: tasks/trinity.yml tags=trinity version=2.0.6
@@ -49,8 +49,8 @@
     - include: tasks/bamutil.yml tags=bamutil version=1.0.13
     - include: tasks/bamstats.yml tags=bamstats version=1.25
     - include: tasks/trimmomatic.yml tags=trimmomatic version=0.33
-    # - include: tasks/rstudio-server.yml tags=rstudio version=0.98.1103-amd64
-    - include: tasks/rstudio-server-daily.yml tags=rstudio version=0.99.752-amd64
+    - include: tasks/rstudio-server.yml tags=rstudio version=1.0.44-amd64
+    # - include: tasks/rstudio-server-daily.yml tags=rstudio version=0.99.752-amd64
     - include: tasks/rna-seqc.yml tags=rna-seqc version=1.1.8
     - include: tasks/big-data-script.yml tags=big-data-script version=0.9999c
     - include: tasks/rseqc.yml tags=rseqc version=2.6.4
@@ -62,7 +62,7 @@
     - include: tasks/qiime.yml tags=qiime version=1.9.1
     - include: tasks/bbmap.yml tags=bbmap version=35.43
     - include: tasks/fastqc.yml tags=fastqc version=0.11.4
-    - include: tasks/splitstree.yml tags=splitstree version=4_14_2
+    - include: tasks/splitstree.yml tags=splitstree version=4_14_4
     - include: tasks/subread.yml tags=subread version=1.5.0-p3
 
     - include: tasks/macs2.yml tags=macs2 version=2.1.0.20140616
