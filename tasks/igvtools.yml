@@ -2,12 +2,12 @@
 - name: Download igvtools - you should register here https://www.broadinstitute.org/software/igv/?q=registration and agree with the license terms (LGPL, http://www.opensource.org/licenses/lgpl-2.1.php)
   get_url:
     url=http://data.broadinstitute.org/igv/projects/downloads/igvtools_{{version}}.zip
-    dest=tarballs/igvtools_{{version}}.zip
+    dest={{source_dir}}/igvtools_{{version}}.zip
 
 # Ensure the unarchive directory exists (the zip file has no version info)
 - file: dest="{{ soft_dir }}/IGVTools-{{version}}" state=directory mode=0755
 
-- stat: path=tarballs/igvtools_{{version}}.zip
+- stat: path={{source_dir}}/igvtools_{{version}}.zip
   register: igvtoolszip
 
 # Check if it has been uncompressed.  The "creates" in the next section should do this, but it
@@ -17,13 +17,13 @@
 
 - name: Uncompress igvtools
   unarchive: 
-    src=tarballs/igvtools_{{version}}.zip
+    src={{source_dir}}/igvtools_{{version}}.zip
     dest={{ soft_dir }}/IGVTools-{{version}}
-    copy=yes
+    copy=no
     creates={{ soft_dir }}/IGVTools-{{version}}/IGVTools/igvtools
   when: not igvtools.stat.exists and igvtoolszip.stat.exists
 
-- debug: msg="Didn't find tarballs/igvtools_{{version}}.zip - not installing igvtools"
+- debug: msg="Didn't find igvtools_{{version}}.zip - not installing igvtools"
   when: not igvtoolszip.stat.exists
 
 - file: dest="{{modules_dir}}/bio/igvtools" state=directory mode=0755

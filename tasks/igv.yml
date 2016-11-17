@@ -2,9 +2,9 @@
 - name: Download IGV - you should register here https://www.broadinstitute.org/software/igv/?q=registration and agree with the license terms (LGPL, http://www.opensource.org/licenses/lgpl-2.1.php)
   get_url:
     url=http://data.broadinstitute.org/igv/projects/downloads/IGV_{{version}}.zip
-    dest=tarballs/IGV_{{version}}.zip
+    dest={{source_dir}}/IGV_{{version}}.zip
 
-- stat: path=tarballs/IGV_{{version}}.zip
+- stat: path={{source_dir}}/IGV_{{version}}.zip
   register: igvzip
 
 # Check if it has been uncompressed.  The "creates" in the next section should do this, but it
@@ -14,13 +14,13 @@
 
 - name: Uncompress igv
   unarchive: 
-    src=tarballs/IGV_{{version}}.zip
+    src={{source_dir}}/IGV_{{version}}.zip
     dest={{ soft_dir }}
-    copy=yes
+    copy=no
     creates={{ soft_dir}}/IGV_{{version}}/igv.sh
   when: not igv.stat.exists and igvzip.stat.exists
 
-- debug: msg="Didn't find tarballs/IGV_{{version}}.zip - not installing IGV"
+- debug: msg="Didn't find IGV_{{version}}.zip - not installing IGV"
   when: not igvzip.stat.exists
 
 - file: dest="{{modules_dir}}/bio/igv" state=directory mode=0755
