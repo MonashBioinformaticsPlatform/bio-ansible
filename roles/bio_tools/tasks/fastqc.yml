@@ -17,6 +17,19 @@
 
   tags: fastqc
 
+- name: Rename FastQC directory to reflect the version
+  shell: mv {{ source_dir }}/FastQC {{ source_dir }}/fastqc-{{ version }}
+  args:
+    creates: "{{ source_dir }}/fastqc-{{ version }}/fastqc"
+
+  tags: fastqc
+
+- file:
+    path: "{{ source_dir }}/fastqc-{{ version }}/fastqc"
+    mode: 0755
+
+  tags: fastqc
+
 - file:
     dest: "{{ apps_dir }}/fastqc-{{ version }}"
     state: directory
@@ -24,15 +37,10 @@
 
   tags: fastqc
 
-- name: Move fastqc executable to apps directory
-  shell: cp {{ source_dir }}/FastQC/fastqc {{ apps_dir }}/fastqc-{{ version }}
-  args:
-    creates: "{{ apps_dir }}/fastqc-{{ version }}/fastqc"
-
-  tags: fastqc
-
 - file:
-    path: "{{ apps_dir }}/fastqc-{{ version }}/fastqc"
+    src: "{{ source_dir }}/fastqc-{{ version }}/fastqc"
+    dest: "{{ apps_dir }}/fastqc-{{ version }}/fastqc"
+    state: link
     mode: 0755
 
   tags: fastqc
@@ -61,14 +69,6 @@
   stat:
     path: "{{ apps_dir }}/fastqc-{{ version }}/fastqc"
   register: f
-
-  tags: fastqc
-
-- name: Removing fastqc source directory
-  file:
-    dest: "{{ source_dir }}/FastQC"
-    state: absent
-  when: "{{ del_src }} f.stat.exists"
 
   tags: fastqc
 
