@@ -58,11 +58,18 @@ Also note that modules are ‘idempotent’, meaning if you run them again, they
 7. Alternatively you can install only particular tool
 
 ```BASH
-ansible-playbook -i hosts main.yml --tags get_samtools,build_samtools
+ansible-playbook -i hosts main.yml --tags samtools
+ansible-playbook -i hosts main.yml --tags star
+ansible-playbook -i hosts main.yml --tags subread
+```
+
+OR
+
+```BASH
+ansible-playbook -i hosts main.yml --tags samtools,star,subread
 ```
 
 _You can always add `-v` or `-vvv` options for verbose mode_
-
 
 ## Extra files
 
