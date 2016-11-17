@@ -29,3 +29,5 @@
     # BigDataScript dependencies
     - golang-go
     - ant
+    # extras
+    - pandoc
