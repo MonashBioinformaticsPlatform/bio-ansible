@@ -1,13 +1,13 @@
 
-- stat: path=tarballs/GenomeAnalysisTK-{{version}}.tar.bz2
-  register: gatktarball
-
-- debug: msg="Skipping installation of GATK - tarballs/GenomeAnalysisTK-{{version}}.tar.bz2 not found."
-  when: not gatktarball.stat.exists
+#- stat: path=tarballs/GenomeAnalysisTK-{{version}}.tar.bz2
+#  register: gatktarball
+#
+#- debug: msg="Skipping installation of GATK - tarballs/GenomeAnalysisTK-{{version}}.tar.bz2 not found."
+#  when: not gatktarball.stat.exists
 
 # Create a directory for extraction
 - file: dest="{{ soft_dir }}/GenomeAnalysisTK-{{version}}" state=directory mode=0755
-  when: gatktarball.stat.exists
+#  when: gatktarball.stat.exists
 
 - name: Uncompress GATK
   unarchive:
@@ -15,7 +15,7 @@
     dest: "{{ soft_dir }}/GenomeAnalysisTK-{{version}}"
     copy: yes
     creates: "{{ soft_dir }}/GenomeAnalysisTK-{{version}}/GenomeAnalysisTK.jar"
-  when: gatktarball.stat.exists
+#  when: gatktarball.stat.exists
 
 - name: GATK wrapper script
   template:
@@ -25,10 +25,10 @@
     mode: 0755
   with_items:
     - { jar: '{{ soft_dir }}/GenomeAnalysisTK-{{version}}/GenomeAnalysisTK.jar' }
-  when: gatktarball.stat.exists
+#  when: gatktarball.stat.exists
 
 - file: dest="{{modules_dir}}/bio/gatk" state=directory mode=0755
-  when: gatktarball.stat.exists
+#  when: gatktarball.stat.exists
 
 - name: GATK module definition
   template:
@@ -38,5 +38,5 @@
     mode: 0644
   with_items:
     - { help_text: 'The Genome Analysis Toolkit or GATK', dir: 'GenomeAnalysisTK-{{version}}', skip_bin: true }
-  when: gatktarball.stat.exists
+#  when: gatktarball.stat.exists
 
