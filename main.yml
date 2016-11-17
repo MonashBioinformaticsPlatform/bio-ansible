@@ -5,7 +5,7 @@
     - soft_dir: /mnt/software/apps
     - modules_dir: /mnt/software/modules
     - brew_dir: /mnt/software/linuxbrew
-    - ref_dir: /references
+    - ref_dir: /mnt/references
 
   pre_tasks:
     - name: Create sw-installer user
