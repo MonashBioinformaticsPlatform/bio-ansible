@@ -1,8 +1,8 @@
-# https://github.com/Homebrew/homebrew-core/issues/4204
-- name: Force brew update
-  shell: "cd $({{brew_dir}}/bin/brew  --repo); /usr/bin/git fetch; /usr/bin/git reset --hard origin/master; {{brew_dir}}/bin/brew update"
-  sudo: yes
-  sudo_user: sw-installer
+## https://github.com/Homebrew/homebrew-core/issues/4204
+#- name: Force brew update
+#  shell: "cd $({{brew_dir}}/bin/brew  --repo); /usr/bin/git fetch; /usr/bin/git reset --hard origin/master; {{brew_dir}}/bin/brew update"
+#  sudo: yes
+#  sudo_user: sw-installer
 
 - name: Install {{brew_name}}
   shell: "{{brew_dir}}/bin/brew install {{brew_name}}"
