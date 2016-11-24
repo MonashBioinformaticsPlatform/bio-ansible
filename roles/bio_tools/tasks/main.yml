@@ -10,5 +10,5 @@
   #- include: freebayes.yml version=master
 - include: vcflib.yml version=master
 - include: sratoolkit.yml version=2.6.3
-- include: rnasik-pipe.yml version=1.4.x.feature bds_version=master
+- include: rnasik-pipe.yml version=1.4.x bds_version=master
 - include: qualimap.yml version=v2.2.1
