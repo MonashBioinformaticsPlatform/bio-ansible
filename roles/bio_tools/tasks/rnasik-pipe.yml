@@ -20,7 +20,7 @@
   lineinfile: 
     dest: "{{ source_dir }}/RNAsik-pipe-{{ version }}/src/RNAsik"
     regexp: "/usr/bin/env bds"
-    line: "#!{{ source_dir }}/BigDataScript-{{ bds_version }}/build/bds"
+    line: "#!{{ source_dir }}/BigDataScript-{{ bds_v }}/build/bds"
 
   tags: rnasik
 
