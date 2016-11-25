@@ -1,4 +1,5 @@
 *.swp
 secret_hosts
 *.retry
+my_hosts
 
