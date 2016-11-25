@@ -7,35 +7,35 @@
     version: "{{ version }}"
     update: no
 
-  tags: get_bds
+  tags: bds
 
 - name: build BigDataScript
   shell: cd {{ source_dir }}/BigDataScript-{{ version }}/; ./scripts/install.sh
   args:
-    creates: "{{ source_dir }}/BigDataScript-{{ version }}/build/bds"
+    creates: "{{ local_home }}/.bds/bds"
 
-  tags: build_bds
-
-- file:
-    dest: "{{ source_dir }}/BigDataScript-{{ version }}"
-    state: directory
-    mode: 0755
-
-  tags: build_bds
+  tags: bds
 
 - name: build BigDataScript
-  shell: mv "{{ local_home }}/.bds" "{{ source_dir }}/BigDataScript-{{ version }}/build"
+  shell: mv "{{ local_home }}/.bds" "{{ apps_dir }}/BigDataScript-{{ version }}"
   args:
-    creates: "{{ source_dir }}/BigDataScript-{{ version }}/build/bds"
+    creates: "{{ apps_dir }}/BigDataScript-{{ version }}/bds"
 
-  tags: build_bds
+  tags: bds
+
+- name: Copy bds.config file
+  template:
+    src: bds.config
+    dest: "{{ apps_dir }}/BigDataScript-{{ version }}"
+
+  tags: bds
 
 - file:
     dest: "{{ modules_dir }}/BigDataScript"
     state: directory
     mode: 0755
 
-  tags: lmod_bds
+  tags: bds
 
 - name: BigDataScript lmod definition
   template:
@@ -45,7 +45,22 @@
     mode: 0644
   with_items:
     - dir: 'BigDataScript-{{ version }}'
-      bin: 'build'
+      skip_bin: true
       help_text: 'This module loads BigDataScript'
 
-  tags: lmod_bds
+  tags: bds
+
+- name: Setting register for BigDataScript
+  stat:
+    path: "{{ apps_dir }}/BigDataScript-{{ version }}/bds"
+  register: b
+
+  tags: bds
+
+- name: Removing BigDataScript source directory
+  file:
+    dest: "{{ source_dir }}/BigDataScript-{{ version }}"
+    state: absent
+  when: "{{ del_src }} b.stat.exists"
+
+  tags: bds
