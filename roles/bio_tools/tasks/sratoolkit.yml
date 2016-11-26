@@ -30,7 +30,7 @@
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:
-    - dir: 'sratoolkit.{{ version }}-ubuntu64'
+    - dir: 'sratoolkit-{{ version }}'
       help_text: 'This module loads SRA tools'
 
   tags: sratoolkit 
