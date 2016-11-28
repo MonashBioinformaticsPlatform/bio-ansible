@@ -1,6 +1,6 @@
 ---
 
-- name: download BigDataScript
+- name: download BigDataScript {{ version }}
   git:
     repo: https://github.com/pcingola/BigDataScript.git
     dest: "{{ source_dir }}/BigDataScript-{{ version }}"
@@ -9,14 +9,14 @@
 
   tags: bds
 
-- name: build BigDataScript
+- name: build BigDataScript {{ version }}
   shell: cd {{ source_dir }}/BigDataScript-{{ version }}/; ./scripts/install.sh
   args:
     creates: "{{ local_home }}/.bds/bds"
 
   tags: bds
 
-- name: build BigDataScript
+- name: moving executable bds {{ version }} to apps directory
   shell: mv "{{ local_home }}/.bds" "{{ apps_dir }}/BigDataScript-{{ version }}"
   args:
     creates: "{{ apps_dir }}/BigDataScript-{{ version }}/bds"
@@ -37,7 +37,7 @@
 
   tags: bds
 
-- name: BigDataScript lmod definition
+- name: BigDataScript {{ version }} lmod definition
   template:
     src: sw-module.lua.j2
     dest: "{{ modules_dir }}/BigDataScript/{{ version }}.lua"
@@ -50,14 +50,14 @@
 
   tags: bds
 
-- name: Setting register for BigDataScript
+- name: Setting register for BigDataScript {{ version }}
   stat:
     path: "{{ apps_dir }}/BigDataScript-{{ version }}/bds"
   register: b
 
   tags: bds
 
-- name: Removing BigDataScript source directory
+- name: Removing BigDataScript {{ version }} source directory
   file:
     dest: "{{ source_dir }}/BigDataScript-{{ version }}"
     state: absent
