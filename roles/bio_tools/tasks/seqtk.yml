@@ -1,0 +1,66 @@
+---
+
+- name: download seqtk {{ version }}
+  git:
+    repo: https://github.com/lh3/seqtk/
+    dest: "{{ source_dir }}/seqtk-{{ version }}"
+    version: "{{ version }}"
+    update: no
+
+  tags: seqtk
+
+- name: build seqtk {{ version }}
+  shell: cd {{ source_dir }}/seqtk-{{ version }}; make -j {{ threads }}
+  args:
+    creates: "{{ source_dir }}/seqtk-{{ version }}/seqtk"
+
+  tags: seqtk
+
+- file:
+    dest: "{{ modules_dir }}/seqtk"
+    state: directory
+    mode: 0755
+
+  tags: seqtk
+
+- file:
+    dest: "{{ apps_dir }}/seqtk-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: seqtk
+
+- name: Move seqtk {{ version }} executables to apps directory
+  shell: cp {{ source_dir }}/seqtk-{{ version }}/seqtk {{ apps_dir }}/seqtk-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/seqtk-{{ version }}/seqtk"
+
+  tags: seqtk
+
+- name: seqtk {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_dir }}/seqtk/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'seqtk-{{ version }}'
+      skip_bin: true
+      help_text: 'This module loads seqtk {{ version }}'
+
+  tags: seqtk
+
+- name: Setting register for seqtk {{ version }}
+  stat:
+    path: "{{ apps_dir }}/seqtk-{{ version }}/seqtk"
+  register: s
+
+  tags: seqtk
+
+- name: Removing bwa source directory
+  file:
+    dest: "{{ source_dir }}/seqtk-{{ version }}"
+    state: absent
+  when: "{{ del_src }} s.stat.exists"
+
+  tags: seqtk
