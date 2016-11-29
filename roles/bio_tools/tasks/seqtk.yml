@@ -50,14 +50,14 @@
 
   tags: seqtk
 
-- name: Setting register for seqtk {{ version }}
+- name: setting register for seqtk {{ version }}
   stat:
     path: "{{ apps_dir }}/seqtk-{{ version }}/seqtk"
   register: s
 
   tags: seqtk
 
-- name: Removing bwa source directory
+- name: removing seqtk {{ version }} source directory
   file:
     dest: "{{ source_dir }}/seqtk-{{ version }}"
     state: absent
