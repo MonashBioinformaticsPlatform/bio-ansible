@@ -13,3 +13,4 @@
 - include: rnasik-pipe.yml version={{ rnasik_version }} bds_v={{ bds_version }}
 - include: qualimap.yml version={{ qualimap_version }}
 - include: seqtk.yml version={{ seqtk_version }}
+- include: igv.yml version={{ igv_version }}

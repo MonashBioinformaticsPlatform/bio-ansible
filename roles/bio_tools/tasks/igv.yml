@@ -1,0 +1,62 @@
+---
+
+- name: download igv {{ version }}
+  get_url:
+    url: "https://github.com/igvteam/igv/archive/v{{ version }}.tar.gz"
+    dest: "{{ source_dir }}/v{{ version }}.tar.gz"
+
+  tags: igv
+
+- name: uncompress igv {{ version }}
+  unarchive:
+      src: "{{ source_dir }}/v{{ version }}.tar.gz"
+      dest: "{{ source_dir }}"
+      copy: no
+
+  tags: igv
+
+- name: build igv {{ version }}
+  shell: cd {{ source_dir }}/igv-{{ version }}; ant
+  args:
+    creates: "{{ source_dir }}/igv-{{ version }}/igv.jar"
+
+  tags: igv
+
+- debug: msg="If this task failes check that you have ant installed"
+
+  tags: igv
+
+- file:
+    dest: "{{ apps_dir }}/igv-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: igv
+
+- name: copy igv {{ version }} shell file
+  template:
+    src: igv
+    dest: "{{ apps_dir }}/igv-{{ version }}"
+    mode: 0755
+
+  tags: igv
+
+- file:
+    dest: "{{ modules_dir }}/igv"
+    state: directory
+    mode: 0755
+
+  tags: igv
+
+- name: igv {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_dir }}/igv/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'igv-{{ version }}'
+      skip_bin: true
+      help_text: 'This module loads the igv data viewing tool'
+
+  tags: igv 
