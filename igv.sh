@@ -1,1 +1,0 @@
-roles/bio_tools/templates/igv.sh
