@@ -10,9 +10,10 @@ sudo_guy: "{{ main_guy }}"
 # Different directories variables
 #---------------------------------
 local_home: "{{ ansible_env.HOME }}"
-source_dir: "{{ local_home }}/software/source"
-modules_dir: "{{ local_home }}/software/modules"
-apps_dir: "{{ local_home }}/software/apps"
+your_path: "{{ local_home }}"
+source_dir: "{{ your_path }}/software/source"
+modules_dir: "{{ your_path }}/software/modules"
+apps_dir: "{{ your_path }}/software/apps"
 #------------------------------
 # Other global variables
 #------------------------------
