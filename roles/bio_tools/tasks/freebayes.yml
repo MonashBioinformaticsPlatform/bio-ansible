@@ -1,6 +1,6 @@
 ---
 
-- name: download freebayes
+- name: download freebayes {{ version }}
   git:
     repo: git://github.com/ekg/freebayes.git
     dest: "{{ source_dir }}/freebayes-{{ version }}"
@@ -9,7 +9,7 @@
     recursive: yes
   tags: freebayes
 
-- name: build freebayes
+- name: build freebayes {{ version }}
   shell: cd {{ source_dir }}/freebayes-{{ version }}; make -j {{ threads }}
   args:
     creates: "{{ source_dir }}/freebayes-{{ version }}/bin/freebayes"
@@ -25,7 +25,7 @@
 
   tags: freebayes
 
-- name: freebayes module definition
+- name: freebayes {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/freebayes/{{ version }}.lua"
@@ -44,7 +44,7 @@
 
   tags: freebayes
 
-- name: Move freebayes executables to apps directory
+- name: move freebayes {{ version }} executables to apps directory
   shell: cp -r {{ source_dir }}/freebayes-{{ version }}/bin {{ apps_dir }}/freebayes-{{ version }}/
   args:
     creates: "{{ apps_dir }}/freebayes-{{ version }}/bin/freebayes"

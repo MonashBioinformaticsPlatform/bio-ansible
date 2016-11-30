@@ -1,6 +1,6 @@
 ---
 
-- name: download bwa
+- name: download bwa {{ version }}
   git:
     repo: https://github.com/lh3/bwa/
     dest: "{{ source_dir }}/bwa-{{ version }}"
@@ -9,7 +9,7 @@
 
   tags: bwa
 
-- name: build bwa
+- name: build bwa {{ version }}
   shell: cd {{ source_dir }}/bwa-{{ version }}; make -j {{ threads }}
   args:
     creates: "{{ source_dir }}/bwa-{{ version }}/bwa"
@@ -30,14 +30,14 @@
 
   tags: bwa
 
-- name: Move bwa executables to apps directory
+- name: move bwa {{ version }} executables to apps directory
   shell: cp {{ source_dir }}/bwa-{{ version }}/bwa {{ source_dir }}/bwa-{{ version }}/qualfa2fq.pl {{ source_dir }}/bwa-{{ version }}/xa2multi.pl {{ apps_dir }}/bwa-{{ version }}
   args:
     creates: "{{ apps_dir }}/bwa-{{ version }}/bwa"
 
   tags: bwa
 
-- name: bwa module definition
+- name: bwa {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/bwa/{{ version }}.lua"
@@ -50,14 +50,14 @@
 
   tags: bwa
 
-- name: Setting register for bwa
+- name: setting register for bwa {{ version }}
   stat:
     path: "{{ apps_dir }}/bwa-{{ version }}/bwa"
   register: b
 
   tags: bwa
 
-- name: Removing bwa source directory
+- name: removing bwa {{ version }}  source directory
   file:
     dest: "{{ source_dir }}/bwa-{{ version }}"
     state: absent

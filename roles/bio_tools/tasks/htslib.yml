@@ -1,6 +1,6 @@
 ---
 
-- name: download htslib
+- name: download htslib {{ version }}
   git:
     repo: https://github.com/samtools/htslib/
     dest: "{{ source_dir }}/htslib-{{ version }}"
@@ -10,7 +10,7 @@
 
   tags: htslib
 
-- name: build htslib
+- name: build htslib {{ version }}
   shell: cd {{ source_dir }}/htslib-{{ version }}; make install prefix={{ source_dir }}/htslib-{{ version }}
   args:
     creates: "{{ source_dir }}/htslib-{{ version }}/bin/tabix"

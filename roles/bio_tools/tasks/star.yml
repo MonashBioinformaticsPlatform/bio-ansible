@@ -1,6 +1,6 @@
 ---
 
-- name: download STAR
+- name: download STAR {{ version }}
   git:
     repo: https://github.com/alexdobin/STAR
     dest: "{{ source_dir }}/STAR-{{ version }}"
@@ -16,7 +16,7 @@
 
   tags: star
 
-- name: Move STAR executables to apps directory
+- name: move STAR {{ version }} executables to apps directory
   shell: cp {{ source_dir }}/STAR-{{ version }}/bin/Linux_x86_64_static/STAR {{ source_dir }}/STAR-{{ version }}/bin/Linux_x86_64_static/STARlong {{ apps_dir }}/STAR-{{ version }}/
   args:
     creates: "{{ apps_dir }}/STAR-{{ version }}/STAR"
@@ -30,7 +30,7 @@
 
   tags: star
 
-- name: STAR module definition
+- name: STAR {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/STAR/{{ version }}.lua"
@@ -44,21 +44,21 @@
 
   tags: star
 
-- name: Setting register for STAR
+- name: setting register for STAR {{ version }}
   stat:
     path: "{{ apps_dir }}/STAR-{{ version }}/STAR"
   register: s
 
   tags: star
 
-- name: Setting register for STARlong
+- name: setting register for STARlong {{ version }}
   stat:
     path: "{{ apps_dir }}/STAR-{{ version }}/STARlong"
   register: slong
 
   tags: star
 
-- name: Removing STAR source directory
+- name: removing STAR {{ version }} source directory
   file:
     dest: "{{ source_dir }}/STAR-{{ version }}"
     state: absent

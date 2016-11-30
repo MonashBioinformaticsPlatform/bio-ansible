@@ -1,6 +1,6 @@
 ---
 
-- name: git clone vcflib
+- name: download vcflib {{ version }}
   git:
     repo: https://github.com/vcflib/vcflib.git
     dest: "{{ source_dir }}/vcflib-{{ version }}"
@@ -10,7 +10,7 @@
 
   tags: vcflib
 
-- name: build vcflib
+- name: build vcflib {{ version }}
   shell: cd {{ source_dir }}/vcflib-{{ version }}; make -j {{ threads }}
   args:
     creates: "{{ source_dir }}/vcflib-{{ version }}/bin/vcfstats"
@@ -24,7 +24,7 @@
 
   tags: vcflib
 
-- name: vcflib module definition
+- name: vcflib {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/vcflib/{{ version }}.lua"
@@ -43,21 +43,21 @@
 
   tags: vcflib
 
-- name: Move vcflib library to apps directory
+- name: move vcflib {{ verison }} library to apps directory
   shell: cp -r {{ source_dir }}/vcflib-{{ version }}/bin {{ apps_dir }}/vcflib-{{ version }}/
   args:
     creates: "{{ apps_dir }}/vcflib-{{ version }}/bin/vcfstats"
 
   tags: vcflib
 
-- name: Setting register for vcflib
+- name: setting register for vcflib {{ version }}
   stat:
     path: "{{ apps_dir }}/vcflib-{{ version }}/bin"
   register: v
 
   tags: vcflib
 
-- name: Removing vcflib source directory
+- name: removing vcflib {{ version }} source directory
   file:
     dest: "{{ source_dir }}/vcflib-{{ version }}"
     state: absent

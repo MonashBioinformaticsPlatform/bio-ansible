@@ -1,6 +1,6 @@
 ---
 
-- name: Download subread package
+- name: download subread package {{ version }}
   get_url:
     url: http://sourceforge.net/projects/subread/files/latest/download?source=files
     timeout: 30
@@ -8,7 +8,7 @@
 
   tags: subread
 
-- name: Uncompress subread
+- name: uncompress subread {{ version }}
   unarchive:
       src: "{{ source_dir }}/subread-{{ version }}-source.tar.gz"
       dest: "{{ source_dir }}"
@@ -16,7 +16,7 @@
 
   tags: subread
 
-- name: build subread tools
+- name: build subread {{ version }}
   shell: cd {{ source_dir }}/subread-{{ version }}-source/src; make -j {{ threads }} -f Makefile.Linux
   args:
     creates: "{{ source_dir }}/subread-{{ version }}-source/bin/featureCounts"
@@ -30,7 +30,7 @@
 
   tags: subread
 
-- name: subread module definition
+- name: subread {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/subread/{{ version }}.lua"
@@ -49,21 +49,21 @@
 
   tags: subread
 
-- name: Move subread executable to apps directory
+- name: move subread {{ verison }} executable to apps directory
   shell: cp -r {{ source_dir }}/subread-{{ version }}-source/bin {{ apps_dir }}/subread-{{ version }}
   args:
     creates: "{{ apps_dir }}/subread-{{ version }}/subread/bin"
 
   tags: subread
 
-- name: Setting register for subread
+- name: setting register for subread {{ version }}
   stat:
     path: "{{ apps_dir }}/subread-{{ version }}/bin/featureCounts"
   register: s
 
   tags: subread
 
-- name: Removing subread source directory
+- name: removing subread {{ version }} source directory
   file:
     dest: "{{ source_dir }}/subread-{{ version }}-source"
     state: absent
@@ -71,7 +71,7 @@
 
   tags: subread
 
-- name: Removing subread tar file
+- name: removing subread {{ version }} tar file
   file:
     dest: "{{ source_dir }}/subread-{{ version }}-source.tar.gz"
     state: absent

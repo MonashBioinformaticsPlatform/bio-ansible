@@ -1,13 +1,13 @@
 ---
 
-- name: download SRA ToolKit
+- name: download SRA ToolKit {{ version }}
   get_url:
     url: "http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/{{ version }}/sratoolkit.{{ version }}-ubuntu64.tar.gz"
     dest: "{{ source_dir }}"
 
   tags: sratoolkit
 
-- name: uncompress sratoolkit
+- name: uncompress sratoolkit {{ version }}
   unarchive: 
     src: "{{ source_dir }}/sratoolkit.{{ version }}-ubuntu64.tar.gz"
     dest: "{{ source_dir }}"
@@ -23,7 +23,7 @@
 
   tags: sratoolkit
 
-- name: SRA ToolKit module definition
+- name: SRA ToolKit {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/sratoolkit/{{ version }}.lua"
@@ -42,21 +42,21 @@
 
   tags: sratoolkit
 
-- name: Move SRAtoolKit library to apps directory
+- name: move SRA ToolKit {{ version }} library to apps directory
   shell: cp -r {{ source_dir }}/sratoolkit.{{ version }}-ubuntu64/bin {{ apps_dir }}/sratoolkit-{{ version }}
   args:
     creates: "{{ apps_dir }}/sratoolkit-{{ version }}/bin/illumina-dump"
 
   tags: sratoolkit
 
-- name: Setting register for SRA ToolKit
+- name: setting register for SRA ToolKit {{ version }}
   stat:
     path: "{{ apps_dir }}/sratoolkit-{{ version }}/bin"
   register: s
 
   tags: sratoolkit
 
-- name: Removing SRA ToolKit source directory
+- name: removing SRA ToolKit {{ verison }} source directory
   file:
     dest: "{{ source_dir }}/sratoolkit.{{ version }}-ubuntu64"
     state: absent
@@ -64,7 +64,7 @@
 
   tags: sratoolkit
 
-- name: Removing SRA ToolKit zip file
+- name: removing SRA ToolKit {{ version }} zip file
   file:
     dest: "{{ source_dir }}/sratoolkit.{{ version }}-ubuntu64.tar.gz"
     state: absent

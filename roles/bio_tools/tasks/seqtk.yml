@@ -30,7 +30,7 @@
 
   tags: seqtk
 
-- name: Move seqtk {{ version }} executables to apps directory
+- name: move seqtk {{ version }} executables to apps directory
   shell: cp {{ source_dir }}/seqtk-{{ version }}/seqtk {{ apps_dir }}/seqtk-{{ version }}
   args:
     creates: "{{ apps_dir }}/seqtk-{{ version }}/seqtk"

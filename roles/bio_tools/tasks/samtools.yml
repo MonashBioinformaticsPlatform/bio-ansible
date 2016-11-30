@@ -1,6 +1,6 @@
 ---
 
-- name: download samtools
+- name: download samtools {{ version }}
   git:
     repo: https://github.com/samtools/samtools
     dest: "{{ source_dir }}/samtools-{{ version }}"
@@ -10,7 +10,7 @@
 
   tags: samtools
 
-- name: build samtools
+- name: build samtools {{ version }}
   shell: cd {{ source_dir }}/samtools-{{ version }}; make -j {{ threads }} install prefix={{ source_dir }}/samtools-{{ version }} HTSDIR=../htslib-{{ htslib_v }}
   args:
     creates: "{{ source_dir }}/samtools-{{ version }}/bin/samtools"
@@ -24,7 +24,7 @@
 
   tags: samtools
 
-- name: samtools lmod definition
+- name: samtools {{ verison }} lmod definition
   template:
     src: sw-module.lua.j2
     dest: "{{ modules_dir }}/samtools/{{ version }}.lua"
@@ -44,21 +44,21 @@
 
   tags: samtools
 
-- name: Move samtools executables to apps directory
+- name: move samtools {{ version }} executables to apps directory
   shell: cp {{ source_dir }}/samtools-{{ version }}/samtools {{ apps_dir }}/samtools-{{ version }}/
   args:
     creates: "{{ apps_dir }}/samtools-{{ version }}/samtools"
 
   tags: samtools
 
-- name: Setting register for samtools
+- name: setting register for samtools {{ verison }}
   stat:
     path: "{{ apps_dir }}/samtools-{{ version }}/samtools"
   register: s
 
   tags: samtools
 
-- name: Removing samtools source directory
+- name: removing samtools {{ verison }} source directory
   file:
     dest: "{{ source_dir }}/samtools-{{ version }}"
     state: absent

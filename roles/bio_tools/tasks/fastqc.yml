@@ -1,13 +1,13 @@
 ---
 
-- name: download FastQC
+- name: download FastQC {{ version }}
   get_url:
     url: "http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v{{ version }}.zip"
     dest: "{{ source_dir }}/fastqc_v{{ version }}.zip"
 
   tags: fastqc
 
-- name: build FastQC
+- name: build FastQC {{ version }}
   unarchive:
     src: "{{ source_dir }}/fastqc_v{{ version }}.zip"
     dest: "{{ source_dir }}"
@@ -17,7 +17,7 @@
 
   tags: fastqc
 
-- name: Rename FastQC directory to reflect the version
+- name: rename FastQC {{ version }} directory to reflect the version
   shell: mv {{ source_dir }}/FastQC {{ source_dir }}/fastqc-{{ version }}
   args:
     creates: "{{ source_dir }}/fastqc-{{ version }}/fastqc"
@@ -52,7 +52,7 @@
 
   tags: fastqc
 
-- name: FastQC module definition
+- name: FastQC {{ version }} module definition
   template:
     src: sw-module.lua.j2
     dest: "{{ modules_dir }}/fastqc/{{ version }}.lua"
@@ -65,14 +65,14 @@
 
   tags: fastqc
 
-- name: Setting register for fastqc
+- name: setting register for FastQC {{ version }}
   stat:
     path: "{{ apps_dir }}/fastqc-{{ version }}/fastqc"
   register: f
 
   tags: fastqc
 
-- name: Removing fastqc zip file
+- name: removing FastQC {{ version }} zip file
   file:
     dest: "{{ source_dir }}/fastqc_v{{ version }}.zip"
     state: absent

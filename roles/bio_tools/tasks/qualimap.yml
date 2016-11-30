@@ -1,13 +1,13 @@
 ---
 
-- name: download qualimap
+- name: download qualimap {{ version }}
   get_url:
     url: "https://bitbucket.org/kokonech/qualimap/downloads/qualimap_{{ version }}.zip"
     dest: "{{ source_dir }}"
 
   tags: qualimap
 
-- name: build qualimap
+- name: build qualimap {{ version }}
   unarchive:
     src: "{{ source_dir }}/qualimap_{{ version }}.zip"
     dest: "{{ apps_dir }}"
@@ -24,7 +24,7 @@
 
   tags: qualimap
 
-- name: qualimap module definition
+- name: qualimap {{ version }} module definition
   template:
     src: sw-module.lua.j2
     dest: "{{ modules_dir }}/qualimap/{{ version }}.lua"
@@ -37,14 +37,14 @@
 
   tags: qualimap
 
-- name: Setting register for qualimap
+- name: setting register for qualimap {{ verison }}
   stat:
     path: "{{ apps_dir }}/qualimap_{{ version }}/qualimap"
   register: q
 
   tags: qualimap
 
-- name: Removing qualimap zip file
+- name: removing qualimap {{ verison }} zip file
   file:
     dest: "{{ source_dir }}/qualimap_{{ version }}.zip"
     state: absent

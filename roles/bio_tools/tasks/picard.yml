@@ -7,14 +7,14 @@
 
   tags: picard
 
-- name: download picard tools
+- name: download picard tools {{ version }}
   get_url:
     url: "https://github.com/broadinstitute/picard/releases/download/{{ version }}/picard.jar"
     dest: "{{ apps_dir }}/picard-{{ version }}"
 
   tags: picard
 
-- name: picard wrapper script
+- name: picard {{ version }} wrapper script
   template:
     src: java-wrapper.sh.j2
     dest: "{{ apps_dir }}/picard-{{ version }}/picard"
@@ -32,7 +32,7 @@
 
   tags: picard
 
-- name: picard module definition
+- name: picard {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_dir }}/picard/{{ version }}.lua"
