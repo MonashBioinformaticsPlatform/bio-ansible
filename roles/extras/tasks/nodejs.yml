@@ -31,7 +31,7 @@
     mode: 0644
   with_items:
     - dir: 'node-{{ version }}'
-      sikp_bin: true
+      skip_bin: true
       help_text: 'This module loads node.js and npm'
 
   tags: nodejs 
