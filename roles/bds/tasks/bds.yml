@@ -31,7 +31,7 @@
   tags: bds
 
 - file:
-    dest: "{{ modules_dir }}/BigDataScript"
+    dest: "{{ modules_bio }}/BigDataScript"
     state: directory
     mode: 0755
 
@@ -40,7 +40,7 @@
 - name: BigDataScript {{ version }} lmod definition
   template:
     src: sw-module.lua.j2
-    dest: "{{ modules_dir }}/BigDataScript/{{ version }}.lua"
+    dest: "{{ modules_bio }}/BigDataScript/{{ version }}.lua"
     owner: "{{ main_guy }}"
     mode: 0644
   with_items:
