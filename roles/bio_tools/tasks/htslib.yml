@@ -18,7 +18,7 @@
   tags: build_htslib
 
 - file:
-    dest: "{{ modules_dir }}/htslib"
+    dest: "{{ modules_bio }}/htslib"
     state: directory
     mode: 0755
 

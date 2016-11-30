@@ -17,7 +17,7 @@
   tags: bwa
 
 - file:
-    dest: "{{ modules_dir }}/bwa"
+    dest: "{{ modules_bio }}/bwa"
     state: directory
     mode: 0755
 
@@ -40,7 +40,7 @@
 - name: bwa {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
-    dest: "{{ modules_dir }}/bwa/{{ version }}.lua"
+    dest: "{{ modules_bio }}/bwa/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:

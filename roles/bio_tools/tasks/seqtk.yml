@@ -17,7 +17,7 @@
   tags: seqtk
 
 - file:
-    dest: "{{ modules_dir }}/seqtk"
+    dest: "{{ modules_bio }}/seqtk"
     state: directory
     mode: 0755
 
@@ -40,7 +40,7 @@
 - name: seqtk {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
-    dest: "{{ modules_dir }}/seqtk/{{ version }}.lua"
+    dest: "{{ modules_bio }}/seqtk/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:

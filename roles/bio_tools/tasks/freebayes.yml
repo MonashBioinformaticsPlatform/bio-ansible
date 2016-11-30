@@ -19,7 +19,7 @@
   tags: freebayes
 
 - file:
-    dest: "{{ modules_dir }}/freebayes"
+    dest: "{{ modules_bio }}/freebayes"
     state: directory
     mode: 0755
 
@@ -28,7 +28,7 @@
 - name: freebayes {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
-    dest: "{{ modules_dir }}/freebayes/{{ version }}.lua"
+    dest: "{{ modules_bio }}/freebayes/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:

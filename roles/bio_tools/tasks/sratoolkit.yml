@@ -17,7 +17,7 @@
   tags: sratoolkit
 
 - file:
-    dest: "{{ modules_dir }}/sratoolkit"
+    dest: "{{ modules_bio }}/sratoolkit"
     state: directory
     mode: 0755
 
@@ -26,7 +26,7 @@
 - name: SRA ToolKit {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
-    dest: "{{ modules_dir }}/sratoolkit/{{ version }}.lua"
+    dest: "{{ modules_bio }}/sratoolkit/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:

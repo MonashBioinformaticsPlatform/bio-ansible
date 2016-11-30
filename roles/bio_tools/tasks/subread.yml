@@ -24,7 +24,7 @@
   tags: subread
 
 - file:
-    dest: "{{ modules_dir }}/subread"
+    dest: "{{ modules_bio }}/subread"
     state: directory
     mode: 0755
 
@@ -33,7 +33,7 @@
 - name: subread {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
-    dest: "{{ modules_dir }}/subread/{{ version }}.lua"
+    dest: "{{ modules_bio }}/subread/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:

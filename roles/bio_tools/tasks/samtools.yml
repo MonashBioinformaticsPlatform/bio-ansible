@@ -18,7 +18,7 @@
   tags: samtools
 
 - file:
-    dest: "{{ modules_dir }}/samtools"
+    dest: "{{ modules_bio }}/samtools"
     state: directory
     mode: 0755
 
@@ -27,7 +27,7 @@
 - name: samtools {{ verison }} lmod definition
   template:
     src: sw-module.lua.j2
-    dest: "{{ modules_dir }}/samtools/{{ version }}.lua"
+    dest: "{{ modules_bio }}/samtools/{{ version }}.lua"
     owner: "{{ main_guy }}"
     mode: 0644
   with_items:

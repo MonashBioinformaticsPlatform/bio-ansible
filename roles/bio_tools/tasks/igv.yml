@@ -42,7 +42,7 @@
   tags: igv
 
 - file:
-    dest: "{{ modules_dir }}/igv"
+    dest: "{{ modules_bio }}/igv"
     state: directory
     mode: 0755
 
@@ -51,7 +51,7 @@
 - name: igv {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
-    dest: "{{ modules_dir }}/igv/{{ version }}.lua"
+    dest: "{{ modules_bio }}/igv/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:

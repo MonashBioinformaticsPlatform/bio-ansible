@@ -18,7 +18,7 @@
   tags: qualimap
 
 - file:
-    dest: "{{ modules_dir }}/qualimap"
+    dest: "{{ modules_bio }}/qualimap"
     state: directory
     mode: 0755
 
@@ -27,7 +27,7 @@
 - name: qualimap {{ version }} module definition
   template:
     src: sw-module.lua.j2
-    dest: "{{ modules_dir }}/qualimap/{{ version }}.lua"
+    dest: "{{ modules_bio }}/qualimap/{{ version }}.lua"
     owner: "{{ main_guy }}"
     mode: 0644
   with_items:

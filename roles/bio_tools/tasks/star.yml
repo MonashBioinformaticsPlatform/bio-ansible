@@ -24,7 +24,7 @@
   tags: star
 
 - file:
-    dest: "{{ modules_dir }}/STAR"
+    dest: "{{ modules_bio }}/STAR"
     state: directory
     mode: 0755
 
@@ -33,7 +33,7 @@
 - name: STAR {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
-    dest: "{{ modules_dir }}/STAR/{{ version }}.lua"
+    dest: "{{ modules_bio }}/STAR/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:

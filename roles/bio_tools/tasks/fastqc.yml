@@ -46,7 +46,7 @@
   tags: fastqc
 
 - file:
-    dest: "{{ modules_dir }}/fastqc"
+    dest: "{{ modules_bio }}/fastqc"
     state: directory
     mode: 0755
 
@@ -55,7 +55,7 @@
 - name: FastQC {{ version }} module definition
   template:
     src: sw-module.lua.j2
-    dest: "{{ modules_dir }}/fastqc/{{ version }}.lua"
+    dest: "{{ modules_bio }}/fastqc/{{ version }}.lua"
     owner: "{{ main_guy }}"
     mode: 0644
   with_items:

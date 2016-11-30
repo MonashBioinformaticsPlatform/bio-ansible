@@ -9,6 +9,9 @@
   with_items:
     - "{{ source_dir }}"
     - "{{ modules_dir }}"
+    - "{{ modules_core }}"
+    - "{{ modules_bio }}"
+    - "{{ modules_extra }}"
     - "{{ apps_dir }}"
 
   tags: dirs

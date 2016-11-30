@@ -13,6 +13,9 @@ local_home: "{{ ansible_env.HOME }}"
 your_path: "{{ local_home }}"
 source_dir: "{{ your_path }}/software/source"
 modules_dir: "{{ your_path }}/software/modules"
+modules_core: "{{ modules_dir }}/core"
+modules_bio: "{{ modules_dir }}/bio"
+modules_extra: "{{ modules_dir }}/extra"
 apps_dir: "{{ your_path }}/software/apps"
 #------------------------------
 # Other global variables
@@ -34,7 +37,7 @@ fastqc_version: 0.11.5
 freebayes_version: master
 vcflib_version: master
 sratoolkit_version: 2.8.0
-rnasik_version: 1.4.x.feature
+rnasik_version: master
 qualimap_version: v2.2.1
 seqtk_version: v1.2
 igv_version: 2.3.88
