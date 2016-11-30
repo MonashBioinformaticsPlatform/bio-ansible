@@ -80,7 +80,6 @@ The `playbook.yml` going to skip installation of those packages if it doesn't fi
 
 - http://www.broadinstitute.org/software/igv/download
 
-    - IGV_2.3.42.zip
     - igvtools_2.3.42.zip
 
 - https://www.broadinstitute.org/gatk/download/auth?package=GATK
