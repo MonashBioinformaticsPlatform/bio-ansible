@@ -44,3 +44,6 @@ igv_version: 2.3.88
 
 # bds version
 bds_version: master
+
+# extra packages
+nodejs_version: v6.9.1

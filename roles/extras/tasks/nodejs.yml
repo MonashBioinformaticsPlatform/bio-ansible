@@ -1,0 +1,75 @@
+---
+
+- name: download node.js {{ version }}
+  get_url:
+    url: "https://nodejs.org/dist/{{ version }}/node-{{ version }}-linux-x64.tar.xz"
+    dest: "{{ source_dir }}"
+
+  tags: nodejs
+
+- name: uncompress node.js {{ version }}
+  unarchive: 
+    src: "{{ source_dir }}/node-{{ version }}-linux-x64.tar.xz"
+    dest: "{{ source_dir }}"
+    copy: no
+    creates: "{{ source_dir }}/node-{{ version }}-linux-x64/bin/node"
+
+  tags: nodejs
+
+- file:
+    dest: "{{ modules_extra }}/node"
+    state: directory
+    mode: 0755
+
+  tags: nodejs
+
+- name: node.js {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_extra }}/node/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'node-{{ version }}'
+      sik_bin: true
+      help_text: 'This module loads node.js and npm'
+
+  tags: nodejs 
+
+- file:
+    dest: "{{ apps_dir }}/node-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: nodejs
+      
+- file:
+    src: "{{ source_dir }}/node-{{ version }}-linux-x64/bin/node"
+    dest: "{{ apps_dir }}/node-{{ version }}/node"
+    state: link
+    mode: 0755
+
+  tags: nodejs
+
+- file:
+    src: "{{ source_dir }}/node-{{ version }}-linux-x64/bin/npm"
+    dest: "{{ apps_dir }}/node-{{ version }}/npm"
+    state: link
+    mode: 0755
+
+  tags: nodejs
+
+- name: setting register for node.js {{ version }}
+  stat:
+    path: "{{ apps_dir }}/node-{{ version }}/bin/node"
+  register: n
+
+  tags: nodejs
+
+- name: removing node.js {{ version }} tar file
+  file:
+    dest: "{{ source_dir }}/node-{{ version }}-linux-x86_64.tar.xz"
+    state: absent
+  when: "{{ del_src }} n.stat.exists"
+
+  tags: nodejs
