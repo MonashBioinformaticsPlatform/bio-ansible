@@ -1,0 +1,32 @@
+- name: Update APT cache
+  tags: ['bcl2fastq']
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Install packages
+  tags: ['bcl2fastq']
+  apt: pkg={{item}} state=present
+  with_items:
+    - libexpat1-dev
+    - libexpat1
+    - expat
+    - alien
+    - build-essential
+    - xsltproc
+    - imagemagick
+    - gnuplot
+
+- name: Download bcl2fastq-1.8.4
+  tags: ['bcl2fastq']
+  get_url:
+    url=ftp://webdata:webdata@ussd-ftp.illumina.com//Downloads/Software/bcl2fastq/bcl2fastq-1.8.4-Linux-x86_64.rpm
+    dest={{ source_dir }}/bcl2fastq-1.8.4-Linux-x86_64.rpm
+    # checksum="sha256:b7c802e3a24fec07a1fbb583fa273ee64cf2a0fad1830f3feb638b7232be268e"
+
+- name: Install bcl2fastq RPM via alien
+  tags: ['bcl2fastq']
+  become: true
+  command: alien -iv {{ source_dir }}/bcl2fastq-1.8.4-Linux-x86_64.rpm creates=/usr/local/bin/configureBclToFastq.pl
+
+- name: Slowly installing perlbrew globally in /opt/perlbrew
+  tags: ['bcl2fastq']
+  script: illumina/files/perlbrew.sh creates=/opt/perlbrew/perls/perl-5.14.4/bin/perl
