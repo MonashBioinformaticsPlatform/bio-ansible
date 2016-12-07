@@ -1,13 +1,13 @@
 ---
 
-- name: download stack tools
+- name: download stack {{ version }}
   get_url:
     url: "https://github.com/commercialhaskell/stack/releases/download/v1.2.0/stack-{{ version }}-linux-x86_64.tar.gz"
     dest: "{{ source_dir }}"
 
   tags: stack
 
-- name: uncompress stack
+- name: uncompress stack {{ version }}
   unarchive: 
     src: "{{ source_dir }}/stack-{{ version }}-linux-x86_64.tar.gz"
     dest: "{{ source_dir }}"
@@ -17,16 +17,16 @@
   tags: stack
 
 - file:
-    dest: "{{ modules_dir }}/stack"
+    dest: "{{ modules_extra }}/stack"
     state: directory
     mode: 0755
 
   tags: stack
 
-- name: stack module definition
+- name: stack {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
-    dest: "{{ modules_dir }}/stack/{{ version }}.lua"
+    dest: "{{ modules_extra }}/stack/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:
@@ -43,27 +43,27 @@
 
   tags: stack
 
-- name: Move stack compiler to apps directory
+- name: move stack {{ version }} compiler to apps directory
   shell: cp -r {{ source_dir }}/stack-{{ version }}-linux-x86_64/stack {{ apps_dir }}/stack-{{ version }}
   args:
     creates: "{{ apps_dir }}/stack-{{ version }}/stack"
 
   tags: stack
 
-- name: Setting register for stack
+- name: setting register for stack {{ version }}
   stat:
     path: "{{ apps_dir }}/stack-{{ version }}/stack"
   register: s
 
   tags: stack
 
-- name: Removing stack tar file
+- name: removing stack {{ version }} tar file
   file:
     dest: "{{ source_dir }}/stack-{{ version }}-linux-x86_64.tar.gz"
     state: absent
   when: "{{ del_src }} s.stat.exists"
 
-- name: Removing stack source directory
+- name: removing stack {{ version }} source directory
   file:
     dest: "{{ source_dir }}/stack-{{ version }}-linux-x86_64"
     state: absent
