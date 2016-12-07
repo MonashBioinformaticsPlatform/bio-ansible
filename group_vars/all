@@ -47,3 +47,4 @@ bds_version: master
 
 # extra packages
 nodejs_version: v6.9.1
+maven_version: 3.3.9
