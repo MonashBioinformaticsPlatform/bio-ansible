@@ -11,7 +11,9 @@
   tags: vcflib
 
 - name: build vcflib {{ version }}
-  shell: cd {{ source_dir }}/vcflib-{{ version }}; make -j {{ threads }}
+  #shell: cd {{ source_dir }}/vcflib-{{ version }}; make -j {{ threads }}
+  # This task fails sometimes, learning from freebayes, this might be due to multithreading
+  shell: cd {{ source_dir }}/vcflib-{{ version }}; make
   args:
     creates: "{{ source_dir }}/vcflib-{{ version }}/bin/vcfstats"
 
