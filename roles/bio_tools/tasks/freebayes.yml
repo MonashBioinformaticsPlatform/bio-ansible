@@ -10,7 +10,9 @@
   tags: freebayes
 
 - name: build freebayes {{ version }}
-  shell: cd {{ source_dir }}/freebayes-{{ version }}; make -j {{ threads }}
+  #shell: cd {{ source_dir }}/freebayes-{{ version }}; make -j {{ threads }}
+  # apparently freebayes can't get compiled with multithreading
+  shell: cd {{ source_dir }}/freebayes-{{ version }}; make
   args:
     creates: "{{ source_dir }}/freebayes-{{ version }}/bin/freebayes"
   tags: freebayes

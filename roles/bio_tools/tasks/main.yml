@@ -7,7 +7,7 @@
 - include: subread.yml version={{ subread_version }}
 - include: picard.yml version={{ picard_version }}
 - include: fastqc.yml version={{ fastqc_version }}
-  #- include: freebayes.yml version={{ freebayes_version }}
+- include: freebayes.yml version={{ freebayes_version }}
 - include: vcflib.yml version={{ vcflib_version }}
 - include: sratoolkit.yml version={{ sratoolkit_version }}
 - include: rnasik-pipe.yml version={{ rnasik_version }} bds_v={{ bds_version }}
