@@ -1,0 +1,67 @@
+---
+
+- name: download virtualenv {{ version }}
+  get_url:
+      url: "https://pypi.python.org/packages/d4/0c/9840c08189e030873387a73b90ada981885010dd9aea134d6de30cd24cb8/virtualenv-{{ version }}.tar.gz"
+      dest: "{{ source_dir }}"
+
+  tags: virtualenv
+
+- name: uncompress virtualenv {{ version }}
+  unarchive: 
+    src: "{{ source_dir }}/virtualenv-{{ version }}.tar.gz"
+    dest: "{{ source_dir }}"
+    copy: no
+    creates: "{{ source_dir }}/virtualenv-{{ version }}/virtualenv.py"
+
+  tags: virtualenv
+
+- file:
+    dest: "{{ modules_extra }}/virtualenv"
+    state: directory
+    mode: 0755
+
+  tags: virtualenv
+
+- name: virtualenv {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_extra }}/virtualenv/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'virtualenv-{{ version }}'
+      skip_bin: true
+      help_text: 'This module loads virtualenv and npm'
+
+  tags: virtualenv 
+
+- file:
+    dest: "{{ apps_dir }}/virtualenv-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: virtualenv
+      
+- file:
+    src: "{{ source_dir }}/virtualenv-{{ version }}/virtualenv.py"
+    dest: "{{ apps_dir }}/virtualenv-{{ version }}/virtualenv"
+    state: link
+    mode: 0755
+
+  tags: virtualenv
+
+- name: setting register for virtualenv {{ version }}
+  stat:
+    path: "{{ apps_dir }}/virtualenv-{{ version }}/virtualenv"
+  register: v
+
+  tags: virtualenv
+
+- name: removing virtualenv {{ version }} tar file
+  file:
+    dest: "{{ source_dir }}/virtualenv-{{ version }}.tar.gz"
+    state: absent
+  when: "{{ del_src }} v.stat.exists"
+
+  tags: virtualenv

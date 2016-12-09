@@ -1,5 +1,6 @@
 ---
 
-- include: stack.yml version=1.2.0
+- include: stack.yml version={{ stack_version }}
 - include: nodejs.yml version={{ nodejs_version }}
 - include: maven.yml version={{ maven_version }}
+- include: virtualenv.yml version={{ virtualenv_version }}
