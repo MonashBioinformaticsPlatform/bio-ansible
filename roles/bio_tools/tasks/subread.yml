@@ -49,7 +49,7 @@
 
   tags: subread
 
-- name: move subread {{ verison }} executable to apps directory
+- name: move subread {{ version }} executable to apps directory
   shell: cp -r {{ source_dir }}/subread-{{ version }}-source/bin {{ apps_dir }}/subread-{{ version }}
   args:
     creates: "{{ apps_dir }}/subread-{{ version }}/subread/bin"

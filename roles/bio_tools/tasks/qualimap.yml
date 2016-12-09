@@ -37,14 +37,14 @@
 
   tags: qualimap
 
-- name: setting register for qualimap {{ verison }}
+- name: setting register for qualimap {{ version }}
   stat:
     path: "{{ apps_dir }}/qualimap_{{ version }}/qualimap"
   register: q
 
   tags: qualimap
 
-- name: removing qualimap {{ verison }} zip file
+- name: removing qualimap {{ version }} zip file
   file:
     dest: "{{ source_dir }}/qualimap_{{ version }}.zip"
     state: absent

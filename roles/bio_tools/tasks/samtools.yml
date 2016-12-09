@@ -24,7 +24,7 @@
 
   tags: samtools
 
-- name: samtools {{ verison }} lmod definition
+- name: samtools {{ version }} lmod definition
   template:
     src: sw-module.lua.j2
     dest: "{{ modules_bio }}/samtools/{{ version }}.lua"
@@ -51,14 +51,14 @@
 
   tags: samtools
 
-- name: setting register for samtools {{ verison }}
+- name: setting register for samtools {{ version }}
   stat:
     path: "{{ apps_dir }}/samtools-{{ version }}/samtools"
   register: s
 
   tags: samtools
 
-- name: removing samtools {{ verison }} source directory
+- name: removing samtools {{ version }} source directory
   file:
     dest: "{{ source_dir }}/samtools-{{ version }}"
     state: absent
