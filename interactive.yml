@@ -4,6 +4,12 @@
   hosts: interactive
   remote_user: "{{ sudo_guy }}"
   roles:
+            # common isn't really needed here
+            # but to insure that r-base is installed, which is part of common
+            # I run it here
+            # TODO think about just running r.yml when installing RStudio
+            # most of the common stuff should be installed and it should cause any issues
+            - common
             - interactive
 
   become: true
