@@ -1,0 +1,28 @@
+---
+
+- name: download rstudio-server {{ version }}
+  get_url:
+    url: "http://download2.rstudio.org/rstudio-server-{{ version }}.deb"
+    dest: "{{ tmp_dir }}" #/rstudio-server-{{version}}.deb"
+
+  tags: rstudio
+
+- name: install dependencies
+  apt:
+      pkg: "{{ item }}"
+      state: present
+  with_items:
+    - gdebi-core
+    - libapparmor1
+
+  tags: rstudio
+
+- name: install rstudio server
+  shell: gdebi -n "{{ tmp_dir }}/rstudio-server-{{ version }}.deb"
+
+  tags: rstudio
+
+- name: restart rstudio-server
+  shell: rstudio-server restart
+
+  tags: rstudio

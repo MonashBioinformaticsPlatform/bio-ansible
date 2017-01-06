@@ -1,0 +1,9 @@
+---
+# This playbook install common dependencies
+- name: Installing interactive bits e.g RStudio
+  hosts: interactive
+  remote_user: "{{ sudo_guy }}"
+  roles:
+            - interactive
+
+  become: true

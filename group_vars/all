@@ -3,7 +3,7 @@
 #----------------
 # Users variable
 #----------------
-main_guy: ubuntu
+main_guy: kirill
 sudo_guy: "{{ main_guy }}"
 
 #---------------------------------
@@ -17,11 +17,13 @@ modules_core: "{{ modules_dir }}/core"
 modules_bio: "{{ modules_dir }}/bio"
 modules_extra: "{{ modules_dir }}/extra"
 apps_dir: "{{ your_path }}/software/apps"
+tmp_dir: "/tmp"
 #------------------------------
 # Other global variables
 #------------------------------
 threads: 4
 del_src: "" # empty string means true and "not" negates that
+rstudio_pro_key: ""
 #---------------------
 # Your tools versions
 #---------------------
@@ -50,3 +52,8 @@ stack_version: 1.2.0
 nodejs_version: v6.9.1
 maven_version: 3.3.9
 virtualenv_version: 15.1.0
+
+# interactive
+rstudio_version: 1.0.136-amd64
+rstudio_pro_version: 1.0.136-amd64
+
