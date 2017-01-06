@@ -18,3 +18,6 @@ Add categories tool categories so can load related tools together eg.
 ## Notes
 
 This ansible for linux machine, if other machine will be in mind, don't forget to switch featureCounts make file type
+
+added sudo rstudio-server verify-installation to varify?
+
