@@ -22,7 +22,12 @@
 
   tags: rstudio
 
-- name: restart rstudio-server
-  shell: rstudio-server restart
-
-  tags: rstudio
+# from what I understad if no user using RStudio server then
+# it aint running then you don't need to restart
+# and if you do restart then exit code is non-zero
+# because there is nothing to restart, which breaks ansible installation
+# Its unlikely that I'll be re-installing/updaing RStudio server while its in use
+  #- name: restart rstudio-server
+  #  shell: rstudio-server restart
+  #
+  #  tags: rstudio

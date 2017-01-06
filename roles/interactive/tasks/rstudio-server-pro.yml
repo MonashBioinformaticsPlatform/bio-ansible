@@ -26,9 +26,3 @@
   shell: rstudio-server license-manager activate "{{ rstudio_pro_key }}"
 
   tags: rstudio_pro
-
-- name: restart rstudio-server-pro
-  shell: rstudio-server restart
-
-  tags: rstudio_pro
-
