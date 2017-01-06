@@ -1,0 +1,13 @@
+---
+
+- name: pip install python packages
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - virtualenv
+      #- htseq
+      #- pysam
+      #- nesoni
+      #- gffutils
+  tags: pip
