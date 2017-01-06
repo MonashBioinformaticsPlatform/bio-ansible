@@ -3,7 +3,7 @@
 #----------------
 # Users variable
 #----------------
-main_guy: kirill
+main_guy: ubuntu
 sudo_guy: "{{ main_guy }}"
 
 #---------------------------------
