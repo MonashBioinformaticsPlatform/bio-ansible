@@ -1,0 +1,44 @@
+---
+
+- name: adding cran mirror to sources.list
+  apt_repository:
+    repo: "deb {{ r_base_mirror }}/bin/linux/ubuntu {{ ubuntu_version }}/"
+    state: present
+
+  tags: r_base
+
+- name: add apt key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: E084DAB9
+
+  tags: r_base
+
+- name: update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+  tags: r_base
+
+- name: install R packages
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+    - r-base
+    - r-base-dev
+    - r-cran-ggplot2
+    - r-bioc-biobase
+    - r-bioc-limma
+    - r-bioc-edger
+    - r-bioc-cummerbund
+    - r-bioc-biomart
+    - r-bioc-biovizbase
+    - r-bioc-genomicfeatures
+    - r-bioc-genomicranges
+    - r-bioc-iranges
+    - r-bioc-rsamtools
+    - r-bioc-shortread
+
+  tags: r_base
