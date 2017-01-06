@@ -24,6 +24,9 @@ tmp_dir: "/tmp"
 threads: 4
 del_src: "" # empty string means true and "not" negates that
 rstudio_pro_key: ""
+r_base_mirror: "https://cran.ms.unimelb.edu.au"
+# at this stage ubuntu_version is mainly for the mirror
+ubuntu_version: trusty
 #---------------------
 # Your tools versions
 #---------------------
