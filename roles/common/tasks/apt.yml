@@ -1,12 +1,11 @@
 ---
-# This to install BigDataScript with all required dependencies
 
-- name: Update APT cache
+- name: update apt cache
   apt:
     update_cache: yes
     cache_valid_time: 3600
 
-- name: Installing common packages
+- name: installing common packages
   apt:
     pkg: "{{ item }}"
     state: present
