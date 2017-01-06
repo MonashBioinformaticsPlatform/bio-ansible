@@ -5,7 +5,9 @@
     update_cache: yes
     cache_valid_time: 3600
 
-- name: installing common packages
+  tags: apt
+
+- name: apt-get common dependencies
   apt:
     pkg: "{{ item }}"
     state: present
@@ -32,3 +34,4 @@
     - pandoc
     # dep for r-base
     #- libssl0.9.8
+  tags: apt
