@@ -62,3 +62,15 @@ ansible-test
 - `main.yml` is a special file, ansible will assume default behaviour from it.
 - please start every `.yml` file with `---` at the top, for more [YAML](http://www.yaml.org/spec/1.2/spec.html)
 
+## Handy tips
+
+#### RStudio 
+
+- [configuring server](https://support.rstudio.com/hc/en-us/articles/200552316-Configuring-the-Server)
+- [managing the server](https://support.rstudio.com/hc/en-us/articles/200532327-Configuring-the-Server)
+
+- useful variable `RSTUDIO_WHICH_R` to set specific `R` version
+
+#### General
+
+- `dpkg -l "*studio*"` to see which debian package you have installed
