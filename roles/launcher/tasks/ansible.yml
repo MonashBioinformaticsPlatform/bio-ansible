@@ -1,0 +1,10 @@
+---
+
+- name: pip install ansible
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - ansible
+
+  tags: launcher_ansible

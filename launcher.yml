@@ -1,0 +1,9 @@
+---
+
+- name: set up ansible installation platform
+  hosts: launcher
+  remote_user: "{{ sudo_guy }}"
+  roles:
+            - launcher
+
+  become: true

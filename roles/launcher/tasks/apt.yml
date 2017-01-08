@@ -1,0 +1,20 @@
+---
+
+- name: install essentials
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+  with_items:
+    # general
+    - tmux
+    - vim
+    - curl
+    - htop
+    - zsh
+    - git
+    # python
+    - python-pip
+    - python-dev
+    - libpython3.4-dev
+
+  tags: launcher_apt

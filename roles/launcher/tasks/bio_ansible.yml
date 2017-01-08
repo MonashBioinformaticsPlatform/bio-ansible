@@ -1,0 +1,9 @@
+---
+
+- name: download bio-ansible {{ version }}
+  git:
+    repo: https://github.com/serine/bio-ansible
+    dest: "{{ your_path }}"
+    version: "{{ version }}"
+
+  tags: bio_ansible
