@@ -1,7 +1,7 @@
 ---
 # This playbook install common dependencies
-- name: Installing dependencies, Java and lmod
-  hosts: home
+- name: installing common apt dependencies, pip python packages as well as java and lmod
+  hosts: think_twice
   remote_user: "{{ sudo_guy }}"
   roles:
             # apt-get installation
