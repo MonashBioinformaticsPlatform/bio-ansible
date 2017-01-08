@@ -3,7 +3,7 @@
 - name: pip install python packages
   pip:
     name: "{{ item }}"
-    state: present
+    state: latest
   with_items:
     - virtualenv
       #- htseq
