@@ -5,6 +5,7 @@
     name: "{{ item }}"
     state: latest
   with_items:
+    - pip
     - ansible
 
   tags: launcher_ansible

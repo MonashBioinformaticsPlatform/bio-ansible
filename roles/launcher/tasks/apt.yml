@@ -12,9 +12,13 @@
     - htop
     - zsh
     - git
+    - gcc
+    - make
     # python
     - python-pip
     - python-dev
-    - libpython3.4-dev
+    - libssl-dev
+    - libssl-doc
+    - zlib1g-dev
 
   tags: launcher_apt
