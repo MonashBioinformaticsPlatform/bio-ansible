@@ -3,7 +3,7 @@
 - name: download rstudio-server-pro {{ version }}
   get_url:
     url: "http://download2.rstudio.org/rstudio-server-pro-{{ version }}.deb"
-    dest: "{{ source_dir }}" #/rstudio-server-{{version}}.deb"
+    dest: "{{ tmp_dir }}" #/rstudio-server-{{version}}.deb"
 
   tags: rstudio_pro
 
@@ -18,7 +18,7 @@
   tags: rstudio_pro
 
 - name: install rstudio-server-pro
-  shell: gdebi -n "{{ source_dir }}/rstudio-server-pro-{{ version }}.deb"
+  shell: gdebi -n "{{ tmp_dir }}/rstudio-server-pro-{{ version }}.deb"
 
   tags: rstudio_pro
 
