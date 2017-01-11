@@ -1,5 +1,5 @@
 ---
 
 - include: rstudio-server.yml version={{ rstudio_version }}
-  #- include: rstudio-server-pro.yml version={{ rstudio_pro_version}}
+#- include: rstudio-server-pro.yml version={{ rstudio_pro_version}}
 #- include: jupyter.yml tags=jupyter version=1.0.0
