@@ -4,10 +4,12 @@
 # Users variable
 #----------------
 sw_guy: "sw-installer"
-sw_guy_passwd: "$6$4pGNnZw/YtBQk$iddc4NrZBR2N7mqwCTpiN4t5AYoC64Y8WfSAUfBtmx.lMn9XzJK6k9BpK6tJGyVvDKhq4z/LltcNMUDwg7Pcq."
+sw_guy_pubkey: "{{ lookup('file', '/home/blah/' }}"
+sw_guy_passwd: ""
 
-main_guy: ubuntu
-sudo_guy: "{{ main_guy }}"
+main_guy: "{{ sw_guy }}"
+sudo_guy: ubuntu
+#sudo_guy: "{{ main_guy }}"
 
 #---------------------------------
 # Different directories variables
@@ -21,6 +23,7 @@ modules_bio: "{{ modules_dir }}/bio"
 modules_extra: "{{ modules_dir }}/extra"
 apps_dir: "{{ your_path }}/software/apps"
 tmp_dir: "/tmp"
+cannonical_sw_dir: "/software"
 #------------------------------
 # Other global variables
 #------------------------------
@@ -70,3 +73,6 @@ bio_ansible_version: master
 jdk_major: 8
 jdk_minor: 121
 java_oracle_version: "{{ jdk_major }}u{{ jdk_minor }}"
+
+# lmod version
+lmod_version: 7.3.6
