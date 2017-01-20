@@ -32,6 +32,7 @@
     - ant
     # extras
     - pandoc
+    - vim
     # dep for python
     - python-pip
     # dep for r-base
