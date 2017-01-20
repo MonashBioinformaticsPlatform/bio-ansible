@@ -32,6 +32,8 @@
     - ant
     # extras
     - pandoc
+    # dep for python
+    - python-pip
     # dep for r-base
     #- libssl0.9.8
   tags: apt
