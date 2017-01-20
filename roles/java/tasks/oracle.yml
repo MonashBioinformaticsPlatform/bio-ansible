@@ -1,0 +1,50 @@
+---
+
+# assumes you have tarbal downloaded
+#
+- name: check jdk-{{ version }}-linux-x64.tar.gz exists
+  local_action: stat path="{{ playbook_dir }}/tarballs/jdk-{{ version }}-linux-x64.tar.gz"
+  register: j
+
+  tags: java_oracle
+
+- name: copy local jdk-{{ version }}-linux-x64.tar.gz file
+  copy:
+    src: "{{ playbook_dir }}/tarballs/jdk-{{ version }}-linux-x64.tar.gz"
+    dest: "{{ source_dir }}/jdk-{{ version }}-linux-x64.tar.gz"
+  when: j.stat.exists
+
+  tags: java_oracle
+
+- name: uncompress jdk {{ version }}
+  unarchive:
+      src: "{{ source_dir }}/jdk-{{ version }}-linux-x64.tar.gz"
+      dest: "{{ apps_dir }}"
+      copy: no
+
+  when: j.stat.exists
+
+  tags: java_oracle
+
+- file:
+    dest: "{{ modules_core }}/java"
+    state: directory
+
+  when: j.stat.exists
+
+  tags: java_oracle
+
+- name: java {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_core }}/java/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'jdk1.{{ jdk_major }}.0_{{ jdk_minor }}'
+      java: true
+      help_text: 'This module loads the java and set enviromental vairables JAVA_HOME and JAVA_ROOT'
+
+  when: j.stat.exists
+
+  tags: java_oracle
