@@ -1,0 +1,20 @@
+---
+# This will install and set up nginx 
+
+- name: update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: apt install nginx
+  apt:
+    name: nginx
+    state: latest
+    #force: yes
+
+- name: copy nginx configuration file
+  template:
+    src: nginx-default-config
+    dest: /etc/nginx/sites-available/default.conf
+
+  notify: restar nginx
