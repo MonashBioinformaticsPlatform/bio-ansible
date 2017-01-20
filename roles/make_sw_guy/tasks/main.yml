@@ -4,7 +4,27 @@
   user:
     name: "{{ sw_guy }}"
     password: "{{ sw_guy_passwd }}"
+    shell: /bin/bash
     comment: "Software install user"
+
+  tags: make_sw_guy
+
+- name: Set authorized key took from file
+  authorized_key:
+    user: "{{ sw_guy }}"
+    state: present
+    key: "{{ sw_guy_pubkey }}"
+
+  tags: make_sw_guy
+
+- file:
+    dest: "/software"
+    state: directory
+    owner: "{{ sw_guy }}"
+    group: "{{ sw_guy }}"
+    mode: 0755
+
+  tags: make_sw_guy
 
 # Adding public key
 #- name: Add public key to the authorised_key
