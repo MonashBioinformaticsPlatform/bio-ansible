@@ -2,4 +2,6 @@
 secret_hosts
 *.retry
 my_hosts
+# ignore tarballs directory
+tarballs
 
