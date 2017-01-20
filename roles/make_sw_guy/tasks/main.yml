@@ -3,7 +3,7 @@
 - name: Create sw-installer user
   user:
     name: "{{ sw_guy }}"
-    password: $6$4pGNnZw/YtBQk$iddc4NrZBR2N7mqwCTpiN4t5AYoC64Y8WfSAUfBtmx.lMn9XzJK6k9BpK6tJGyVvDKhq4z/LltcNMUDwg7Pcq.
+    password: "{{ sw_guy_passwd }}"
     comment: "Software install user"
 
 # Adding public key

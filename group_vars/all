@@ -5,6 +5,8 @@
 #----------------
 main_guy: ubuntu
 sudo_guy: "{{ main_guy }}"
+sw_guy: "sw-installer"
+sw_guy_passwd: "$6$4pGNnZw/YtBQk$iddc4NrZBR2N7mqwCTpiN4t5AYoC64Y8WfSAUfBtmx.lMn9XzJK6k9BpK6tJGyVvDKhq4z/LltcNMUDwg7Pcq."
 
 #---------------------------------
 # Different directories variables
