@@ -1,6 +1,6 @@
 ---
 
-- name: Installing bioinformatics tools
+- name: Installing bioinformatics tools 
   hosts: home
   remote_user: "{{ main_guy }}"
   roles:
@@ -10,5 +10,7 @@
           - bds
           # install everyting into one container
           - bio_tools
+          # java as a module
+          - java
           # install extra packages, not necessary biology relate
           #- extras

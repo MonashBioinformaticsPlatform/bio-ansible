@@ -8,7 +8,5 @@
             - common
             # lmod installed in /opt directory
             - lmod
-            # java installed throught ppa
-            - java
 
   become: true
