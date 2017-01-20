@@ -11,5 +11,7 @@
             # most of the common stuff should be installed and it should cause any issues
             - common
             - interactive
+  #task:
+  #  - include: roles/interactive/tasks/r.yml
 
   become: true
