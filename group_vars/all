@@ -62,3 +62,8 @@ rstudio_pro_version: 1.0.136-amd64
 
 # launcher
 bio_ansible_version: master
+
+# java version
+jdk_major: 8
+jdk_minor: 121
+java_oracle_version: "{{ jdk_major }}u{{ jdk_minor }}"
