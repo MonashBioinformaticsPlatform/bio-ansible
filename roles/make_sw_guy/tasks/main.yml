@@ -1,0 +1,12 @@
+---
+# Make sw-installer guy and allowing him to install software
+- name: Create sw-installer user
+  user:
+    name: "{{ sw_guy }}"
+    password: $6$4pGNnZw/YtBQk$iddc4NrZBR2N7mqwCTpiN4t5AYoC64Y8WfSAUfBtmx.lMn9XzJK6k9BpK6tJGyVvDKhq4z/LltcNMUDwg7Pcq.
+    comment: "Software install user"
+
+# Adding public key
+#- name: Add public key to the authorised_key
+#  authorized_key: user={{ sw_installer }}
+#                  key={{ pub_key }}
