@@ -1,37 +1,43 @@
 ---
 
-- name: Download LMOD
-  get_url:
-    url: http://downloads.sourceforge.net/project/lmod/Lmod-{{ version }}.tar.bz2
-    dest: "/opt/Lmod-{{ version }}.tar.bz2"
-    mode: 0444
+#- file:
+#    dest: "/opt"
+#    state: directory
+#    mode: 0755
+#
+#  tags: lmod
 
-  when: have_root
+- name: download lmod {{ version }}
+  git:
+    repo: https://github.com/TACC/Lmod
+    dest: "/opt/Lmod-{{ version }}"
+    version: "{{ version }}"
+    update: no
 
-- name: Uncompress LMOD
-  unarchive:
-    src: "/opt/Lmod-{{ version }}.tar.bz2"
-    dest: "/opt/"
-    copy: no
-    creates: "/opt/Lmod-{{ version }}/README"
+  tags: lmod
 
-  when: have_root
-
-- name: Compile and install Lmod
+    #- name: uncompress lmod {{ version }}
+    #  unarchive:
+    #    src: "/opt/Lmod-{{ version }}.tar.bz2"
+    #    dest: "/opt/"
+    #    copy: no
+    #    creates: "/opt/Lmod-{{ version }}/README"
+    #
+    #  tags: lmod
+    #
+- name: compile and install lmod {{ version }}
   shell: cd /opt/Lmod-{{ version }}; ./configure --prefix=/opt --with-mpathSearch=YES --with-caseIndependentSorting=YES && make install LUA_INCLUDE=/usr/include/lua5.2
   args:
     creates: "/opt/{{ version }}"
 
-  when: have_root
+  tags: lmod
 
-- name: Copy lmod bash init file to /etc/profile.d/lmod.sh
+- name: copy lmod bash init file to /etc/profile.d/lmod.sh
   template:
     src: lmod.profile.sh.j2
     dest: /etc/profile.d/lmod.sh
     owner: root
     #owner: "{{ main_guy }}"
     mode: 0444
-
-  when: have_root
 
   tags: lmod
