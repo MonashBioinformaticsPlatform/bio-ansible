@@ -6,8 +6,8 @@
     state: latest
   with_items:
     - virtualenv
+    - nesoni
       #- htseq
       #- pysam
-      #- nesoni
       #- gffutils
   tags: pip
