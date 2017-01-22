@@ -18,7 +18,7 @@
   tags: make_sw_guy
 
 - file:
-    dest: "/software"
+    dest: "{{ cannonical_sw_dir }}"
     state: directory
     owner: "{{ sw_guy }}"
     group: "{{ sw_guy }}"
