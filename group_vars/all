@@ -8,8 +8,7 @@ sw_guy_pubkey: "{{ lookup('file', '/home/blah/' }}"
 sw_guy_passwd: ""
 
 main_guy: "{{ sw_guy }}"
-sudo_guy: ubuntu
-#sudo_guy: "{{ main_guy }}"
+sudo_guy: "{{ main_guy }}"
 
 #---------------------------------
 # Different directories variables
