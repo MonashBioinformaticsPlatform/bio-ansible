@@ -1,34 +1,18 @@
 ---
 
-#- file:
-#    dest: "/opt"
-#    state: directory
-#    mode: 0755
-#
-#  tags: lmod
-
 - name: download lmod {{ version }}
   git:
     repo: https://github.com/TACC/Lmod
-    dest: "/opt/Lmod-{{ version }}"
+    dest: "{{ cannonical_sw_dir }}/Lmod-{{ version }}"
     version: "{{ version }}"
     update: no
 
   tags: lmod
 
-    #- name: uncompress lmod {{ version }}
-    #  unarchive:
-    #    src: "/opt/Lmod-{{ version }}.tar.bz2"
-    #    dest: "/opt/"
-    #    copy: no
-    #    creates: "/opt/Lmod-{{ version }}/README"
-    #
-    #  tags: lmod
-    #
 - name: compile and install lmod {{ version }}
-  shell: cd /opt/Lmod-{{ version }}; ./configure --prefix=/opt --with-mpathSearch=YES --with-caseIndependentSorting=YES && make install LUA_INCLUDE=/usr/include/lua5.2
+  shell: cd {{ cannonical_sw_dir }}/Lmod-{{ version }}; ./configure --prefix=/opt --with-mpathSearch=YES --with-caseIndependentSorting=YES && make install LUA_INCLUDE=/usr/include/lua5.2
   args:
-    creates: "/opt/{{ version }}"
+    creates: "{{ cannonical_sw_dir }}/{{ version }}"
 
   tags: lmod
 
