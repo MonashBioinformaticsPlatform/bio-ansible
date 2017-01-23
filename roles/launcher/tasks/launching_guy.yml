@@ -14,7 +14,7 @@
     dest: "{{ tmp_dir }}/bio-ansible-{{ bio_ansible_version }}"
     owner: "{{ main_guy }}"
     group: "{{ main_guy }}"
-    mode: 0644
+    mode: 0600
 
   tags: make_launching_guy
 
