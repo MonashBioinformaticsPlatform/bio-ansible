@@ -3,11 +3,12 @@
 #----------------
 # Users variable
 #----------------
-sw_guy: "sw-installer"
-sw_guy_pubkey: "{{ lookup('file', '/home/blah/' }}"
-sw_guy_passwd: ""
+#sw_guy: "sw-installer"
+#sw_guy_pubkey: "{{ lookup('file', '/home/blah/' }}"
+#sw_guy_passwd: ""
 
-main_guy: "{{ sw_guy }}"
+main_guy: ubuntu
+main_guy_privatekey: ""
 sudo_guy: "{{ main_guy }}"
 
 #---------------------------------
