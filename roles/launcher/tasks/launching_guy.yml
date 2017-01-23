@@ -15,7 +15,7 @@
 
   tags: make_launching_guy
 
-- name: copy private ssh key
+- name: copy public ssh key
   copy:
     src: "{{ main_guy_privatekey }}.pub"
     dest: "{{ tmp_dir }}/bio-ansible-{{ bio_ansible_version }}"
