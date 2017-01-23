@@ -1,0 +1,23 @@
+---
+
+- name: create launching guy {{ main_guy }}
+  user:
+    name: "{{ main_guy }}"
+    shell: /bin/bash
+    comment: "Create launching guy"
+
+  tags: make_launching_guy
+
+- name: copy private ssh key
+  copy:
+    src: "{{ main_guy_privatekey }}"
+    dest: "{{ tmp_dir }}/bio-ansible-{{ bio_ansible_version }}"
+
+  tags: make_launching_guy
+
+- name: copy private ssh key
+  copy:
+    src: "{{ main_guy_privatekey }}.pub"
+    dest: "{{ tmp_dir }}/bio-ansible-{{ bio_ansible_version }}"
+
+  tags: make_launching_guy

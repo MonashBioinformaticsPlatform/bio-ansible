@@ -7,3 +7,13 @@
     version: "{{ version }}"
 
   tags: bio_ansible
+
+- debug: msg="symlink my_hosts file to roles/launcher/templates if you need to"
+  tags: bio_ansible
+
+- name: copy local (secrete!) inventory
+  template:
+    src: my_hosts
+    dest: "{{ tmp_dir }}/bio-ansible-{{ version }}"
+
+  tags: bio_ansible

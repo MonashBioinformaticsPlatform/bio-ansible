@@ -4,6 +4,8 @@
   hosts: launcher
   remote_user: "{{ sudo_guy }}"
   roles:
-            - launcher
+
+    - launcher
 
   become: true
+
