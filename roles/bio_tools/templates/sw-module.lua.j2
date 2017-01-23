@@ -20,6 +20,10 @@ load("STAR/{{ star_version  }}",
     )
 {% endif %}
 
+{% if item.igv is defined %}
+load("java/{{ java_oracle_version }}")
+{% endif %}
+
 {% if item.skip_bin is defined %}
   local path = base
 {% elif item.bin is defined %}

@@ -1,62 +1,73 @@
 ---
 
-- name: download igv {{ version }}
-  get_url:
-    url: "https://github.com/igvteam/igv/archive/v{{ version }}.tar.gz"
-    dest: "{{ source_dir }}/v{{ version }}.tar.gz"
+# assumes you have tarbal downloaded
+#
+- name: check IGV-{{ version }}.zip exists
+  local_action: stat path="{{ playbook_dir }}/tarballs/IGV-{{ version }}.zip
+  register: i
+
+  tags: igv
+
+- name: copy IGV-{{ version }}.zip file
+  copy:
+    src: "{{ playbook_dir }}/tarballs/IGV-{{ version }}.zip"
+    dest: "{{ source_dir }}/IGV-{{ version }}.zip"
+  when: i.stat.exists
 
   tags: igv
 
 - name: uncompress igv {{ version }}
   unarchive:
-      src: "{{ source_dir }}/v{{ version }}.tar.gz"
-      dest: "{{ source_dir }}"
+      src: "{{ source_dir }}/IGV-{{ version }}.zip"
+      dest: "{{ apps_dir }}"
       copy: no
 
-  tags: igv
-
-- name: build igv {{ version }}
-  shell: cd {{ source_dir }}/igv-{{ version }}; ant
-  args:
-    creates: "{{ source_dir }}/igv-{{ version }}/igv.jar"
-
-  tags: igv
-
-- debug: msg="If this task failes check that you have ant installed"
+  when: i.stat.exists
 
   tags: igv
 
 - file:
-    dest: "{{ apps_dir }}/igv-{{ version }}"
+    dest: "{{ modules_core }}/igv"
     state: directory
-    mode: 0755
 
-  tags: igv
-
-- name: copy igv {{ version }} shell file
-  template:
-    src: igv
-    dest: "{{ apps_dir }}/igv-{{ version }}"
-    mode: 0755
-
-  tags: igv
-
-- file:
-    dest: "{{ modules_bio }}/igv"
-    state: directory
-    mode: 0755
+  when: i.stat.exists
 
   tags: igv
 
 - name: igv {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
-    dest: "{{ modules_bio }}/igv/{{ version }}.lua"
+    dest: "{{ modules_core }}/igv/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:
     - dir: 'igv-{{ version }}'
+      igv: true
       skip_bin: true
       help_text: 'This module loads the igv data viewing tool'
 
-  tags: igv 
+  when: i.stat.exists
+
+  tags: igv
+
+  #- file:
+  #    dest: "{{ apps_dir }}/igv-{{ version }}"
+  #    state: directory
+  #    mode: 0755
+  #
+  #  tags: igv
+  #
+  #- name: copy igv {{ version }} shell file
+  #  template:
+  #    src: igv
+  #    dest: "{{ apps_dir }}/igv-{{ version }}"
+  #    mode: 0755
+  #
+  #  tags: igv
+  #
+  #- file:
+  #    dest: "{{ modules_bio }}/igv"
+  #    state: directory
+  #    mode: 0755
+  #
+  #  tags: igv
