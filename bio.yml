@@ -6,11 +6,11 @@
   roles:
           # make container for all other installation
           - make_dirs
-          # install everyting into one container
-          - bio_tools
           # java as a module
           - java
           # installing BigDataScript
-          - bds
+          #- bds
+          # install everyting into one container
+          - bio_tools
           # install extra packages, not necessary biology relate
           - extras
