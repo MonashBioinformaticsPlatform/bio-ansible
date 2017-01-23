@@ -67,7 +67,7 @@ rstudio_version: 1.0.136-amd64
 rstudio_pro_version: 1.0.136-amd64
 
 # launcher
-bio_ansible_version: master
+bio_ansible_version: 0.3.x
 
 # java version
 jdk_major: 8
