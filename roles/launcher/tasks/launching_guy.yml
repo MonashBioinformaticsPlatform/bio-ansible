@@ -11,7 +11,7 @@
 - name: copy private ssh key
   copy:
     src: "{{ main_guy_privatekey }}"
-    dest: "{{ tmp_dir }}/bio-ansible-{{ bio_ansible_version }}"
+    dest: "{{ tmp_dir }}"
     owner: "{{ main_guy }}"
     group: "{{ main_guy }}"
     mode: 0600
@@ -21,7 +21,7 @@
 - name: copy public ssh key
   copy:
     src: "{{ main_guy_privatekey }}.pub"
-    dest: "{{ tmp_dir }}/bio-ansible-{{ bio_ansible_version }}"
+    dest: "{{ tmp_dir }}"
     owner: "{{ main_guy }}"
     group: "{{ main_guy }}"
     mode: 0644
