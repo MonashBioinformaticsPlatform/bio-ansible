@@ -1,16 +1,16 @@
 ---
 
 - name: Installing bioinformatics tools 
-  hosts: home
+  hosts: bio
   remote_user: "{{ main_guy }}"
   roles:
           # make container for all other installation
           - make_dirs
-          # installing BigDataScript
-          - bds
           # install everyting into one container
           - bio_tools
           # java as a module
           - java
+          # installing BigDataScript
+          - bds
           # install extra packages, not necessary biology relate
-          #- extras
+          - extras
