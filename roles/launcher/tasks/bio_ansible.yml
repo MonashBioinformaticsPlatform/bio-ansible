@@ -8,6 +8,17 @@
 
   tags: bio_ansible
 
+# TODO not the best permission set up. want directories to be
+# executable but file not !
+- name: change permission for bio-ansible {{ version }}
+  file:
+    dest: "{{ tmp_dir }}/bio-ansible-{{ version }}"
+    recurse: yes
+    state: directory
+    owner: "{{ main_guy }}"
+    group: "{{ main_guy }}"
+    mode: 0755
+
 - debug: msg="symlink my_hosts file to roles/launcher/templates if you need to"
   tags: bio_ansible
 
@@ -15,5 +26,8 @@
   template:
     src: my_hosts
     dest: "{{ tmp_dir }}/bio-ansible-{{ version }}"
+    owner: "{{ main_guy }}"
+    group: "{{ main_guy }}"
+    mode: 0644
 
   tags: bio_ansible

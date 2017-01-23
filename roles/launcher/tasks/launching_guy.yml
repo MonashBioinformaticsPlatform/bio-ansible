@@ -12,6 +12,9 @@
   copy:
     src: "{{ main_guy_privatekey }}"
     dest: "{{ tmp_dir }}/bio-ansible-{{ bio_ansible_version }}"
+    owner: "{{ main_guy }}"
+    group: "{{ main_guy }}"
+    mode: 0644
 
   tags: make_launching_guy
 
@@ -19,5 +22,8 @@
   copy:
     src: "{{ main_guy_privatekey }}.pub"
     dest: "{{ tmp_dir }}/bio-ansible-{{ bio_ansible_version }}"
+    owner: "{{ main_guy }}"
+    group: "{{ main_guy }}"
+    mode: 0644
 
   tags: make_launching_guy
