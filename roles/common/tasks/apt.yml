@@ -12,7 +12,7 @@
     pkg: "{{ item }}"
     state: latest
   with_items:
-    - git
+    # essentials
     - gcc
     - make
     - cmake
@@ -33,8 +33,17 @@
     # extras
     - pandoc
     - vim
+    - tmux
+    - git
+    - curl
+    - htop
+    - zsh
     # dep for python
     - python-pip
+    - python-dev
+    - libssl-dev
+    - libssl-doc
+    - zlib1g-dev
     # dep for r-base
     #- libssl0.9.8
   tags: apt
