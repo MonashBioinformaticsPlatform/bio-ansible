@@ -4,6 +4,8 @@
   hosts: think_twice
   remote_user: "{{ sudo_guy }}"
   roles:
+            # need to have no previlidged installer guy
+            - make_sw_guy
             # apt-get installation
             - common
             # lmod installed in /opt directory
