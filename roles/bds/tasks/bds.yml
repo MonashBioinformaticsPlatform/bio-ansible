@@ -1,18 +1,27 @@
 ---
 
+- name: check oracle java exists
+  stat:
+    path: "{{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}"
+  register: j
+
+  tags: bds
+
 - name: download BigDataScript {{ version }}
   git:
     repo: https://github.com/pcingola/BigDataScript.git
     dest: "{{ source_dir }}/BigDataScript-{{ version }}"
     version: "{{ version }}"
     update: no
+  when: j.stat.isdir is defined and j.stat.isdir
 
   tags: bds
 
 - name: build BigDataScript {{ version }}
-  shell: cd {{ source_dir }}/BigDataScript-{{ version }}/; ./scripts/install.sh
+  shell: export JAVA_HOME={{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}; cd {{ source_dir }}/BigDataScript-{{ version }}/; ./scripts/install.sh
   args:
     creates: "{{ local_home }}/.bds/bds"
+  when: j.stat.isdir is defined and j.stat.isdir
 
   tags: bds
 
@@ -20,6 +29,7 @@
   shell: mv "{{ local_home }}/.bds" "{{ apps_dir }}/BigDataScript-{{ version }}"
   args:
     creates: "{{ apps_dir }}/BigDataScript-{{ version }}/bds"
+  when: j.stat.isdir is defined and j.stat.isdir
 
   tags: bds
 
@@ -27,6 +37,7 @@
   template:
     src: bds.config
     dest: "{{ apps_dir }}/BigDataScript-{{ version }}"
+  when: j.stat.isdir is defined and j.stat.isdir
 
   tags: bds
 
@@ -34,6 +45,7 @@
     dest: "{{ modules_bio }}/BigDataScript"
     state: directory
     mode: 0755
+  when: j.stat.isdir is defined and j.stat.isdir
 
   tags: bds
 
@@ -47,6 +59,7 @@
     - dir: 'BigDataScript-{{ version }}'
       skip_bin: true
       help_text: 'This module loads BigDataScript'
+  when: j.stat.isdir is defined and j.stat.isdir
 
   tags: bds
 
