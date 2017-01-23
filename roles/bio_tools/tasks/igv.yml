@@ -3,7 +3,7 @@
 # assumes you have tarbal downloaded
 #
 - name: check IGV-{{ version }}.zip exists
-  local_action: stat path="{{ playbook_dir }}/tarballs/IGV-{{ version }}.zip
+  local_action: stat path="{{ playbook_dir }}/tarballs/IGV-{{ version }}.zip"
   register: i
 
   tags: igv
