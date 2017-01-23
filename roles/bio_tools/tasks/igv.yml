@@ -1,73 +1,76 @@
 ---
 
-# assumes you have tarbal downloaded
-#
-- name: check IGV-{{ version }}.zip exists
-  local_action: stat path="{{ playbook_dir }}/tarballs/IGV-{{ version }}.zip"
-  register: i
+- name: check oracle java exists
+  stat:
+    path: "{{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}"
+  register: j
 
   tags: igv
 
-- name: copy IGV-{{ version }}.zip file
-  copy:
-    src: "{{ playbook_dir }}/tarballs/IGV-{{ version }}.zip"
-    dest: "{{ source_dir }}/IGV-{{ version }}.zip"
-  when: i.stat.exists
+- name: download igv {{ version }}
+  get_url:
+    url: "https://github.com/igvteam/igv/archive/v{{ version }}.tar.gz"
+    dest: "{{ source_dir }}/v{{ version }}.tar.gz"
+  when: j.stat.isdir is defined and j.stat.isdir
 
   tags: igv
 
 - name: uncompress igv {{ version }}
   unarchive:
-      src: "{{ source_dir }}/IGV-{{ version }}.zip"
-      dest: "{{ apps_dir }}"
+      src: "{{ source_dir }}/v{{ version }}.tar.gz"
+      dest: "{{ source_dir }}"
       copy: no
+  when: j.stat.isdir is defined and j.stat.isdir
 
-  when: i.stat.exists
+  tags: igv
+
+- name: build igv {{ version }}
+  shell: export JAVA_HOME={{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}; cd {{ source_dir }}/igv-{{ version }}; ant
+  args:
+    creates: "{{ source_dir }}/igv-{{ version }}/igv.jar"
+  when: j.stat.isdir is defined and j.stat.isdir
+
+  tags: igv
+
+- debug: msg="If this task failes check that you have ant installed"
 
   tags: igv
 
 - file:
-    dest: "{{ modules_core }}/igv"
+    dest: "{{ apps_dir }}/igv-{{ version }}"
     state: directory
+    mode: 0755
+  when: j.stat.isdir is defined and j.stat.isdir
 
-  when: i.stat.exists
+  tags: igv
+
+- name: copy igv {{ version }} shell file
+  template:
+    src: igv
+    dest: "{{ apps_dir }}/igv-{{ version }}"
+    mode: 0755
+  when: j.stat.isdir is defined and j.stat.isdir
+
+  tags: igv
+
+- file:
+    dest: "{{ modules_bio }}/igv"
+    state: directory
+    mode: 0755
+  when: j.stat.isdir is defined and j.stat.isdir
 
   tags: igv
 
 - name: igv {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
-    dest: "{{ modules_core }}/igv/{{ version }}.lua"
+    dest: "{{ modules_bio }}/igv/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:
     - dir: 'igv-{{ version }}'
-      igv: true
       skip_bin: true
       help_text: 'This module loads the igv data viewing tool'
+  when: j.stat.isdir is defined and j.stat.isdir
 
-  when: i.stat.exists
-
-  tags: igv
-
-  #- file:
-  #    dest: "{{ apps_dir }}/igv-{{ version }}"
-  #    state: directory
-  #    mode: 0755
-  #
-  #  tags: igv
-  #
-  #- name: copy igv {{ version }} shell file
-  #  template:
-  #    src: igv
-  #    dest: "{{ apps_dir }}/igv-{{ version }}"
-  #    mode: 0755
-  #
-  #  tags: igv
-  #
-  #- file:
-  #    dest: "{{ modules_bio }}/igv"
-  #    state: directory
-  #    mode: 0755
-  #
-  #  tags: igv
+  tags: igv 
