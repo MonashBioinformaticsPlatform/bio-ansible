@@ -3,16 +3,10 @@
 #----------------
 # Users variable
 #----------------
-#sw_guy: "sw-installer"
-#sw_guy_pubkey: "{{ lookup('file', '/home/blah/' }}"
-#sw_guy_passwd: ""
-
 main_guy: ubuntu
-# only need to specify private key if you planing to setyp a launching server
-main_guy_privatekey: ""
-# public key to connect to the 
-#main_guy_pubkey: ""
 sudo_guy: "{{ main_guy }}"
+# need to specify private key if you planing to setyp a launching server
+main_guy_privatekey: ""
 
 #---------------------------------
 # Different directories variables
@@ -39,7 +33,6 @@ ubuntu_version: trusty
 #---------------------
 # Your tools versions
 #---------------------
-
 # bio_tools versions
 star_version: 2.5.2b
 bwa_version: v0.7.15
@@ -68,9 +61,6 @@ virtualenv_version: 15.1.0
 # interactive
 rstudio_version: 1.0.136-amd64
 rstudio_pro_version: 1.0.136-amd64
-
-# launcher
-bio_ansible_version: 0.3.x
 
 # java version
 jdk_major: 8
