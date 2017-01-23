@@ -2,26 +2,25 @@
 # Make sw-installer guy and allowing him to install software
 - name: Create sw-installer user
   user:
-    name: "{{ sw_guy }}"
-    password: "{{ sw_guy_passwd }}"
+    name: "{{ main_guy }}"
     shell: /bin/bash
     comment: "Software install user"
 
   tags: make_sw_guy
 
-- name: Set authorized key took from file
-  authorized_key:
-    user: "{{ sw_guy }}"
-    state: present
-    key: "{{ sw_guy_pubkey }}"
-
-  tags: make_sw_guy
+  #- name: Set authorized key took from file
+  #  authorized_key:
+  #    user: "{{ main_guy }}"
+  #    state: present
+  #    key: "{{ main_guy_pubkey }}"
+  #
+  #  tags: make_sw_guy
 
 - file:
     dest: "{{ cannonical_sw_dir }}"
     state: directory
-    owner: "{{ sw_guy }}"
-    group: "{{ sw_guy }}"
+    owner: "{{ main_guy }}"
+    group: "{{ main_guy }}"
     mode: 0755
 
   tags: make_sw_guy

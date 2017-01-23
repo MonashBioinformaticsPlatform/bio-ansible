@@ -8,7 +8,10 @@
 #sw_guy_passwd: ""
 
 main_guy: ubuntu
+# only need to specify private key if you planing to setyp a launching server
 main_guy_privatekey: ""
+# public key to connect to the 
+#main_guy_pubkey: ""
 sudo_guy: "{{ main_guy }}"
 
 #---------------------------------
