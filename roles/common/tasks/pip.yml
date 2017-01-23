@@ -7,7 +7,8 @@
   with_items:
     - virtualenv
     - nesoni
+    # bioinformaticky packages
+    - pysam
+    - gffutils
       #- htseq
-      #- pysam
-      #- gffutils
   tags: pip
