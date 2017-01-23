@@ -1,8 +1,5 @@
 ---
 
-- debug:
-    msg: "{{ main_guy }}"
-
 - name: download bio-ansible {{ version }}
   git:
     repo: https://github.com/serine/bio-ansible
@@ -10,20 +7,4 @@
     version: "{{ version }}"
 
   become_user: "{{ main_guy }}"
-  tags: bio_ansible
-
-- debug:
-    msg: "{{ main_guy }}"
-
-- debug: msg="symlink my_hosts file to roles/launcher/templates if you need to"
-  tags: bio_ansible
-
-- name: copy local (secrete!) inventory
-  template:
-    src: my_hosts
-    dest: "{{ tmp_dir }}"
-    owner: "{{ main_guy }}"
-    group: "{{ main_guy }}"
-    mode: 0644
-
   tags: bio_ansible
