@@ -1,6 +1,0 @@
----
-
-- include: apt.yml
-- include: bio_ansible.yml version={{ bio_ansible_version }}
-- include: pip.yml
-- include: launching_guy.yml
