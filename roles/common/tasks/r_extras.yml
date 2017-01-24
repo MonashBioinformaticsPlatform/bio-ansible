@@ -13,7 +13,7 @@
   tags: r-extras
 
 - file:
-    dest: "{{ source_dir }}/scripts/R"
+    dest: "{{ tmp_dir }}/scripts/R"
     state: directory
     mode: 0755
   with_items: "{{ e.results }}"
@@ -21,18 +21,20 @@
   
   tags: r-extras
 
-- name: copy R script {{ source_dir }}
+- name: copy R script {{ tmp_dir }}
   copy:
     src: "{{ playbook_dir }}/scripts/R/{{ item.item }}"
-    dest: "{{ source_dir }}/scripts/R"
+    dest: "{{ tmp_dir }}/scripts/R"
   with_items: "{{ e.results }}"
   when: item.stat.exists
 
   tags: r-extras
 
 - name: run CRAN R script to install packages
-  shell: Rscript {{ source_dir }}/scripts/R/{{ item.item }} {{ r_base_mirror }}
+  shell: Rscript {{ tmp_dir }}/scripts/R/{{ item.item }} {{ r_base_mirror }}
   with_items: "{{ e.results }}"
   when: item.stat.exists
 
   tags: r-extras
+
+#TODO add clean up of scripts/R directory
