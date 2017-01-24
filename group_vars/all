@@ -6,7 +6,7 @@
 main_guy: ubuntu
 sudo_guy: "{{ main_guy }}"
 # need to specify private key if you planing to setyp a launching server
-main_guy_privatekey: ""
+main_guy_pubkey: ""
 
 #---------------------------------
 # Different directories variables
