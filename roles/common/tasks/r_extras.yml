@@ -1,0 +1,14 @@
+---
+
+- name: check CRAN R script exists
+  stat:
+    path: "{{ playbook_dir }}/scripts/R/cran.R"
+  register: cran
+
+  tags: r_extras
+
+- name: run CRAN R script to install packages
+  shell: Rscript '{{ playbook_dir }}/scripts/R/cran.R {{ r_base_mirror }}'
+  when: cran.stat.exists
+
+  tags: r_extras
