@@ -7,8 +7,7 @@
       - cran.R
       - bioconductor.R
   delegate_to: localhost
-  become_user: "{{ local_guy }}"
-  #become: false
+  become: false
   register: e
 
   tags: r-extras
