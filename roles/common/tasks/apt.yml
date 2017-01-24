@@ -47,5 +47,6 @@
     # dep for R
     - libcurl4-openssl-dev
     - libxml2-dev
-    #- libssl0.9.8
+    # RStudio dep
+    - libapparmor1
   tags: apt

@@ -1,33 +1,21 @@
 ---
 
-- name: download rstudio-server {{ version }}
-  get_url:
-    url: "http://download2.rstudio.org/rstudio-server-{{ version }}.deb"
-    dest: "{{ tmp_dir }}" #/rstudio-server-{{version}}.deb"
-
-  tags: rstudio
-
-- name: install dependencies
+- name: update apt cache
   apt:
-      pkg: "{{ item }}"
-      state: present
-  with_items:
-    - gdebi-core
-    - libapparmor1
+    update_cache: yes
+    cache_valid_time: 3600
 
   tags: rstudio
 
-- name: install rstudio server
-  shell: gdebi -n "{{ tmp_dir }}/rstudio-server-{{ version }}.deb"
+- name: download rstudio-server {{ version }}
+  apt:
+    deb: "http://download2.rstudio.org/rstudio-server-{{ version }}.deb"
 
   tags: rstudio
 
-# from what I understad if no user using RStudio server then
-# it aint running then you don't need to restart
-# and if you do restart then exit code is non-zero
-# because there is nothing to restart, which breaks ansible installation
-# Its unlikely that I'll be re-installing/updaing RStudio server while its in use
-  #- name: restart rstudio-server
-  #  shell: rstudio-server restart
-  #
-  #  tags: rstudio
+- name: restart rstudio {{ version }}
+  service:
+    name: rstudio-server
+    state: restarted
+
+  tags: rstudio
