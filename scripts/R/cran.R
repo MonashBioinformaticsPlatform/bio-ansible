@@ -11,6 +11,7 @@ if (length(args)==0) {
                      "shiny"
                      ),
                     # pass in r_base_mirror
-                    repos=args[1]
+                    repos=args[1],
+                    lib="/usr/local/lib/R/site-library"
                   )
 }

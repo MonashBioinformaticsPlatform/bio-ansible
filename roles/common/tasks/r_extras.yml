@@ -2,13 +2,38 @@
 
 - name: check CRAN R script exists
   stat:
-    path: "{{ playbook_dir }}/scripts/R/cran.R"
-  register: cran
+    path: "{{ playbook_dir }}/scripts/R/{{ item }}"
+  with_items:
+      - cran.R
+      - bioconductor.R
+  delegate_to: localhost
+  become_user: "{{ local_guy }}"
+  #become: false
+  register: e
 
-  tags: r_extras
+  tags: r-extras
+
+- file:
+    dest: "{{ source_dir }}/scripts/R"
+    state: directory
+    mode: 0755
+  with_items: "{{ e.results }}"
+  when: item.stat.exists
+  
+  tags: r-extras
+
+- name: copy R script {{ source_dir }}
+  copy:
+    src: "{{ playbook_dir }}/scripts/R/{{ item.item }}"
+    dest: "{{ source_dir }}/scripts/R"
+  with_items: "{{ e.results }}"
+  when: item.stat.exists
+
+  tags: r-extras
 
 - name: run CRAN R script to install packages
-  shell: Rscript '{{ playbook_dir }}/scripts/R/cran.R {{ r_base_mirror }}'
-  when: cran.stat.exists
+  shell: Rscript {{ source_dir }}/scripts/R/{{ item.item }} {{ r_base_mirror }}
+  with_items: "{{ e.results }}"
+  when: item.stat.exists
 
-  tags: r_extras
+  tags: r-extras

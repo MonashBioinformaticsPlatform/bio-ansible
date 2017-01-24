@@ -44,6 +44,8 @@
     - libssl-dev
     - libssl-doc
     - zlib1g-dev
-    # dep for r-base
+    # dep for R
+    - libcurl4-openssl-dev
+    - libxml2-dev
     #- libssl0.9.8
   tags: apt

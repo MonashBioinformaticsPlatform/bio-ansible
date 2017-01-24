@@ -31,13 +31,10 @@
     - r-base-dev
       #    - r-cran-ggplot2
       #    - r-bioc-biobase
-      #    - r-bioc-limma
-      #    - r-bioc-edger
       #    - r-bioc-cummerbund
       #    - r-bioc-biomart
       #    - r-bioc-biovizbase
       #    - r-bioc-genomicfeatures
-      #    - r-bioc-genomicranges
       #    - r-bioc-iranges
       #    - r-bioc-rsamtools
       #    - r-bioc-shortread
