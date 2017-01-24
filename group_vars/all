@@ -60,6 +60,7 @@ maven_version: 3.3.9
 # interactive
 rstudio_version: 1.0.136-amd64
 rstudio_pro_version: 1.0.136-amd64
+shiny_version: 1.5.1.834-amd64
 
 # java version
 jdk_major: 8
