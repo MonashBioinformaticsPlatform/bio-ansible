@@ -17,9 +17,10 @@ then
       if [[ -z $module_path ]]
       then
         module_path+=$mtype
+      else
+        module_path+=":"
+        module_path+=$mtype
       fi
-      module_path+=":"
-      module_path+=$mtype
     fi
   done
 
