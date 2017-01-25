@@ -7,12 +7,12 @@
 
   tags: apt
 
-- name: upgrade
-  apt:
-    upgrade: yes
-    autoremove: yes
-
-  tags: apt
+  #- name: upgrade
+  #  apt:
+  #    upgrade: yes
+  #    autoremove: yes
+  #
+  #  tags: apt
 
 - name: apt-get common dependencies
   apt:
