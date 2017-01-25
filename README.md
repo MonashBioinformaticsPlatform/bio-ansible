@@ -1,6 +1,6 @@
 # Bio-Ansible 
 
-> Simple way to configure your server remotely, one ansible instead of many `sudo apt-get install`s
+> Do bioinformatics, not sys-admining - run the playbook and get back to work !
 
 ## Content 
 
