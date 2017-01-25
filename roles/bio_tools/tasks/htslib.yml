@@ -15,7 +15,7 @@
   args:
     creates: "{{ source_dir }}/htslib-{{ version }}/bin/tabix"
 
-  tags: build_htslib
+  tags: build
 
 - file:
     dest: "{{ modules_bio }}/htslib"
