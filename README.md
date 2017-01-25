@@ -15,24 +15,22 @@
 Assume you know how to start new [virtual machine (vm)](https://en.wikipedia.org/wiki/Virtual_machine) instance and how to install and operate [ansible](http://docs.ansible.com/ansible/intro.html).
 
 - bring up a vm (AWS, NeCTAR, OpenStack, etc)
-
-_depending on how you want to run this playbook the order of the next couple of steps will change, but I can see you are a smart cookie, so you'll be fine_
-
 - set up your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
 - edit `host` file to add vm ip address, edit `groups_vars/all` files to change vm username
-- [run ansible](#running-ansible)
+
 ```BASH
 ansible-playbook -i hosts all.yml
 ```
-- all done !
-
 ## Introduction
 
-This ansible script is multi-potent as it can set up from scratch the whole army of server for bioinformatics (genomic focused) work or this ansible can be used to install selected tools only. This ansible script can be used by user without `sudo` privilege for installing tools, this assuming all of the common dependencies have been installed (which is usually the case on the running server). If you are missing some or all of the dependencies point your system administrator [to these dependencies](roles/common/tasks/main.yml) plus Java 8. One can use `common.yml` to install all of the dependencies at once.
+This bio-ansible script is multi-potent as it can set up from scratch the whole army of servers with bioinformatics (genomic) focus or just install handful of selected tools. Depending what you are trying to do you can run bio-ansible as a non privileged user, particular if are just installing bio-tools. However you might still need to install some "common" dependencies and for that you might need `sudo`.
+
+For more comprehensive playbook breakdown [read here](#supplementary/playbook_breakdown.md)
 
 Also note that modules are ‘idempotent’, meaning if you run them again, they will make only the changes they must in order to bring the system to the desired state. This makes it very safe to rerun the same playbook multiple times. They won’t change things unless they have to change things.
 
 **It is safe to re-run the same playbook**
+
 
 #### Running ansible
 
