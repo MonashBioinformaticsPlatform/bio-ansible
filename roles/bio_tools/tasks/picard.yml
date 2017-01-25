@@ -9,7 +9,7 @@
 
 - name: download picard tools {{ version }}
   get_url:
-    url: "https://github.com/broadinstitute/picard/releases/download/{{ version }}/picard.jar"
+    url: "https://github.com/broadinstitute/picard/releases/download/{{ version }}/picard-{{ version }}.jar"
     dest: "{{ apps_dir }}/picard-{{ version }}"
 
   tags: picard
@@ -21,7 +21,7 @@
     owner: "{{ main_guy }}" 
     mode: 0755
   with_items:
-    - jar: "{{ apps_dir }}/picard-{{ version }}/picard.jar"
+    - jar: "{{ apps_dir }}/picard-{{ version }}/picard-{{ version }}.jar"
 
   tags: picard
 
