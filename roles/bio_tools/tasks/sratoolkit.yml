@@ -56,7 +56,7 @@
 
   tags: sratoolkit
 
-- name: removing SRA ToolKit {{ verison }} source directory
+- name: removing SRA ToolKit {{ version }} source directory
   file:
     dest: "{{ source_dir }}/sratoolkit.{{ version }}-ubuntu64"
     state: absent
