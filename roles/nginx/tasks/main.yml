@@ -14,10 +14,13 @@
     #force: yes
   tags: nginx
 
+#TODO might want to do slightly better
+#and name your config differently 
+#and add a task to symlink it to sites-enabled
 - name: copy nginx configuration file
   template:
-    src: nginx-default-config
-    dest: /etc/nginx/sites-available/default.conf
+    src: default
+    dest: /etc/nginx/sites-available/default
     backup: yes
 
   tags: nginx
