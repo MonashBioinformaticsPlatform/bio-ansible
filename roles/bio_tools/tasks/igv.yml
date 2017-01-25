@@ -69,6 +69,7 @@
     mode: 0644
   with_items:
     - dir: 'igv-{{ version }}'
+      java: true
       skip_bin: true
       help_text: 'This module loads the igv data viewing tool'
   when: j.stat.isdir is defined and j.stat.isdir
