@@ -12,14 +12,13 @@
 - name: compile and install lmod {{ version }}
   shell: cd {{ tmp_dir }}/Lmod-{{ version }}; ./configure --prefix=/opt --with-mpathSearch=YES --with-caseIndependentSorting=YES && make install LUA_INCLUDE=/usr/include/lua5.2
   args:
-    creates: "{{ tmp_dir }}/Lmod-{{ version }}"
 
   tags: lmod
 
-- name: copy lmod bash init file to /etc/profile.d/lmod.bash
+- name: copy lmod bash init file to /etc/profile.d/lmod.sh
   template:
     src: lmod.profile.sh.j2
-    dest: /etc/profile.d/lmod.bash
+    dest: /etc/profile.d/lmod.sh
     #owner: root
     #owner: "{{ main_guy }}"
     mode: 0444
