@@ -39,7 +39,7 @@ bwa_version: v0.7.15
 htslib_version: 1.3.2
 samtools_version: 1.3.1
 subread_version: 1.5.1
-picard_version: 2.7.1
+picard_version: 2.8.2
 fastqc_version: 0.11.5
 freebayes_version: master
 vcflib_version: master
@@ -47,7 +47,7 @@ sratoolkit_version: 2.8.0
 rnasik_version: master
 qualimap_version: v2.2.1
 seqtk_version: v1.2
-igv_version: 2.3.88
+igv_version: 2.3.90
 
 # bds version
 bds_version: master
@@ -68,4 +68,4 @@ jdk_minor: 121
 java_oracle_version: "{{ jdk_major }}u{{ jdk_minor }}"
 
 # lmod version
-lmod_version: 7.3.6
+lmod_version: 7.3.9
