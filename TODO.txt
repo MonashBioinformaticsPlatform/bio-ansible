@@ -21,3 +21,29 @@ This ansible for linux machine, if other machine will be in mind, don't forget t
 
 added sudo rstudio-server verify-installation to varify?
 
+## Update README
+
+Most (all) of the java tools will be tied with java_oracle installation before hand. If java oracle app isn't installed then no other java oracle
+depended tools will be installed. Refere to java oracle installation guide - need to manually download it into tarballs directory
+
+Java Oracle dependent
+
+- igv
+- bds
+
+## Questions
+
+- need to understand ports. Why TCP 3838 for ShinyApps and not HTTP/HTTPS ?
+- also nestat -tuple showed port 3838 before I enabled it?
+
+
+## Nginx 
+
+- [nice installation guied](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-16-04)
+- `/var/www/html` - default location for file serving
+
+#### Improtant nginx files
+
+- `/etc/nginx/nginx.conf` - The main Nginx configuration file. This can be modified to make changes to the Nginx global configuraiton.
+- `/etc/nginx/sites-available` - The directory where per-site "server blocks" can be stored. Nginx will not use the configuration files found in this directory unless they are linked to the sites-enabled directory (see below). Typically, all server block configuration is done in this directory, and then enabled by linking to the other directory.
+- `/etc/nginx/sites-enabled/` - The directory where enabled per-site "server blocks" are stored. Typically, these are created by linking to configuration files found in the sites-available directory
