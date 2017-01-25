@@ -1,6 +1,6 @@
 # Bio-Ansible 
 
-> Do bioinformatics, not sys-admining - run the playbook and get back to work !
+> Do bioinformatics not sys-admining - run the playbook and get back to work !
 
 ## Content 
 
