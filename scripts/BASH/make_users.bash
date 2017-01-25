@@ -8,11 +8,11 @@ make_user() {
   then
     made_rand=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c7`
     made_pass=`mkpasswd --method=sha-256 $made_rand`
-    #user_group="unknown"
-    #useradd --password $made_pass \
-    #        --create-home \
-    #        --shell /bin/bash \
-    #        "$new_guy"
+    user_group="unknown"
+    useradd --password $made_pass \
+            --create-home \
+            --shell /bin/bash \
+            "$new_guy"
     echo "$new_guy,$made_rand,new"
   else
     >&2 echo "MESSAGE: Bad username $new_guy"
@@ -50,3 +50,5 @@ old_ifs=$IFS
 IFS=,
 
 run_through $1
+
+IFS=$old_ifs
