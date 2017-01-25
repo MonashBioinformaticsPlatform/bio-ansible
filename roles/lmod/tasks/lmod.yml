@@ -3,16 +3,16 @@
 - name: download lmod {{ version }}
   git:
     repo: https://github.com/TACC/Lmod
-    dest: "{{ cannonical_sw_dir }}/Lmod-{{ version }}"
+    dest: "{{ tmp_dir }}/Lmod-{{ version }}"
     version: "{{ version }}"
     update: no
 
   tags: lmod
 
 - name: compile and install lmod {{ version }}
-  shell: cd {{ cannonical_sw_dir }}/Lmod-{{ version }}; ./configure --prefix=/opt --with-mpathSearch=YES --with-caseIndependentSorting=YES && make install LUA_INCLUDE=/usr/include/lua5.2
+  shell: cd {{ tmp_dir }}/Lmod-{{ version }}; ./configure --prefix=/opt --with-mpathSearch=YES --with-caseIndependentSorting=YES && make install LUA_INCLUDE=/usr/include/lua5.2
   args:
-    creates: "{{ cannonical_sw_dir }}/{{ version }}"
+    creates: "{{ tmp_dir }}/Lmod-{{ version }}"
 
   tags: lmod
 
@@ -20,7 +20,7 @@
   template:
     src: lmod.profile.sh.j2
     dest: /etc/profile.d/lmod.sh
-    owner: root
+    #owner: root
     #owner: "{{ main_guy }}"
     mode: 0444
 

@@ -1,16 +1,30 @@
 shell=`basename $SHELL`
 
-if [ -f /opt/lmod/lmod/init/$shell ]
+if [[ -f /opt/lmod/lmod/init/$shell ]]
 then
 
-    export PATH=/opt/lmod/lmod/libexec:$PATH
-    . /opt/lmod/lmod/init/$shell
+  export PATH=/opt/lmod/lmod/libexec:$PATH
+  . /opt/lmod/lmod/init/$shell
 
-    #export MODULEPATH="{{ modules_dir }}/"
-    # this is dodgy since it won't work of any other distros
-    # if users aren't located in /home/$USER, but should work for most linux
-    export MODULEPATH="/home/{{ main_guy }}/software/modules"
+  module_types=("{{ module_core }}" "{{ module_bio }}")
+  #module_types=("{{ module_core }}" "{{ module_bio }}" "{{ module_extra }}")
+  
+  module_path=""
+  for mtype in ${module_types[@]}
+  do
+    if [[ -d $mtype ]]
+    then
+      if [[ -z $module_path ]]
+      then
+        module_path+=$mtype
+      fi
+      module_path+=":"
+      module_path+=$mtype
+    fi
+  done
 
-    #export LMOD_PAGER="/usr/bin/less -E -F -R"
+  export MODULEPATH=$module_path
+  #export LMOD_PAGER="/usr/bin/less -E -F -R"
 
 fi
+
