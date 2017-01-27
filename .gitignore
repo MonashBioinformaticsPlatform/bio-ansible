@@ -5,4 +5,4 @@ my_hosts
 # ignore tarballs directory
 tarballs/*
 !tarballs/README.md
-
+*users_list.txt
