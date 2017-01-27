@@ -3,6 +3,7 @@
 make_user() {
 
   new_guy=$1
+  guys_email=$2
 
   if ! grep -q $new_guy /etc/passwd
   then
@@ -13,28 +14,32 @@ make_user() {
             --create-home \
             --shell /bin/bash \
             "$new_guy"
-    echo "$new_guy,$made_rand,new"
+    echo "This is your username $new_guy and randomly generate password. You are strongly encouraged to change it. You can do so by running `passwd` command and following the prompts \n \n Not a lab guy" | mail -s "Your login details for upcoming course by Monash Bioinforamtics Platform" $guys_email
+    echo "$new_guy,$guys_email,$made_rand,new"
   else
     >&2 echo "MESSAGE: Bad username $new_guy"
-    echo "$new_guy,-,current"
+    echo "$new_guy,$guys_email,-,current"
   fi
+
+  unset new_guy
+  unset guys_email
 }
 
 run_through() {
 
   input_file=$1
 
-  while read dude pass_word user_status
+  while read dude email pass_word user_status
   do
     if [[ -z $user_status ]]
     then
-        make_user $dude
+        make_user $dude $email
     elif [[ $user_status == "current" ]]
     then
-        make_user $dude
+        make_user $dude $email
     elif [[ $user_status == "new" ]]
     then
-      echo "$dude,$pass_word,$user_status"
+      echo "$dude,$email,$pass_word,$user_status"
     else
       >2& echo "ERROR: This shouldn't have happend"
     fi
@@ -52,3 +57,7 @@ IFS=,
 run_through $1
 
 IFS=$old_ifs
+
+unset old_ifs
+unset make_user
+unset run_through
