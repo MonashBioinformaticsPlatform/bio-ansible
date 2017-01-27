@@ -14,7 +14,9 @@ make_user() {
             --create-home \
             --shell /bin/bash \
             "$new_guy"
-    echo "This is your username $new_guy and randomly generate password. You are strongly encouraged to change it. You can do so by running passwd command and following the prompts \n \n Not a lab guy" | mail -s "Your login details for upcoming course by Monash Bioinforamtics Platform" $guys_email
+    echo "This is your username $new_guy and randomly generate password $made_rand. You are strongly encouraged to change it. You can do so by running passwd command and following the prompts \
+                                     \
+          Not a lab guy" | mail -s "Your login details for upcoming course by Monash Bioinforamtics Platform" $guys_email
     echo "$new_guy,$guys_email,$made_rand,new"
   else
     >&2 echo "MESSAGE: Bad username $new_guy"
