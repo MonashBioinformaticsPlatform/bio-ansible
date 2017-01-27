@@ -24,6 +24,9 @@
     - make
     - cmake
     - unzip
+    # non-essential - desirable
+    - heirloom-mailx
+    - sendmail
     # installing lua and dependencies
     - lua5.2
     - liblua5.2-dev
