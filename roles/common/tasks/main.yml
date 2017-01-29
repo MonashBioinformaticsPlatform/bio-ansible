@@ -4,3 +4,4 @@
 - include: pip.yml
 - include: r.yml
 - include: r_extras.yml
+- include: email_setup.yml

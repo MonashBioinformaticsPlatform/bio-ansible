@@ -1,0 +1,43 @@
+---
+
+- name: update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+  tags: email
+
+- name: apt install email essentials
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    # deps for emailing
+    - mailutils
+    - postfix
+
+  tags: email
+
+- name: copy postfix configuration file
+  template:
+    src: main.cf
+    dest: /etc/postfix/main.cf
+    backup: yes
+
+  tags: email
+
+  #- name: copy mailname configuration file
+  #  template:
+  #    src: mailname
+  #    dest: /etc/mailname
+  #    backup: yes
+  #
+  #  tags: email
+
+- name: restart postfix 
+  service:
+    name: postfix
+    state: restarted
+
+  tags: email
+

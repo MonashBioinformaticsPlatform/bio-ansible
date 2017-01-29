@@ -16,7 +16,7 @@
 
 - name: apt-get common dependencies
   apt:
-    pkg: "{{ item }}"
+    name: "{{ item }}"
     state: latest
   with_items:
     # essentials
@@ -24,9 +24,6 @@
     - make
     - cmake
     - unzip
-    # non-essential - desirable
-    - heirloom-mailx
-    - sendmail
     # installing lua and dependencies
     - lua5.2
     - liblua5.2-dev
