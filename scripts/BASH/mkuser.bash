@@ -27,20 +27,16 @@ make_user() {
 
   if [[ -n $new_guy ]]
   then
-    if [[ $EUID == 0 ]]
-    then
-      made_rand=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c7`
-      made_pass=`mkpasswd --method=sha-256 $made_rand`
-      #user_group="unknown"
-      useradd --password $made_pass \
-              --create-home \
-              --shell /bin/bash \
-              "$new_guy"
-      echo "$new_guy,$user_mail,new,$made_rand"
-      send_out
-    else
-      >&2 echo "ERROR: Are you running this script as root? You sould be !"
-    fi
+    made_rand=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c7`
+    made_pass=`mkpasswd --method=sha-256 $made_rand`
+    #user_group="unknown"
+    sudo useradd --password $made_pass \
+                 --create-home \
+                 --shell /bin/bash \
+                 "$new_guy"
+    >&2 echo "MESSAGE: You'll need sudo to run this script!"
+    echo "$new_guy,$user_mail,new,$made_rand"
+    send_out
   else
     #>&2 echo "MESSAGE: Bad username $new_guy"
     echo "$new_guy,$user_mail,current,-"
