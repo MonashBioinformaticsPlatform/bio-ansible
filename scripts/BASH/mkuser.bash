@@ -1,6 +1,5 @@
 
 # global variables
-
 old_ifs=$IFS
 IFS=,
 
@@ -98,52 +97,58 @@ make_users() {
   
 }
 
-#main() {
 
-while [[ $# -gt 0 ]]
-do
-  key="$1"
+mkuser() {
 
-  case $key in
-    (-h|--help)
-      echo ""
-      echo "  Version: 0.1.2"
-      echo "  Usage: mkuser [OPTIONS] < --filename FILE > "
-      echo ""
-      echo "  Options: "
-      echo ""
-      echo "           -f (--filename) <FILE> - provide file with user infomation"
-      #echo "           -s (--show) - show user(s) status on the machine"
-      #echo "           -n (--newpass) - generate new random password for user(s)"
-      #echo "           -d (--delete) - remove user(s) from the system" 
-      echo "           --ifs [,] - set IFS (internal field separator)"
-      echo ""
-      shift
-      ;;
-    (-f|--filename)
-      if [[ -f $2 && -s $2 ]]
-      then
-        make_users $2
-      else
-        >&2 echo "ERROR: Check your input file --filename $2"
-      fi
-      shift
-      ;;
-    (--ifs)
-      IFS=$3
-      shift
-      ;;
-  esac
-  shift
-done
-#}
+  if [[ -z "$@" ]]
+  then
+    mkuser -h
+  fi
+  
+  while [[ $# -gt 0 ]]
+  do
+    key="$1"
+  
+    case $key in
+      (-h|--help)
+        echo ""
+        echo "  Version: 0.1.2"
+        echo "  Usage: mkuser [OPTIONS] < --filename FILE > "
+        echo ""
+        echo "  Options: "
+        echo ""
+        echo "           -f (--filename) <FILE> - provide file with user infomation"
+        #echo "           -s (--show) - show user(s) status on the machine"
+        #echo "           -n (--newpass) - generate new random password for user(s)"
+        #echo "           -d (--delete) - remove user(s) from the system" 
+        echo "           --ifs [,] - set IFS (internal field separator)"
+        echo ""
+        shift
+        ;;
+      (-f|--filename)
+        if [[ -f $2 && -s $2 ]]
+        then
+          make_users $2
+        else
+          >&2 echo "ERROR: Check your input file --filename $2"
+        fi
+        shift
+        ;;
+      (--ifs)
+        IFS=$3
+        shift
+        ;;
+    esac
+    shift
+  done
+}
 
-IFS=$old_ifs
-
-unset old_ifs
-unset check_user
-unset send_out
-unset make_user
-unset make_users
+#IFS=$old_ifs
+#
+#unset old_ifs
+#unset check_user
+#unset send_out
+#unset make_user
+#unset make_users
 #unset main
 
