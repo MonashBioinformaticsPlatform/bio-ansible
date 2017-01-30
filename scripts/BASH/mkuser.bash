@@ -20,7 +20,7 @@ send_out() {
     bold=$(tput bold)
     normal=$(tput sgr0)
 
-    printf "This is your username ${bold}}$new_guy${normal} and randomly generate password ${bold}$made_rand${normal}. \n You are strongly encouraged to change it. You can do so by running \`passwd\` command and following the prompts \n \n Not a lab guy" | mail -s "Your login details for upcoming course by Monash Bioinforamtics Platform" $user_mail
+    printf "This is your username ${bold}$new_guy${normal} and randomly generate password ${bold}$made_rand${normal}. \n You are strongly encouraged to change it. You can do so by running \`passwd\` command and following the prompts \n \n Not a lab guy" | mail -s "Your login details for upcoming course by Monash Bioinforamtics Platform" $user_mail
 }
 
 make_user() {
