@@ -18,13 +18,13 @@
 
   tags: email
 
-- name: copy postfix configuration file
-  template:
-    src: main.cf
-    dest: /etc/postfix/main.cf
-    backup: yes
-
-  tags: email
+  #- name: copy postfix configuration file
+  #  template:
+  #    src: main.cf
+  #    dest: /etc/postfix/main.cf
+  #    backup: yes
+  #
+  #  tags: email
 
   #- name: copy mailname configuration file
   #  template:
