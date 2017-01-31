@@ -18,7 +18,7 @@ check_user() {
 
 send_out() {
     
-  echo -e "This is your login details below, note you were given randomly generated password. You are strongly encouraged to change it. You can do so by running \`passwd\` command and following the prompts. \n \n username: $new_guy \n password: $made_rand \n host: biotraining.erc.monash.edu \n \n To connect to the server use \`ssh\` command \n \n  \`ssh $new_guy@bioitraining.erc.monash.edu\` \n \n Not a lab guy" | mail -s "Your login details for upcoming course by Monash Bioinforamtics Platform" $user_mail
+  echo -e "This is your login details, note you were given randomly generated password. You are strongly encouraged to change it. You can do so by running \`passwd\` command and following the prompts. \n \n username: $new_guy \n password: $made_rand \n host: biotraining.erc.monash.edu \n \n To connect to the server use \`ssh\` command \n \n  \`ssh $new_guy@bioitraining.erc.monash.edu\` \n \n Not a lab guy" | mail -s "Your login details for upcoming course by Monash Bioinforamtics Platform" $user_mail
 }
 
 make_user() {
