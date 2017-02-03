@@ -3,3 +3,4 @@
 - include: common.yml
 - include: bio.yml
 - include: interactive.yml
+- include: other.yml
