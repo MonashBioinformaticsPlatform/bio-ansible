@@ -3,8 +3,8 @@
 #----------------
 # Users variable
 #----------------
-main_guy: ubuntu
-sudo_guy: "{{ main_guy }}"
+main_guy: "sw-installer"
+sudo_guy: ubuntu
 # need to specify private key if you planing to setyp a launching server
 main_guy_pubkey: ""
 
@@ -12,7 +12,8 @@ main_guy_pubkey: ""
 # Different directories variables
 #---------------------------------
 local_home: "{{ ansible_env.HOME }}"
-your_path: "{{ local_home }}"
+#your_path: "{{ local_home }}"
+your_path: ""
 source_dir: "{{ your_path }}/software/source"
 modules_dir: "{{ your_path }}/software/modules"
 modules_core: "{{ modules_dir }}/core"
@@ -20,6 +21,7 @@ modules_bio: "{{ modules_dir }}/bio"
 modules_extra: "{{ modules_dir }}/extra"
 apps_dir: "{{ your_path }}/software/apps"
 tmp_dir: "/tmp"
+data_dir: "/data/bio-data"
 cannonical_sw_dir: "/software"
 #------------------------------
 # Other global variables
@@ -69,3 +71,8 @@ java_oracle_version: "{{ jdk_major }}u{{ jdk_minor }}"
 
 # lmod version
 lmod_version: 7.3.9
+
+# data versions
+r_intro_version: gh-pages
+r_more_version: gh-pages
+r_de_analysis_version: gh-pages

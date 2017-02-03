@@ -1,0 +1,29 @@
+---
+
+
+- name: download r-into {{ r_intro_version }}
+  git:
+    repo: https://github.com/MonashBioinformaticsPlatform/r-intro
+    dest: "{{ data_dir }}/r-intro-{{ r_intro_version }}"
+    version: "{{ r_intro_version }}"
+    update: no
+
+  tags: r-data
+
+- name: download r-more {{ r_more_version }}
+  git:
+    repo: https://github.com/MonashBioinformaticsPlatform/r-more
+    dest: "{{ data_dir }}/r-more-{{ r_more_version }}"
+    version: "{{ r_more_version }}"
+    update: no
+
+  tags: r-data
+
+- name: download RNAseq-DE-analysis-with-R {{ r_de_analysis_version }}
+  git:
+    repo: https://github.com/MonashBioinformaticsPlatform/RNAseq-DE-analysis-with-R
+    dest: "{{ data_dir }}/RNAseq-DE-analysis-with-R-{{ r_de_analysis_version }}"
+    version: "{{ r_de_analysis_version }}"
+    update: no
+
+  tags: r-data
