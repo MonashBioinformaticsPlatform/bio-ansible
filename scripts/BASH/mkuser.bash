@@ -18,13 +18,17 @@ check_user() {
 
 send_out() {
     
-  echo -e "This is your login details, note you were given randomly generated password. You are strongly encouraged to change it. You can do so by running \`passwd\` command and following the prompts. \n \n username: $new_guy \n password: $made_rand \n host: biotraining.erc.monash.edu \n \n To connect to the server use \`ssh\` command \n \n  \`ssh $new_guy@bioitraining.erc.monash.edu\` \n \n Not a lab guy" | mail -s "Your login details for upcoming course by Monash Bioinforamtics Platform" $user_mail
+  your_host=$1
+
+  echo -e "This is your login details, note you were given randomly generated password. You are strongly encouraged to change it. You can do so by running \`passwd\` command and following the prompts. \n \n username: $new_guy \n password: $made_rand \n host: biotraining.erc.monash.edu \n \n To connect to the server use \`ssh\` command \n \n  \`ssh $new_guy@your_host\` \n \n Not a lab guy" | mail -s "Your login details for upcoming course by Monash Bioinforamtics Platform" $user_mail
+
+  unset your_host
 }
 
 make_user() {
 
   check_user $1
-  user_mail=$2
+  #user_mail=$2
 
   if [[ -n $new_guy ]]
   then
@@ -37,15 +41,13 @@ make_user() {
                  "$new_guy"
     >&2 echo "MESSAGE: You'll need sudo to run this script!"
     echo "$new_guy,$user_mail,new,$made_rand"
-    send_out
+    send_out $2
   else
     #>&2 echo "MESSAGE: Bad username $new_guy"
     echo "$new_guy,$user_mail,current,-"
   fi
 
   unset new_guy
-  unset user_name
-  unset user_mail
   unset check_guy
   unset made_rand
   unset made_pass
@@ -91,6 +93,10 @@ make_users() {
     fi
 
   done < $input_file
+
+  unset your_host
+  unset user_name
+  unset user_mail
   
 }
 
@@ -115,6 +121,7 @@ mkuser() {
         echo "  Options: "
         echo ""
         echo "           -f (--filename) <FILE> - provide file with user infomation"
+        echo "           -h (--host) <STRING> - provide host name or IP address"
         #echo "           -s (--show) - show user(s) status on the machine"
         #echo "           -n (--newpass) - generate new random password for user(s)"
         #echo "           -d (--delete) - remove user(s) from the system" 
@@ -122,10 +129,19 @@ mkuser() {
         echo ""
         shift
         ;;
+      (-h|--host)
+        your_host=$2 
+        shift
+        ;;
       (-f|--filename)
         if [[ -f $2 && -s $2 ]]
         then
-          make_users $2
+          if [[ -n $your_host ]]
+          then
+            make_users $2 $your_host
+          else
+            >&2 echo "ERROR: you need to specify host use --host"
+          fi
         else
           >&2 echo "ERROR: Check your input file --filename $2"
         fi
