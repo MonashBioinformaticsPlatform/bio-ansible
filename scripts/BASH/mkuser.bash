@@ -98,6 +98,8 @@ make_users() {
   unset user_name
   unset user_mail
   
+  unset user_name
+  unset user_mail
 }
 
 
