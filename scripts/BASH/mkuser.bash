@@ -44,8 +44,6 @@ make_user() {
   fi
 
   unset new_guy
-  unset user_name
-  unset user_mail
   unset check_guy
   unset made_rand
   unset made_pass
@@ -92,6 +90,8 @@ make_users() {
 
   done < $input_file
   
+  unset user_name
+  unset user_mail
 }
 
 
