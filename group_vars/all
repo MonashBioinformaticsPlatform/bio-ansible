@@ -20,7 +20,7 @@ modules_bio: "{{ modules_dir }}/bio"
 modules_extra: "{{ modules_dir }}/extra"
 apps_dir: "{{ your_path }}/software/apps"
 tmp_dir: "/tmp"
-data_dir: "/data"
+data_dir: "/data/bio-data"
 cannonical_sw_dir: "/software"
 #------------------------------
 # Other global variables
