@@ -10,5 +10,6 @@
     # bioinformaticky packages
     - pysam
     - gffutils
+    - ansible
       #- htseq
   tags: pip
