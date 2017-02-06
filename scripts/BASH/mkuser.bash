@@ -20,9 +20,9 @@ send_out() {
     
   your_host=$1
 
-  echo -e "This is your login details, note you were given randomly generated password. You are strongly encouraged to change it. You can do so by running \`passwd\` command and following the prompts. \n \n username: $new_guy \n password: $made_rand \n host: biotraining.erc.monash.edu \n \n To connect to the server use \`ssh\` command \n \n  \`ssh $new_guy@your_host\` \n \n Not a lab guy" | mail -s "Your login details for upcoming course by Monash Bioinforamtics Platform" $user_mail
+  #echo -e "This is your login details, note you were given randomly generated password. You are strongly encouraged to change it. You can do so by running \`passwd\` command and following the prompts. \n \n username: $new_guy \n password: $made_rand \n host: biotraining.erc.monash.edu \n \n To connect to the server use \`ssh\` command \n \n  \`ssh $new_guy@$your_host\` \n \n Not a lab guy" | mail -s "Your login details for upcoming course by Monash Bioinforamtics Platform" $user_mail
+  echo -e "This is your login details below: \n \n username: $new_guy \n password: $made_rand \n host: biotraining.erc.monash.edu \n \n To connect to the server use \`ssh\` command \n \n  \`ssh $new_guy@$your_host\` \n \n If you have any problems email Kirill at kirill.tsyganov@monash.edu" | mail -s "Your login details for upcoming course by Monash Bioinforamtics Platform" $user_mail
 
-  unset your_host
 }
 
 make_user() {
@@ -131,7 +131,7 @@ mkuser() {
         echo ""
         shift
         ;;
-      (-h|--host)
+      (--host)
         your_host=$2 
         shift
         ;;
@@ -140,8 +140,11 @@ mkuser() {
         then
           if [[ -n $your_host ]]
           then
+            echo "I'm here and host is $your_host"
             make_users $2 $your_host
+            shift
           else
+            echo "I'm NOT here and host is $your_host"
             >&2 echo "ERROR: you need to specify host use --host"
           fi
         else
