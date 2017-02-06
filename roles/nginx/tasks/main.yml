@@ -24,6 +24,21 @@
     backup: yes
 
   tags: nginx
+#TODO set proper variables in group_vars/all
+- file:
+    src: /etc/nginx/sites-available/biotraining.erc.monash.edu
+    dest: /etc/nginx/sites-enabled/biotraining.erc.monash.edu
+    state: link
+    mode: 0755
+
+  tags: nginx
+
+- file:
+    dest: /var/www/html/biotraining.erc.monash.edu
+    state: directory
+    mode: 0755
+
+  tags: nginx
 
 - name: restart nginx 
   service:
