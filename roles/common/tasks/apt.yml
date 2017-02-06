@@ -39,12 +39,16 @@
     - ant
     # extras
     - pandoc
+    - pandoc-citeproc
+    - python-pandocfilters
     - vim
     - tmux
     - git
     - curl
     - htop
     - zsh
+    - texlive
+    - texlive-latex-extra
     # dep for python
     - python-pip
     - python-dev
