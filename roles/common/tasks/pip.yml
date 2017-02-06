@@ -5,11 +5,14 @@
     name: "{{ item }}"
     state: latest
   with_items:
+    # upgrade pip
+    - pip
+    # common
     - virtualenv
+    - ansible
+    # bio
     - nesoni
-    # bioinformaticky packages
     - pysam
     - gffutils
-    - ansible
-      #- htseq
+
   tags: pip
