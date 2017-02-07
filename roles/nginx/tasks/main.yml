@@ -32,9 +32,16 @@
     mode: 0755
 
   tags: nginx
-
+  # create directory for default / root serving directory
 - file:
     dest: /var/www/html/biotraining.erc.monash.edu
+    state: directory
+    mode: 0755
+
+  tags: nginx
+  # create directory for log files
+- file:
+    dest: /var/log/nginx/biotraining.erc.monash.edu
     state: directory
     mode: 0755
 
