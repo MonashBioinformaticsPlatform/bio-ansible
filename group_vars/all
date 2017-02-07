@@ -3,16 +3,17 @@
 #----------------
 # Users variable
 #----------------
-main_guy: ubuntu
-sudo_guy: "{{ main_guy }}"
+main_guy: "sw-installer"
+sudo_guy: ubuntu
 # need to specify private key if you planing to setyp a launching server
-main_guy_pubkey: ""
+main_guy_pubkey: "{{ lookup('file', '/home/ubuntu/.ssh/biotrain.pub') }}"
 
 #---------------------------------
 # Different directories variables
 #---------------------------------
 local_home: "{{ ansible_env.HOME }}"
-your_path: "{{ local_home }}"
+#your_path: "{{ local_home }}"
+your_path: ""
 source_dir: "{{ your_path }}/software/source"
 modules_dir: "{{ your_path }}/software/modules"
 modules_core: "{{ modules_dir }}/core"
@@ -23,7 +24,7 @@ tmp_dir: "/tmp"
 data_dir: "/data/bio-data"
 cannonical_sw_dir: "/software"
 #
-time_zone: "Australia/Melbourne"
+time_zone: "Australia/Victoria"
 #------------------------------
 # Other global variables
 #------------------------------

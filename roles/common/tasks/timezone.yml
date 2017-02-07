@@ -8,6 +8,15 @@
 
   tags: timezone
 
+- name: set localtime
+  file:
+    src: /usr/share/zoneinfo/Australia/Victoria
+    dest: /etc/localtime
+    state: link
+    force: yes
+
+  tags: timezone
+
 - name: update timezone
   command: dpkg-reconfigure --frontend noninteractive tzdata
 
