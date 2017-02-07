@@ -20,7 +20,7 @@
 - name: copy nginx configuration file
   template:
     src: default
-    dest: /etc/nginx/sites-available/default
+    dest: /etc/nginx/sites-available/biotraining.erc.monash.edu
     backup: yes
 
   tags: nginx
