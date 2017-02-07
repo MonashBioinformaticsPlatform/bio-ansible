@@ -12,5 +12,6 @@ biocLite(c("Biostrings",
            "edgeR",
            "limma",
            "biomaRt",
+           "org.Hs.eg.db",
            "GOstats")
          )
