@@ -19,8 +19,26 @@
   template:
     src: lmod.profile.sh.j2
     dest: /etc/profile.d/lmod.sh
-    #owner: root
+    owner: root
     #owner: "{{ main_guy }}"
-    mode: 0444
+    mode: 0644
+
+  tags: lmod
+
+- name: copy lmod sh stdenv init file to /etc/profile.d/
+  template:
+    src: z00_StdEnv.sh
+    dest: /etc/profile.d/z00_StdEnv.sh
+    owner: root
+    mode: 0644
+
+  tags: lmod
+
+- name: copy stdenv module definition
+  template:
+    src: StdEnv.lua
+    dest: "{{ modules_core }}"
+    owner: root
+    mode: 0644
 
   tags: lmod
