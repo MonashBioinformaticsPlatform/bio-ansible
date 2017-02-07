@@ -51,6 +51,7 @@ rnasik_version: master
 qualimap_version: v2.2.1
 seqtk_version: v1.2
 igv_version: 2.3.90
+bedtools2_version: 2.26.0
 
 # bds version
 bds_version: master

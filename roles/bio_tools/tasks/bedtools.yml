@@ -1,0 +1,72 @@
+---
+
+- name: download bedtools2 {{ version }}
+  get_url:
+    url: "https://github.com/arq5x/bedtools2/releases/download/v{{ version }}/bedtools-{{ version }}.tar.gz"
+    dest: "{{ source_dir }}"
+
+  tags: bedtools
+
+- name: uncompress bedtools2 {{ version }}
+  unarchive:
+      src: "{{ source_dir }}/bedtools-{{ version }}.tar.gz"
+      dest: "{{ source_dir }}"
+      copy: no
+
+  tags: bedtools
+
+- name: build bedtools2 {{ version }}
+  shell: cd {{ source_dir }}/bedtools2-{{ version }}; make -j {{ threads }}
+  args:
+    creates: "{{ source_dir }}/bedtools2-{{ version }}/bin/bedtools"
+
+  tags: bedtools
+
+- name: move bedtools2 {{ version }} executables to apps directory
+  shell: mv {{ source_dir }}/bedtools2-{{ version }}/bin {{ apps_dir }}/bedtools2-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/bedtools2-{{ version }}/bin/bedtools"
+
+  tags: bedtools
+
+- file:
+    dest: "{{ apps_dir }}/bedtools2-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: bedtools
+
+
+- file:
+    dest: "{{ modules_bio }}/bedtools2"
+    state: directory
+    mode: 0755
+
+  tags: bedtools
+
+- name: bedtools2 {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/bedtools2/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'bedtools2-{{ version }}'
+      help_text: 'This module loads bedtools'
+
+  tags: bedtools
+
+- name: setting register for bedtools2 {{ version }}
+  stat:
+    path: "{{ apps_dir }}/bedtools2-{{ version }}/bedtools2"
+  register: b
+
+  tags: bedtools
+
+- name: removing bedtools2 {{ version }} source directory
+  file:
+    dest: "{{ source_dir }}/bedtools2-{{ version }}"
+    state: absent
+  when: "{{ del_src }} b.stat.exists"
+
+  tags: bedtools
