@@ -23,6 +23,8 @@ apps_dir: "{{ your_path }}/software/apps"
 tmp_dir: "/tmp"
 data_dir: "/data/bio-data"
 cannonical_sw_dir: "/software"
+#
+time_zone: "Australia/Melbourne"
 #------------------------------
 # Other global variables
 #------------------------------

@@ -1,0 +1,14 @@
+---
+
+- name: set time zone
+  copy:
+    content: "{{ time_zone }}"
+    dest: /etc/timezone
+    backup: yes
+
+  tags: timezone
+
+- name: update timezone
+  command: dpkg-reconfigure --frontend noninteractive tzdata
+
+  tags: timezone
