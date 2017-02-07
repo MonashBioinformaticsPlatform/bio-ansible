@@ -3,8 +3,8 @@
 #----------------
 # Users variable
 #----------------
-main_guy: "sw-installer"
-sudo_guy: ubuntu
+main_guy: ubuntu
+sudo_guy: "{{ main_guy }}"
 # need to specify private key if you planing to setyp a launching server
 main_guy_pubkey: ""
 
@@ -12,8 +12,7 @@ main_guy_pubkey: ""
 # Different directories variables
 #---------------------------------
 local_home: "{{ ansible_env.HOME }}"
-#your_path: "{{ local_home }}"
-your_path: ""
+your_path: "{{ local_home }}"
 source_dir: "{{ your_path }}/software/source"
 modules_dir: "{{ your_path }}/software/modules"
 modules_core: "{{ modules_dir }}/core"
