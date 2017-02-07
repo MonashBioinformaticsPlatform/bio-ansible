@@ -19,7 +19,7 @@
 #and add a task to symlink it to sites-enabled
 - name: copy nginx configuration file
   template:
-    src: default
+    src: biotraining.erc.monash.edu
     dest: /etc/nginx/sites-available/biotraining.erc.monash.edu
     backup: yes
 
