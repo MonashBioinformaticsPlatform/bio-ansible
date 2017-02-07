@@ -1,7 +1,4 @@
 
-# global variables
-old_ifs=$IFS
-IFS=,
 
 send_out() {
 
@@ -20,6 +17,7 @@ make_user() {
   new_guy=$1
   guys_email=$2
   guys_hostname=$3
+  guys_fullname=$4
 
   if ! grep -q $new_guy /etc/passwd
   then
@@ -28,28 +26,26 @@ make_user() {
     made_pass=`mkpasswd --method=sha-256 $made_rand`
     #user_group="unknown"
     sudo useradd --password $made_pass \
+                 --comment $guys_fullname \
                  --create-home \
                  --shell /bin/bash \
                  "$new_guy"
-    echo "$new_guy,$guys_email,new,$made_rand"
     send_out $new_guy $guys_email $guys_hostname $made_rand
   else
     >&2 echo "MESSAGE: Username $new_guy is a current user"
-    echo "$new_guy,$guys_email,current,-"
+    current_guy="current"
   fi
 }
 
 del_user() {
 
   old_guy=$1
-
   if [[ -n $old_guy ]]
   then
-    passwd --delete $old_guy
-
-    deluser --remove-home \
-            --remove-all-files \
-            $old_guy
+    sudo passwd --delete $old_guy
+    sudo deluser --remove-home \
+                 --remove-all-files \
+                 $old_guy
 
     >&2 echo "MESSAGE: Username $old_guy had been removed from the system, including howe directory"
   fi
@@ -72,33 +68,46 @@ make_users() {
 
   input_user_file=$1
   input_hostname=$2
+  users_ifs=$3
 
   if [[ -n $input_user_file && -n $input_hostname ]]
   then
 
-    while read user_name user_mail user_status pass_word
+    while IFS=$ifs read user_name user_email user_status pass_word
     do
-      if [[ -z $user_status ]]
+
+      users_fullname=`echo "${user_email%%\@*}" | sed 's/\./-/g'`
+      clean_user=`echo $user_name | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g' | LANG=C sed 's/[^[:print:]]//' | sed 's/\./-/g'`
+      clean_email=`echo $user_email | tr '[:upper:]' '[:lower:]' | sed -e 's/\r$//g' | LANG=C sed 's/[^[:print:]]//' | sed 's/\./-/g'`
+
+      if [[ -z $user_name ]]
       then
-          make_user $user_name $user_mail $input_hostname
-      elif [[ $user_status == "current" ]]
+        user_name=$users_fullname
+      fi
+
+      if [[ -z $user_status || $user_status == "ToBeNew" ]]
       then
-        echo "$user_name,$user_mail,$user_status,-"
-      elif [[ $user_status == "new" ]]
+        make_user $user_name $user_email $input_hostname $users_fullname
+        if [[ $current_guy != "current" ]]
+        then
+          echo "$user_name,$user_email,new,$pass_word"
+        else
+          echo "$user_name,$user_email,current,-"
+        fi
+      elif [[ $user_status == "current" || $user_status == "new" || $user_status == "changed" ]]
       then
-        make_user $user_name $user_mail $input_hostname
-        echo "$user_name,$user_mail,$user_status,$pass_word"
+        echo "$user_name,$user_email,current,-"
       elif [[ $user_status == "ToBeDeleted" ]]
       then
         del_user $user_name
-        echo "$user_name,$user_mail,deleted,-"
+        echo "$user_name,$user_email,deleted,-"
       elif [[ $user_status == "ToBeChanged" ]]
       then
-        change_pass $user_name $user_mail $input_hostname
-        echo "$user_name,$user_mail,changed,-"
-      elif [[ $user_status == "deleted" || $user_status == "changed" ]]
+        change_pass $user_name $user_email $input_hostname
+        echo "$user_name,$user_email,changed,-"
+      elif [[ $user_status == "deleted" ]]
       then
-        echo "$user_name,$user_mail,$user_status,-"
+        echo "$user_name,$user_email,$user_status,-"
       else
         >&2 echo "ERROR: This shouldn't have happened: line 100"
       fi
@@ -111,6 +120,7 @@ make_users() {
   unset guys_email
   unset made_rand
   unset made_pass
+  unset current_guy
   # variables from this function
   unset input_user_file
   unset input_host_file
@@ -141,17 +151,40 @@ do_help() {
 
   echo ""
   echo "  Version: 0.1.2"
-  echo "  Usage: mkuser [OPTIONS] < --filename FILE > "
+  echo "  Usage: mkuser [OPTIONS] < --filename FILE --host STRING > "
   echo ""
   echo "  Options: "
   echo ""
   echo "           -F (--filename) <FILE> - provide file with user infomation"
   echo "           -H (--host) <STRING> - provide host name or IP address"
   echo "           -L (--linkdata) - will symlink /data/bio-data to user's home directory"
-  #echo "           -s (--show) - show user(s) status on the machine"
-  #echo "           -n (--newpass) - generate new random password for user(s)"
-  #echo "           -d (--delete) - remove user(s) from the system" 
   echo "           --ifs [,] - set IFS (internal field separator)"
+  echo ""
+  echo " Description: "
+  echo ""
+  echo "           -F (--filename) takes a file with at least two columns, user_name,user_email "
+  echo "           default CSV file type, use --ifs to set different separator "
+  echo ""
+  echo "           file format: "
+  echo ""
+  echo "              user_name,user_email,key_word,pass_word  "
+  echo ""
+  echo "           user_name - optional, have to be unique on the system, can do this ,user_email NOTE: leading comma "
+  echo "           user_email - self explanatory, if no user_name, everything before @ is used as a user_name "
+  echo "           key_words - there are two types; informative and actions" 
+  echo ""
+  echo "              Actions: "
+  echo "                    > ToBeNew  - to indicate that user needs to be created, this is the same as leaving blank"
+  echo "                    > ToBeChanged - to change users password, will send new email and password"
+  echo "                    > ToBeDeleted - will permanently delete user and all relevant files"
+  echo ""
+  echo "              Informative: "
+  echo "                    > new - new user had been created"
+  echo "                    > current - the user is current, hint: a way to spot duplicated usernames"
+  echo "                    > changed - user's password had been changed"
+  echo "                    > deleted - user had been deleted permanently "
+  echo ""
+  echo "           pass_word - only used to output randomly generated password, can't use it to set any password"
   echo ""
   exit 1
 }
@@ -181,43 +214,48 @@ do
       shift
       ;;
     (--ifs)
-      IFS=$2
+      ifs=$2
       shift
       ;;
   esac
   shift
 done
 
+if [[ -z $ifs ]]
+then
+  ifs=,
+fi
+
 >&2 echo "MESSAGE: You'll need sudo to run this script!"
 
-if [[ -f $username_file && -s $username_file ]]
+if [[ -f $username_file && -s $username_file && -n $your_host ]]
 then
-  if [[ -n $your_host ]]
+  if [[ -n $link_data ]]
   then
-    make_users $username_file $your_host
+    make_users $username_file $your_host $ifs
+    do_data_link
   else
-    >&2 echo "ERROR: you need to specify host use --host"
-    exit 1
+    make_users $username_file $your_host $ifs
   fi
+elif [[ -n $link_data ]]
+then
+  do_data_link
 else
-  >&2 echo "ERROR: Check your input file --filename $2"
+  >&2 echo "ERROR: Check your input file --filename and/or --host"
   exit 1
 fi
 
-if [[ -n $link_data ]]
-then
-  do_data_link
-fi
-
-# unset variables
+# cmd variables
 unset link_data
 unset your_host
 unset username_file
-# change_pass
-unset change_guy
-unset change_email
-unset change_hostname
-unset new_rand
+#make_user
+unset new_guy
+unset guys_email
+unset guys_hostname
+unset guys_fullname
+unset made_rand
+unset made_pass
 # send_out
 unset this_guy
 unset his_email
@@ -225,7 +263,21 @@ unset his_hostname
 unset his_pass
 # del_user
 unset old_guy
-IFS=$old_ifs
+# change_pass
+unset change_guy
+unset change_email
+unset change_hostname
+unset new_rand
+# make_users
+unset input_user_file
+unset input_hostname
+unset users_ifs
+unset users_fullname
+unset clean_user
+unset clean_email
+unset current_guy
+# data_link
+unset data_dirs
 #unset functions
 unset send_out
 unset make_users
