@@ -1,31 +1,17 @@
 ---
 
 - name: download bedtools2 {{ version }}
-  get_url:
-    url: "https://github.com/arq5x/bedtools2/releases/download/v{{ version }}/bedtools-{{ version }}.tar.gz"
-    dest: "{{ source_dir }}"
-
-  tags: bedtools
-
-- name: uncompress bedtools2 {{ version }}
-  unarchive:
-      src: "{{ source_dir }}/bedtools-{{ version }}.tar.gz"
-      dest: "{{ source_dir }}"
-      copy: no
+  git:
+    repo: https://github.com/arq5x/bedtools2
+    dest: "{{ source_dir }}/bedtools2-{{ version }}"
+    version: "v{{ version }}"
 
   tags: bedtools
 
 - name: build bedtools2 {{ version }}
-  shell: cd {{ source_dir }}/bedtools2-{{ version }}; make -j {{ threads }}
+  shell: cd {{ source_dir }}/bedtools2-{{ version }}; make
   args:
     creates: "{{ source_dir }}/bedtools2-{{ version }}/bin/bedtools"
-
-  tags: bedtools
-
-- name: move bedtools2 {{ version }} executables to apps directory
-  shell: mv {{ source_dir }}/bedtools2-{{ version }}/bin {{ apps_dir }}/bedtools2-{{ version }}
-  args:
-    creates: "{{ apps_dir }}/bedtools2-{{ version }}/bin/bedtools"
 
   tags: bedtools
 
@@ -36,6 +22,12 @@
 
   tags: bedtools
 
+- name: move bedtools2 {{ version }} executables to apps directory
+  shell: mv {{ source_dir }}/bedtools2-{{ version }}/bin {{ apps_dir }}/bedtools2-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/bedtools2-{{ version }}/bin/bedtools"
+
+  tags: bedtools
 
 - file:
     dest: "{{ modules_bio }}/bedtools2"
@@ -58,14 +50,14 @@
 
 - name: setting register for bedtools2 {{ version }}
   stat:
-    path: "{{ apps_dir }}/bedtools2-{{ version }}/bedtools2"
+    path: "{{ apps_dir }}/bedtools2-{{ version }}/bin/bedtools"
   register: b
 
   tags: bedtools
-
+      
 - name: removing bedtools2 {{ version }} source directory
   file:
-    dest: "{{ source_dir }}/bedtools2-{{ version }}"
+    path: "{{ source_dir }}/bedtools2-{{ version }}"
     state: absent
   when: "{{ del_src }} b.stat.exists"
 
