@@ -37,13 +37,6 @@
 
   tags: samtools
 
-- file:
-    dest: "{{ apps_dir }}/samtools-{{ version }}"
-    state: directory
-    mode: 0755
-
-  tags: samtools
-
 - name: setting register for samtools {{ version }}
   stat:
     path: "{{ apps_dir }}/samtools-{{ version }}/samtools"
