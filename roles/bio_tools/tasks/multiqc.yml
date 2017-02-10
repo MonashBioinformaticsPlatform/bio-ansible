@@ -1,0 +1,29 @@
+---
+
+- name: pip install multiqc {{ version }}
+  pip:
+    name: multiqc
+    version: "v{{ version }}"
+    virtualenv: "{{ apps_dir }}/multiqc-{{ version }}"
+
+  tags: multiqc
+
+- file:
+    dest: "{{ modules_bio }}/multiqc"
+    state: directory
+    mode: 0755
+
+  tags: multiqc
+
+- name: multiqc {{ version }} module definition
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_bio }}/multiqc/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'multiqc-{{ version }}'
+      help_text: 'loads multiqc pipeline'
+      append: true 
+
+  tags: multiqc

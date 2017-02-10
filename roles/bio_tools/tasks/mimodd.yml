@@ -1,0 +1,51 @@
+---
+
+- name: pip install mimodd {{ version }}
+  pip:
+    name: mimodd
+    version: "{{ version }}"
+    virtualenv: "{{ apps_dir }}/mimodd-{{ version }}"
+    virtualenv_python: python3.5
+
+  tags: mimodd
+
+- file:
+    dest: "{{ modules_bio }}/mimodd"
+    state: directory
+    mode: 0755
+
+  tags: mimodd
+
+- name: mimodd {{ version }} module definition
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_bio }}/mimodd/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'mimodd-{{ version }}'
+      help_text: 'loads mimodd pipeline'
+      append: true 
+
+  tags: mimodd
+
+- file:
+    dest: "{{ tmp_dir }}/mimodd-scratch"
+    state: directory
+    mode: 0755
+
+  tags: mimodd
+
+- name: copy mimodd configuration file
+  template:
+    src: mimodd.config
+    dest: "{{ apps_dir }}/mimodd-{{ version }}/lib/python3.5/site-packages/MiModD/cfg.py"
+    #backup: yes
+
+  tags: mimodd
+
+- file:
+    dest: "{{ apps_dir }}/mimodd-{{ version }}/lib/python3.5/site-packages/MiModD/__first_run__.py"
+    state: absent
+
+  tags: mimodd

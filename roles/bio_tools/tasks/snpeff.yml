@@ -1,0 +1,74 @@
+---
+
+- name: download snpEff package {{ version }}
+  get_url:
+    url: http://sourceforge.net/projects/snpeff/files/snpEff_latest_core.zip
+    timeout: 30
+    dest: "{{ source_dir }}/snpEff_{{ version }}_core.zip"
+
+  tags: snpeff
+
+- name: uncompress snpEff {{ version }}
+  unarchive:
+      src: "{{ source_dir }}/snpEff_{{ version }}_core.zip"
+      dest: "{{ apps_dir }}"
+      copy: no
+
+  tags: snpeff
+
+- name: snpEff {{ version }} wrapper script
+  template:
+    src: java-wrapper.sh.j2
+    dest: "{{ apps_dir }}/snpEff/snpEff"
+    owner: "{{ main_guy }}" 
+    mode: 0755
+  with_items:
+    - jar: "{{ apps_dir }}/snpEff/snpEff.jar"
+
+  tags: snpeff
+
+- name: snpSift {{ version }} wrapper script
+  template:
+    src: java-wrapper.sh.j2
+    dest: "{{ apps_dir }}/snpEff/SnpSift"
+    owner: "{{ main_guy }}" 
+    mode: 0755
+  with_items:
+    - jar: "{{ apps_dir }}/snpEff/SnpSift.jar"
+
+  tags: snpeff
+
+- file:
+    dest: "{{ modules_bio }}/snpEff"
+    state: directory
+    mode: 0755
+
+  tags: snpeff
+
+- name: snpEff {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/snpEff/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'snpEff'
+      skip_bin: true
+      help_text: 'This module loads snpEff'
+
+  tags: snpeff
+
+- name: setting register for snpEff2 {{ version }}
+  stat:
+    path: "{{ apps_dir }}/snpEff/snpEff.jar"
+  register: s
+
+  tags: snpeff
+      
+- name: removing snpEff2 {{ version }} source directory
+  file:
+    path: "{{ source_dir }}/snpEff_{{ version }}_core.zip"
+    state: absent
+  when: "{{ del_src }} s.stat.exists"
+
+  tags: snpeff

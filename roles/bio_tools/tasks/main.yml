@@ -15,3 +15,6 @@
 - include: seqtk.yml version={{ seqtk_version }}
 - include: igv.yml version={{ igv_version }}
 - include: bedtools.yml version={{ bedtools2_version }}
+- include: mimodd.yml version={{ mimodd_version }}
+- include: multiqc.yml version={{ multiqc_version }}
+- include: snpeff.yml version={{ snpeff_version }}
