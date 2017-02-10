@@ -10,9 +10,9 @@
 - name: uncompress maven {{ version }}
   unarchive: 
     src: "{{ source_dir }}/apache-maven-{{ version }}-bin.tar.gz"
-    dest: "{{ source_dir }}"
+    dest: "{{ apps_dir }}"
     copy: no
-    creates: "{{ source_dir }}/apache-maven-{{ version }}/bin/mvn"
+    creates: "{{ apps_dir }}/apache-maven-{{ version }}/bin/mvn"
 
   tags: maven
 
@@ -35,18 +35,18 @@
 
   tags: maven 
 
-- file:
-    dest: "{{ apps_dir }}/maven-{{ version }}"
-    state: directory
-    mode: 0755
-
-  tags: maven
-
-- file:
-    src: "{{ source_dir }}/apache-maven-{{ version }}/bin"
-    dest: "{{ apps_dir }}/maven-{{ version }}/bin"
-    state: link
-    mode: 0755
+  #- file:
+  #    dest: "{{ apps_dir }}/maven-{{ version }}"
+  #    state: directory
+  #    mode: 0755
+  #
+  #  tags: maven
+  #
+  #- file:
+  #    src: "{{ source_dir }}/apache-maven-{{ version }}/bin"
+  #    dest: "{{ apps_dir }}/maven-{{ version }}/bin"
+  #    state: link
+  #    mode: 0755
 
 - name: setting register for maven {{ version }}
   stat:
