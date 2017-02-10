@@ -11,9 +11,9 @@
   tags: samtools
 
 - name: build samtools {{ version }}
-  shell: cd {{ source_dir }}/samtools-{{ version }}; make -j {{ threads }} install prefix={{ source_dir }}/samtools-{{ version }} HTSDIR=../htslib-{{ htslib_v }}
+  shell: cd {{ source_dir }}/samtools-{{ version }}; make -j install prefix={{ apps_dir }}/samtools-{{ version }} HTSDIR=../htslib-{{ htslib_v }}
   args:
-    creates: "{{ source_dir }}/samtools-{{ version }}/bin/samtools"
+    creates: "{{ apps_dir }}/samtools-{{ version }}/samtools"
 
   tags: samtools
 
@@ -41,13 +41,6 @@
     dest: "{{ apps_dir }}/samtools-{{ version }}"
     state: directory
     mode: 0755
-
-  tags: samtools
-
-- name: move samtools {{ version }} executables to apps directory
-  shell: cp {{ source_dir }}/samtools-{{ version }}/samtools {{ apps_dir }}/samtools-{{ version }}/
-  args:
-    creates: "{{ apps_dir }}/samtools-{{ version }}/samtools"
 
   tags: samtools
 
