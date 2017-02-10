@@ -26,10 +26,15 @@ make_user() {
     made_pass=`mkpasswd --method=sha-256 $made_rand`
     #user_group="unknown"
     sudo useradd --password $made_pass \
-                 --comment $guys_fullname \
                  --create-home \
+                 --comment $guys_fullname \
                  --shell /bin/bash \
                  "$new_guy"
+    #echo sudo useradd --password $made_pass \
+    #             --create-home \
+    #             --comment $guys_fullname \
+    #             --shell /bin/bash \
+    #             "$new_guy"
     send_out $new_guy $guys_email $guys_hostname $made_rand
   else
     >&2 echo "MESSAGE: Username $new_guy is a current user"
@@ -75,10 +80,16 @@ make_users() {
 
     while IFS=$ifs read user_name user_email user_status pass_word
     do
+      # skip blank lines
+      # to be exact skip lines which don't have user_name or user_email
+      if [[ -z $user_name && -z $user_email ]]
+      then
+          continue
+      fi
 
-      users_fullname=`echo "${user_email%%\@*}" | sed 's/\./-/g'`
       clean_user=`echo $user_name | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g' | LANG=C sed 's/[^[:print:]]//' | sed 's/\./-/g'`
-      clean_email=`echo $user_email | tr '[:upper:]' '[:lower:]' | sed -e 's/\r$//g' | LANG=C sed 's/[^[:print:]]//' | sed 's/\./-/g'`
+      clean_email=`echo $user_email | tr '[:upper:]' '[:lower:]' | sed -e 's/\r$//g' | LANG=C sed 's/[^[:print:]]//'`
+      users_fullname=`echo "${clean_email%%\@*}" | sed 's/\./-/g'`
 
       if [[ -z $user_name ]]
       then
@@ -90,7 +101,7 @@ make_users() {
         make_user $user_name $user_email $input_hostname $users_fullname
         if [[ $current_guy != "current" ]]
         then
-          echo "$user_name,$user_email,new,$pass_word"
+          echo "$user_name,$user_email,new,$made_rand"
         else
           echo "$user_name,$user_email,current,-"
         fi
@@ -112,8 +123,9 @@ make_users() {
         >&2 echo "ERROR: This shouldn't have happened: line 100"
       fi
     done < $input_user_file
+
   else
-    >&2 echo "ERROR: This shouldn't have happened, check make_users function"
+    >&2 echo "ERROR: This shouldn't have happened, check function"
   fi
   # variables from make_user function
   unset new_guy
@@ -230,12 +242,10 @@ fi
 
 if [[ -f $username_file && -s $username_file && -n $your_host ]]
 then
+  make_users $username_file $your_host $ifs
   if [[ -n $link_data ]]
   then
-    make_users $username_file $your_host $ifs
     do_data_link
-  else
-    make_users $username_file $your_host $ifs
   fi
 elif [[ -n $link_data ]]
 then
@@ -268,7 +278,7 @@ unset change_guy
 unset change_email
 unset change_hostname
 unset new_rand
-# make_users
+# makeusers
 unset input_user_file
 unset input_hostname
 unset users_ifs
