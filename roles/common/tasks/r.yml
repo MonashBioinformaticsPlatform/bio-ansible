@@ -24,7 +24,7 @@
 - name: install R packages
   apt:
     pkg: "{{ item }}"
-    state: present
+    state: latest
     allow_unauthenticated: yes
   with_items:
     - r-base

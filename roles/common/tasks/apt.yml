@@ -40,7 +40,8 @@
     # extras
     - pandoc
     - pandoc-citeproc
-    - python-pandocfilters
+      # moved it to pip instead of apt-get
+      #- python-pandocfilters
     - vim
     - tmux
     - git
@@ -51,6 +52,7 @@
     - texlive-latex-extra
     # dep for python
     - python-pip
+    - python3-pip
     - python-dev
     - libssl-dev
     - libssl-doc

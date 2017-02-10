@@ -10,6 +10,8 @@
     # common
     - virtualenv
     - ansible
+    # other
+    - pandocfilters
     # bio
     - nesoni
     - pysam
