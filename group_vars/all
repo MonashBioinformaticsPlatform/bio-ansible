@@ -53,10 +53,12 @@ seqtk_version: v1.2
 igv_version: 2.3.90
 bedtools2_version: 2.25.0
 snpeff_version: latest
-
+spades_version: 3.10.0
+vsearch_version: 2.4.0
 # python virtualenv
 mimodd_version: 0.1.7.3
 multiqc_version: 0.9
+cutadapt_version: 1.12
 # bds version
 bds_version: master
 

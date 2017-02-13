@@ -1,0 +1,51 @@
+---
+
+- name: download vsearch {{ version }}
+  git:
+    repo: https://github.com/torognes/vsearch
+    dest: "{{ source_dir }}/vsearch-{{ version }}"
+    version: "v{{ version }}"
+    update: no
+
+  tags: vsearch
+
+- name: compile vsearch {{ version }} 
+  shell: cd {{ source_dir }}/vsearch-{{ version }}; ./autogen.sh; ./configure; make install prefix={{ apps_dir }}/vsearch-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/vsearch-{{ version }}/bin/vsearch"
+
+  tags: vsearch
+
+- file:
+    dest: "{{ modules_bio }}/vsearch"
+    state: directory
+    mode: 0755
+
+  tags: vsearch
+
+- name: vsearch {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/vsearch/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'vsearch-{{ version }}'
+      help_text: 'This module loads the vsearch'
+
+  tags: vsearch
+
+- name: setting register for vsearch {{ version }}
+  stat:
+    path: "{{ apps_dir }}/vsearch-{{ version }}/bin/vsearch"
+  register: v
+
+  tags: vsearch
+
+- name: removing vsearch {{ version }} source directory
+  file:
+    dest: "{{ source_dir }}/vsearch-{{ version }}"
+    state: absent
+  when: "{{ del_src }} v.stat.exists"
+
+  tags: vsearch

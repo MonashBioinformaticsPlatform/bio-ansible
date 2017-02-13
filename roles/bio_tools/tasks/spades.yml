@@ -1,0 +1,51 @@
+---
+
+- name: download spades {{ version }}
+  get_url:
+    url: "http://spades.bioinf.spbau.ru/release{{ version }}/SPAdes-{{ version }}-Linux.tar.gz"
+    dest: "{{ source_dir }}"
+
+  tags: spades
+
+- name: uncompress spades {{ version }}
+  unarchive: 
+    src: "{{ source_dir }}/SPAdes-{{ version }}-Linux.tar.gz"
+    dest: "{{ apps_dir }}"
+    copy: no
+    creates: "{{ apps_dir }}/SPAdes-{{ version }}-Linux/bin/spades"
+
+  tags: spades
+
+- file:
+    dest: "{{ modules_bio }}/spades"
+    state: directory
+    mode: 0755
+
+  tags: spades
+
+- name: spades {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/spades/{{ version }}.lua"
+    owner: "{{ main_guy }}"
+    mode: 0644
+  with_items:
+    - dir: 'spades-{{ version }}-Linux'
+      help_text: 'This module loads spades genome assembler'
+
+  tags: spades
+
+- name: setting register for spades {{ version }}
+  stat:
+    path: "{{ apps_dir }}/SPAdes-{{ version }}-Linux/bin/spades.py"
+  register: s
+
+  tags: spades
+      
+- name: removing spades {{ version }} source directory
+  file:
+    path: "{{ source_dir }}/SPAdes-{{ version }}-Linux.tar.gz"
+    state: absent
+  when: "{{ del_src }} s.stat.exists"
+
+  tags: spades
