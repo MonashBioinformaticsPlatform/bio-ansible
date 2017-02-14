@@ -2,8 +2,8 @@
 
 - name: download RNAsik {{ version }}
   git:
-    repo: https://github.com/monashbioinformaticsplatform/RNAsik-pipe.git
-    dest: "{{ source_dir }}/RNAsik-pipe-{{ version }}"
+    repo: https://github.com/monashbioinformaticsplatform/RNAsik-pipe
+    dest: "{{ source_dir }}"
     version: "{{ version }}"
     update: no
 

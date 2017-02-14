@@ -47,7 +47,7 @@ fastqc_version: 0.11.5
 freebayes_version: master
 vcflib_version: master
 sratoolkit_version: 2.8.0
-rnasik_version: master
+rnasik_version: 1.4.6
 qualimap_version: v2.2.1
 seqtk_version: v1.2
 igv_version: 2.3.90

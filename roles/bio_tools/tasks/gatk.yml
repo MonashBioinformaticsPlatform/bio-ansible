@@ -1,0 +1,76 @@
+---
+
+- name: check GenomeAnalysisTK-{{ version }}.tar.bz2 exists
+  local_action: stat path="{{ playbook_dir }}/tarballs/GenomeAnalysisTK-{{ version }}.tar.bz2"
+  register: g
+
+  tags: gatk
+
+- debug: msg: "Skipping installation of GATK - tarballs/GenomeAnalysisTK-{{ version }}.tar.bz2 not found."
+  when: not g.stat.exists
+
+- name: copy local GenomeAnalysisTK-{{ version }}.tar.bz2 file
+  copy:
+    src: "{{ playbook_dir }}/tarballs/GenomeAnalysisTK-{{ version }}.tar.bz2"
+    dest: "{{ source_dir }}/GenomeAnalysisTK-{{ version }}.tar.bz2"
+    owner: "{{ main_guy }}"
+    group: "{{ main_guy }}"
+  when: g.stat.exists
+
+  tags: gatk
+
+- file:
+    dest: "{{ apps_dir }}/gatk-{{ version }}"
+    state: directory
+    mode: 0755
+  when: g.stat.exists
+
+  tags: gatk
+
+- name: uncompress gatk {{ version }}
+  unarchive:
+      src: "{{ source_dir }}/GenomeAnalysisTK-{{ version }}.tar.bz2"
+      dest: "{{ apps_dir }}/gatk-{{ version }}"
+      owner: "{{ main_guy }}"
+      group: "{{ main_guy }}"
+      copy: no
+
+  when: g.stat.exists
+
+  tags: gatk
+
+- name: gatk {{ version }} wrapper script
+  template:
+    src: java-wrapper.sh.j2
+    dest: "{{ apps_dir }}/gatk-{{ version }}/gatk"
+    owner: "{{ main_guy }}" 
+    mode: 0755
+  with_items:
+    - jar: "{{ apps_dir }}/gatk-{{ version }}/GenomeAnalysisTK-{{ version }}.jar"
+  when: g.stat.exists
+
+  tags: gatk
+
+- file:
+    dest: "{{ modules_core }}/gatk"
+    state: directory
+    owner: "{{ main_guy }}"
+    group: "{{ main_guy }}"
+
+  when: g.stat.exists
+
+  tags: gatk
+
+- name: gatk {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_core }}/gatk/{{ version }}.lua"
+    owner: "{{ main_guy }}"
+    group: "{{ main_guy }}"
+    mode: 0644
+  with_items:
+    - dir: 'gatk-{{ version }}'
+      skip_bin: true
+      help_text: 'This module loads the java and set enviromental vairables JAVA_HOME and JAVA_ROOT'
+
+  when: g.stat.exists
