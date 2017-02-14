@@ -21,7 +21,7 @@ modules_extra: "{{ modules_dir }}/extra"
 apps_dir: "{{ your_path }}/software/apps"
 tmp_dir: "/tmp"
 data_dir: "/data/bio-data"
-cannonical_sw_dir: "/software"
+cannonical_sw_dir: "/mnt/software"
 #
 time_zone: "Australia/Victoria"
 #------------------------------
@@ -60,7 +60,7 @@ mimodd_version: 0.1.7.3
 multiqc_version: 0.9
 cutadapt_version: 1.12
 # bds version
-bds_version: master
+bds_version: 0.99999g
 
 # extra packages
 stack_version: 1.2.0

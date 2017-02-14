@@ -11,7 +11,7 @@
   git:
     repo: https://github.com/pcingola/BigDataScript.git
     dest: "{{ source_dir }}/BigDataScript-{{ version }}"
-    version: "{{ version }}"
+    version: "v{{ version }}"
     update: no
   when: j.stat.isdir is defined and j.stat.isdir
 
