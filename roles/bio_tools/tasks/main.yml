@@ -1,5 +1,6 @@
 ---
 
+- include: lmod_stdenv.yml
 - include: star.yml version={{ star_version}}
 - include: bwa.yml version={{ bwa_version }} 
 - include: htslib.yml version={{ htslib_version }}

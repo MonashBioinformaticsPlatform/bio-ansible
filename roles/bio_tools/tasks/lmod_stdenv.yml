@@ -1,0 +1,10 @@
+---
+
+- name: copy stdenv module definition
+  template:
+    src: StdEnv.lua
+    dest: "{{ modules_core }}"
+    owner: "{{ main_guy }}"
+    mode: 0644
+
+  tags: stdenv

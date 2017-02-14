@@ -33,12 +33,3 @@
     mode: 0644
 
   tags: lmod
-
-- name: copy stdenv module definition
-  template:
-    src: StdEnv.lua
-    dest: "{{ modules_core }}"
-    owner: root
-    mode: 0644
-
-  tags: lmod
