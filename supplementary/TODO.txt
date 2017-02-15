@@ -1,10 +1,10 @@
+## High priority installation
 
 artemis http://www.sanger.ac.uk/resources/software/artemis/#download
 MACS  https://github.com/taoliu/MACS
 SnpEff http://snpeff.sourceforge.net/download.html
 VEP http://www.ensembl.org/info/docs/tools/vep/index.html
 Gemini http://gemini.readthedocs.org/en/latest/content/installation.html#automated-installation
-
 
 
 Add categories tool categories so can load related tools together eg.
@@ -47,3 +47,16 @@ Java Oracle dependent
 - `/etc/nginx/nginx.conf` - The main Nginx configuration file. This can be modified to make changes to the Nginx global configuraiton.
 - `/etc/nginx/sites-available` - The directory where per-site "server blocks" can be stored. Nginx will not use the configuration files found in this directory unless they are linked to the sites-enabled directory (see below). Typically, all server block configuration is done in this directory, and then enabled by linking to the other directory.
 - `/etc/nginx/sites-enabled/` - The directory where enabled per-site "server blocks" are stored. Typically, these are created by linking to configuration files found in the sites-available directory
+
+####
+
+Need to include modules labeling guide
+
+use the same case as how you would run the tool on the command line e.g snpEff as a module name because you'd run snpEff on the command line
+e.g SPAdes module should actually be called, spades, because this is how you'd run it on the commnand line. Also there shouldn't be any "v" prefixes in the module names
+
+####
+
+Need to add args:
+               create: dest to apps/bin/file
+on all of the downloading steps, because it keeps re-downloading every apppp, which isn't desirable. From reading docs quicly I'd have to set up a register and use with when option instead
