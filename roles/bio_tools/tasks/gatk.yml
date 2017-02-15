@@ -6,15 +6,14 @@
 
   tags: gatk
 
-- debug: msg: "Skipping installation of GATK - tarballs/GenomeAnalysisTK-{{ version }}.tar.bz2 not found."
+- debug:
+    msg: "Skipping installation of GATK - tarballs/GenomeAnalysisTK-{{ version }}.tar.bz2 not found."
   when: not g.stat.exists
 
 - name: copy local GenomeAnalysisTK-{{ version }}.tar.bz2 file
   copy:
     src: "{{ playbook_dir }}/tarballs/GenomeAnalysisTK-{{ version }}.tar.bz2"
     dest: "{{ source_dir }}/GenomeAnalysisTK-{{ version }}.tar.bz2"
-    owner: "{{ main_guy }}"
-    group: "{{ main_guy }}"
   when: g.stat.exists
 
   tags: gatk
@@ -31,8 +30,6 @@
   unarchive:
       src: "{{ source_dir }}/GenomeAnalysisTK-{{ version }}.tar.bz2"
       dest: "{{ apps_dir }}/gatk-{{ version }}"
-      owner: "{{ main_guy }}"
-      group: "{{ main_guy }}"
       copy: no
 
   when: g.stat.exists
@@ -55,7 +52,6 @@
     dest: "{{ modules_core }}/gatk"
     state: directory
     owner: "{{ main_guy }}"
-    group: "{{ main_guy }}"
 
   when: g.stat.exists
 
@@ -66,7 +62,6 @@
     src: sw-module.lua.j2 
     dest: "{{ modules_core }}/gatk/{{ version }}.lua"
     owner: "{{ main_guy }}"
-    group: "{{ main_guy }}"
     mode: 0644
   with_items:
     - dir: 'gatk-{{ version }}'
