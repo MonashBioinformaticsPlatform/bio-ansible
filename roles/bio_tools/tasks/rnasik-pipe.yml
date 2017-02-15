@@ -5,7 +5,7 @@
     repo: https://github.com/monashbioinformaticsplatform/RNAsik-pipe
     dest: "{{ apps_dir }}/RNAsik-pipe-{{ version }}"
     version: "{{ version }}"
-    update: yes
+    update: no
 
   tags: rnasik
 

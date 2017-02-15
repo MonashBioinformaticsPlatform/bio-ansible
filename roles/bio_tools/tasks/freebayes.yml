@@ -5,7 +5,7 @@
     repo: git://github.com/ekg/freebayes.git
     dest: "{{ source_dir }}/freebayes-{{ version }}"
     version: "{{ version }}"
-    update: yes
+    update: no
     recursive: yes
   tags: freebayes
 
@@ -47,7 +47,7 @@
   tags: freebayes
 
 - name: move freebayes {{ version }} executables to apps directory
-  shell: cp -r {{ source_dir }}/freebayes-{{ version }}/bin {{ apps_dir }}/freebayes-{{ version }}/
+  shell: mv {{ source_dir }}/freebayes-{{ version }}/bin/ {{ apps_dir }}/freebayes-{{ version }}/
   args:
     creates: "{{ apps_dir }}/freebayes-{{ version }}/bin/freebayes"
 
