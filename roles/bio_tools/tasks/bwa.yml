@@ -5,7 +5,7 @@
     repo: https://github.com/lh3/bwa/
     dest: "{{ source_dir }}/bwa-{{ version }}"
     version: "{{ version }}"
-    update: no
+    update: yes
 
   tags: bwa
 

@@ -6,7 +6,7 @@
     dest: "{{ source_dir }}/samtools-{{ version }}"
     version: "{{ version }}"
     # this should prevent git clone error if directory already exist
-    update: no
+    update: yes
 
   tags: samtools
 

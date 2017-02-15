@@ -5,7 +5,7 @@
     repo: https://github.com/alexdobin/STAR
     dest: "{{ source_dir }}/STAR-{{ version }}"
     version: "{{ version }}"
-    update: no
+    update: yes
 
   tags: star
 

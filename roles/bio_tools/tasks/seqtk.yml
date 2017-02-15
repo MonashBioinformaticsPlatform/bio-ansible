@@ -5,7 +5,7 @@
     repo: https://github.com/lh3/seqtk/
     dest: "{{ source_dir }}/seqtk-{{ version }}"
     version: "{{ version }}"
-    update: no
+    update: yes
 
   tags: seqtk
 

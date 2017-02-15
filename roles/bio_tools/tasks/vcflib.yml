@@ -5,7 +5,7 @@
     repo: https://github.com/vcflib/vcflib.git
     dest: "{{ source_dir }}/vcflib-{{ version }}"
     version: "{{ version }}"
-    update: no
+    update: yes
     recursive: yes
 
   tags: vcflib

@@ -5,7 +5,7 @@
     repo: https://github.com/torognes/vsearch
     dest: "{{ source_dir }}/vsearch-{{ version }}"
     version: "v{{ version }}"
-    update: no
+    update: yes
 
   tags: vsearch
 

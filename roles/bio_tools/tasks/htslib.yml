@@ -6,7 +6,7 @@
     dest: "{{ source_dir }}/htslib-{{ version }}"
     version: "{{ version }}"
     # this should prevent git clone error if directory already exist
-    update: no
+    update: yes
 
   tags: htslib
 
