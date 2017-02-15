@@ -7,6 +7,7 @@
 - include: samtools.yml version={{ samtools_version }} htslib_v={{ htslib_version }}
 - include: subread.yml version={{ subread_version }}
 - include: picard.yml version={{ picard_version }}
+- include: gatk.yml version={{ gatk_version }}
 - include: fastqc.yml version={{ fastqc_version }}
 - include: freebayes.yml version={{ freebayes_version }}
 - include: vcflib.yml version={{ vcflib_version }}
