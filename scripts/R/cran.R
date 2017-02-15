@@ -8,6 +8,7 @@ if (length(args)==0) {
   install.packages(c("rmarkdown",
                      "tidyverse",
                      "viridis",
+                     "formatR",
                      "shiny"
                      ),
                     # pass in r_base_mirror

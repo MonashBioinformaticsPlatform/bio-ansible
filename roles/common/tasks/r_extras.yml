@@ -1,6 +1,6 @@
 ---
 
-- name: check CRAN R script exists
+- name: check CRAN and bioconductor R scripts exist
   stat:
     path: "{{ playbook_dir }}/scripts/R/{{ item }}"
   with_items:
@@ -21,7 +21,7 @@
   
   tags: r-extras
 
-- name: copy R script {{ tmp_dir }}
+- name: copy R scripts {{ tmp_dir }}
   copy:
     src: "{{ playbook_dir }}/scripts/R/{{ item.item }}"
     dest: "{{ tmp_dir }}/scripts/R"
@@ -30,11 +30,21 @@
 
   tags: r-extras
 
-- name: run CRAN R script to install packages
+- name: run R scripts to install packages
   shell: Rscript {{ tmp_dir }}/scripts/R/{{ item.item }} {{ r_base_mirror }}
   with_items: "{{ e.results }}"
   when: item.stat.exists
 
+  tags: r-extras
+
+- name: remove R scripts from {{ tmp_dir }}
+  file:
+    dest: "{{ tmp_dir }}/scripts/R"
+    state: absent
+    mode: 0755
+  with_items: "{{ e.results }}"
+  when: item.stat.exists
+  
   tags: r-extras
 
 #TODO add clean up of scripts/R directory
