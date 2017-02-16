@@ -98,16 +98,17 @@ make_users() {
 
       if [[ -z $user_status || $user_status == "ToBeNew" ]]
       then
-        make_user $clean_user $user_email $input_hostname $users_fullname
+        make_user $clean_user $clean_email $input_hostname $users_fullname
         if [[ $current_guy != "current" ]]
         then
-          echo "$clean_user,$user_email,new,$made_rand"
+          echo "$clean_user,$clean_email,new,$made_rand"
         else
-          echo "$clean_user,$user_email,current,-"
+          echo "$clean_user,$clean_email,current,-"
         fi
+        unset current_guy
       elif [[ $user_status == "current" || $user_status == "new" || $user_status == "changed" ]]
       then
-        echo "$user_name,$user_email,current,-"
+        echo "$user_name,$clean_email,current,-"
       elif [[ $user_status == "ToBeDeleted" ]]
       then
         del_user $user_name
