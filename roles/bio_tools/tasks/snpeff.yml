@@ -2,7 +2,7 @@
 
 - name: download snpEff package {{ version }}
   get_url:
-    url: http://sourceforge.net/projects/snpeff/files/snpEff_latest_core.zip
+    url: http://sourceforge.net/projects/snpeff/files/snpEff_v{{ version }}_core.zip
     timeout: 30
     dest: "{{ source_dir }}/snpEff_{{ version }}_core.zip"
 

@@ -49,7 +49,7 @@
   tags: gatk
 
 - file:
-    dest: "{{ modules_core }}/gatk"
+    dest: "{{ modules_bio }}/gatk"
     state: directory
     owner: "{{ main_guy }}"
 
@@ -60,7 +60,7 @@
 - name: gatk {{ version }} module definition
   template: 
     src: sw-module.lua.j2 
-    dest: "{{ modules_core }}/gatk/{{ version }}.lua"
+    dest: "{{ modules_bio }}/gatk/{{ version }}.lua"
     owner: "{{ main_guy }}"
     mode: 0644
   with_items:
