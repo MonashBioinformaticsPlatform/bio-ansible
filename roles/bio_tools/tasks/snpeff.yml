@@ -16,25 +16,36 @@
 
   tags: snpeff
 
+- name: rename snpEff directory to reflecte version number {{ version }}
+  file:
+    src: "{{ apps_dir }}/snpEff"
+    dest: "{{ apps_dir }}/snpEff-{{ version }}"
+  tags: snpeff
+
+- file:
+    path: "{{ apps_dir }}/snpEff"
+    state: absent
+  tags: snpeff
+
 - name: snpEff {{ version }} wrapper script
   template:
     src: java-wrapper.sh.j2
-    dest: "{{ apps_dir }}/snpEff/snpEff"
+    dest: "{{ apps_dir }}/snpEff-{{ version }}/snpEff"
     owner: "{{ main_guy }}" 
     mode: 0755
   with_items:
-    - jar: "{{ apps_dir }}/snpEff/snpEff.jar"
+    - jar: "{{ apps_dir }}/snpEff-{{ version }}/snpEff.jar"
 
   tags: snpeff
 
 - name: snpSift {{ version }} wrapper script
   template:
     src: java-wrapper.sh.j2
-    dest: "{{ apps_dir }}/snpEff/SnpSift"
+    dest: "{{ apps_dir }}/snpEff-{{ version }}/SnpSift"
     owner: "{{ main_guy }}" 
     mode: 0755
   with_items:
-    - jar: "{{ apps_dir }}/snpEff/SnpSift.jar"
+    - jar: "{{ apps_dir }}/snpEff-{{ version }}/SnpSift.jar"
 
   tags: snpeff
 
@@ -52,7 +63,7 @@
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:
-    - dir: 'snpEff'
+    - dir: 'snpEff-{{ version }}'
       skip_bin: true
       help_text: 'This module loads snpEff'
 
@@ -60,7 +71,7 @@
 
 - name: setting register for snpEff2 {{ version }}
   stat:
-    path: "{{ apps_dir }}/snpEff/snpEff.jar"
+    path: "{{ apps_dir }}/snpEff-{{ version }}/snpEff.jar"
   register: s
 
   tags: snpeff

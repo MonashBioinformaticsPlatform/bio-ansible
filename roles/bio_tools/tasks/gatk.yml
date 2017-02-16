@@ -68,4 +68,6 @@
       skip_bin: true
       help_text: 'This module loads the java and set enviromental vairables JAVA_HOME and JAVA_ROOT'
 
+  tags: gatk
+
   when: g.stat.exists
