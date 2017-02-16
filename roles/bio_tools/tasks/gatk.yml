@@ -43,7 +43,7 @@
     owner: "{{ main_guy }}" 
     mode: 0755
   with_items:
-    - jar: "{{ apps_dir }}/gatk-{{ version }}/GenomeAnalysisTK-{{ version }}.jar"
+    - jar: "{{ apps_dir }}/gatk-{{ version }}/GenomeAnalysisTK.jar"
   when: g.stat.exists
 
   tags: gatk
@@ -66,7 +66,8 @@
   with_items:
     - dir: 'gatk-{{ version }}'
       skip_bin: true
-      help_text: 'This module loads the java and set enviromental vairables JAVA_HOME and JAVA_ROOT'
+      java: true
+      help_text: 'This module loads the GenomeAnalysisTK together with oracle java'
 
   tags: gatk
 
