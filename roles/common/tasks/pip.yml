@@ -7,6 +7,10 @@
   with_items:
     # upgrade pip
     - pip
+    # essential?
+    - pyopenssl
+    - ndg-httpsclient
+    - pyasn1
     # common
     - virtualenv
     - ansible
@@ -18,3 +22,4 @@
     - gffutils
 
   tags: pip
+
