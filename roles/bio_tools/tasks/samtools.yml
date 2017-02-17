@@ -5,15 +5,13 @@
     repo: https://github.com/samtools/samtools
     dest: "{{ source_dir }}/samtools-{{ version }}"
     version: "{{ version }}"
-    # this should prevent git clone error if directory already exist
-    update: yes
 
   tags: samtools
 
 - name: build samtools {{ version }}
   shell: cd {{ source_dir }}/samtools-{{ version }}; make install prefix={{ apps_dir }}/samtools-{{ version }} HTSDIR=../htslib-{{ htslib_v }}
   args:
-    creates: "{{ apps_dir }}/samtools-{{ version }}/samtools"
+    creates: "{{ apps_dir }}/samtools-{{ version }}/bin/samtools"
 
   tags: samtools
 
@@ -32,7 +30,6 @@
     mode: 0644
   with_items:
     - dir: 'samtools-{{version}}'
-      skip_bin: true
       help_text: 'This module loads the samtools tool suite'
 
   tags: samtools

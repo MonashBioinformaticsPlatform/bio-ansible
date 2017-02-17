@@ -20,6 +20,7 @@
   file:
     src: "{{ apps_dir }}/snpEff"
     dest: "{{ apps_dir }}/snpEff-{{ version }}"
+    state: directory
   tags: snpeff
 
 - file:
