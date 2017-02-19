@@ -1,5 +1,4 @@
 
-
 send_out() {
 
   this_guy=$1
@@ -7,8 +6,7 @@ send_out() {
   his_hostname=$3
   his_pass=$4
     
-  #echo -e "This is your login details, note you were given randomly generated password. You are strongly encouraged to change it. You can do so by running \`passwd\` command and following the prompts. \n \n username: $new_guy \n password: $made_rand \n host: biotraining.erc.monash.edu \n \n To connect to the server use \`ssh\` command \n \n  \`ssh $new_guy@$your_host\` \n \n Not a lab guy" | mail -s "Your login details for upcoming course by Monash Bioinforamtics Platform" $user_mail
-  echo -e "This is your login details below: \n \n username: $this_guy \n password: $his_pass \n host: $his_hostname \n \n To connect to the server use \`ssh\` command \n \n  \`ssh $this_guy@$his_hostname\` \n \n If you have any problems email Kirill at kirill.tsyganov@monash.edu" | mail -s "Your login details for upcoming course by Monash Bioinforamtics Platform" $his_email
+  echo -e "This is your login details below: \n \n username: $this_guy \n password: $his_pass \n host: $his_hostname \n \n To connect to the server use \`ssh\` command \n \n  \`ssh $this_guy@$his_hostname\` \n \n If you have any problems email Kirill at kirill.tsyganov@monash.edu" | mail -s "Your login details for $his_hostname hosted by Monash Bioinforamtics Platform" $his_email
 
 }
 
@@ -141,25 +139,6 @@ make_users() {
   unset make_user
 }
 
-do_data_link() {
-  data_dirs=(r-intro-gh-pages/r-intro-files r-more-gh-pages/r-more-files RNAseq-DE-analysis-with-R-gh-pages/data)
-  
-  for u in /home/*
-  do 
-    for dd in ${data_dirs[@]}
-    do
-      if [[ ! -L "$u/$(basename $dd)" ]]
-      then
-        ln -s /data/bio-data/$dd $u/
-        chown -R $(basename $u):$(basename $u) $u/$(basename $dd)
-        >&2 echo "MESSAGE: Linked $dd to $u"
-      else
-        >&2 echo "MESSAGE: Username $(basename $u) already has $dd symlink"
-      fi
-    done
-  done
-}
-
 do_help() {
 
   echo ""
@@ -170,7 +149,6 @@ do_help() {
   echo ""
   echo "           -F (--filename) <FILE> - provide file with user infomation"
   echo "           -H (--host) <STRING> - provide host name or IP address"
-  echo "           -L (--linkdata) - will symlink /data/bio-data to user's home directory"
   echo "           --ifs [,] - set IFS (internal field separator)"
   echo ""
   echo " Description: "
@@ -215,9 +193,6 @@ do
     (-h|--help)
       do_help
       ;;
-    (-L|--linkdata)
-      link_data=true
-      ;;
     (-H|--host)
       your_host=$2 
       shift
@@ -244,20 +219,12 @@ fi
 if [[ -f $username_file && -s $username_file && -n $your_host ]]
 then
   make_users $username_file $your_host $ifs
-  if [[ -n $link_data ]]
-  then
-    do_data_link
-  fi
-elif [[ -n $link_data ]]
-then
-  do_data_link
 else
   >&2 echo "ERROR: Check your input file --filename and/or --host"
   exit 1
 fi
 
 # cmd variables
-unset link_data
 unset your_host
 unset username_file
 #make_user
