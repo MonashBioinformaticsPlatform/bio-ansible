@@ -26,7 +26,7 @@
   tags: bds
 
 - name: moving executable bds {{ version }} to apps directory
-  shell: mv "{{ local_home }}/.bds/" "{{ apps_dir }}/BigDataScript-{{ version }}"
+  shell: mv "{{ local_home }}/.bds" "{{ apps_dir }}/BigDataScript-{{ version }}"
   args:
     creates: "{{ apps_dir }}/BigDataScript-{{ version }}/bds"
   when: j.stat.isdir is defined and j.stat.isdir
