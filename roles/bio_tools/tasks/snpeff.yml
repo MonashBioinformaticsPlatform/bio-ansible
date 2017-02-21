@@ -17,15 +17,10 @@
   tags: snpeff
 
 - name: rename snpEff directory to reflecte version number {{ version }}
-  file:
-    src: "{{ apps_dir }}/snpEff"
-    dest: "{{ apps_dir }}/snpEff-{{ version }}"
-    state: directory
-  tags: snpeff
+  command: mv {{ apps_dir }}/snpEff {{ apps_dir }}/snpEff-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/snpEff-{{ version }}/snpEff.jar"
 
-- file:
-    path: "{{ apps_dir }}/snpEff"
-    state: absent
   tags: snpeff
 
 - name: snpEff {{ version }} wrapper script
