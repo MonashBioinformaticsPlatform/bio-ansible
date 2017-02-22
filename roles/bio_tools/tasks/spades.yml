@@ -30,7 +30,7 @@
     owner: "{{ main_guy }}"
     mode: 0644
   with_items:
-    - dir: 'spades-{{ version }}-Linux'
+    - dir: 'SPAdes-{{ version }}-Linux'
       msg: 'Use spades.py instead of spades'
       help_text: 'This module loads spades genome assembler'
 
