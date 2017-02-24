@@ -4,6 +4,7 @@
   user:
     name: "{{ main_guy }}"
     shell: /bin/bash
+    group: "{{ main_guy }}"
     comment: "software install user"
 
   tags: sw_guy

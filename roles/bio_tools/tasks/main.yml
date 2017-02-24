@@ -9,8 +9,6 @@
 - include: picard.yml version={{ picard_version }}
 - include: gatk.yml version={{ gatk_version }}
 - include: fastqc.yml version={{ fastqc_version }}
-- include: freebayes.yml version={{ freebayes_version }}
-- include: vcflib.yml version={{ vcflib_version }}
 - include: sratoolkit.yml version={{ sratoolkit_version }}
 - include: rnasik-pipe.yml version={{ rnasik_version }}
 - include: qualimap.yml version={{ qualimap_version }}
@@ -23,3 +21,6 @@
 - include: snpeff.yml version={{ snpeff_version }}
 - include: spades.yml version={{ spades_version }}
 - include: vsearch.yml version={{ vsearch_version }}
+# alsways keep those two at the bottom of the list as they tend to break during compilation
+- include: freebayes.yml version={{ freebayes_version }}
+- include: vcflib.yml version={{ vcflib_version }}
