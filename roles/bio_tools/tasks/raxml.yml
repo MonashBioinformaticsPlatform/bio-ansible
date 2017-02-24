@@ -1,0 +1,65 @@
+---
+
+- name: download raxml {{ version }}
+  git:
+    repo: https://github.com/stamatak/standard-RAxML
+    dest: "{{ source_dir }}/raxml-{{ version }}"
+    version: "v{{ version }}"
+
+  tags: raxml
+
+- name: build raxml {{ version }}
+  shell: cd {{ source_dir }}/raxml-{{ version }}; make -f {{ raxml_makefile }}
+  args:
+    creates: "{{ source_dir }}/raxml-{{ version }}/raxmlHPC-PTHREADS-AVX"
+
+  tags: raxml
+
+- file:
+    dest: "{{ apps_dir }}/raxml-{{ version }}/bin"
+    state: directory
+    owner: "{{ main_guy }}"
+    mode: 0755
+
+  tags: raxml
+
+- file:
+    src: "{{ source_dir }}/raxml-{{ version }}/raxmlHPC-PTHREADS-AVX"
+    dest: "{{ apps_dir }}/raxml-{{ version }}/bin/raxml"
+    state: link
+
+  tags: raxml
+
+- file:
+    dest: "{{ modules_bio }}/raxml"
+    state: directory
+    mode: 0755
+
+  tags: raxml
+
+- name: raxml {{ version }} lmod definition
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_bio }}/raxml/{{ version }}.lua"
+    owner: "{{ main_guy }}"
+    mode: 0644
+  with_items:
+    - dir: 'raxml-{{ version }}'
+      help_text: 'This module loads the raxml tool' 
+
+  tags: raxml
+
+  #- name: setting register for raxml {{ version }}
+  #  stat:
+  #    path: "{{ apps_dir }}/raxml-{{ version }}/raxml"
+  #  register: s
+  #
+  #  tags: raxml
+  #
+  #- name: removing raxml {{ version }} source directory
+  #  file:
+  #    dest: "{{ source_dir }}/raxml-{{ version }}"
+  #    state: absent
+  #  when: "{{ del_src }} s.stat.exists"
+  #
+  #  tags: raxml

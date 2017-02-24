@@ -21,6 +21,7 @@
 - include: snpeff.yml version={{ snpeff_version }}
 - include: spades.yml version={{ spades_version }}
 - include: vsearch.yml version={{ vsearch_version }}
+- include: raxml.yml version={{ raxml_version }}
 # alsways keep those two at the bottom of the list as they tend to break during compilation
 - include: freebayes.yml version={{ freebayes_version }}
 - include: vcflib.yml version={{ vcflib_version }}
