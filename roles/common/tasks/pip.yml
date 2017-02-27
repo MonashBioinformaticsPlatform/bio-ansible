@@ -7,6 +7,8 @@
   with_items:
     # upgrade pip
     - pip
+    # upgrade setuptools
+    - setuptools
     # essential?
     - pyopenssl
     - ndg-httpsclient
@@ -18,8 +20,10 @@
     # other
     - pandocfilters
     # bio
-    - nesoni
+    - biopython
+    - matplotlib
     - pysam
+    - nesoni
     - gffutils
 
   tags: pip

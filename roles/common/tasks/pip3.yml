@@ -1,0 +1,17 @@
+---
+
+- name: pip3 install python packages
+  pip:
+    name: "{{ item }}"
+    state: latest
+    executable: pip3
+  with_items:
+    # upgrade pip
+    - pip
+    - ipython
+    - biopython
+    - matplotlib
+    - pysam
+
+  tags: pip3
+
