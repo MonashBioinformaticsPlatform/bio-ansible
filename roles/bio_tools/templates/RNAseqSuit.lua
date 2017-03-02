@@ -3,5 +3,5 @@ load("fastqc",
      "picard",
      "STAR",
      "multiqc",
-     "subread",
+     "subread"
 )
