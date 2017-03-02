@@ -1,0 +1,4 @@
+load("freebayes",
+     "gatk",
+     "snpEff",
+)
