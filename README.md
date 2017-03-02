@@ -25,6 +25,7 @@ ansible-playbook -i hosts all.yml
 
 This bio-ansible script is multi-potent as it can set up from scratch the whole army of servers with bioinformatics (genomic) focus or just install handful of selected tools. Depending on what you are trying to do you can run bio-ansible as a non privileged user, particular if you are just installing bio-tools. However you still might need to install some "common" dependencies and for that you might need `sudo`.
 Also note that modules are ‘idempotent’, meaning if you run them again, they will make only the changes they must in order to bring the system to the desired state. This makes it very safe to rerun the same playbook multiple times. They won’t change things unless they have to change things.
+Please note this this playbook is targeting linux operating systems, specifically ubuntu distribution.
 
 **It is safe to re-run the same playbook**
 

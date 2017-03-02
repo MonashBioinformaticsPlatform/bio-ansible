@@ -1,41 +1,26 @@
+# List of packages to support
+
 ## High priority installation
 
 artemis http://www.sanger.ac.uk/resources/software/artemis/#download
 MACS  https://github.com/taoliu/MACS
-SnpEff http://snpeff.sourceforge.net/download.html
 VEP http://www.ensembl.org/info/docs/tools/vep/index.html
 Gemini http://gemini.readthedocs.org/en/latest/content/installation.html#automated-installation
 
+## Make "stdenv" like file
 
-Add categories tool categories so can load related tools together eg.
-  variants
-  chipseq
-  rnaseq
-  utils
-  cnv
+Make StdEnv.lua like file for specific categofies e.g
+
+- variants
+- chipseq
+- rnaseq
+- utils
+- cnv
  
-
-## Notes
-
-This ansible for linux machine, if other machine will be in mind, don't forget to switch featureCounts make file type
-
-added sudo rstudio-server verify-installation to varify?
-
-## Update README
-
-Most (all) of the java tools will be tied with java_oracle installation before hand. If java oracle app isn't installed then no other java oracle
-depended tools will be installed. Refere to java oracle installation guide - need to manually download it into tarballs directory
-
-Java Oracle dependent
-
-- igv
-- bds
-
-## Questions
+## Questions?
 
 - need to understand ports. Why TCP 3838 for ShinyApps and not HTTP/HTTPS ?
 - also nestat -tuple showed port 3838 before I enabled it?
-
 
 ## Nginx 
 
@@ -48,15 +33,8 @@ Java Oracle dependent
 - `/etc/nginx/sites-available` - The directory where per-site "server blocks" can be stored. Nginx will not use the configuration files found in this directory unless they are linked to the sites-enabled directory (see below). Typically, all server block configuration is done in this directory, and then enabled by linking to the other directory.
 - `/etc/nginx/sites-enabled/` - The directory where enabled per-site "server blocks" are stored. Typically, these are created by linking to configuration files found in the sites-available directory
 
-####
-
-Need to include modules labeling guide
+## Brief modules writing guide
 
 use the same case as how you would run the tool on the command line e.g snpEff as a module name because you'd run snpEff on the command line
 e.g SPAdes module should actually be called, spades, because this is how you'd run it on the commnand line. Also there shouldn't be any "v" prefixes in the module names
 
-####
-
-Need to add args:
-               create: dest to apps/bin/file
-on all of the downloading steps, because it keeps re-downloading every apppp, which isn't desirable. From reading docs quicly I'd have to set up a register and use with when option instead
