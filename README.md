@@ -77,10 +77,7 @@ _You can always add `-v` or `-vvv` options for verbose mode_
 
 ### Manual handling
 
-Because of the licenses some installation files need to be manually downloaded into `tarballs` directory. [List of supported packages](tarballs)
-
-You need to manually download these packages and place them into `roles/bio_tools/files/` directory.
-The `playbook.yml` going to skip installation of those packages if it doesn't find archived files in files directory.
+Because of the licenses some installation files need to be manually downloaded into `tarballs` directory. You need to manually download these packages and place them into `roles/bio_tools/files/` directory. The `playbook.yml` going to skip installation of those packages if it doesn't find archived files in files directory.
 
 ### Manual scripts
 
