@@ -11,9 +11,7 @@ Gemini http://gemini.readthedocs.org/en/latest/content/installation.html#automat
 
 Make StdEnv.lua like file for specific categofies e.g
 
-- variants
 - chipseq
-- rnaseq
 - utils
 - cnv
  

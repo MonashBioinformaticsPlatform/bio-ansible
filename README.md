@@ -73,6 +73,7 @@ _You can always add `-v` or `-vvv` options for verbose mode_
 - [List of required dependencies](supplementary/dependencies.md)
 - [List of python pip packages](supplementary/pip_packages.md)
 - [List of supported talball packages](tarballs)
+- [To Do list](supplementary/TODO.md)
 
 ## Other
 
