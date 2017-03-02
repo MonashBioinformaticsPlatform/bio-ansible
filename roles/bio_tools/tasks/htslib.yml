@@ -5,8 +5,6 @@
     repo: https://github.com/samtools/htslib/
     dest: "{{ source_dir }}/htslib-{{ version }}"
     version: "{{ version }}"
-    # this should prevent git clone error if directory already exist
-    update: yes
 
   tags: htslib
 
@@ -15,7 +13,7 @@
   args:
     creates: "{{ source_dir }}/htslib-{{ version }}/bin/tabix"
 
-  tags: build
+  tags: htslib
 
 - file:
     dest: "{{ modules_bio }}/htslib"
