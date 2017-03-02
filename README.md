@@ -7,9 +7,8 @@
 - [Quick start](#quick-start)
 - [Introduction](#introduction)
 - [Running bio-ansible](#running-bio-ansible)
-- [Extra files](#extra-files)
-  - [Manual handling](#manual-handling)
-  - [Manual scripts](#manual-scripts)
+- [Frequently asked questions](#frequently-asked-questions)
+- [Other](#other)
 
 ## Quick start
 
@@ -25,9 +24,6 @@ ansible-playbook -i hosts all.yml
 ## Introduction
 
 This bio-ansible script is multi-potent as it can set up from scratch the whole army of servers with bioinformatics (genomic) focus or just install handful of selected tools. Depending on what you are trying to do you can run bio-ansible as a non privileged user, particular if you are just installing bio-tools. However you still might need to install some "common" dependencies and for that you might need `sudo`.
-
-For more comprehensive playbook breakdown [read here](supplementary/playbook_breakdown.md)
-
 Also note that modules are ‘idempotent’, meaning if you run them again, they will make only the changes they must in order to bring the system to the desired state. This makes it very safe to rerun the same playbook multiple times. They won’t change things unless they have to change things.
 
 **It is safe to re-run the same playbook**
@@ -39,7 +35,7 @@ Also note that modules are ‘idempotent’, meaning if you run them again, they
 3. `git clone https://github.com/serine/bio-ansible.git`
 4. edit `hosts` file to include your IP address into the right group
 5. edit `group/all` file to include your username as `main_guy` variable
-6. To install:
+6. Running playbook:
     - everything - need `sudo` privilege
     ```
     ansible-playbook -i hosts all.yml
@@ -69,9 +65,15 @@ ansible-playbook -i hosts main.yml --tags samtools,star,subread
 
 _You can always add `-v` or `-vvv` options for verbose mode_
 
-[Full list of available tags](supplementary/list_of_tags.md)
+## Frequently asked questions
 
-## Extra files
+- [Playbook breakdown](supplementary/playbook_breakdown.md)
+- [Full list of available tags](supplementary/list_of_tags.md)
+- [List of required dependencies](supplementary/dependencies.md)
+- [List of python pip packages](supplementary/pip_packages.md)
+- [List of supported talball packages](tarballs)
+
+## Other
 
 ### Manual handling
 
