@@ -2,10 +2,10 @@
 
 ## High priority installation
 
-artemis http://www.sanger.ac.uk/resources/software/artemis/#download
-MACS  https://github.com/taoliu/MACS
-VEP http://www.ensembl.org/info/docs/tools/vep/index.html
-Gemini http://gemini.readthedocs.org/en/latest/content/installation.html#automated-installation
+- [artemis](http://www.sanger.ac.uk/resources/software/artemis/#download)
+- [MACS](https://github.com/taoliu/MACS)
+- [VEP](http://www.ensembl.org/info/docs/tools/vep/index.html)
+- [Gemini](http://gemini.readthedocs.org/en/latest/content/installation.html#automated-installation)
 
 ## Make "stdenv" like file
 
