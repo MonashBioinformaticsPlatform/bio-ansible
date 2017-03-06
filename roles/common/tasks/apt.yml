@@ -24,6 +24,8 @@
     - make
     - cmake
     - unzip
+    # non essential
+    - sysstat
     # installing lua and dependencies
     - lua5.2
     - liblua5.2-dev
