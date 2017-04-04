@@ -10,7 +10,7 @@
   become: false
   register: e
 
-  tags: r-extras
+  tags: r_extras
 
 - file:
     dest: "{{ tmp_dir }}/scripts/R"
@@ -19,7 +19,7 @@
   with_items: "{{ e.results }}"
   when: item.stat.exists
   
-  tags: r-extras
+  tags: r_extras
 
 - name: copy R scripts {{ tmp_dir }}
   copy:
@@ -28,14 +28,14 @@
   with_items: "{{ e.results }}"
   when: item.stat.exists
 
-  tags: r-extras
+  tags: r_extras
 
 - name: run R scripts to install packages
   shell: Rscript {{ tmp_dir }}/scripts/R/{{ item.item }} {{ r_base_mirror }}
   with_items: "{{ e.results }}"
   when: item.stat.exists
 
-  tags: r-extras
+  tags: r_extras
 
 - name: remove R scripts from {{ tmp_dir }}
   file:
@@ -45,6 +45,6 @@
   with_items: "{{ e.results }}"
   when: item.stat.exists
   
-  tags: r-extras
+  tags: r_extras
 
 #TODO add clean up of scripts/R directory
