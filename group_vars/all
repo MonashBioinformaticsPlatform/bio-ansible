@@ -58,10 +58,12 @@ spades_version: 3.10.0
 vsearch_version: 2.4.0
 raxml_version: 8.2.9
 raxml_makefile: Makefile.AVX.PTHREADS.gcc
+cellranger_version: 1.3.1
 # python virtualenv
 mimodd_version: 0.1.7.3
 multiqc_version: 0.9
 cutadapt_version: 1.12
+macs2_version: 2.1.1.20160309
 # bds version
 bds_version: 0.99999g
 
