@@ -9,7 +9,7 @@
 
 - name: install shiny-server {{ version }}
   apt:
-      deb: https://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-{{ version }}.deb
+      deb: "http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-{{ version }}.deb"
 
   tags: shiny
 
