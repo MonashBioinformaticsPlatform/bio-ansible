@@ -1,0 +1,36 @@
+---
+
+- name: pip install numpy
+  pip:
+    name: numpy
+    virtualenv: "{{ apps_dir }}/macs2-{{ version }}"
+
+  tags: macs2
+
+- name: pip install macs2 {{ version }}
+  pip:
+    name: macs2
+    version: "{{ version }}"
+    virtualenv: "{{ apps_dir }}/macs2-{{ version }}"
+
+  tags: macs2
+
+- file:
+    dest: "{{ modules_bio }}/macs2"
+    state: directory
+    mode: 0755
+
+  tags: macs2
+
+- name: macs2 {{ version }} module definition
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_bio }}/macs2/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'macs2-{{ version }}'
+      help_text: 'loads macs2 Chip-Seq tool'
+      append: true 
+
+  tags: macs2
