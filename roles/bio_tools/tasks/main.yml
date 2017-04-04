@@ -26,6 +26,7 @@
 - include: vsearch.yml version={{ vsearch_version }}
 - include: raxml.yml version={{ raxml_version }}
 - include: cellranger.yml version={{ cellranger_version }}
+- include: vcftools.yml version={{ vcftools_version }}
 # alsways keep those two at the bottom of the list as they tend to break during compilation
 - include: freebayes.yml version={{ freebayes_version }}
 - include: vcflib.yml version={{ vcflib_version }}
