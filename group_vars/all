@@ -59,6 +59,7 @@ vsearch_version: 2.4.0
 raxml_version: 8.2.9
 raxml_makefile: Makefile.AVX.PTHREADS.gcc
 cellranger_version: 1.3.1
+vcftools_version: 0.1.14
 # python virtualenv
 mimodd_version: 0.1.7.3
 multiqc_version: 0.9
