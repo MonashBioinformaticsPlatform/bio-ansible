@@ -4,7 +4,7 @@
   pip:
     name: ansible
     state: present
-    version: 2.2.1.0
+    version: {{ ansible_version }}
 
 - name: pip install python packages
   pip:
