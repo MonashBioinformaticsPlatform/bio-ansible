@@ -20,3 +20,6 @@ localhost
 [think_twice]
 localhost
 # your IP here
+
+[common]
+localhost
