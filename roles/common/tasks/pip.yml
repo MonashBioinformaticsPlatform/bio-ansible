@@ -4,7 +4,7 @@
   pip:
     name: ansible
     state: present
-    version: {{ ansible_version }}
+    version: "{{ ansible_version }}"
 
 - name: pip install python packages
   pip:
