@@ -4,10 +4,16 @@
 #  sudo: yes
 #  sudo_user: sw-installer
 
+- name: Check {{brew_name}} installed
+  shell: "{{brew_dir}}/bin/brew list {{brew_name}}"
+  register: exists
+  ignore_errors: True
+
+
 - name: Install {{brew_name}}
   shell: "{{brew_dir}}/bin/brew install {{brew_name}}"
-  sudo: yes
-  sudo_user: sw-installer
+  when: exists.rc == 1
 
 - name: Create module def
   shell: "{{brew_dir}}/brew2lmod.rb -l '{{libdir | default('')}}' -m {{modules_dir}}/bio -b {{brew_dir}}/bin/brew {{lmod_name}}"
+  when: exists.rc == 1
