@@ -17,8 +17,18 @@
 
   tags: sw_guy
 
+#TODO check if this will work?
+  #- file:
+  #    dest: "{{ bioansible_basepath }}"
+  #    state: directory
+  #    owner: "{{ sudo_guy }}"
+  #    group: "{{ sudo_guy }}"
+  #    mode: 0755
+  #
+  #  tags: sw_guy
+
 - file:
-    dest: "{{ cannonical_sw_dir }}"
+    dest: "{{ bioansible_basepath }}/software"
     state: directory
     owner: "{{ main_guy }}"
     group: "{{ main_guy }}"

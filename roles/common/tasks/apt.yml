@@ -64,5 +64,7 @@
     - libxml2-dev
     # RStudio dep
     - libapparmor1
+    - libxml2
+    - libxml2-dev
 
   tags: apt

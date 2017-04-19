@@ -8,10 +8,16 @@
   with_items:
     # upgrade pip
     - pip
+    # essential?
+    - pyopenssl
+    - ndg-httpsclient
+    - pyasn1
+    #
     - ipython
     - biopython
     - matplotlib
     - pysam
+    - notebook
 
   tags: pip3
 
