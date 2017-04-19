@@ -5,11 +5,14 @@ if (length(args)==0) {
   stop("At least one argument must be supplied (input file).n", call.=FALSE)
 } else {
 
-  install.packages(c("rmarkdown",
+  install.packages(c("Rcpp",
+                     "httpuv",
+                     "rmarkdown",
                      "tidyverse",
                      "viridis",
                      "formatR",
-                     "shiny"
+                     "shiny",
+                     "plotly"
                      ),
                     # pass in r_base_mirror
                     repos=args[1],

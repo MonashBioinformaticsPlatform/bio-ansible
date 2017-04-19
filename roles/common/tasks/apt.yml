@@ -24,6 +24,10 @@
     - make
     - cmake
     - unzip
+    # non essential, useful
+    - sysstat
+    - ethtool
+    - iotop
     # installing lua and dependencies
     - lua5.2
     - liblua5.2-dev
@@ -40,8 +44,6 @@
     # extras
     - pandoc
     - pandoc-citeproc
-      # moved it to pip instead of apt-get
-      #- python-pandocfilters
     - vim
     - tmux
     - git
@@ -62,5 +64,7 @@
     - libxml2-dev
     # RStudio dep
     - libapparmor1
+    - libxml2
+    - libxml2-dev
 
   tags: apt

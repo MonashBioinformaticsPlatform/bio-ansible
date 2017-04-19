@@ -17,7 +17,7 @@
   tags: subread
 
 - name: build subread {{ version }}
-  shell: cd {{ source_dir }}/subread-{{ version }}-source/src; make -j {{ threads }} -f Makefile.Linux
+  shell: cd {{ source_dir }}/subread-{{ version }}-source/src; make -f Makefile.Linux
   args:
     creates: "{{ source_dir }}/subread-{{ version }}-source/bin/featureCounts"
 

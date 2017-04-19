@@ -10,5 +10,6 @@
   # additional task to insure that r-base is installed
   tasks:
     - include: roles/common/tasks/r.yml
+    - include: roles/common/tasks/r_extras.yml
 
   become: true

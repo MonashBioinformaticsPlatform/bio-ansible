@@ -1,0 +1,103 @@
+
+---
+
+      #repo: export PERL5LIB=/path/to/your/vcftools-directory/src/perl/
+- name: download vcftools {{ version }}
+  git:
+    repo: https://github.com/vcftools/vcftools
+    dest: "{{ source_dir }}/vcftools-{{ version }}"
+    version: "v{{ version }}"
+    force: yes
+
+  tags: vcftools
+
+- name: build vcftools {{ version }}
+  shell: cd {{ source_dir }}/vcftools-{{ version }}; ./autogen.sh; ./configure; make
+  args:
+    creates: "{{ source_dir }}/vcftools-{{ version }}/src/cpp/vcftools"
+
+  tags: vcftools
+
+- name: change permissions for perl executables 
+  shell: chmod a+x {{ source_dir }}/vcftools-{{ version }}/src/perl/*vcf*; chmod a+x {{ source_dir }}/vcftools-{{ version }}/src/perl/fill-*
+
+  tags: vcftools
+
+- file:
+    dest: "{{ apps_dir }}/vcftools-{{ version }}/bin"
+    state: directory
+    owner: "{{ main_guy }}"
+    mode: 0755
+
+  tags: vcftools
+
+- file:
+    dest: "{{ apps_dir }}/vcftools-{{ version }}/perl/scripts"
+    recurse: yes
+    state: directory
+    owner: "{{ main_guy }}"
+    mode: 0755
+
+  tags: vcftools
+
+- file:
+    dest: "{{ apps_dir }}/vcftools-{{ version }}/perl/lib"
+    recurse: yes
+    state: directory
+    owner: "{{ main_guy }}"
+    mode: 0755
+
+  tags: vcftools
+
+- name: copy vcftools {{ version }} binary across
+  shell: mv {{ source_dir }}/vcftools-{{ version }}/src/perl/*.pm {{ apps_dir }}/vcftools-{{ version }}/perl/lib
+  args:
+     creates: "{{ apps_dir }}/vcftools-{{ version }}/perl/lib/VcfStats.pm"
+
+  tags: vcftools
+
+- name: copy vcftools {{ version }} binary across
+  shell: mv {{ source_dir }}/vcftools-{{ version }}/src/cpp/vcftools {{ apps_dir }}/vcftools-{{ version }}/bin/
+  args:
+     creates: "{{ apps_dir }}/vcftools-{{ version }}/bin/vcftools"
+
+  tags: vcftools
+
+- name: copy perl scrips from vcftools {{ version }} across
+  shell: mv {{ source_dir }}/vcftools-{{ version }}/src/perl/*vcf* {{ apps_dir }}/vcftools-{{ version }}/perl/scripts
+  args:
+    creates: "{{ apps_dir }}/vcftools-{{ version }}/perl/scripts/vcf-stats"
+
+  tags: vcftools
+
+- name: copy perl scrips from vcftools {{ version }} across
+  shell: mv {{ source_dir }}/vcftools-{{ version }}/src/perl/fill-* {{ apps_dir }}/vcftools-{{ version }}/perl/scripts
+  args:
+    creates: "{{ apps_dir }}/vcftools-{{ version }}/perl/scripts/fill-an-ac"
+
+  tags: vcftools
+
+- name: symlink perl scripts to bin directory
+  shell: ln -sf {{ apps_dir }}/vcftools-{{ version }}/perl/scripts/* {{ apps_dir }}/vcftools-{{ version }}/bin/
+
+  tags: vcftools
+
+- file:
+    dest: "{{ modules_bio }}/vcftools"
+    state: directory
+    mode: 0755
+
+  tags: vcftools
+
+- name: vcftools {{ version }} lmod definition
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_bio }}/vcftools/{{ version }}.lua"
+    owner: "{{ main_guy }}"
+    mode: 0644
+  with_items:
+    - dir: 'vcftools-{{ version }}'
+      perl_path: 'perl/lib'
+      help_text: 'This module loads the vcftools binary and perl scripts' 
+
+  tags: vcftools

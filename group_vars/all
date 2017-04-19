@@ -12,16 +12,15 @@ main_guy_pubkey: ""
 # Different directories variables
 #---------------------------------
 local_home: "{{ ansible_env.HOME }}"
-your_path: "{{ local_home }}"
-source_dir: "{{ your_path }}/software/source"
-modules_dir: "{{ your_path }}/software/modules"
+bioansible_basepath: "{{ local_home }}/bioansible"
+source_dir: "{{ bioansible_basepath }}/software/source"
+modules_dir: "{{ bioansible_basepath }}/software/modules"
 modules_core: "{{ modules_dir }}/core"
 modules_bio: "{{ modules_dir }}/bio"
 modules_extra: "{{ modules_dir }}/extra"
-apps_dir: "{{ your_path }}/software/apps"
+apps_dir: "{{ bioansible_basepath }}/software/apps"
 tmp_dir: "/tmp"
 data_dir: "/data/bio-data"
-cannonical_sw_dir: "/mnt/software"
 #
 time_zone: "Australia/Victoria"
 #------------------------------
@@ -30,7 +29,8 @@ time_zone: "Australia/Victoria"
 threads: 4
 del_src: "" # empty string means true and "not" negates that
 rstudio_pro_key: ""
-r_base_mirror: "https://cran.ms.unimelb.edu.au"
+r_base_mirror: "https://cran.csiro.au"
+#r_base_mirror: "https://cran.ms.unimelb.edu.au"
 # at this stage ubuntu_version is mainly for the mirror
 ubuntu_version: trusty
 #---------------------
@@ -41,8 +41,8 @@ star_version: 2.5.2b
 bwa_version: v0.7.15
 htslib_version: 1.3.2
 samtools_version: 1.3.1
-subread_version: 1.5.1
-picard_version: 2.8.2
+subread_version: 1.5.2
+picard_version: 2.9.0
 gatk_version: 3.7
 fastqc_version: 0.11.5
 freebayes_version: 1.1.0
@@ -58,10 +58,13 @@ spades_version: 3.10.0
 vsearch_version: 2.4.0
 raxml_version: 8.2.9
 raxml_makefile: Makefile.AVX.PTHREADS.gcc
+cellranger_version: 1.3.1
+vcftools_version: 0.1.14
 # python virtualenv
 mimodd_version: 0.1.7.3
 multiqc_version: 0.9
 cutadapt_version: 1.12
+macs2_version: 2.1.1.20160309
 # bds version
 bds_version: 0.99999g
 

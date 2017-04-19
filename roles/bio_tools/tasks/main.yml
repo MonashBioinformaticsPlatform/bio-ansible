@@ -15,13 +15,18 @@
 - include: seqtk.yml version={{ seqtk_version }}
 - include: igv.yml version={{ igv_version }}
 - include: bedtools.yml version={{ bedtools2_version }}
+# pythons
 - include: mimodd.yml version={{ mimodd_version }}
 - include: multiqc.yml version={{ multiqc_version }}
 - include: cutadapt.yml version={{ cutadapt_version }}
+- include: macs2.yml version={{ macs2_version }}
+#
 - include: snpeff.yml version={{ snpeff_version }}
 - include: spades.yml version={{ spades_version }}
 - include: vsearch.yml version={{ vsearch_version }}
 - include: raxml.yml version={{ raxml_version }}
+- include: cellranger.yml version={{ cellranger_version }}
+- include: vcftools.yml version={{ vcftools_version }}
 # alsways keep those two at the bottom of the list as they tend to break during compilation
 - include: freebayes.yml version={{ freebayes_version }}
 - include: vcflib.yml version={{ vcflib_version }}
