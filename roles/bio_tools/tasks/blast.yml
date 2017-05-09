@@ -1,0 +1,80 @@
+---
+
+- name: download NCBI blast package {{ version }}
+  get_url:
+    url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/{{ version }}/ncbi-blast-{{ version }}+-src.tar.gz
+    timeout: 30
+    dest: "{{ source_dir }}/ncbi-blast-{{ version }}+-src.tar.gz"
+
+  tags: blast
+
+- name: uncompress blast {{ version }}
+  unarchive:
+    src: "{{ source_dir }}/ncbi-blast-{{ version }}+-src.tar.gz"
+    dest: "{{ source_dir }}"
+    copy: no
+
+  tags: blast
+
+- name: build blast {{ version }}
+  shell: cd {{ source_dir }}/ncbi-blast-{{ version }}+-src/c++; ./configure; make # install prefix={{ apps_dir }}/blast-{{ version }}
+  args:
+    creates: "{{ source_dir }}/ncbi-blast-{{ version }}+-src/c++/ReleaseMT/bin/blastn"
+
+  tags: blast
+
+- file:
+    dest: "{{ modules_bio }}/blast"
+    state: directory
+    mode: 0755
+
+  tags: blast
+
+- name: blast {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/blast/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'blast-{{ version }}'
+      help_text: 'This module loads the blast packages including featureCounts'
+
+  tags: blast
+
+- file:
+    dest: "{{ apps_dir }}/blast-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: blast
+
+- name: move blast {{ version }} executable to apps directory
+  shell: cp -r {{ source_dir }}/ncbi-blast-{{ version }}+-src/c++/ReleaseMT/bin {{ apps_dir }}/blast-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/blast-{{ version }}/bin/blastn"
+
+  tags: blast
+
+- name: setting register for blast {{ version }}
+  stat:
+    path: "{{ apps_dir }}/blast-{{ version }}/bin/blastn"
+  register: s
+
+  tags: blast
+
+- name: removing blast {{ version }} source directory
+  file:
+    dest: "{{ source_dir }}/ncbi-blast-{{ version }}+-src"
+    state: absent
+  when: "{{ del_src }} s.stat.exists"
+
+  tags: blast
+
+- name: removing blast {{ version }} tar file
+  file:
+    dest: "{{ source_dir }}/ncbi-blast-{{ version }}+-src.tar.gz"
+    state: absent
+  when: "{{ del_src }} s.stat.exists"
+
+  tags: blast

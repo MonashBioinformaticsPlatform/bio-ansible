@@ -15,6 +15,8 @@
 - include: seqtk.yml version={{ seqtk_version }}
 - include: igv.yml version={{ igv_version }}
 - include: bedtools.yml version={{ bedtools2_version }}
+- include: blast.yml version={{ blast_version }}
+- include: smalt.yml version={{ smalt_version }}
 # pythons
 - include: mimodd.yml version={{ mimodd_version }}
 - include: multiqc.yml version={{ multiqc_version }}

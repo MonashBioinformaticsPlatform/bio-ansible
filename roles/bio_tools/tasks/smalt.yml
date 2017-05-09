@@ -1,0 +1,66 @@
+---
+
+- name: download smalt package {{ version }}
+  get_url:
+    url: https://sourceforge.net/projects/smalt/files/smalt-{{ version }}.tar.gz/download
+    timeout: 30
+    dest: "{{ source_dir }}/smalt-{{ version }}.tar.gz"
+
+  tags: smalt
+
+- name: uncompress smalt {{ version }}
+  unarchive:
+    src: "{{ source_dir }}/smalt-{{ version }}.tar.gz"
+    dest: "{{ source_dir }}"
+    copy: no
+
+  tags: smalt
+
+- name: build smalt {{ version }}
+  shell: cd {{ source_dir }}/smalt-{{ version }}; ./configure; make install prefix={{ apps_dir }}/smalt-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/smalt-{{ version }}/bin/smalt"
+
+  tags: smalt
+
+- file:
+    dest: "{{ modules_bio }}/smalt"
+    state: directory
+    mode: 0755
+
+  tags: smalt
+
+- name: smalt {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/smalt/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'smalt-{{ version }}'
+      help_text: 'This module loads the smalt packages'
+
+  tags: smalt
+
+- name: setting register for smalt {{ version }}
+  stat:
+    path: "{{ apps_dir }}/smalt-{{ version }}/bin/smalt"
+  register: s
+
+  tags: smalt
+
+- name: removing smalt {{ version }} source directory
+  file:
+    dest: "{{ source_dir }}/smalt-{{ version }}"
+    state: absent
+  when: "{{ del_src }} s.stat.exists"
+
+  tags: smalt
+
+- name: removing smalt {{ version }} tar file
+  file:
+    dest: "{{ source_dir }}/smalt-{{ version }}.tar.gz"
+    state: absent
+  when: "{{ del_src }} s.stat.exists"
+
+  tags: smalt

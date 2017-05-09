@@ -12,7 +12,8 @@ main_guy_pubkey: ""
 # Different directories variables
 #---------------------------------
 local_home: "{{ ansible_env.HOME }}"
-bioansible_basepath: "{{ local_home }}/bioansible"
+#bioansible_basepath: "{{ local_home }}/bioansible"
+bioansible_basepath: "/mnt"
 source_dir: "{{ bioansible_basepath }}/software/source"
 modules_dir: "{{ bioansible_basepath }}/software/modules"
 modules_core: "{{ modules_dir }}/core"
@@ -53,6 +54,8 @@ qualimap_version: v2.2.1
 seqtk_version: v1.2
 igv_version: 2.3.90
 bedtools2_version: 2.25.0
+blast_version: 2.6.0
+smalt_version: 0.7.6
 snpeff_version: "4_3i"
 spades_version: 3.10.0
 vsearch_version: 2.4.0
