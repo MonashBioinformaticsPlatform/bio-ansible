@@ -12,6 +12,7 @@ if (length(args)==0) {
                      "viridis",
                      "formatR",
                      "shiny",
+                     "optparse",
                      "plotly"
                      ),
                     # pass in r_base_mirror
