@@ -18,6 +18,8 @@
     - matplotlib
     - pysam
     - notebook
+    # other
+    - awscli
 
   tags: pip3
 

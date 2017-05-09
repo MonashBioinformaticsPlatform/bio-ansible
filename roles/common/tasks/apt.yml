@@ -66,5 +66,10 @@
     - libapparmor1
     - libxml2
     - libxml2-dev
+    # aws-manage dep
+    - jq
+    # perl deps
+    - libmoo-perl
+    - liblist-moreutils-perl
 
   tags: apt
