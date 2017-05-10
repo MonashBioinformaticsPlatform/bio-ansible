@@ -1,0 +1,31 @@
+---
+
+- name: download lmod {{ version }}
+  git:
+    repo: https://github.com/TACC/Lmod
+    dest: "{{ source_dir }}/Lmod-{{ version }}"
+    version: "{{ version }}"
+    update: no
+
+  tags: lmod
+
+- name: compile and install lmod {{ version }}
+  shell: cd {{ source_dir }}/Lmod-{{ version }}; ./configure --prefix={{ apps_dir }} --with-mpathSearch=YES --with-caseIndependentSorting=YES && make install LUA_INCLUDE=/usr/include/lua5.2
+  args:
+    creates: "{{ soft_dir }}/lmod/{{ lmod_version }}"
+
+  tags: lmod
+
+- name: copy lmod bash init file to {{ apps_dir }}/lmod/{{ lmod_version }}
+  template:
+    src: lmod.profile.sh.j2
+    dest: "{{ apps_dir }}/lmod/{{ lmod_version }}/lmod.sh"
+
+  tags: lmod
+
+- name: copy lmod sh stdenv init file to {{ apps_dir }}/lmod/{{ lmod_version }}
+  template:
+    src: z00_StdEnv.sh
+    dest: "{{ apps_dir }}/lmod/{{ lmod_version }}/z00_StdEnv.sh"
+
+  tags: lmod

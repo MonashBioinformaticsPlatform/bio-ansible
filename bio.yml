@@ -6,6 +6,8 @@
   roles:
           # make container for all other installation
           - make_dirs
+          # lmod as a module
+          - lmod
           # java as a module
           - java
           # installing BigDataScript
