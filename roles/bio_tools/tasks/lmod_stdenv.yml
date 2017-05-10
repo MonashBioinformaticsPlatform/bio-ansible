@@ -11,7 +11,7 @@
 
 - name: copy RNAseq module definition
   template:
-    src: RNAseqSuit.lua
+    src: RNAseqSuite.lua
     dest: "{{ modules_core }}"
     owner: "{{ main_guy }}"
     mode: 0644
@@ -20,7 +20,7 @@
 
 - name: copy VariantCalling module definition
   template:
-    src: VariantCallingSuit.lua
+    src: VariantCallingSuite.lua
     dest: "{{ modules_core }}"
     owner: "{{ main_guy }}"
     mode: 0644
