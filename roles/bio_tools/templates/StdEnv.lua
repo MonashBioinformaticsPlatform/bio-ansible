@@ -1,1 +1,3 @@
-load("fastqc")
+load("fastqc",
+     "samtools",
+    )
