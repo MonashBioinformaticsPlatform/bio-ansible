@@ -1,3 +1,3 @@
 load("fastqc",
-     "samtools",
+     "samtools"
     )
