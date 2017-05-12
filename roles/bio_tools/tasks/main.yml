@@ -1,6 +1,5 @@
 ---
 
-- include: lmod_stdenv.yml
 - include: star.yml version={{ star_version}}
 - include: bwa.yml version={{ bwa_version }} 
 - include: htslib.yml version={{ htslib_version }}
@@ -29,6 +28,7 @@
 - include: raxml.yml version={{ raxml_version }}
 - include: cellranger.yml version={{ cellranger_version }}
 - include: vcftools.yml version={{ vcftools_version }}
+- include: biotradis.yml version={{ biotradis_version }}
 # alsways keep those two at the bottom of the list as they tend to break during compilation
 - include: freebayes.yml version={{ freebayes_version }}
 - include: vcflib.yml version={{ vcflib_version }}
