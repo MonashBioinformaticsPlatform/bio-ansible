@@ -7,3 +7,4 @@
 - include: r_extras.yml
 - include: email_setup.yml
 - include: timezone.yml
+- include: motd.yml

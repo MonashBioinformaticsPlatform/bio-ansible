@@ -1,42 +1,56 @@
 ---
 
-- name: adding cran mirror to sources.list
-  apt_repository:
-    repo: "deb {{ r_base_mirror }}/bin/linux/ubuntu {{ ubuntu_version }}/"
-    state: present
-
-  tags: r_base
-
-- name: add apt key
-  apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: E084DAB9
-
-  tags: r_base
-
-- name: update apt cache
+- name: installing R language {{ r_version }}
   apt:
     update_cache: yes
     cache_valid_time: 3600
+    deb: "{{ r_base_mirror }}/bin/linux/ubuntu/{{ ubuntu_version }}/{{ item }}"
 
-  tags: r_base
-
-- name: install R packages
-  apt:
-    pkg: "{{ item }}"
-    state: latest
-    allow_unauthenticated: yes
   with_items:
-    - r-base
-    - r-base-dev
-      #    - r-cran-ggplot2
-      #    - r-bioc-biobase
-      #    - r-bioc-cummerbund
-      #    - r-bioc-biomart
-      #    - r-bioc-biovizbase
-      #    - r-bioc-genomicfeatures
-      #    - r-bioc-iranges
-      #    - r-bioc-rsamtools
-      #    - r-bioc-shortread
+      - "r-base-core_{{ r_version }}_amd64.deb"
+      - "r-base-dev_{{ r_version }}_all.deb"
+      - "r-base-html_{{ r_version }}_all.deb"
+      - "r-doc-html_{{ r_version }}_all.deb"
+      - "r-mathlib_{{ r_version }}_amd64.deb"
 
   tags: r_base
+      #      - "r-recommended_{{ r_version }}_all.deb" 
+      #      - "r-base_{{ r_version }}_all.deb"
+
+#- name: adding cran mirror to sources.list
+#  apt_repository:
+#    repo: "deb {{ r_base_mirror }}/bin/linux/ubuntu {{ ubuntu_version }}/"
+#    state: present
+#
+#  tags: r_base
+#
+#- name: add apt key
+#  apt_key:
+#    keyserver: keyserver.ubuntu.com
+#    id: E084DAB9
+#
+#  tags: r_base
+#
+#- name: update apt cache
+#  apt:
+#    update_cache: yes
+#    cache_valid_time: 3600
+#
+#  tags: r_base
+#
+#- name: installing R language {{ version }}
+#  apt:
+#    pkg: "{{ item }}"
+#    state: present
+#    allow_unauthenticated: yes
+#  with_items:
+#    - r-base
+#    - r-base-core
+#    - r-base-dev
+#      #- r-recommended={{ version }}
+#      #- r-base-core={{ version }}
+#      #- r-base={{ version }}
+#      #- r-base
+#      #- r-base-dev
+#
+#  tags: r_base

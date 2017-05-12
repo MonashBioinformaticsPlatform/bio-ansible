@@ -7,17 +7,11 @@
 
   tags: apt
 
-  #- name: upgrade
-  #  apt:
-  #    upgrade: yes
-  #    autoremove: yes
-  #
-  #  tags: apt
-
 - name: apt-get common dependencies
   apt:
     name: "{{ item }}"
-    state: latest
+    state: present
+    autoremove: yes
   with_items:
     # essentials
     - gcc
@@ -28,19 +22,42 @@
     - sysstat
     - ethtool
     - iotop
-    # installing lua and dependencies
+    # lua and its deps
     - lua5.2
     - liblua5.2-dev
     - lua-filesystem
     - lua-posix
     # lmos dep
     - tcl
-    # htslib dependencies
+    # htslib deps
     - zlib1g-dev
     - libncurses-dev
-    # BigDataScript dependencies
+    # BigDataScript deps
     - golang-go
     - ant
+    # tmux deps
+    - libevent-dev
+    # python deps
+    - python-pip
+    - python3-pip
+    - python-dev
+    - libssl-dev
+    - libssl-doc
+    - zlib1g-dev
+    # R deps
+    - libcurl4-openssl-dev
+    - libxml2-dev
+    # RStudio deps
+    - libapparmor1
+    - libxml2
+    - libxml2-dev
+    # aws-manage deps
+    - jq
+    # perl deps
+    - libmoo-perl
+    - liblist-moreutils-perl
+    # perl stuff
+    - cpanminus
     # extras
     - pandoc
     - pandoc-citeproc
@@ -52,24 +69,5 @@
     - zsh
     - texlive
     - texlive-latex-extra
-    # dep for python
-    - python-pip
-    - python3-pip
-    - python-dev
-    - libssl-dev
-    - libssl-doc
-    - zlib1g-dev
-    # dep for R
-    - libcurl4-openssl-dev
-    - libxml2-dev
-    # RStudio dep
-    - libapparmor1
-    - libxml2
-    - libxml2-dev
-    # aws-manage dep
-    - jq
-    # perl deps
-    - libmoo-perl
-    - liblist-moreutils-perl
 
   tags: apt

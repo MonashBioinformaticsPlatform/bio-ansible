@@ -3,7 +3,7 @@
 - name: pip install python packages
   pip:
     name: "{{ item }}"
-    state: latest
+    state: present
   with_items:
     # upgrade pip
     - pip
