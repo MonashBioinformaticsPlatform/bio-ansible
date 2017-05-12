@@ -1,0 +1,15 @@
+#!/bin/sh
+
+days=7
+
+echo NEW/UPDATED SOFTWARE IN LAST $days DAYS:
+
+find /software/modules -type f -mtime -$days | sed 's#/software/modules/bio/##' | sed 's#\.lua##' | sort
+
+
+echo
+echo '---------------------------------------------'
+echo 'This system using the Lmod module system'
+echo 'To list available modules:'
+echo '  ml avail'
+echo
