@@ -3,3 +3,4 @@
 - include: stack.yml version={{ stack_version }}
 - include: nodejs.yml version={{ nodejs_version }}
 - include: maven.yml version={{ maven_version }}
+- include: tmux.yml version={{ tmux_version }}
