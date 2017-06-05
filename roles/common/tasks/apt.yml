@@ -22,6 +22,7 @@
     - sysstat
     - ethtool
     - iotop
+    - xinetd
     # lua and its deps
     - lua5.2
     - liblua5.2-dev
@@ -44,6 +45,8 @@
     - libssl-dev
     - libssl-doc
     - zlib1g-dev
+    # qiime dep mainly, but this is general GUI package
+    - python-tk
     # R deps
     - libcurl4-openssl-dev
     - libxml2-dev
@@ -51,6 +54,9 @@
     - libapparmor1
     - libxml2
     - libxml2-dev
+    # mothur and uchime C++ deps
+    - libboost-program-options-dev
+    - libboost-iostreams-dev
     # aws-manage deps
     - jq
     # perl deps
@@ -64,6 +70,7 @@
     - vim
     - tmux
     - git
+    - mercurial
     - curl
     - htop
     - zsh

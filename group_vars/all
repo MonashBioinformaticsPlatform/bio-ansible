@@ -3,11 +3,10 @@
 #----------------
 # Users variable
 #----------------
-main_guy: ubuntu
-sudo_guy: "{{ main_guy }}"
+main_guy: "{{ vault_main_guy }}"
+sudo_guy: "{{ vault_sudo_guy }}"
 # need to specify private key if you planing to setyp a launching server
-main_guy_pubkey: ""
-
+main_guy_pubkey: "{{ vault_main_guy_pubkey }}"
 #---------------------------------
 # Different directories variables
 #---------------------------------
@@ -22,6 +21,7 @@ modules_extra: "{{ modules_dir }}/extra"
 apps_dir: "{{ bioansible_basepath }}/software/apps"
 tmp_dir: "/tmp"
 data_dir: "/data/bio-data"
+ref_dir: "/references"
 #
 time_zone: "Australia/Victoria"
 #------------------------------
@@ -29,9 +29,9 @@ time_zone: "Australia/Victoria"
 #------------------------------
 threads: 4
 del_src: "" # empty string means true and "not" negates that
-rstudio_pro_key: ""
+rstudio_pro_key: "{{ vault_rstudio_pro_key }}"
 r_base_mirror: "https://cran.csiro.au"
-#r_base_mirror: "https://cran.ms.unimelb.edu.au"
+r_version: 3.3.3-1trusty0
 # at this stage ubuntu_version is mainly for the mirror
 ubuntu_version: trusty
 #---------------------
@@ -63,22 +63,31 @@ raxml_version: 8.2.9
 raxml_makefile: Makefile.AVX.PTHREADS.gcc
 cellranger_version: 1.3.1
 vcftools_version: 0.1.14
+muscle_version: 3.8.31
+cdhit_version: 4.6.7
+mothur_version: 1.39.5
+#infernal_version: 1.1.2
 # python virtualenv
 mimodd_version: 0.1.7.3
 multiqc_version: 0.9
 cutadapt_version: 1.12
 macs2_version: 2.1.1.20160309
+qiime_version: 1.9.1
 # bds version
 bds_version: 0.99999g
-
+# perl
+biotradis_version: 1.3.3
 # extra packages
 stack_version: 1.2.0
 nodejs_version: v6.9.1
 maven_version: 3.3.9
+tmux_version: 2.4
 
 # interactive
-rstudio_version: 1.0.136-amd64
-rstudio_pro_version: 1.0.136-amd64
+#rstudio_version: 1.0.136-amd64
+#rstudio_pro_version: 1.0.136-amd64
+rstudio_version: 1.0.143-amd64
+rstudio_pro_version: 1.0.143-amd64
 shiny_version: 1.5.1.834-amd64
 
 # java version

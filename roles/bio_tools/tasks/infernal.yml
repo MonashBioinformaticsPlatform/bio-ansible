@@ -1,0 +1,51 @@
+---
+
+- name: download infernal {{ version }}
+  git:
+    repo: https://github.com/EddyRivasLab/infernal
+    dest: "{{ source_dir }}/infernal-{{ version }}"
+    version: "{{ version }}"
+    update: yes
+
+  tags: infernal
+
+- name: build infernal {{ version }}
+  shell: cd {{ source_dir }}/infernal-{{ version }}; make && make install prefix={{ apps_dir }}/infernal-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/infernal-{{ version }}/bin/cmalign"
+
+  tags: infernal
+
+- file:
+    dest: "{{ modules_bio }}/infernal"
+    state: directory
+    mode: 0755
+
+  tags: infernal
+
+- name: infernal {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/infernal/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'infernal-{{ version }}'
+      help_text: 'This module loads the infernal tools'
+
+  tags: infernal
+
+- name: setting register for infernal {{ version }}
+  stat:
+    path: "{{ apps_dir }}/infernal-{{ version }}/bin/cmalign"
+  register: i
+
+  tags: infernal
+
+- name: removing infernal {{ version }} source
+  file:
+    dest: "{{ source_dir }}/infernal-{{ version }}"
+    state: absent
+  when: "{{ del_src }} i.stat.exists"
+
+  tags: infernal

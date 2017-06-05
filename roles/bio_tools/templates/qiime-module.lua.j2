@@ -1,0 +1,40 @@
+help(
+[[
+{{ item.help_text }}
+]])
+
+{% if item.base is defined %}
+local base = "{{ item.base }}"
+{% else %}
+local base = pathJoin("{{ apps_dir }}", "{{ item.dir }}")
+{% endif %}
+
+{% if item.skip_bin is defined %}
+  local path = base
+{% elif item.bin is defined %}
+  local path = pathJoin(base, "{{ item.bin }}")
+{% else %}
+  local path = pathJoin(base, "bin")
+{% endif %}
+
+{% if item.append is defined %}
+  append_path("PATH", path)
+{% else %}
+  prepend_path("PATH", path)
+{% endif %}
+
+{% if item.qiime is defined %}
+load("raxml/{{ raxml_version  }}",
+     "muscle/{{ muscle_version }}",
+     "cdhit/{{ cdhit_version }}",
+     "mothur/{{ mothur_version }}"
+    )
+{% endif %}
+
+{% if item.rdp_jar_path is defined %}
+  prepend_path("RDP_JAR_PATH", pathJoin(base, "{{ item.rdp_jar_path }}"))
+{% endif %}
+
+{% if item.extra_path is defined %}
+  prepend_path("PATH", pathJoin(base, "{{ item.extra_path }}"))
+{% endif %}

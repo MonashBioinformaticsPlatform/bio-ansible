@@ -1,0 +1,65 @@
+---
+
+- name: download muscle multiple sequence aligner {{ version }}
+  get_url:
+    url: http://www.drive5.com/muscle/downloads{{ version }}/muscle{{ version }}_i86linux64.tar.gz
+    dest: "{{ source_dir }}/muscle{{ version }}_i86.linux64.tar.gz"
+
+  tags: muscle
+
+- file:
+    dest: "{{ apps_dir }}/muscle-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: muscle
+
+- name: uncompress muscle {{ version }}
+  unarchive:
+      src: "{{ source_dir }}/muscle{{ version }}_i86.linux64.tar.gz"
+      dest: "{{ apps_dir }}/muscle-{{ version }}"
+      copy: no
+
+  tags: muscle
+
+- name: rename muscle {{ version }} executable
+  shell: mv {{ apps_dir }}/muscle-{{ version }}/muscle3.8.31_i86linux64 {{ apps_dir }}/muscle-{{ version }}/muscle
+  args:
+    creates: "{{ apps_dir }}/muscle-{{ version }}/muscle"
+
+  tags: muscle
+
+- file:
+    dest: "{{ modules_bio }}/muscle"
+    state: directory
+    mode: 0755
+
+  tags: muscle
+
+- name: muscle {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/muscle/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'muscle-{{ version }}'
+      skip_bin: true
+      help_text: 'This module loads the muscle multiple sequence aligner'
+
+  tags: muscle
+
+- name: setting register for muscle {{ version }}
+  stat:
+    path: "{{ apps_dir }}/muscle-{{ version }}/muscle"
+  register: m
+
+  tags: muscle
+
+- name: removing muscle {{ version }} source directory
+  file:
+    dest: "{{ source_dir }}/muscle{{ version }}_i86.linux64.tar.gz"
+    state: absent
+  when: "{{ del_src }} m.stat.exists"
+
+  tags: muscle

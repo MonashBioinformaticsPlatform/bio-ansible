@@ -1,0 +1,37 @@
+---
+
+- name: download cdhit {{ version }}
+  git:
+    repo: https://github.com/weizhongli/cdhit
+    dest: "{{ apps_dir }}/cdhit-{{ version }}"
+    version: "V{{ version }}"
+    update: yes
+
+  tags: cdhit
+
+- name: build cdhit {{ version }}
+  shell: cd {{ apps_dir }}/cdhit-{{ version }}; make
+  args:
+    creates: "{{ apps_dir }}/cdhit-{{ version }}/cd-hit"
+
+  tags: cdhit
+
+- file:
+    dest: "{{ modules_bio }}/cdhit"
+    state: directory
+    mode: 0755
+
+  tags: cdhit
+
+- name: cdhit {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/cdhit/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'cdhit-{{ version }}'
+      skip_bin: true
+      help_text: 'This module loads the cd-hit'
+
+  tags: cdhit
