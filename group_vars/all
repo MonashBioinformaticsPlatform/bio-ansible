@@ -1,18 +1,16 @@
 ---
-
 #----------------
 # Users variable
 #----------------
-main_guy: "{{ vault_main_guy }}"
-sudo_guy: "{{ vault_sudo_guy }}"
+main_guy: ubuntu
+sudo_guy: "{{ main_guy }}"
 # need to specify private key if you planing to setyp a launching server
-main_guy_pubkey: "{{ vault_main_guy_pubkey }}"
+main_guy_pubkey: ""
 #---------------------------------
 # Different directories variables
 #---------------------------------
 local_home: "{{ ansible_env.HOME }}"
-#bioansible_basepath: "{{ local_home }}/bioansible"
-bioansible_basepath: "/mnt"
+bioansible_basepath: "{{ local_home }}/bioansible"
 source_dir: "{{ bioansible_basepath }}/software/source"
 modules_dir: "{{ bioansible_basepath }}/software/modules"
 modules_core: "{{ modules_dir }}/core"
@@ -29,72 +27,20 @@ time_zone: "Australia/Victoria"
 #------------------------------
 threads: 4
 del_src: "" # empty string means true and "not" negates that
-rstudio_pro_key: "{{ vault_rstudio_pro_key }}"
+rstudio_pro_key: ""
 r_base_mirror: "https://cran.csiro.au"
 r_version: 3.3.3-1trusty0
 # at this stage ubuntu_version is mainly for the mirror
 ubuntu_version: trusty
-#---------------------
-# Your tools versions
-#---------------------
-# bio_tools versions
-star_version: 2.5.2b
-bwa_version: v0.7.15
-htslib_version: 1.3.2
-samtools_version: 1.3.1
-subread_version: 1.5.2
-picard_version: 2.9.0
-gatk_version: 3.7
-fastqc_version: 0.11.5
-freebayes_version: 1.1.0
-vcflib_version: master
-sratoolkit_version: 2.8.0
-rnasik_version: 1.4.6
-qualimap_version: v2.2.1
-seqtk_version: v1.2
-igv_version: 2.3.90
-bedtools2_version: 2.25.0
-blast_version: 2.6.0
-smalt_version: 0.7.6
-snpeff_version: "4_3i"
-spades_version: 3.10.0
-vsearch_version: 2.4.0
-raxml_version: 8.2.9
-raxml_makefile: Makefile.AVX.PTHREADS.gcc
-cellranger_version: 1.3.1
-vcftools_version: 0.1.14
-muscle_version: 3.8.31
-cdhit_version: 4.6.7
-mothur_version: 1.39.5
-#infernal_version: 1.1.2
-# python virtualenv
-mimodd_version: 0.1.7.3
-multiqc_version: 0.9
-cutadapt_version: 1.12
-macs2_version: 2.1.1.20160309
-qiime_version: 1.9.1
-# bds version
-bds_version: 0.99999g
-# perl
-biotradis_version: 1.3.3
-# extra packages
-stack_version: 1.2.0
-nodejs_version: v6.9.1
-maven_version: 3.3.9
-tmux_version: 2.4
 
 # interactive
-#rstudio_version: 1.0.136-amd64
-#rstudio_pro_version: 1.0.136-amd64
 rstudio_version: 1.0.143-amd64
 rstudio_pro_version: 1.0.143-amd64
 shiny_version: 1.5.1.834-amd64
-
 # java version
 jdk_major: 8
 jdk_minor: 121
 java_oracle_version: "{{ jdk_major }}u{{ jdk_minor }}"
-
 # lmod version
 lmod_version: 7.3.9
 
