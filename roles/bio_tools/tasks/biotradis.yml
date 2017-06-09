@@ -1,0 +1,56 @@
+---
+
+- name: download biotradis {{ version }}
+  git:
+    repo: https://github.com/sanger-pathogens/Bio-Tradis
+    dest: "{{ source_dir }}/biotradis-{{ version }}"
+    version: "v{{ version }}"
+    update: yes
+
+  tags: biotradis
+
+- cpanm:
+    name: Bio::Tradis
+    locallib: "{{ apps_dir }}/biotradis-{{ version }}"
+    version: "v{{ version }}"
+    installdeps: yes
+    #force: yes
+
+  tags: biotradis
+
+- file:
+    dest: "{{ modules_bio }}/biotradis"
+    state: directory
+    mode: 0755
+
+  tags: biotradis
+
+- name: copy biotradis lib files
+  shell: cp -r {{ source_dir }}/biotradis-{{ version }}/lib/Bio {{ apps_dir }}/biotradis-{{ version }}/lib/perl5
+
+  tags: biotradis
+
+- name: copy biotradis bin files
+  shell: cp {{ source_dir }}/biotradis-{{ version }}/bin/* {{ apps_dir }}/biotradis-{{ version }}/bin
+
+  tags: biotradis
+
+  #- file:
+  #    dest: "{{ apps_dir }}/biotradis-{{ version }}"
+  #    state: directory
+  #    mode: 0755
+  #
+  #  tags: biotradis
+
+- name: biotradis {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/biotradis/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'biotradis-{{ version }}'
+      perl_path: 'lib/perl5'
+      help_text: 'This module loads biotradis'
+
+  tags: biotradis

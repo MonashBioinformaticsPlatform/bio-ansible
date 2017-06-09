@@ -3,7 +3,7 @@
 - name: pip3 install python packages
   pip:
     name: "{{ item }}"
-    state: latest
+    state: present
     executable: pip3
   with_items:
     # upgrade pip
@@ -18,6 +18,8 @@
     - matplotlib
     - pysam
     - notebook
+    # other
+    - awscli
 
   tags: pip3
 

@@ -2,7 +2,7 @@
 
 - name: download subread package {{ version }}
   get_url:
-    url: http://sourceforge.net/projects/subread/files/latest/download?source=files
+    url: https://sourceforge.net/projects/subread/files/subread-{{ version }}/subread-{{ version }}-source.tar.gz/download
     timeout: 30
     dest: "{{ source_dir }}/subread-{{ version }}-source.tar.gz"
 

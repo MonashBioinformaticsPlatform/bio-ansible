@@ -1,4 +1,3 @@
 ---
 
 - include: lmod.yml version={{ lmod_version }}
-- include: lmod_stdenv.yml

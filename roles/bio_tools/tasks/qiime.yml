@@ -1,0 +1,237 @@
+---
+# installing base qiime
+- name: pip install numpy
+  pip:
+    name: "{{ item }}"
+    virtualenv: "{{ apps_dir }}/qiime-{{ version }}"
+  with_items:
+    - numpy
+    - six
+
+  tags: qiime
+
+- name: pip install qiime {{ version }}
+  pip:
+    name: qiime
+    version: "v{{ version }}"
+    virtualenv: "{{ apps_dir }}/qiime-{{ version }}"
+
+  tags: qiime
+
+# extened qiime installation
+- file:
+    dest: "{{ apps_dir }}/qiime-{{ version }}/extended"
+    state: directory
+    mode: 0755
+
+  tags: qiime
+
+# install rdp
+- name: download rpd classifier package {{ version }}
+  get_url:
+    url: https://sourceforge.net/projects/rdp-classifier/files/rdp-classifier/rdp_classifier_2.2.zip/download
+    timeout: 30
+    dest: "{{ apps_dir }}/qiime-{{ version }}/extended/rdp_classifier_2.2.zip"
+
+  tags: qiime
+
+- name: uncompress rpd classifier
+  unarchive:
+      src: "{{ apps_dir }}/qiime-{{ version }}/extended/rdp_classifier_2.2.zip"
+      dest: "{{ apps_dir }}/qiime-{{ version }}/extended"
+      copy: no
+
+  tags: qiime
+
+# install blast legacy
+- name: download blast legacy
+  get_url:
+    url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy/2.2.26/blast-2.2.26-x64-linux.tar.gz
+    timeout: 30
+    dest: "{{ apps_dir }}/qiime-{{ version }}/extended/blast-2.2.26-x64-linux.tar.gz"
+
+  tags: qiime
+
+- name: uncompress rpd classifier {{ version }}
+  unarchive:
+      src: "{{ apps_dir }}/qiime-{{ version }}/extended/blast-2.2.26-x64-linux.tar.gz"
+      dest: "{{ apps_dir }}/qiime-{{ version }}/extended"
+      copy: no
+
+  tags: qiime
+
+- name: copy blast binaries to common bin directory
+  shell: mv {{ apps_dir }}/qiime-{{ version }}/extended/blast-2.2.26/bin/* {{ apps_dir }}/qiime-{{ version }}/bin/
+  args:
+    creates: "{{ apps_dir }}/qiime-{{ version }}/bin/bl2seq"
+
+  tags: qiime
+
+# install usearch from pre-downloaded file
+- name: check usearch exists
+  local_action: stat path="{{ playbook_dir }}/tarballs/usearch5.2.236_i86linux32"
+  register: u
+
+  tags: qiime
+
+- name: copy local usearch
+  copy:
+    src: "{{ playbook_dir }}/tarballs/usearch5.2.236_i86linux32"
+    dest: "{{ apps_dir }}/qiime-{{ version }}/bin/usearch"
+    mode: 0755
+
+  when: u.stat.exists
+
+  tags: qiime
+
+- name: download microbiomeutil package
+  get_url:
+    url: https://sourceforge.net/projects/microbiomeutil/files/microbiomeutil-r20110519.tgz/download
+    timeout: 30
+    dest: "{{ apps_dir }}/qiime-{{ version }}/extended/microbiomeutil-r20110519.tgz"
+
+  tags: qiime
+
+- name: uncompress microbiomeutil
+  unarchive:
+      src: "{{ apps_dir }}/qiime-{{ version }}/extended/microbiomeutil-r20110519.tgz"
+      dest: "{{ apps_dir }}/qiime-{{ version }}/extended"
+      copy: no
+
+  tags: qiime
+
+- file:
+    src: "{{ apps_dir }}/qiime-{{ version }}/extended/microbiomeutil-r20110519/ChimeraSlayer/ChimeraSlayer.pl"
+    dest: "{{ apps_dir }}/qiime-{{ version }}/bin/ChimeraSlayer.pl"
+    state: link
+    mode: 0755
+
+  tags: qiime
+
+- name: download clearcut
+  git:
+    repo: https://github.com/sheneman/clearcut
+    dest: "{{ apps_dir }}/qiime-{{ version }}/extended/clearcut"
+
+  tags: qiime
+
+- name: build clearcut
+  shell: cd {{ apps_dir }}/qiime-{{ version }}/extended/clearcut; make
+  args:
+    creates: "{{ apps_dir }}/qiime-{{ version }}/extended/clearcut/clearcut"
+
+  tags: qiime
+
+- name: copy clearcut binaries to common bin directory
+  shell: mv {{ apps_dir }}/qiime-{{ version }}/extended/clearcut/clearcut {{ apps_dir }}/qiime-{{ version }}/bin/
+  args:
+    creates: "{{ apps_dir }}/qiime-{{ version }}/bin/clearcut"
+
+  tags: qiime
+
+- name: download infernal package
+  get_url:
+    url: http://eddylab.org/software/infernal/infernal-1.0.2.tar.gz
+    dest: "{{ apps_dir }}/qiime-{{ version }}/extended"
+
+  tags: qiime
+
+- name: uncompress infernal
+  unarchive:
+      src: "{{ apps_dir }}/qiime-{{ version }}/extended/infernal-1.0.2.tar.gz"
+      dest: "{{ apps_dir }}/qiime-{{ version }}/extended"
+      copy: no
+
+  tags: qiime
+
+- name: build infernal {{ version }}
+  shell: cd {{ apps_dir }}/qiime-{{ version }}/extended/infernal-1.0.2; ./configure; make; make install prefix={{ apps_dir }}/qiime-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/qiime-{{ version }}/bin/cmalign"
+
+  tags: qiime
+
+- name: download cdbfast package
+  get_url:
+    url: ftp://occams.dfci.harvard.edu/pub/bio/tgi/software/cdbfasta/cdbfasta.tar.gz
+    dest: "{{ apps_dir }}/qiime-{{ version }}/extended/cdbfasta.tar.gz"
+
+  tags: qiime
+
+- name: uncompress cdbfast
+  unarchive:
+      src: "{{ apps_dir }}/qiime-{{ version }}/extended/cdbfasta.tar.gz"
+      dest: "{{ apps_dir }}/qiime-{{ version }}/extended"
+      copy: no
+
+  tags: qiime
+
+- name: build infernal {{ version }}
+  shell: cd {{ apps_dir }}/qiime-{{ version }}/extended/cdbfasta; make
+  args:
+    creates: "{{ apps_dir }}/qiime-{{ version }}/bin/cdbfasta"
+
+  tags: qiime
+
+- name:
+  shell: mv {{ apps_dir }}/qiime-{{ version }}/extended/cdbfasta/{{ item }} {{ apps_dir }}/qiime-{{ version }}/bin/{{ item }}
+  args:
+    creates: "{{ apps_dir }}/qiime-{{ version }}/bin/{{ item }}"
+  with_items:
+    - cdbfasta
+    - cdbyank
+
+  tags: qiime
+
+- name: download rtax package
+  get_url:
+    url: http://static.davidsoergel.com/rtax-0.984.tgz
+    dest: "{{ apps_dir }}/qiime-{{ version }}/extended/rtax-0.984.tgz"
+
+  tags: qiime
+
+- name: uncompress rtax
+  unarchive:
+      src: "{{ apps_dir }}/qiime-{{ version }}/extended/rtax-0.984.tgz"
+      dest: "{{ apps_dir }}/qiime-{{ version }}/extended"
+      copy: no
+
+  tags: qiime
+
+- lineinfile:
+    path: "{{ apps_dir }}/qiime-{{ version }}/extended/rtax-0.984/rtax"
+    regexp: "stat -f"
+    line: "arg=$0; [[ -L $0 ]] && arg=$(stat -c %N ${0})"
+
+  tags: qiime
+
+- file:
+    src: "{{ apps_dir }}/qiime-{{ version }}/extended/rtax-0.984/rtax"
+    dest: "{{ apps_dir }}/qiime-{{ version }}/bin/rtax"
+    state: link
+    mode: 0755
+
+  tags: qiime
+
+## lmod definition
+- file:
+    dest: "{{ modules_bio }}/qiime"
+    state: directory
+    mode: 0755
+
+  tags: qiime
+
+- name: qiime {{ version }} module definition
+  template:
+    src: qiime-module.lua.j2
+    dest: "{{ modules_bio }}/qiime/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'qiime-{{ version }}'
+      help_text: 'loads qiime pipeline'
+      qiime: true
+      rdp_jar_path: "extended/rdp_classifier_2.2/rdp_classifier-2.2.jar"
+      extra_path: "extended/microbiomeutil-r20110519/ChimeraSlayer"
+
+  tags: qiime

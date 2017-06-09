@@ -1,0 +1,65 @@
+---
+
+- name: download tmux {{ version }}
+  git:
+    repo: https://github.com/tmux/tmux
+    dest: "{{ source_dir }}/tmux-{{ version }}"
+    version: "{{ version }}"
+    update: yes
+
+  tags: tmux
+
+- name: build tmux {{ version }}
+  shell: cd {{ source_dir }}/tmux-{{ version }}; ./autogen.sh; ./configure; make
+  args:
+    creates: "{{ source_dir }}/tmux-{{ version }}/tmux"
+
+  tags: tmux
+
+- file:
+    dest: "{{ modules_extra }}/tmux"
+    state: directory
+    mode: 0755
+
+  tags: tmux
+
+- file:
+    dest: "{{ apps_dir }}/tmux-{{ version }}/bin"
+    state: directory
+    mode: 0755
+
+  tags: tmux
+
+- name: move tmux {{ version }} executables to apps directory
+  shell: cp -r {{ source_dir }}/tmux-{{ version }}/tmux {{ apps_dir }}/tmux-{{ version }}/bin
+  args:
+    creates: "{{ apps_dir }}/tmux-{{ version }}/bin/tmux"
+
+  tags: tmux
+
+- name: tmux {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_extra }}/tmux/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'tmux-{{ version }}'
+      help_text: 'This module loads the tmux'
+
+  tags: tmux
+
+- name: setting register for tmux {{ version }}
+  stat:
+    path: "{{ apps_dir }}/tmux-{{ version }}/bin/tmux"
+  register: b
+
+  tags: tmux
+
+- name: removing tmux {{ version }}  source directory
+  file:
+    dest: "{{ source_dir }}/tmux-{{ version }}"
+    state: absent
+  when: "{{ del_src }} b.stat.exists"
+
+  tags: tmux

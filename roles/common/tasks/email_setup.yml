@@ -10,7 +10,7 @@
 - name: apt install email essentials
   apt:
     name: "{{ item }}"
-    state: latest
+    state: present
   with_items:
     # deps for emailing
     - mailutils

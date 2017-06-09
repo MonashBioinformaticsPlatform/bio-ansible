@@ -1,6 +1,5 @@
 ---
 
-- include: lmod_stdenv.yml
 - include: star.yml version={{ star_version}}
 - include: bwa.yml version={{ bwa_version }} 
 - include: htslib.yml version={{ htslib_version }}
@@ -15,11 +14,14 @@
 - include: seqtk.yml version={{ seqtk_version }}
 - include: igv.yml version={{ igv_version }}
 - include: bedtools.yml version={{ bedtools2_version }}
+- include: blast.yml version={{ blast_version }}
+- include: smalt.yml version={{ smalt_version }}
 # pythons
 - include: mimodd.yml version={{ mimodd_version }}
 - include: multiqc.yml version={{ multiqc_version }}
 - include: cutadapt.yml version={{ cutadapt_version }}
 - include: macs2.yml version={{ macs2_version }}
+- include: qiime.yml version={{ qiime_version }}
 #
 - include: snpeff.yml version={{ snpeff_version }}
 - include: spades.yml version={{ spades_version }}
@@ -27,6 +29,11 @@
 - include: raxml.yml version={{ raxml_version }}
 - include: cellranger.yml version={{ cellranger_version }}
 - include: vcftools.yml version={{ vcftools_version }}
+- include: biotradis.yml version={{ biotradis_version }}
+- include: muscle.yml version={{ muscle_version }}
+- include: cdhit.yml version={{ cdhit_version }}
+- include: mothur.yml version={{ mothur_version }}
+#- include: infernal.yml version={{ infernal_version }}#installation doesn't work
 # alsways keep those two at the bottom of the list as they tend to break during compilation
 - include: freebayes.yml version={{ freebayes_version }}
 - include: vcflib.yml version={{ vcflib_version }}
