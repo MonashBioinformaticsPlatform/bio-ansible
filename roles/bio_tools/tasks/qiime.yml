@@ -213,6 +213,64 @@
 
   tags: qiime
 
+- name: download ea-utils package
+  get_url:
+    url: https://github.com/ExpressionAnalysis/ea-utils/archive/1.04.807.tar.gz
+    dest: "{{ apps_dir }}/qiime-{{ version }}/extended/1.04.807.tar.gz"
+
+  tags: qiime
+
+- name: uncompress ea-utils
+  unarchive:
+      src: "{{ apps_dir }}/qiime-{{ version }}/extended/1.04.807.tar.gz"
+      dest: "{{ apps_dir }}/qiime-{{ version }}/extended"
+      copy: no
+
+  tags: qiime
+
+- name: build ea-utils 
+  shell: cd {{ apps_dir }}/qiime-{{ version }}/extended/ea-utils-1.04.807/clipper; make
+  args:
+    creates: "{{ apps_dir }}/qiime-{{ version }}/extended/ea-utils-1.04.807/clipper/fastq-join"
+
+  tags: qiime
+
+- name: move ea-utils executables 
+  shell: cd {{ apps_dir }}/qiime-{{ version }}/extended/ea-utils-1.04.807/clipper; find . -maxdepth 1 -type f -executable -exec mv {} {{ apps_dir }}/qiime-{{ version }}/bin \;
+  args:
+    creates: "{{ apps_dir }}/qiime-{{ version }}/bin/fastq-join"
+
+  tags: qiime
+
+- name: download seqprep package
+  get_url:
+    url: https://github.com/jstjohn/SeqPrep/archive/v1.2.tar.gz
+    dest: "{{ apps_dir }}/qiime-{{ version }}/extended/v1.2.tar.gz"
+
+  tags: qiime
+
+- name: uncompress seqprep
+  unarchive:
+      src: "{{ apps_dir }}/qiime-{{ version }}/extended/v1.2.tar.gz"
+      dest: "{{ apps_dir }}/qiime-{{ version }}/extended"
+      copy: no
+
+  tags: qiime
+
+- name: build seqprep 
+  shell: cd {{ apps_dir }}/qiime-{{ version }}/extended/SeqPrep-1.2; make
+  args:
+    creates: "{{ apps_dir }}/qiime-{{ version }}/extended/SeqPrep-1.2/SeqPrep"
+
+  tags: qiime
+
+- name: move seqprep
+  shell: mv {{ apps_dir }}/qiime-{{ version }}/extended/SeqPrep-1.2/SeqPrep {{ apps_dir }}/qiime-{{ version }}/bin
+  args:
+    creates: "{{ apps_dir }}/qiime-{{ version }}/bin/SeqPrep"
+
+  tags: qiime
+
 ## lmod definition
 - file:
     dest: "{{ modules_bio }}/qiime"

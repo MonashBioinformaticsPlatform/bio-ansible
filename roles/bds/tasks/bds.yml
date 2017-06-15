@@ -6,13 +6,13 @@
     dest: "{{ source_dir }}/BigDataScript-{{ version }}"
     version: "v{{ version }}"
     update: no
-  when: j.stat.isdir is defined and j.stat.isdir
 
   tags: bds
 
 - name: check that /usr/bin/java exists
   command: /usr/bin/java
   register: java_local
+  ignore_errors: true
 
   tags: bds
 
