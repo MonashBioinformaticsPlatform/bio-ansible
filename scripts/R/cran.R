@@ -30,7 +30,13 @@ if (length(args)==0) {
                      "nnet",
                      "rpart",
                      "spatial",
-                     "survival"
+                     "survival",
+                     # qiime requiments
+                     "ape",
+                     "biom",
+                     "RColorBrewer",
+                     "randomForest",
+                     "vegan"
                      ),
                     # pass in r_base_mirror
                     repos=args[1],

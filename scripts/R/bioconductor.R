@@ -18,5 +18,7 @@ biocLite(pkgs = c("Biostrings",
                   "scater",
                   "getopt",
                   "MASS",
-                  "GOstats")
+                  "GOstats",
+                  "DESeq2",
+                  "metagenomeSeq")
          )

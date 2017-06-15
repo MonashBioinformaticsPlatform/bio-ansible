@@ -12,7 +12,7 @@
 - name: compile and install lmod {{ version }}
   shell: cd {{ source_dir }}/Lmod-{{ version }}; ./configure --prefix={{ apps_dir }} --with-mpathSearch=YES --with-caseIndependentSorting=YES && make install LUA_INCLUDE=/usr/include/lua5.2
   args:
-    creates: "{{ soft_dir }}/lmod/{{ lmod_version }}"
+    creates: "{{ apps_dir }}/lmod/{{ lmod_version }}"
 
   tags: lmod
 

@@ -1,14 +1,15 @@
 ---
 
+- name: pip upgrade pip
+  pip:
+    name: pip
+    state: latest
+
 - name: pip install python packages
   pip:
     name: "{{ item }}"
     state: present
   with_items:
-    # upgrade pip
-    - pip
-    # upgrade setuptools
-    - setuptools
     # essential?
     - pyopenssl
     - ndg-httpsclient
