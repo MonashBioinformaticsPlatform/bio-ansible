@@ -91,7 +91,8 @@ make_users() {
 
       if [[ -z $user_name ]]
       then
-        user_name=$users_fullname
+        #user_name=$users_fullname
+        clean_user=$users_fullname
       fi
 
       if [[ -z $user_status || $user_status == "ToBeNew" ]]
