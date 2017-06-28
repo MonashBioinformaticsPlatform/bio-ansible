@@ -49,3 +49,4 @@
     state: absent
 
   tags: mimodd
+# http://mimodd.readthedocs.io/en/latest/install_snpeff.html

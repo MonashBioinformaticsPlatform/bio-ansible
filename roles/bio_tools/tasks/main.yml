@@ -4,6 +4,7 @@
 - include: bwa.yml version={{ bwa_version }} 
 - include: htslib.yml version={{ htslib_version }}
 - include: samtools.yml version={{ samtools_version }} htslib_v={{ htslib_version }}
+- include: bcftools.yml version={{ bcftools_version }} htslib_v={{ htslib_version }}
 - include: subread.yml version={{ subread_version }}
 - include: picard.yml version={{ picard_version }}
 - include: gatk.yml version={{ gatk_version }}

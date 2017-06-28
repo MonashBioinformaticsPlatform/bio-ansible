@@ -1,0 +1,51 @@
+---
+
+- name: download bcftools {{ version }}
+  git:
+    repo: https://github.com/samtools/bcftools
+    dest: "{{ source_dir }}/bcftools-{{ version }}"
+    version: "{{ version }}"
+
+  tags: bcftools
+
+- name: build bcftools {{ version }}
+  #shell: cd {{ source_dir }}/bcftools-{{ version }}; make install prefix={{ apps_dir }}/bcftools-{{ version }} HTSDIR={{ source_dir }}/htslib-{{ htslib_version }}
+  shell: cd {{ source_dir }}/bcftools-{{ version }}; make install prefix={{ apps_dir }}/bcftools-{{ version }} HTSDIR=../htslib-{{ htslib_version }}
+  args:
+    creates: "{{ apps_dir }}/bcftools-{{ version }}/bin/bcftools"
+
+  tags: bcftools
+
+- file:
+    dest: "{{ modules_bio }}/bcftools"
+    state: directory
+    mode: 0755
+
+  tags: bcftools
+
+- name: bcftools {{ version }} lmod definition
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_bio }}/bcftools/{{ version }}.lua"
+    owner: "{{ main_guy }}"
+    mode: 0644
+  with_items:
+    - dir: 'bcftools-{{version}}'
+      help_text: 'This module loads the bcftools tool suite'
+
+  tags: bcftools
+
+- name: setting register for bcftools {{ version }}
+  stat:
+    path: "{{ apps_dir }}/bcftools-{{ version }}/bcftools"
+  register: s
+
+  tags: bcftools
+
+- name: removing bcftools {{ version }} source directory
+  file:
+    dest: "{{ source_dir }}/bcftools-{{ version }}"
+    state: absent
+  when: "{{ del_src }} s.stat.exists"
+
+  tags: bcftools

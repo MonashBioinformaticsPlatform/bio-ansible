@@ -31,7 +31,6 @@
     mode: 0644
   with_items:
     - dir: 'RNAsik-pipe-{{ version }}'
-      bin: 'src'
       sik: true
       help_text: 'This module loads RNAsik-pipe and all requried modules for RNAsik-pipe to run'
 
