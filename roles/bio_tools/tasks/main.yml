@@ -2,6 +2,7 @@
 
 - include: star.yml version={{ star_version}}
 - include: bwa.yml version={{ bwa_version }} 
+- include: bowtie2.yml version={{ bowtie2_version }} 
 - include: htslib.yml version={{ htslib_version }}
 - include: samtools.yml version={{ samtools_version }} htslib_v={{ htslib_version }}
 - include: bcftools.yml version={{ bcftools_version }} htslib_v={{ htslib_version }}
