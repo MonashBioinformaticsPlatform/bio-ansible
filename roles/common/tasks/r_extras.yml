@@ -37,6 +37,14 @@
 
   tags: r_extras
 
+  #- name: remove R scripts from {{ tmp_dir }}
+  #  file:
+  #    dest: "{{ tmp_dir }}/scripts"
+  #    state: absent
+  #    mode: 0755
+  #  
+  #  tags: r_extras
+
 - name: remove R scripts from {{ tmp_dir }}
   file:
     dest: "{{ tmp_dir }}/scripts/R"

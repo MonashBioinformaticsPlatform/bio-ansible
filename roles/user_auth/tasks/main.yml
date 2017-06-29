@@ -8,3 +8,10 @@
     mode: 0644
 
   tags: user_auth
+
+- name: create ldap-user group
+  group:
+    name: ldap-user
+    gid: 1190
+
+  tags: user_auth

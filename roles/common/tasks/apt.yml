@@ -62,6 +62,8 @@
     # mothur and uchime C++ deps
     - libboost-program-options-dev
     - libboost-iostreams-dev
+    # bowtie2 deps
+    - libtbb-dev
     # aws-manage deps
     - jq
     # perl deps
