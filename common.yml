@@ -10,5 +10,6 @@
             - common
             # lmod installed in {{ bioansible_basepath }}/software/apps directory
             - lmod_etc
+            - user_auth
 
   become: true
