@@ -55,6 +55,9 @@
     # R deps
     - libcurl4-openssl-dev
     - libxml2-dev
+    - libxt-dev
+    # R packages deps
+    - libcairo2-dev
     # RStudio deps
     - libapparmor1
     - libxml2

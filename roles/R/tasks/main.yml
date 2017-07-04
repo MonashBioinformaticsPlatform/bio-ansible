@@ -1,0 +1,3 @@
+---
+
+- include: r_base.yml version={{ r_base_version }}

@@ -3,7 +3,6 @@
 - include: apt.yml
 - include: pip.yml
 - include: pip3.yml
-- include: r.yml
 - include: r_extras.yml
 - include: email_setup.yml
 - include: timezone.yml

@@ -2,6 +2,8 @@
 #---------------------
 # Your tools versions
 #---------------------
+#
+r_base_version: 3.4.0
 # bio_tools versions
 star_version: 2.5.2b
 bwa_version: v0.7.15
@@ -19,7 +21,7 @@ sratoolkit_version: 2.8.0
 rnasik_version: 1.4.7
 qualimap_version: v2.2.1
 seqtk_version: v1.2
-igv_version: 2.3.90
+igv_version: 2.3.94
 bedtools2_version: 2.25.0
 blast_version: 2.6.0
 smalt_version: 0.7.6

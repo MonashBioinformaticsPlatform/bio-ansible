@@ -10,6 +10,8 @@
           - lmod
           # java as a module
           - java
+          # installing R language base 
+          - R
           # installing BigDataScript
           - bds
           # install everyting into one container

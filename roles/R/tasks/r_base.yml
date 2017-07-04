@@ -1,0 +1,57 @@
+---
+
+- name: download r {{ version }}
+  get_url: 
+    url: https://cran.r-project.org/src/base/R-3/R-{{ version }}.tar.gz
+    dest: "{{ source_dir }}/R-{{ version }}.tar.gz"
+
+  tags: r_base
+
+- name: uncompress r {{ version }}
+  unarchive:
+      src: "{{ source_dir }}/R-{{ version }}.tar.gz"
+      dest: "{{ source_dir }}"
+      copy: no
+
+  tags: r_base
+
+- name: build r {{ version }}
+  shell: cd {{ source_dir }}/R-{{ version }}; ./configure --prefix={{ apps_dir }}/R/{{ version }} --enable-R-shlib; make; make install
+  args:
+    creates: "{{ apps_dir }}/R/{{ version }}/bin/Rscript"
+
+  tags: r_base
+
+- file:
+    dest: "{{ modules_core }}/R"
+    state: directory
+    mode: 0755
+
+  tags: r_base
+
+- name: r {{ version }} module definition
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_core }}/R/{{ version }}.lua"
+    owner: "{{ main_guy }}"
+    mode: 0644
+  with_items:
+    - dir: 'R/{{ version }}'
+      help_text: 'R language base'
+
+  tags: r_base
+
+- name: setting register for r {{ version }}
+  stat:
+    path: "{{ apps_dir }}/R-{{ version }}/bin/Rscript"
+  register: r
+
+  tags: r_base
+
+- name: removing r {{ version }} source file
+  file:
+    dest: "{{ source_dir }}/R-{{ version }}.tar.gz"
+    state: absent
+  when: "{{ del_src }} r.stat.exists"
+
+  tags: r_base
