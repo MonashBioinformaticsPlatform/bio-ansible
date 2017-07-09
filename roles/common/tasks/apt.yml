@@ -23,6 +23,8 @@
     - ethtool
     - iotop
     - xinetd
+    # nfs stuff
+    - nfs-common
     # user-auth deps
     - libpam-krb5
     - ldap-utils
