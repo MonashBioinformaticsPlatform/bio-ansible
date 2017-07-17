@@ -20,7 +20,7 @@ make_user() {
   if ! grep -q $new_guy /etc/passwd
   then
     >&2 echo "MESSAGE: Username $new_guy doesn't exists"
-    made_rand=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c7`
+    made_rand=`< /dev/urandom tr -dc '[:alnum:]' | head -c7`
     made_pass=`mkpasswd --method=sha-256 $made_rand`
     #user_group="unknown"
     sudo useradd --password $made_pass \
