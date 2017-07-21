@@ -18,6 +18,8 @@
 - include: bedtools.yml version={{ bedtools2_version }}
 - include: blast.yml version={{ blast_version }}
 - include: smalt.yml version={{ smalt_version }}
+  #- include: bcl2fastq2.yml version={{ bcl2fastq2_version }}
+- include: emboss.yml version={{ emboss_version }}
 # pythons
 - include: mimodd.yml version={{ mimodd_version }}
 - include: multiqc.yml version={{ multiqc_version }}

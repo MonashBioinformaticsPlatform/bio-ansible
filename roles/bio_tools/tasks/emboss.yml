@@ -1,0 +1,73 @@
+---
+
+- name: download emboss package {{ version }}
+  get_url:
+    url: ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-{{ version }}.tar.gz
+    timeout: 30
+    dest: "{{ source_dir }}/EMBOSS-{{ version }}.tar.gz"
+
+  tags: emboss
+
+- name: uncompress emboss {{ version }}
+  unarchive:
+      src: "{{ source_dir }}/EMBOSS-{{ version }}.tar.gz"
+      dest: "{{ source_dir }}"
+      copy: no
+
+  tags: emboss
+
+- name: build emboss {{ version }}
+  shell: cd {{ source_dir }}/EMBOSS-{{ version }}; ./configure --prefix={{ apps_dir }}/emboss-{{ version }}; make; make install
+  args:
+    creates: "{{ source_dir }}/emboss-{{ version }}/bin/seqret"
+
+  tags: emboss
+
+- file:
+    dest: "{{ modules_bio }}/emboss"
+    state: directory
+    mode: 0755
+
+  tags: emboss
+
+- name: emboss {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/emboss/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'emboss-{{ version }}'
+      help_text: 'This module loads the EMBOSS bioinformatics tools'
+
+  tags: emboss
+
+- file:
+    dest: "{{ apps_dir }}/emboss-{{ version }}"
+    state: directory
+    mode: 0755
+
+  tags: emboss
+
+- name: setting register for emboss {{ version }}
+  stat:
+    path: "{{ apps_dir }}/emboss-{{ version }}/bin/seqret"
+  register: s
+
+  tags: emboss
+
+- name: removing emboss {{ version }} source directory
+  file:
+    dest: "{{ source_dir }}/emboss-{{ version }}"
+    state: absent
+  when: "{{ del_src }} s.stat.exists"
+
+  tags: emboss
+
+- name: removing emboss {{ version }} tar file
+  file:
+    dest: "{{ source_dir }}/emboss-{{ version }}.tar.gz"
+    state: absent
+  when: "{{ del_src }} s.stat.exists"
+
+  tags: emboss
