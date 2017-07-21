@@ -12,10 +12,3 @@
     deb: "http://download2.rstudio.org/rstudio-server-{{ version }}.deb"
 
   tags: rstudio
-
-- name: restart rstudio {{ version }}
-  service:
-    name: rstudio-server
-    state: restarted
-
-  tags: rstudio

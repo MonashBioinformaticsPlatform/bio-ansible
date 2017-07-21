@@ -1,26 +1,18 @@
 ---
 
-- name: download rstudio-server-pro {{ version }}
-  get_url:
-    url: "http://download2.rstudio.org/rstudio-server-pro-{{ version }}.deb"
-    dest: "{{ tmp_dir }}" #/rstudio-server-{{version}}.deb"
-
-  tags: rstudio_pro
-
-- name: install dependencies
+- name: update apt cache
   apt:
-      pkg: "{{ item }}"
-      state: present
-  with_items:
-    - gdebi-core
-    - libapparmor1
+    update_cache: yes
+    cache_valid_time: 3600
 
   tags: rstudio_pro
 
-- name: install rstudio-server-pro
-  shell: gdebi -n "{{ tmp_dir }}/rstudio-server-pro-{{ version }}.deb"
+- name: download rstudio-server-pro {{ version }}
+  apt:
+    deb: "http://download2.rstudio.org/rstudio-server-pro-{{ version }}.deb"
 
   tags: rstudio_pro
+
 
 - name: activate license
   shell: rstudio-server license-manager activate "{{ rstudio_pro_key }}"
