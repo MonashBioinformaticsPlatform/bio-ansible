@@ -2,17 +2,15 @@
 #----------------
 # Users variable
 #----------------
-main_guy: sw-installer
-sudo_guy: ubuntu
+main_guy: ubuntu
+sudo_guy: "{{ main_guy }}"
 # need to specify private key if you planing to setyp a launching server
-#main_guy_pubkey: ""
-main_guy_pubkey: "{{ lookup('file', '/home/ubuntu/.ssh/bioansible.pub') }}"
+main_guy_pubkey: ""
 #---------------------------------
 # Different directories variables
 #---------------------------------
 local_home: "{{ ansible_env.HOME }}"
-bioansible_basepath: "/mnt"
-#bioansible_basepath: "{{ local_home }}/bioansible"
+bioansible_basepath: "{{ local_home }}/bioansible"
 source_dir: "{{ bioansible_basepath }}/software/source"
 modules_dir: "{{ bioansible_basepath }}/software/modules"
 modules_core: "{{ modules_dir }}/core"
