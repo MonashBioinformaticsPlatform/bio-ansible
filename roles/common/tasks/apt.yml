@@ -55,18 +55,40 @@
     - python-tk
     - libgsl0-dev
     # R deps
+    - gfortran
+    - gfortran-5
+    - libncurses5-dev
+    - libbz2-dev
+    - libsuperlu-dev 
+    - libarpack2-dev
     - libcurl4-openssl-dev
     - libxml2-dev
     - libxt-dev
-    # R packages deps
     - libcairo2-dev
+    - tcl8.6-dev
+    - tk8.6-dev
+    - texinfo
+    - texlive-fonts-extra
+    - libtiff5-dev
+    - libpango1.0-dev
+    - freeglut3-dev
+    - libxmu-dev
+    - libglu1-mesa-dev
+    - libcgal-dev
     # RStudio deps
+    - libgstreamer-plugins-base0.10-0
+    - libgstreamer0.10-0
+    - libjpeg62
+    - liborc-0.4-0
     - libapparmor1
     - libxml2
     - libxml2-dev
     # mothur and uchime C++ deps
     - libboost-program-options-dev
     - libboost-iostreams-dev
+    # vsearch
+    - autoconf
+    - autogen
     # bowtie2 deps
     - libtbb-dev
     # aws-manage deps
@@ -84,6 +106,7 @@
     - pandoc-citeproc
     - vim
     - tmux
+    - mosh
     - git
     - mercurial
     - curl

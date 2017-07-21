@@ -16,9 +16,46 @@
   tags: r_base
 
 - name: build r {{ version }}
-  shell: cd {{ source_dir }}/R-{{ version }}; ./configure --prefix={{ apps_dir }}/R/{{ version }} --enable-R-shlib; make; make install
+  shell: cd {{ source_dir }}/R-{{ version }}; ./configure --prefix={{ apps_dir }}/R/{{ version }} --enable-R-shlib --enable-memory-profiling; make -j {{ threads }}; make install
   args:
     creates: "{{ apps_dir }}/R/{{ version }}/bin/Rscript"
+
+  tags: r_base
+
+# install required packages from CRAN and Bioconductor
+- name: check CRAN and bioconductor R scripts exist
+  stat:
+    path: "{{ playbook_dir }}/scripts/R/{{ item }}"
+  with_items:
+      - cran.R
+      - bioconductor.R
+  delegate_to: localhost
+  register: e
+
+  tags: r_base
+
+- file:
+    dest: "{{ tmp_dir }}/scripts/R"
+    state: directory
+    mode: 0755
+  with_items: "{{ e.results }}"
+  when: item.stat.exists
+  
+  tags: r_base
+
+- name: copy R scripts {{ tmp_dir }}
+  copy:
+    src: "{{ playbook_dir }}/scripts/R/{{ item.item }}"
+    dest: "{{ tmp_dir }}/scripts/R"
+  with_items: "{{ e.results }}"
+  when: item.stat.exists
+
+  tags: r_base
+
+- name: run R scripts to install packages
+  shell: "{{ apps_dir }}/R/{{ version }}/bin/Rscript {{ tmp_dir }}/scripts/R/{{ item.item }} {{ r_base_mirror }} {{ apps_dir }}/R/{{ r_base_version }}/{{ r_lib_path }}"
+  with_items: "{{ e.results }}"
+  when: item.stat.exists
 
   tags: r_base
 

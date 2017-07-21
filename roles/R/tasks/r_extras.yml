@@ -30,8 +30,9 @@
 
   tags: r_extras
 
+#TODO assumes that r-base is installed
 - name: run R scripts to install packages
-  shell: Rscript {{ tmp_dir }}/scripts/R/{{ item.item }} {{ r_base_mirror }}
+  shell: "{{ apps_dir }}/R/{{ r_base_version }}/bin/Rscript {{ tmp_dir }}/scripts/R/{{ item.item }} {{ r_base_mirror }}"
   with_items: "{{ e.results }}"
   when: item.stat.exists
 

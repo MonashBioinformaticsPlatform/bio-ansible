@@ -5,14 +5,31 @@ if (length(args)==0) {
   stop("At least one argument must be supplied (input file).n", call.=FALSE)
 } else {
 
-  install.packages(c("Rcpp",
+  install.packages(c("shiny",
                      "httpuv",
+                     "backports",
+                     "base64enc",
+                     "bitops",
+                     "caTools",
+                     "digest",
+                     "evaluate",
+                     "formatR",
+                     "highr",
+                     "htmltools",
+                     "jsonlite",
+                     "knitr",
+                     "magrittr",
+                     "markdown",
+                     "mime",
+                     "Rcpp",
                      "rmarkdown",
+                     "rprojroot",
+                     "stringi",
+                     "stringr",
+                     "yaml",
                      "tidyverse",
                      "gtools",
                      "viridis",
-                     "formatR",
-                     "shiny",
                      "optparse",
                      "plotly",
                      # from r-commended debian pacakge
@@ -40,6 +57,7 @@ if (length(args)==0) {
                      ),
                     # pass in r_base_mirror
                     repos=args[1],
-                    lib="/usr/local/lib/R/site-library"
+                    lib=args[2]
+                    #lib="/usr/local/lib/R/site-library"
                   )
 }
