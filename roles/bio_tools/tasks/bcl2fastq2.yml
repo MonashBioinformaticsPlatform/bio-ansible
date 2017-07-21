@@ -1,0 +1,94 @@
+---
+
+- name: download bcl2fastq2 package {{ version }}
+  get_url:
+    url: ftp://webdata2:webdata2@ussd-ftp.illumina.com/downloads/software/bcl2fastq/bcl2fastq2-v{{ version }}-tar.zip
+    dest: "{{ source_dir }}/bcl2fastq2-v{{ version }}-tar.zip"
+
+  tags: bcl2fastq2
+
+- name: uncompress bcl2fastq2 {{ version }}
+  unarchive:
+      src: "{{ source_dir }}/bcl2fastq2-v{{ version }}-tar.zip"
+      dest: "{{ source_dir }}"
+      copy: no
+
+  tags: bcl2fastq2
+
+- name: uncompress bcl2fastq2 {{ version }}
+  unarchive:
+      src: "{{ source_dir }}/bcl2fastq2-v{{ version }}.403.tar.gz"
+      dest: "{{ source_dir }}"
+      copy: no
+
+  tags: bcl2fastq2
+
+- file:
+    dest: "{{ source_dir }}/bcl2fastq/build"
+    state: directory
+    mode: 0755
+
+  tags: bcl2fastq2
+
+- name: build bcl2fastq2 {{ version }}
+  shell: cd {{ source_dir }}/bcl2fastq/build; ../src/configure --prefix={{ apps_dir }}/bcl2fastq2-{{ version }}; make -j {{ threads }}; make install
+  args:
+    creates: "{{ apps_dir }}/bcl2fastq2-{{ version }}/bin/bcl2fastq2"
+
+  tags: bcl2fastq2
+
+  #- file:
+  #    dest: "{{ modules_bio }}/bcl2fastq2"
+  #    state: directory
+  #    mode: 0755
+  #
+  #  tags: bcl2fastq2
+  #
+  #- name: bcl2fastq2 {{ version }} module definition
+  #  template: 
+  #    src: sw-module.lua.j2 
+  #    dest: "{{ modules_bio }}/bcl2fastq2/{{ version }}.lua"
+  #    owner: "{{ main_guy }}" 
+  #    mode: 0644
+  #  with_items:
+  #    - dir: 'bcl2fastq2-{{ version }}'
+  #      help_text: 'This module loads the bcl2fastq2 packages including featureCounts'
+  #
+  #  tags: bcl2fastq2
+  #
+  #- file:
+  #    dest: "{{ apps_dir }}/bcl2fastq2-{{ version }}"
+  #    state: directory
+  #    mode: 0755
+  #
+  #  tags: bcl2fastq2
+  #
+  #- name: move bcl2fastq2 {{ version }} executable to apps directory
+  #  shell: cp -r {{ source_dir }}/bcl2fastq2-{{ version }}-source/bin {{ apps_dir }}/bcl2fastq2-{{ version }}
+  #  args:
+  #    creates: "{{ apps_dir }}/bcl2fastq2-{{ version }}/bcl2fastq2/bin"
+  #
+  #  tags: bcl2fastq2
+  #
+  #- name: setting register for bcl2fastq2 {{ version }}
+  #  stat:
+  #    path: "{{ apps_dir }}/bcl2fastq2-{{ version }}/bin/featureCounts"
+  #  register: s
+  #
+  #  tags: bcl2fastq2
+  #
+  #- name: removing bcl2fastq2 {{ version }} source directory
+  #  file:
+  #    dest: "{{ source_dir }}/bcl2fastq2-{{ version }}-source"
+  #    state: absent
+  #  when: "{{ del_src }} s.stat.exists"
+  #
+  #  tags: bcl2fastq2
+  #
+  #- name: removing bcl2fastq2 {{ version }} tar file
+  #  file:
+  #    dest: "{{ source_dir }}/bcl2fastq2-{{ version }}-source.tar.gz"
+  #    state: absent
+  #  when: "{{ del_src }} s.stat.exists"
+  #
+  #  tags: bcl2fastq2
