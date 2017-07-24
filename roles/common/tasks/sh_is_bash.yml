@@ -1,0 +1,4 @@
+- name: Ensure /bin/sh symlinks to bash not dash
+  shell: echo "dash    dash/sh boolean false" | debconf-set-selections; dpkg-reconfigure -p critical dash
+  environment:
+    - DEBIAN_FRONTEND: noninteractive
