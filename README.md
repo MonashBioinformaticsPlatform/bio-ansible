@@ -23,48 +23,82 @@ ansible-playbook -i hosts all.yml
 ```
 ## Introduction
 
-This bio-ansible script is multi-potent as it can set up from scratch the whole army of servers with bioinformatics (genomic) focus or just install handful of selected tools. Depending on what you are trying to do you can run bio-ansible as a non privileged user, particular if you are just installing bio-tools. However you still might need to install some "common" dependencies and for that you might need `sudo`.
-Also note that modules are ‘idempotent’, meaning if you run them again, they will make only the changes they must in order to bring the system to the desired state. This makes it very safe to rerun the same playbook multiple times. They won’t change things unless they have to change things.
-Please note this this playbook is targeting linux operating systems, specifically ubuntu distribution.
+This _bio-ansible_ is multi-potent as it can set up from scratch the whole army 
+of servers with bioinformatics (genomic) focus or just install handful of 
+selected tools. A subset of the _bio-ansible_ playbooks can be run as a 
+as a non-privileged user, in particular if you are just installing bio-tools in
+your home directory on a shared system (eg HPC).
 
-**It is safe to re-run the same playbook**
+However you still might need to install some "common" dependencies and for that 
+you might need `sudo`. Also note that Ansible tasks are typically are 
+‘idempotent’, meaning if you run them again, they will generally only make the 
+changes they must in order to bring the system to the desired state. This means 
+it is safe to rerun the same playbook multiple times.
+
+These playbooks target Ubuntu 14.04 and 16.04 - they may work with small
+modifications on other Debian-flavoured distros. YMMV.
+
 
 ## Running bio-ansible
 
-1. [Install ansible](http://docs.ansible.com/ansible/intro_installation.html)
-2. set up your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
-3. `git clone https://github.com/serine/bio-ansible.git`
-4. edit `hosts` file to include your IP address into the right group
-5. edit `group/all` file to include your username as `main_guy` variable
-6. Running playbook:
-    - everything - need `sudo` privilege
-    ```
-    ansible-playbook -i hosts all.yml
-    ```
-    - just the tools - don't need `sudo`
-    ```
-    ansible-playbook -i hosts bio.yml
-    ```
-    - just the dependencies - need `sudo`
+#### Setup and dependencies
 
-    ```
-    ansible-playbook -i hosts common.yml
-    ```
-7. Alternatively you can install only particular tool
+1. [Install ansible](http://docs.ansible.com/ansible/intro_installation.html)
+
+```bash
+mkdir ~/.virtualenvs
+virtualenv ~/.virtualenvs/ansible
+source ~/.virtualenvs/ansible/bin/activate
+pip install -U pip
+pip install ansible
+```
+
+2. `git clone https://github.com/MonashBioinformaticsPlatform/bio-ansible.git`
+
+If running against remote host(s):
+
+2b. Set up your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
+2c. Edit `hosts` file to include the remote host IP addresses into the appropriate group
+3. Edit `group/all` file to include your username as `main_guy` variable
+4. Download any tar archives for non-FOSS software into `tarballs/` - 
+see the section on [manually downloading tarballs](#manually-downloading-tarballs) below.
+
+#### Running the playbooks
+
+Install everything - `sudo` privilege is required:
+```
+ansible-playbook -i hosts all.yml
+```
+
+Just the tools as a non-privilege user (no `sudo` required):
+```
+ansible-playbook -i hosts bio.yml
+```
+
+Just the dependencies - `sudo` privilege is required:
+
+```
+ansible-playbook -i hosts common.yml
+```
+
+#### Installing specific tools
+
+Alternatively you can install specific tools without running the whole playbook:
 
 ```BASH
-ansible-playbook -i hosts main.yml --tags samtools
-ansible-playbook -i hosts main.yml --tags star
-ansible-playbook -i hosts main.yml --tags subread
+ansible-playbook -i hosts bio.yml --tags samtools
+ansible-playbook -i hosts bio.yml --tags star
+ansible-playbook -i hosts bio.yml --tags subread
 ```
 
 OR
 
 ```BASH
-ansible-playbook -i hosts main.yml --tags samtools,star,subread
+ansible-playbook -i hosts bio.yml --tags samtools,star,subread
 ```
 
-_You can always add `-v` or `-vvv` options for verbose mode_
+Protip: _You can always add `-v` or `-vvv` options for verbose mode to help 
+diagnose failures_
 
 ## Frequently asked questions
 
@@ -77,15 +111,18 @@ _You can always add `-v` or `-vvv` options for verbose mode_
 
 ## Other
 
-### Manual handling
+### Manually downloading tarballs
 
-Because of the licenses some installation files need to be manually downloaded into `tarballs` directory. You need to manually download these packages and place them into `roles/bio_tools/files/` directory. The `playbook.yml` going to skip installation of those packages if it doesn't find archived files in files directory.
+Because of the licenses some installation files need to be manually downloaded 
+into `tarballs` directory. The `playbook.yml` will skip installation of those 
+packages if it doesn't find the archive files in that directory.
 
 ### Manual scripts
 
-There are scripts to download various databases in `scripts/`. These have deliberately not been added to ansible.
+There are scripts to download various databases in `scripts/`. These have 
+deliberately not been added to ansible.
 
-Download blast databases
+Download BLAST databases
 
 ```BASH
 cd /references/blast
