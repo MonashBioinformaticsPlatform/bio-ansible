@@ -5,7 +5,7 @@
 #
 # java version
 jdk_major: 8
-jdk_minor: 121
+jdk_minor: 131
 java_oracle_version: "{{ jdk_major }}u{{ jdk_minor }}"
 # lmod version
 lmod_version: 7.3.9
