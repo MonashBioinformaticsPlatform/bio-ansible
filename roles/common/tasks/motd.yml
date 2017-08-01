@@ -5,6 +5,7 @@
     dest: /etc/update-motd.d/91-release-upgrade
     state: file
     mode: 0644
+  ignore_errors: True
 
   tags: motd
 
