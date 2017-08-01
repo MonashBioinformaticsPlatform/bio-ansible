@@ -6,12 +6,12 @@
     state: latest
   tags: pip
 
-- name: pip install ansible
-  pip:
-    name: ansible
-    state: present
-    version: "{{ ansible_version }}"
-  tags: pip
+  #- name: pip install ansible
+  #  pip:
+  #    name: ansible
+  #    state: present
+  #    version: "{{ ansible_version }}"
+  #  tags: pip
 
 
 - name: pip install python packages
