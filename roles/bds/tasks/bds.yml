@@ -2,9 +2,9 @@
 
 - name: download BigDataScript {{ version }}
   git:
-    repo: https://github.com/pcingola/BigDataScript.git
+    repo: https://github.com/l1ll1/BigDataScript.git
     dest: "{{ source_dir }}/BigDataScript-{{ version }}"
-    version: "v{{ version }}"
+    version: "ffd90c71f85d4b0a580c484740cc1b8c5863e8e6"
     update: no
 
   tags: bds
