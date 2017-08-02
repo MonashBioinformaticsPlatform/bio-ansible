@@ -10,7 +10,8 @@
   tags: bds
 
 - name: check that /usr/bin/java exists
-  stat: /usr/bin/java
+  stat: 
+    path: /usr/bin/java
   register: java_local
   ignore_errors: true
 
