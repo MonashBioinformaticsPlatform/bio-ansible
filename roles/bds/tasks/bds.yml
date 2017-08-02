@@ -32,20 +32,21 @@
 
   tags: bds
 
-- name: build BigDataScript {{ version }} with java_local
-  shell: cd {{ source_dir }}/BigDataScript-{{ version }}/; ./scripts/install.sh
-  args:
-    creates: "{{ local_home }}/.bds/bds"
-  when: ( java_local is defined and java_local.stat is defined ) and ( java_tar is not defined or java_tar.stat is not defined or java_tar.stat.isdir is not defined )
-
-  tags: bds
-
 - name: moving executable bds {{ version }} to apps directory
   shell: mv "{{ local_home }}/.bds" "{{ apps_dir }}/BigDataScript-{{ version }}"
   args:
     creates: "{{ apps_dir }}/BigDataScript-{{ version }}/bds"
 
   tags: bds
+
+- name: build BigDataScript {{ version }} with java_local
+  shell: cd {{ source_dir }}/BigDataScript-{{ version }}/; export BDS_HOME={{ apps_dir }}/BigDataScript-{{ version }} ; ./scripts/install.sh
+  args:
+    creates: "{{ apps_dir }}/BigDataScript-{{ version }}/bds"
+  when: ( java_local is defined and java_local.stat is defined ) and ( java_tar is not defined or java_tar.stat is not defined or java_tar.stat.isdir is not defined )
+
+  tags: bds
+
 
 - name: copy bds.config file
   template:
