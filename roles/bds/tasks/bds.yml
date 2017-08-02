@@ -10,7 +10,7 @@
   tags: bds
 
 - name: check that /usr/bin/java exists
-  command: /usr/bin/java
+  stat: /usr/bin/java
   register: java_local
   ignore_errors: true
 
@@ -35,7 +35,7 @@
   shell: cd {{ source_dir }}/BigDataScript-{{ version }}/; ./scripts/install.sh
   args:
     creates: "{{ local_home }}/.bds/bds"
-  when: java_local and ( java_tar is not defined or java_tar.stat is not defined or java_tar.stat.isdir is not defined )
+  when: ( java_local is defined and java_local.stat is defined ) and ( java_tar is not defined or java_tar.stat is not defined or java_tar.stat.isdir is not defined )
 
   tags: bds
 
