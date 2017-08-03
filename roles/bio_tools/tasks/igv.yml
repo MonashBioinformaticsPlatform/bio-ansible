@@ -24,7 +24,7 @@
   tags: igv
 
 - name: check that /usr/bin/java exists
-  command: /usr/bin/java
+  stat: /usr/bin/java
   register: java_local
   ignore_errors: true
 
@@ -41,7 +41,7 @@
   shell: export JAVA_HOME={{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}; cd {{ source_dir }}/igv-{{ version }}; ant
   args:
     creates: "{{ source_dir }}/igv-{{ version }}/igv.jar"
-  when: java_tar.stat.isdir 
+  when: java_tar is defined and java_tar.stat is defined and java_tar.stat.isdir 
 
   tags: igv
 
@@ -49,7 +49,7 @@
   shell: cd {{ source_dir }}/igv-{{ version }}; ant
   args:
     creates: "{{ source_dir }}/igv-{{ version }}/igv.jar"
-  when: java_local and java_tar.stat.isdir is not defined
+  when: java_local is defined and java_local.stat is defined and java_local.stat.exists and not (java_tar is defined or java_tar.stat is defined or java_tar.stat.isdir is defined)
 
   tags: igv
 
@@ -57,7 +57,7 @@
   shell: export JAVA_HOME={{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}; cd {{ source_dir }}/igv-{{ version }}; ant -lib {{ source_dir }}/igv-{{ version }}/extras -f scripts/build-tools.xml
   args:
     creates: "{{ source_dir }}/igv-{{ version }}/igvtools-dist/igvtools.jar"
-  when: java_tar.stat.isdir 
+  when: java_tar is defined and java_tar.stat is defined and java_tar.stat.isdir 
 
   tags: igv
 
@@ -65,7 +65,7 @@
   shell: cd {{ source_dir }}/igv-{{ version }}; ant -lib {{ source_dir }}/igv-{{ version }}/extras -f scripts/build-tools.xml
   args:
     creates: "{{ source_dir }}/igv-{{ version }}/igvtools-dist/igvtools.jar"
-  when: java_local and java_tar.stat.isdir is not defined
+  when: java_local is defined and java_local.stat is defined and java_local.stat.exists and not (java_tar is defined or java_tar.stat is defined or java_tar.stat.isdir is defined)
 
   tags: igv
 
