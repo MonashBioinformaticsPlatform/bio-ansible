@@ -24,7 +24,7 @@
   tags: snpeff
 
 - file:
-    src: "{{ apps_dir }}/snpEff-{{ version }}"
+    #    src: "{{ apps_dir }}/snpEff-{{ version }}"
     dest: "{{ apps_dir }}/snpEff-{{ version }}/data"
     state: directory
     mode: 0777
