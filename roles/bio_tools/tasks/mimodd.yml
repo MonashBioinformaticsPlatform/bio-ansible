@@ -1,13 +1,29 @@
 ---
 
 - name: pip install mimodd {{ version }}
+  tags: mimodd
   pip:
     name: mimodd
     version: "{{ version }}"
     virtualenv: "{{ apps_dir }}/mimodd-{{ version }}"
-    virtualenv_python: python3.5
+    # If you are using 'pyvenv' instead of 'virtualenv', the line below should be commented
+    virtualenv_python: "{{ python3_executable }}"
+    virtualenv_command: "{{ python3_virtualenv }}"
+  environment:
+    PYTHONPATH: "{{ python3_pythonpath }}"
+  when: "'pyvenv' not in python3_virtualenv"
 
+# alternative when using pyvenv - don't specify virtualenv_python
+- name: pip install mimodd {{ version }} (using pyvenv)
   tags: mimodd
+  pip:
+    name: mimodd
+    version: "{{ version }}"
+    virtualenv: "{{ apps_dir }}/mimodd-{{ version }}"
+    virtualenv_command: "{{ python3_virtualenv }}"
+  environment:
+    PYTHONPATH: "{{ python3_pythonpath }}"
+    when: "'pyvenv' in python3_virtualenv"
 
 - file:
     dest: "{{ modules_bio }}/mimodd"
@@ -39,13 +55,13 @@
 - name: copy mimodd configuration file
   template:
     src: mimodd.config
-    dest: "{{ apps_dir }}/mimodd-{{ version }}/lib/python3.5/site-packages/MiModD/cfg.py"
+    dest: "{{ apps_dir }}/mimodd-{{ version }}/lib/python{{ python3_version_major_minor }}/site-packages/MiModD/cfg.py"
     #backup: yes
 
   tags: mimodd
 
 - file:
-    dest: "{{ apps_dir }}/mimodd-{{ version }}/lib/python3.5/site-packages/MiModD/__first_run__.py"
+    dest: "{{ apps_dir }}/mimodd-{{ version }}/lib/python{{ python3_version_major_minor }}/site-packages/MiModD/__first_run__.py"
     state: absent
 
   tags: mimodd

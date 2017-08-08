@@ -7,3 +7,5 @@ tarballs/*
 !tarballs/README.md
 *users_list.txt
 vault
+.molecule
+*.pyc

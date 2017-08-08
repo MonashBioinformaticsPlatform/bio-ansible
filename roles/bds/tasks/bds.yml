@@ -1,66 +1,83 @@
 ---
 
 - name: download BigDataScript {{ version }}
+  tags: bds
   git:
     repo: https://github.com/pcingola/BigDataScript.git
     dest: "{{ source_dir }}/BigDataScript-{{ version }}"
     version: "v{{ version }}"
     update: no
 
-  tags: bds
-
 - name: check that /usr/bin/java exists
+  tags: bds
   command: /usr/bin/java
   register: java_local
   ignore_errors: true
 
-  tags: bds
-
 - name: check oracle java exists
+  tags: bds
   stat:
     path: "{{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}"
   register: java_tar
 
-  tags: bds
-
 - name: build BigDataScript {{ version }} with java_tar
+  tags: bds
   shell: export JAVA_HOME={{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}; cd {{ source_dir }}/BigDataScript-{{ version }}/; ./scripts/install.sh
   args:
     creates: "{{ local_home }}/.bds/bds"
   when: java_tar.stat.isdir 
 
-  tags: bds
-
 - name: build BigDataScript {{ version }} with java_local
+  tags: bds
   shell: cd {{ source_dir }}/BigDataScript-{{ version }}/; ./scripts/install.sh
   args:
     creates: "{{ local_home }}/.bds/bds"
   when: java_local and java_tar.stat.isdir is not defined
 
-  tags: bds
-
 - name: moving executable bds {{ version }} to apps directory
+  tags: bds
   shell: mv "{{ local_home }}/.bds" "{{ apps_dir }}/BigDataScript-{{ version }}"
   args:
     creates: "{{ apps_dir }}/BigDataScript-{{ version }}/bds"
 
+- name: copy bds.config template file
   tags: bds
-
-- name: copy bds.config file
   template:
-    src: bds.config
-    dest: "{{ apps_dir }}/BigDataScript-{{ version }}"
+    src: bds.config.j2
+    dest: "{{ apps_dir }}/BigDataScript-{{ version }}/bds.config"
+  when: not is_slurm_cluster
 
+- name: copy bds.config template file
   tags: bds
+  template:
+    src: bds.config-slurm.j2
+    dest: "{{ apps_dir }}/BigDataScript-{{ version }}/bds.config"
+  when: is_slurm_cluster
 
-- file:
+- name: Create SLURM wrapper script directory
+  tags: bds
+  file: path="{{ apps_dir }}/BigDataScript-{{ version }}/clusterGenericSLURM" state=directory
+  when: is_slurm_cluster
+
+- name: copy clusterGeneric wrapper scripts
+  tags: bds
+  template:
+    src: "{{ item }}"
+    dest: "{{ apps_dir }}/BigDataScript-{{ version }}/clusterGenericSLURM/{{ item | basename | regex_replace('.j2','') }}"
+    mode: "u=rwx,g=rwx,o=rx"
+  with_fileglob:
+    - templates/clusterGenericSLURM/*
+  when: is_slurm_cluster
+
+- name: Chmod BigDataScript module directory
+  tags: bds
+  file:
     dest: "{{ modules_bio }}/BigDataScript"
     state: directory
     mode: 0755
 
-  tags: bds
-
 - name: BigDataScript {{ version }} lmod definition
+  tags: bds
   template:
     src: sw-module.lua.j2
     dest: "{{ modules_bio }}/BigDataScript/{{ version }}.lua"
@@ -72,19 +89,15 @@
       skip_bin: true
       help_text: 'This module loads BigDataScript'
 
-  tags: bds
-
 - name: Setting register for BigDataScript {{ version }}
+  tags: bds
   stat:
     path: "{{ apps_dir }}/BigDataScript-{{ version }}/bds"
   register: b
 
-  tags: bds
-
 - name: Removing BigDataScript {{ version }} source directory
+  tags: bds
   file:
     dest: "{{ source_dir }}/BigDataScript-{{ version }}"
     state: absent
   when: "{{ del_src }} b.stat.exists"
-
-  tags: bds

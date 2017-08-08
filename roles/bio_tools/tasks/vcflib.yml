@@ -7,8 +7,13 @@
     version: "{{ version }}"
     update: yes
     recursive: yes
+    force: yes
 
   tags: vcflib
+
+- name: WORKAROUND - build the htslib submodule manually first
+  tags: vcflib
+  shell: cd {{ source_dir }}/vcflib-{{ version }}/tabixpp/htslib; make
 
 - name: build vcflib {{ version }}
   #shell: cd {{ source_dir }}/vcflib-{{ version }}; make -j {{ threads }}

@@ -1,0 +1,17 @@
+---
+
+python3_executable: "python3"
+python3_virtualenv: "virtualenv"
+python3_pythonpath: ""
+# Python3 major.minor version for site-packages path (eg python2.7, python3.5 or python3.6)
+# Should be set automatically
+# python3_version_major_minor: "3.6"
+
+python2_executable: "python"
+python2_virtualenv: "virtualenv"
+python2_pythonpath: ""
+# python2_version_major_minor: "2.7"
+
+# Compilation option: NO_TBB (Thread Building Blocks vs pthreads)
+# Valid values: 1 or 0
+bowtie2_notbb: 0
