@@ -10,7 +10,7 @@
 
 - name: WORKAROUND - ensure multiqc is really installed in the virtualenv
   tags: multiqc
-  shell: "{{ apps_dir }}/multiqc-{{ version }}/bin/pip install multiqc"
+  shell: "{{ apps_dir }}/multiqc-{{ version }}/bin/pip3 install multiqc"
   
 - file:
     dest: "{{ modules_bio }}/multiqc"
