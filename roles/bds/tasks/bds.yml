@@ -2,15 +2,16 @@
 
 - name: download BigDataScript {{ version }}
   git:
-    repo: https://github.com/pcingola/BigDataScript.git
+    repo: https://github.com/l1ll1/BigDataScript.git
     dest: "{{ source_dir }}/BigDataScript-{{ version }}"
-    version: "v{{ version }}"
+    version: "ffd90c71f85d4b0a580c484740cc1b8c5863e8e6"
     update: no
 
   tags: bds
 
 - name: check that /usr/bin/java exists
-  command: /usr/bin/java
+  stat: 
+    path: /usr/bin/java
   register: java_local
   ignore_errors: true
 
@@ -24,27 +25,21 @@
   tags: bds
 
 - name: build BigDataScript {{ version }} with java_tar
-  shell: export JAVA_HOME={{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}; cd {{ source_dir }}/BigDataScript-{{ version }}/; ./scripts/install.sh
+  shell: export JAVA_HOME={{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}; cd {{ source_dir }}/BigDataScript-{{ version }}/; export BDS_HOME={{ apps_dir }}/BigDataScript-{{ version }} ; ./scripts/install.sh
   args:
     creates: "{{ local_home }}/.bds/bds"
-  when: java_tar.stat.isdir 
+  when: java_tar is defined and java_tar.stat.isdir 
 
   tags: bds
 
 - name: build BigDataScript {{ version }} with java_local
-  shell: cd {{ source_dir }}/BigDataScript-{{ version }}/; ./scripts/install.sh
-  args:
-    creates: "{{ local_home }}/.bds/bds"
-  when: java_local and java_tar.stat.isdir is not defined
-
-  tags: bds
-
-- name: moving executable bds {{ version }} to apps directory
-  shell: mv "{{ local_home }}/.bds" "{{ apps_dir }}/BigDataScript-{{ version }}"
+  shell: cd {{ source_dir }}/BigDataScript-{{ version }}/; export BDS_HOME={{ apps_dir }}/BigDataScript-{{ version }} ; ./scripts/install.sh
   args:
     creates: "{{ apps_dir }}/BigDataScript-{{ version }}/bds"
+  when: ( java_local is defined and java_local.stat is defined ) and ( java_tar is not defined or java_tar.stat is not defined or java_tar.stat.isdir is not defined )
 
   tags: bds
+
 
 - name: copy bds.config file
   template:

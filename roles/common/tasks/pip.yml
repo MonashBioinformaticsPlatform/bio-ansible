@@ -1,19 +1,18 @@
 ---
 # version 2.2.2.0 of ansible if borked. You may merge this back into latest once 2.2.2.0 if superceeded (maybe)
-#- name: pip install ansible
-#  pip:
-#    name: ansible
-#    state: present
-#    version: "{{ ansible_version }}"
-#
-#  tags: pip
-
 - name: pip upgrade pip
   pip:
     name: pip
     state: latest
-
   tags: pip
+
+  #- name: pip install ansible
+  #  pip:
+  #    name: ansible
+  #    state: present
+  #    version: "{{ ansible_version }}"
+  #  tags: pip
+
 
 - name: pip install python packages
   pip:
