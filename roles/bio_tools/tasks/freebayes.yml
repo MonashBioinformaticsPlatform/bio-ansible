@@ -9,6 +9,12 @@
     recursive: yes
   tags: freebayes
 
+- file:
+    src: "{{ source_dir }}/freebayes-{{ version }}"
+    dest: "{{ source_dir }}/freebayes-{{ version }}/bin"
+    state: directory
+  ignore_errors: true
+
 - name: build freebayes {{ version }}
   #shell: cd {{ source_dir }}/freebayes-{{ version }}; make -j {{ threads }}
   # apparently freebayes can't get compiled with multithreading

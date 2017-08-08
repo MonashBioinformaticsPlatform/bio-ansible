@@ -5,8 +5,8 @@
     name: mimodd
     version: "{{ version }}"
     virtualenv: "{{ apps_dir }}/mimodd-{{ version }}"
-    virtualenv_python: python3.5
-
+    virtualenv_python: "{{ python3_executable }}"
+    virtualenv_command: "{{ python3_virtualenv }}"
   tags: mimodd
 
 - file:
@@ -39,13 +39,13 @@
 - name: copy mimodd configuration file
   template:
     src: mimodd.config
-    dest: "{{ apps_dir }}/mimodd-{{ version }}/lib/python3.5/site-packages/MiModD/cfg.py"
+    dest: "{{ apps_dir }}/mimodd-{{ version }}/lib/{{ mimodd_python_version }}/site-packages/MiModD/cfg.py"
     #backup: yes
 
   tags: mimodd
 
 - file:
-    dest: "{{ apps_dir }}/mimodd-{{ version }}/lib/python3.5/site-packages/MiModD/__first_run__.py"
+    dest: "{{ apps_dir }}/mimodd-{{ version }}/lib/{{ mimodd_python_version }}/site-packages/MiModD/__first_run__.py"
     state: absent
 
   tags: mimodd
