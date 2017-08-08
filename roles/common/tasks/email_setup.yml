@@ -38,6 +38,7 @@
   service:
     name: postfix
     state: restarted
+  when: skip_services is not defined
 
   tags: email
 

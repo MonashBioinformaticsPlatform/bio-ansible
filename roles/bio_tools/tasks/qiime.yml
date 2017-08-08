@@ -199,7 +199,7 @@
   tags: qiime
 
 - lineinfile:
-    path: "{{ apps_dir }}/qiime-{{ version }}/extended/rtax-0.984/rtax"
+    destfile: "{{ apps_dir }}/qiime-{{ version }}/extended/rtax-0.984/rtax"
     regexp: "stat -f"
     line: "arg=$0; [[ -L $0 ]] && arg=$(stat -c %N ${0})"
 
