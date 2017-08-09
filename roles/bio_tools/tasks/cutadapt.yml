@@ -5,6 +5,7 @@
     name: cutadapt
     version: "v{{ version }}"
     virtualenv: "{{ apps_dir }}/cutadapt-{{ version }}"
+    virtualenv_python: "{{ python3_executable }}"
 
   tags: cutadapt
 
