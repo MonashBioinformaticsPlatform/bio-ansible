@@ -6,3 +6,4 @@
 - include: ant.yml version={{ ant_version }}
 - include: golang.yml version={{ go_version }}
 - include: tmux.yml version={{ tmux_version }}
+- include: environment-script.yml
