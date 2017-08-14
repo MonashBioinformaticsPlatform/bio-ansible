@@ -1,5 +1,6 @@
 ---
 - name: Install environment script at {{ bioansible_basepath }}/bioansible_env.sh
+  tags: environment
   template:
     src: bioansible_env.sh.j2
     dest: "{{ bioansible_basepath }}/bioansible_env.sh"
