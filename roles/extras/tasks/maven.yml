@@ -14,8 +14,9 @@
     copy: no
     creates: "{{ apps_dir }}/apache-maven-{{ version }}/bin/mvn"
 
-- file:
+- name: Set maven module permissions
   tags: ['maven', 'java']
+  file:
     dest: "{{ modules_extra }}/maven"
     state: directory
     mode: 0755
