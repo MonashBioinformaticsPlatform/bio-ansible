@@ -4,4 +4,5 @@
 - include: nodejs.yml version={{ nodejs_version }}
 - include: maven.yml version={{ maven_version }}
 - include: ant.yml version={{ ant_version }}
+- include: golang.yml version={{ go_version }}
 - include: tmux.yml version={{ tmux_version }}
