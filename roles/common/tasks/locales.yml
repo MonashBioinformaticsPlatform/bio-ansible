@@ -1,0 +1,36 @@
+---
+
+- name: update apt cache
+  tags: apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: apt-get install locales
+  tags: apt
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - locales
+    - locales-all
+
+- name: Generate locale {{ locale }}
+  tags: apt
+  shell: "localedef -i {{ locale_region }} -c -f {{ locale_charset }} -A /usr/share/locale/locale.alias {{ locale }}"
+  # shell: "locale-gen {{ locale }}"
+
+#- name: Set default locale
+#  tags: apt
+#  lineinfile:
+#    path: /etc/default/locale
+#    regexp: '^LANG='
+#    line: "LANG={{ locale }}"
+
+- name: Update and set default locale
+  tags: apt
+  shell: "dpkg-reconfigure --frontend=noninteractive locales && \
+          update-locale LANG={{ locale }}"
+  environment:
+    - DEBIAN_FRONTEND: noninteractive

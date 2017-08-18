@@ -1,0 +1,61 @@
+---
+version: "2"
+settings:
+  # The Conductor container does the heavy lifting, and provides a portable
+  # Python runtime for building your target containers. It should be derived
+  # from the same distribution as you're building your target containers with.
+  conductor_base: ubuntu:16.04
+  # conductor_base: bioansible-base:latest
+
+  # The deployment_output_path is mounted to the Conductor container, and the
+  # `run` and `deployment` commands then write generated Ansible playbooks to
+  # it.
+  deployment_output_path: ./ansible-deployment
+
+services:
+  # Add your containers here, specifying the base image you want to build from.
+  # To use this example, uncomment it and delete the curly braces after services
+  # key. You may need to run `docker pull ubuntu:trusty` for this to work.
+
+  bioansible:
+    from: ubuntu:16.04
+    # Since the default ubuntu:16.04 seems to have persistent issuse with
+    # locales, we use our own base image derived from it which has
+    # python + locales installed
+    # from: bioansible-base:latest
+    container_name: bioansible
+    # command: ["/bin/bash"]
+    environment:
+      - LANG: "en_AU.UTF-8"
+      - LC_ALL: "en_AU.UTF-8"
+      - LApipNGUAGE: "en_AU.UTF-8"
+      - LC_CTYPE: "en_AU.UTF-8"
+      - LC_NUMERIC: "en_AU.UTF-8"
+      - LC_TIME: "en_AU.UTF-8"
+      - LC_COLLATE: "en_AU.UTF-8"
+      - LC_MONETARY: "en_AU.UTF-8"
+      - LC_MESSAGES: "en_AU.UTF-8"
+      - LC_PAPER: "en_AU.UTF-8"
+      - LC_NAME: "en_AU.UTF-8"
+      - LC_ADDRESS: "en_AU.UTF-8"
+      - LC_TELEPHONE: "en_AU.UTF-8"
+      - LC_MEASUREMENT: "en_AU.UTF-8"
+      - LC_IDENTIFICATION: "en_AU.UTF-8"
+    roles:
+      - make_sw_guy
+      - common
+      - lmod_etc
+      # - user_auth
+      - make_dirs
+      - lmod
+      - java
+      - R
+      - bds
+      - bio_tools
+      - extras
+
+registries: {}
+  # Add optional registries used for deployment. For example:
+  #  google:
+  #    url: https://gcr.io
+  #    namespace: my-cool-project-xxxxxx

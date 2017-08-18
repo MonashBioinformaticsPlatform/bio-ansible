@@ -1,4 +1,22 @@
 ---
+- name: update apt cache
+  tags: apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: apt-get install openssh-server
+  tags: apt
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - openssh-server
+
+- name: Ensure /etc/ssh/sshd_config exists
+  tags: sshd
+  stat: path=/etc/ssh/sshd_config
+  register: sshd_config
 
 - name: Disable OpenSSH server PasswordAuthentication
   tags: sshd
@@ -8,6 +26,7 @@
     line: 'PasswordAuthentication no'
     state: present
   notify: Restart sshd
+  when: sshd_config.stat.exists
 
 - name: Disable OpenSSH server ChallengeResponseAuthentication
   tags: sshd
@@ -17,6 +36,7 @@
     line: 'ChallengeResponseAuthentication no'
     state: present
   notify: Restart sshd
+  when: sshd_config.stat.exists
 
 - name: Disallow OpenSSH root access
   tags: sshd
@@ -26,3 +46,4 @@
     line: 'PermitRootLogin no'
     state: present
   notify: Restart sshd
+  when: sshd_config.stat.exists

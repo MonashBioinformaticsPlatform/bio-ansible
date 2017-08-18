@@ -1,0 +1,15 @@
+FROM ubuntu:16.04
+
+RUN apt-get -y update && \
+    apt-get -y install python-pip git && \
+    apt-get -y clean && \
+    pip install -U pip && \
+    pip install -U ansible
+
+RUN git clone https://github.com/MonashBioinformaticsPlatform/bio-ansible.git && \
+    cd bio-ansible && \
+    ansible-playbook -i hosts common.yml && \
+    ansible-playbook -i hosts bio.yml --skip-tags gatk,java_oracle,cell_ranger && \
+    rm -rf /bio-ansible && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*

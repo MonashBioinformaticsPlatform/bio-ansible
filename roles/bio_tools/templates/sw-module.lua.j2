@@ -11,13 +11,15 @@ local base = pathJoin("{{ apps_dir }}", "{{ item.dir }}")
 
 {% if item.sik is defined %}
 load("STAR/{{ star_version  }}",
+     "bwa/{{ bwa_version }}",
      "subread/{{ subread_version }}",
      "picard/{{ picard_version }}",
      "fastqc/{{ fastqc_version }}",
      "qualimap/{{ qualimap_version }}",
      "samtools/{{ samtools_version }}",
      "multiqc/{{ multiqc_version }}",
-     "java/{{ java_oracle_version }}",
+     -- "java/{{ java_oracle_version }}",
+     "java",
      "BigDataScript/{{ bds_version }}"
     )
 {% endif %}

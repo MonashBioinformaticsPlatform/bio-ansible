@@ -1,19 +1,22 @@
 ---
 
 - name: update apt cache
+  tags: apt
   apt:
     update_cache: yes
     cache_valid_time: 3600
 
-  tags: apt
-
 - name: apt-get common dependencies
+  tags: apt
   apt:
     name: "{{ item }}"
     state: present
     autoremove: yes
   with_items:
     # essentials
+    - apt-utils
+    - locales
+    - locales-all
     - gcc
     - make
     - cmake
@@ -37,7 +40,7 @@
     - liblua5.2-dev
     - lua-filesystem
     - lua-posix
-    # lmos dep
+    # lmod dep
     - tcl
     # htslib deps
     - zlib1g-dev
@@ -48,15 +51,10 @@
     # tmux deps
     - libevent-dev
     # python deps
-    - python-pip
-    - python3-pip
-    - python-dev
     - libssl-dev
     - libssl-doc
     - zlib1g-dev
     - libffi-dev
-    # qiime dep mainly, but this is general GUI package
-    - python-tk
     - libgsl0-dev
     # R deps
     - gfortran
@@ -121,5 +119,3 @@
     - zsh
     - texlive
     - texlive-latex-extra
-
-  tags: apt

@@ -1,0 +1,12 @@
+FROM ubuntu:16.04
+
+RUN apt-get -y update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y locales locales-all && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y upgrade && \
+    localedef -i en_AU -c -f UTF-8 -A /usr/share/locale/locale.alias en_AU.UTF-8 && \
+    dpkg-reconfigure --frontend=noninteractive locales && update-locale LANG=en_AU.UTF-8 && \
+    apt-get install -y python python3 python-pip python3-pip python-virtualenv python3-virtualenv && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+CMD ["/bin/bash"]
