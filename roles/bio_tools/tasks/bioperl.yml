@@ -1,0 +1,29 @@
+---
+
+- name: Install Bio::Perl as a module
+  tags: bioperl
+  cpanm:
+    name: Bio::Perl
+    locallib: "{{ apps_dir }}/bioperl-{{ version }}"
+    version: "v{{ version }}"
+    installdeps: yes
+    #force: yes
+
+- name: Set bioperl module permissions
+  tags: bioperl
+  file:
+    dest: "{{ modules_bio }}/bioperl"
+    state: directory
+    mode: 0755
+
+- name: bioperl {{ version }} module definition
+  tags: bioperl
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/bioperl/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'bioperl-{{ version }}'
+      perl_path: 'lib/perl5'
+      help_text: 'This module loads BioPerl {{ version }}'

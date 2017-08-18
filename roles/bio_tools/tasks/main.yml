@@ -63,6 +63,7 @@
 - include: cellranger.yml version={{ cellranger_version }}
 - include: vcftools.yml version={{ vcftools_version }}
 - include: biotradis.yml version={{ biotradis_version }}
+- include: bioperl.yml version={{ bioperl_version }}
 - include: muscle.yml version={{ muscle_version }}
 - include: cdhit.yml version={{ cdhit_version }}
 - include: mothur.yml version={{ mothur_version }}
