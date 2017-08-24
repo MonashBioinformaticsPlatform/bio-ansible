@@ -41,3 +41,4 @@
 # alsways keep those two at the bottom of the list as they tend to break during compilation
 - include: freebayes.yml version={{ freebayes_version }}
 - include: vcflib.yml version={{ vcflib_version }}
+- include: hifive.yml version={{ hifive_version }}

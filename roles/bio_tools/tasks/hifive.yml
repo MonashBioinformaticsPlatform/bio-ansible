@@ -1,0 +1,27 @@
+---
+
+- name: pip install hifive {{ version }}
+  tags: hifive
+  pip:
+    name: hifive
+    version: "v{{ version }}"
+    virtualenv: "{{ apps_dir }}/hifive-{{ version }}"
+
+- name: Set module permissions for hifive
+  tags: hifive
+  file:
+    dest: "{{ modules_bio }}/hifive"
+    state: directory
+    mode: 0755
+
+- name: hifive {{ version }} module definition
+  tags: hifive
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_bio }}/hifive/{{ version }}.lua"
+    owner: "{{ main_guy }}"
+    mode: 0644
+  with_items:
+    - dir: 'hifive-{{ version }}'
+      help_text: 'loads hifive (https://github.com/bxlab/hifive)'
+      append: true
