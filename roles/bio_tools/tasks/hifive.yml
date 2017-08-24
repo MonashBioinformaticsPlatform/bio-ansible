@@ -4,7 +4,7 @@
   tags: hifive
   pip:
     name: hifive
-    version: "v{{ version }}"
+    version: "{{ version }}"
     virtualenv: "{{ apps_dir }}/hifive-{{ version }}"
 
 - name: Set module permissions for hifive
