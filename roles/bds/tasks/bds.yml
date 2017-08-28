@@ -45,6 +45,28 @@
   template:
     src: bds.config.j2
     dest: "{{ apps_dir }}/BigDataScript-{{ version }}/bds.config"
+  when: not is_slurm_cluster
+
+- name: copy bds.config template file
+  tags: bds
+  template:
+    src: bds.config-slurm.j2
+    dest: "{{ apps_dir }}/BigDataScript-{{ version }}/bds.config"
+  when: is_slurm_cluster
+
+- name: Create SLURM wrapper script directory
+  tags: bds
+  file: path="{{ apps_dir }}/BigDataScript-{{ version }}/clusterGenericSLURM" state=directory
+  when: is_slurm_cluster
+
+- name: copy clusterGeneric wrapper scripts
+  tags: bds
+  template:
+    src: "{{ item }}"
+    dest: "{{ apps_dir }}/BigDataScript-{{ version }}/clusterGenericSLURM/{{ item | basename | regex_replace('.j2','') }}"
+  with_fileglob:
+    - templates/clusterGenericSLURM/*
+  when: is_slurm_cluster
 
 - name: Chmod BigDataScript module directory
   tags: bds

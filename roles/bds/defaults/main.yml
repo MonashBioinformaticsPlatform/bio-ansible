@@ -1,4 +1,6 @@
 ---
 
-bds_config:
-  tmpDir: /tmp
+is_slurm_cluster: false
+
+bds_tmpDir: "/tmp"
+bds_cluster_wrapper_dir: "{{ apps_dir }}/BigDataScript-{{ bds_version }}/clusterGenericSLURM"

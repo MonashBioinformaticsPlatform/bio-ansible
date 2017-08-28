@@ -1,15 +1,29 @@
 ---
 
 - name: pip install mimodd {{ version }}
+  tags: mimodd
   pip:
     name: mimodd
     version: "{{ version }}"
     virtualenv: "{{ apps_dir }}/mimodd-{{ version }}"
+    # If you are using 'pyvenv' instead of 'virtualenv', the line below should be commented
     virtualenv_python: "{{ python3_executable }}"
     virtualenv_command: "{{ python3_virtualenv }}"
   environment:
     PYTHONPATH: "{{ python3_pythonpath }}"
+  when: "'pyvenv' not in python3_virtualenv"
+
+# alternative when using pyvenv - don't specify virtualenv_python
+- name: pip install mimodd {{ version }} (using pyvenv)
   tags: mimodd
+  pip:
+    name: mimodd
+    version: "{{ version }}"
+    virtualenv: "{{ apps_dir }}/mimodd-{{ version }}"
+    virtualenv_command: "{{ python3_virtualenv }}"
+  environment:
+    PYTHONPATH: "{{ python3_pythonpath }}"
+    when: "'pyvenv' in python3_virtualenv"
 
 - file:
     dest: "{{ modules_bio }}/mimodd"
