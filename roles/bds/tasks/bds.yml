@@ -64,6 +64,7 @@
   template:
     src: "{{ item }}"
     dest: "{{ apps_dir }}/BigDataScript-{{ version }}/clusterGenericSLURM/{{ item | basename | regex_replace('.j2','') }}"
+    mode: "u=rwx,g=rwx,o=rx"
   with_fileglob:
     - templates/clusterGenericSLURM/*
   when: is_slurm_cluster
