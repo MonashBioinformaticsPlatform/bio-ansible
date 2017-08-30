@@ -1,0 +1,10 @@
+---
+- name: Setup and connect storage to hosts
+  hosts: common
+  remote_user: "{{ sudo_guy }}"
+  # vars_files:
+  #   - /vars/external_vars.yml
+  roles:
+    - cephfs
+
+  become: true

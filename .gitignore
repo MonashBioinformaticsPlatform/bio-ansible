@@ -6,4 +6,4 @@ my_hosts
 tarballs/*
 !tarballs/README.md
 *users_list.txt
-vault
+private

@@ -9,6 +9,7 @@ main_guy_pubkey: ""
 #---------------------------------
 # Different directories variables
 #---------------------------------
+private_vars_path: "{{ playbook_dir }}/private"
 local_home: "{{ ansible_env.HOME }}"
 bioansible_basepath: "{{ local_home }}/bioansible"
 source_dir: "{{ bioansible_basepath }}/software/source"

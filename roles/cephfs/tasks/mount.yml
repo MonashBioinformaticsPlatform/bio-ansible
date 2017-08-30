@@ -1,0 +1,13 @@
+---
+# Example: /etc/fstab line
+# id=cephfs.RDS-STOR-123,conf=/etc/ceph/ceph.conf,client_mountpoint=/marketv2/RDS-STOR-123/drstrangelove    /cephfs   fuse.ceph    noauto,defaults    0    0
+
+- name: Mount cephfs filesystems (fuse)
+  tags: ['cephfs', 'storage']
+  mount:
+    path: "{{ item.value.local_path }}"
+    src: id=cephfs.{{ item.value.identifier }},conf=/etc/ceph/ceph.conf,client_mountpoint={{ item.value.remote_path }}
+    fstype: fuse.ceph
+    opts: noauto,defaults
+    state: mounted
+  with_dict: "{{ cephfs_mounts }}"
