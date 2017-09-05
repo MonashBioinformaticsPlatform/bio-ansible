@@ -1,21 +1,17 @@
 ---
 
 - name: turn off new releases notifications
+  tags: motd
   file:
     dest: /etc/update-motd.d/91-release-upgrade
     state: file
     mode: 0644
-
-  tags: motd
+  ignore_errors: true
 
 - name: copy lmod notifications to /etc/update-motd.d
+  tags: motd
   template:
     src: 60-lmod-recent
     dest: /etc/update-motd.d/
     mode: 0755
     backup: yes
-
-  tags: motd
-
-
-
