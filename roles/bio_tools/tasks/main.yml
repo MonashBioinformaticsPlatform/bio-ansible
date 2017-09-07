@@ -1,9 +1,11 @@
 ---
 - name: Find Python3 version
+  tags: always
   command: python3 --version
   register: python3_v_str
 
 - name: Extract Python3 major version (ie 3.4, 3.5, 3.6)
+  tags: always
   set_fact: python3_version_major_minor="{{ python3_v_str.stdout.split()[1].rsplit('.', 1)[0] }}"
 
 - name: Find Python2 version
