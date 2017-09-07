@@ -1,0 +1,4 @@
+# java version
+jdk_major: 8
+jdk_minor: 144
+java_oracle_version: "{{ jdk_major }}u{{ jdk_minor }}"
