@@ -1,0 +1,51 @@
+---
+
+- name: download golang {{ version }}
+  tags: ['golang']
+  get_url:
+    url: "https://storage.googleapis.com/golang/go{{ version }}.linux-amd64.tar.gz"
+    dest: "{{ source_dir }}"
+
+- name: uncompress golang {{ version }}
+  tags: ['golang']
+  unarchive:
+    src: "{{ source_dir }}/go{{ version }}.linux-amd64.tar.gz"
+    dest: "{{ source_dir }}"
+    copy: no
+    creates: "{{ source_dir }}/go/bin/go"
+
+- name: Remove any previous install
+  tags: ['golang']
+  file:
+    state: absent
+    path: "{{ apps_dir }}/go-{{ version }}"
+
+- name: Move go to apps go-{{ version }}
+  tags: ['golang']
+  command: mv "{{ source_dir }}/go"  "{{ apps_dir }}/go-{{ version }}"
+
+- name: Set golang module permissions
+  tags: ['golang']
+  file:
+    dest: "{{ modules_bio }}/go"
+    state: directory
+    mode: 0755
+
+- name: Set golang install directory permissions
+  tags: ['golang']
+  file:
+    dest: "{{ apps_dir }}/go-{{ version }}"
+    state: directory
+    mode: 0755
+
+- name: golang {{ version }} module definition
+  tags: ['golang']
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_bio }}/go/{{ version }}.lua"
+    owner: "{{ main_guy }}"
+    mode: 0644
+  with_items:
+    - dir: 'go-{{ version }}'
+      env: [{name: "GOROOT", value: "{{ apps_dir }}/go-{{ version }}"}]
+      help_text: 'This module loads the Go language compiler {{ version }}'

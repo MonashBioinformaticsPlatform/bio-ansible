@@ -47,7 +47,7 @@ load("STAR",
 {% endfor %}
 
 {% if item.depend is defined %}
-  load({{ item.depend }})
+  load("{{ item.depend }}")
 {% endif %}
 
 {% if item.msg is defined %}

@@ -28,6 +28,7 @@
     dest: "{{ apps_dir }}/snpEff-{{ version }}/data"
     state: directory
     mode: 0777
+  ignore_errors: true
 
   tags: snpeff
 

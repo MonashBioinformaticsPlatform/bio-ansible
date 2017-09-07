@@ -1,0 +1,42 @@
+---
+
+- name: download ant {{ version }}
+  tags: ['ant', 'java']
+  get_url:
+    url: "http://mirror.ventraip.net.au/apache/ant/binaries/apache-ant-{{ version }}-bin.tar.bz2"
+    dest: "{{ source_dir }}"
+
+- name: uncompress ant {{ version }}
+  tags: ['ant', 'java']
+  unarchive:
+    src: "{{ source_dir }}/apache-ant-{{ version }}-bin.tar.bz2"
+    dest: "{{ apps_dir }}"
+    copy: no
+    creates: "{{ apps_dir }}/apache-ant-{{ version }}/bin/ant"
+
+- name: Set Ant module permissions
+  tags: ['ant', 'java']
+  file:
+    dest: "{{ modules_bio }}/ant"
+    state: directory
+    mode: 0755
+
+- name: Set Ant install directory permissions
+  tags: ['ant', 'java']
+  file:
+    dest: "{{ apps_dir }}/apache-ant-{{ version }}"
+    state: directory
+    mode: 0755
+
+- name: ant {{ version }} module definition
+  tags: ['ant', 'java']
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_bio }}/ant/{{ version }}.lua"
+    owner: "{{ main_guy }}"
+    mode: 0644
+  with_items:
+    - dir: 'apache-ant-{{ version }}'
+      env: [{name: "ANT_HOME", value: "{{ apps_dir }}/apache-ant-{{ version }}"}]
+      depend: "java"
+      help_text: 'This module loads Apache Ant {{ version }}'

@@ -13,7 +13,7 @@
 # Default memory in bytes (negative number means unspecified)
 # Strings finished by 'K', 'M', 'G', will be treated as Kilo, Mega, 
 # Giga, etc. (2^10, 2^20, 2^30, etc.)
-#mem = -1
+mem = {{ bds_default_memory }}
 
 # Default execution node (empty means unspecified)
 #node = ""
@@ -24,14 +24,15 @@
 # Default number of retries when a task fails (0 means no retry)
 # Upon failire, a task is re-executed up to 'retry' times. 
 # I.e. a task is considered failed only after failing 'retry + 1' times.
-#retry = 0
+retry = 1
 
 # Default system type. 
 # If unspecified, the default system is 'local' (run tasks on local computer)
-#system = "local"
+system = "generic"
 
 # Task timeout in seconds (default is one day)
-#timeout = 86400
+# 3 days
+timeout = 259200
 
 # Task's wall-timeout in seconds (default is one day). 
 # Wall timeout includes all the time that the task is waiting to be executed. 
@@ -39,7 +40,8 @@
 # For example if walltimeout is one day and a task is queued by the cluster 
 # system for one day (and never executed), it will timeout, even if the task 
 # was never run.
-#walltimeout = 86400
+# 7 days
+walltimeout = 604800
 
 # Shell to be used when running a task (default '/bin/sh -e')
 #     WARNING: Make sure you use "-e" or some command line option that stops execution when an error if found.
@@ -64,7 +66,7 @@
 # tasks simultaneously. An example is when 'qsub' reports "Unable to 
 # connect to socket" if there are many tasks being submitted 
 # simultaneously.
-#waitAfterTaskRun = 0
+waitAfterTaskRun = 3
 
 # This is a horrible hack used to make sure the shell script has
 # been fully written to disk and we no have the file open for writing.
@@ -100,11 +102,11 @@
 
 # Temporary directory. It is used for several things, such as downloading 
 # files from remote file systems
-#tmpDir = /tmp
+tmpDir = {{ bds_tmpDir }}
 
 # Create HTML / YAML reports while running
 reportHtml = true
-#reportYaml = false
+reportYaml = true
 
 #---
 # Cluster options
@@ -125,6 +127,8 @@ reportHtml = true
 #pidRegex = "(.+).domain.com"
 #pidRegex = (.+).guillimin.clumeq.ca
 #pidRegex = "Your job (\\S+)"
+# For SLURM sbatch default (without --parsable flag)
+# pidRegex = "Submitted batch job (\\S+)"
 
 # Regex used to extract PID from cluster's "check tasks" (e.g. qstat). 
 # Default: Empty (use the first column)
@@ -250,7 +254,8 @@ sge.timeout = h_rt
 #     6) Cluster's STDERR redirect file. This is where the cluster should redirect STDERR
 #     7) Cluster command and arguments to be executed (typically is a "bds -exec ...").
 
-clusterGenericRun = ~/.bds/clusterGeneric/run.pl
+# clusterGenericRun = {{ bds_cluster_wrapper_dir }}/run.sh
+clusterGenericRun = {{ bds_cluster_wrapper_dir }}/run.pl
 
 # The following command is executed in order to kill a task
 #
@@ -261,7 +266,7 @@ clusterGenericRun = ~/.bds/clusterGeneric/run.pl
 #     jobId: This is the jobId returned as the first line in 'clusterGenericRun' 
 #           script (i.e. the jobID provided by the cluster management system)
 
-clusterGenericKill = ~/.bds/clusterGeneric/kill.pl
+clusterGenericKill = {{ bds_cluster_wrapper_dir }}/kill.sh
 
 # The following command is executed in order to show the jobID of all jobs currently 
 # scheduled in the cluster
@@ -275,7 +280,7 @@ clusterGenericKill = ~/.bds/clusterGeneric/kill.pl
 # Command line arguments: 
 #     None
 
-clusterGenericStat = ~/.bds/clusterGeneric/stat.pl
+clusterGenericStat = {{ bds_cluster_wrapper_dir }}/stat.sh
 
 # The following command is executed in order to get information of a recently 
 # finished jobId. This information is typically used for debuging and it added to bds's output.
@@ -290,7 +295,7 @@ clusterGenericStat = ~/.bds/clusterGeneric/stat.pl
 #     jobId: This is the jobId returned as the first line in 'clusterGenericRun' 
 #           script (i.e. the jobID provided by the cluster management system)
 
-clusterGenericPostMortemInfo = ~/.bds/clusterGeneric/postMortemInfo.pl
+clusterGenericPostMortemInfo = {{ bds_cluster_wrapper_dir }}/postMortemInfo.sh
 
 #---
 # SSH cluster nodes stored here

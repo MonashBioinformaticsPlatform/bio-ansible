@@ -1,19 +1,18 @@
 ---
 
-- name: pip install numpy
-  pip:
-    name: numpy
-    virtualenv: "{{ apps_dir }}/macs2-{{ version }}"
-
-  tags: macs2
-
 - name: pip install macs2 {{ version }}
-  pip:
-    name: macs2
-    version: "{{ version }}"
-    virtualenv: "{{ apps_dir }}/macs2-{{ version }}"
-
   tags: macs2
+  pip:
+    name: "{{ item }}"
+    virtualenv: "{{ apps_dir }}/macs2-{{ version }}"
+    virtualenv_python: "{{ python2_executable }}"
+    virtualenv_command: "{{ python2_virtualenv }}"
+    virtualenv_site_packages: no
+  environment:
+    PYTHONPATH: "{{ python2_pythonpath }}"
+  with_items:
+    - numpy
+    - macs
 
 - file:
     dest: "{{ modules_bio }}/macs2"

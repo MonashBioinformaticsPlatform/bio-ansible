@@ -1,13 +1,20 @@
 ---
 
 - name: pip install multiqc {{ version }}
+  tags: multiqc
   pip:
     name: multiqc
     version: "v{{ version }}"
     virtualenv: "{{ apps_dir }}/multiqc-{{ version }}"
+    virtualenv_python: "{{ python3_executable }}"
+    virtualenv_command: "{{ python3_virtualenv }}"
+  environment:
+    PYTHONPATH: "{{ python3_pythonpath }}"
 
+- name: WORKAROUND - ensure multiqc is really installed in the virtualenv
   tags: multiqc
-
+  shell: "{{ apps_dir }}/multiqc-{{ version }}/bin/pip3 install multiqc"
+  
 - file:
     dest: "{{ modules_bio }}/multiqc"
     state: directory

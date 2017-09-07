@@ -2,21 +2,26 @@
 # These checks and installs Java 1.8 through PPA
 
 - name: Check if java license accepted
+  tags: java
   command: debconf-show oracle-java8-installer | grep 'shared/accepted-oracle-license-v1-1:'
   register: license_check
 
 - name: add repo for java 8
+  tags: java
   apt_repository: repo='ppa:webupd8team/java' state=present
   when: license_check.stdout.find('true') == -1
 
 - name: set licence selected
+  tags: java
   shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
   when: license_check.stdout.find('true') == -1
 
 - name: set licence seen
+  tags: java
   shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
   when: license_check.stdout.find('true') == -1
 
 - name: install java 8
+  tags: java
   apt: name=oracle-java8-installer state=latest update-cache=yes force=yes
   when: license_check.stdout.find('true') == -1

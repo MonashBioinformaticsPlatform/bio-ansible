@@ -10,7 +10,7 @@
   tags: bowtie2
 
 - name: build bowtie2 {{ version }}
-  shell: cd {{ source_dir }}/bowtie2-{{ version }}; make install prefix={{ apps_dir }}/bowtie2-{{ version }}
+  shell: cd {{ source_dir }}/bowtie2-{{ version }}; make install NO_TBB={{ bowtie2_notbb }} prefix={{ apps_dir }}/bowtie2-{{ version }}
   args:
     creates: "{{ apps_dir }}/bowtie2-{{ version }}/bin/bowtie2"
 

@@ -1,29 +1,28 @@
 ---
 
 - name: download maven {{ version }}
+  tags: ['maven', 'java']
   get_url:
     url: "http://www-eu.apache.org/dist/maven/maven-3/{{ version }}/binaries/apache-maven-{{ version }}-bin.tar.gz"
     dest: "{{ source_dir }}"
 
-  tags: maven
-
 - name: uncompress maven {{ version }}
+  tags: ['maven', 'java']
   unarchive: 
     src: "{{ source_dir }}/apache-maven-{{ version }}-bin.tar.gz"
     dest: "{{ apps_dir }}"
     copy: no
     creates: "{{ apps_dir }}/apache-maven-{{ version }}/bin/mvn"
 
-  tags: maven
-
-- file:
+- name: Set maven module permissions
+  tags: ['maven', 'java']
+  file:
     dest: "{{ modules_extra }}/maven"
     state: directory
     mode: 0755
 
-  tags: maven
-
 - name: maven {{ version }} module definition
+  tags: ['maven', 'java']
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_extra }}/maven/{{ version }}.lua"
@@ -33,32 +32,28 @@
     - dir: 'apache-maven-{{ version }}'
       help_text: 'This module loads maven java thing'
 
-  tags: maven 
-
   #- file:
+  #  tags: ['maven', 'java']
   #    dest: "{{ apps_dir }}/maven-{{ version }}"
   #    state: directory
   #    mode: 0755
   #
-  #  tags: maven
-  #
   #- file:
+  #  tags: ['maven', 'java']
   #    src: "{{ source_dir }}/apache-maven-{{ version }}/bin"
   #    dest: "{{ apps_dir }}/maven-{{ version }}/bin"
   #    state: link
   #    mode: 0755
 
 - name: setting register for maven {{ version }}
+  tags: ['maven', 'java']
   stat:
     path: "{{ apps_dir }}/apache-maven-{{ version }}/bin/mvn"
   register: m
 
-  tags: maven
-
 - name: removing maven {{ version }} tar file
+  tags: ['maven', 'java']
   file:
     dest: "{{ source_dir }}/apache-maven-{{ version }}-bin.tar.gz"
     state: absent
   when: "{{ del_src }} m.stat.exists"
-
-  tags: maven

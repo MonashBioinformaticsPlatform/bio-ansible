@@ -1,0 +1,23 @@
+#!/bin/sh
+
+export BIOANSIBLE_BASE="{{ bioansible_basepath }}"
+
+echo "═╬══════  Activating bio-ansible                          ════════╬═"
+
+source ${BIOANSIBLE_BASE}/software/apps/lmod/lmod/init/bash
+ml use ${BIOANSIBLE_BASE}/software/modules/core
+ml use ${BIOANSIBLE_BASE}/software/modules/bio
+ml use ${BIOANSIBLE_BASE}/software/modules/extra
+
+echo "═╬══════  Done !                                          ════════╬═"
+echo
+echo "|[●▪▪●]| Bio-ansible is a bioinformatics tool stack maintained as a"
+echo "|[●▪▪●]| community service by the Monash Bioinformatics Platform."
+echo "|[●▪▪●]|"
+echo "|[●▪▪●]| Please report issues at:"
+echo "|[●▪▪●]| https://github.com/MonashBioinformaticsPlatform/bio-ansible"
+echo "|[●▪▪●]|"
+echo "|[●▪▪●]| List available modules with:"
+echo "|[●▪▪●]|"
+echo "|[●▪▪●]| ml avail"
+echo "═╬═══════════════════════════════~════════════════════════════════╬═"

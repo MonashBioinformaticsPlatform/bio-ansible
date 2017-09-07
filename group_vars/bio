@@ -53,8 +53,12 @@ multiqc_version: 1.0
 cutadapt_version: 1.12
 macs2_version: 2.1.1.20160309
 qiime_version: 1.9.1
+
 # bds version
 bds_version: 0.99999g
+bds_config:
+  tmpDir: /tmp
+
 # perl
 biotradis_version: 1.3.3
 # extra packages
@@ -63,3 +67,15 @@ nodejs_version: v6.9.1
 maven_version: 3.3.9
 tmux_version: 2.4
 hifive_version: 1.4.0
+ant_version: 1.10.1
+go_version: 1.8.3
+
+python3_executable: "python3"
+python3_virtualenv: "virtualenv"
+# Should match Python version used above, so site-packages 
+# in the virtualenv(s) can be found
+mimodd_python_version: "python3.5"
+
+# Compilation option: NO_TBB (Thread Building Blocks vs pthreads)
+# Valid values: 1 or 0
+bowtie2_notbb: 0

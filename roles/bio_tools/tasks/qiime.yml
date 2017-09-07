@@ -4,6 +4,10 @@
   pip:
     name: "{{ item }}"
     virtualenv: "{{ apps_dir }}/qiime-{{ version }}"
+    virtualenv_python: "{{ python2_executable }}"
+    virtualenv_command: "{{ python2_virtualenv }}"
+  environment:
+    PYTHONPATH: "{{ python2_pythonpath }}"
   with_items:
     - numpy
     - six
@@ -15,6 +19,10 @@
     name: qiime
     version: "v{{ version }}"
     virtualenv: "{{ apps_dir }}/qiime-{{ version }}"
+    virtualenv_python: "{{ python2_executable }}"
+    virtualenv_command: "{{ python2_virtualenv }}"
+  environment:
+    PYTHONPATH: "{{ python2_pythonpath }}"
 
   tags: qiime
 
