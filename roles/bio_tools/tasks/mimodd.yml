@@ -55,13 +55,13 @@
 - name: copy mimodd configuration file
   template:
     src: mimodd.config
-    dest: "{{ apps_dir }}/mimodd-{{ version }}/lib/{{ python3_version }}/site-packages/MiModD/cfg.py"
+    dest: "{{ apps_dir }}/mimodd-{{ version }}/lib/python{{ python3_version_major_minor }}/site-packages/MiModD/cfg.py"
     #backup: yes
 
   tags: mimodd
 
 - file:
-    dest: "{{ apps_dir }}/mimodd-{{ version }}/lib/{{ python3_version }}/site-packages/MiModD/__first_run__.py"
+    dest: "{{ apps_dir }}/mimodd-{{ version }}/lib/python{{ python3_version_major_minor }}/site-packages/MiModD/__first_run__.py"
     state: absent
 
   tags: mimodd
