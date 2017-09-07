@@ -1,4 +1,6 @@
 ---
+# a list of JVM flags (eg max memory)
+jvm_flags: ["-Xmx3g"]
 
 hifive_version: 1.4.0
 

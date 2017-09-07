@@ -24,6 +24,7 @@
   with_items:
       #- jar: "{{ apps_dir }}/picard-{{ version }}/picard-{{ version }}.jar"
     - jar: "{{ apps_dir }}/picard-{{ version }}/picard.jar"
+    - jvm_flags: [] # No RAM limit for picard (eg, no -Xmx3g flag)
 
   tags: picard
 
