@@ -5,6 +5,7 @@ my_hosts
 # ignore tarballs directory
 tarballs/*
 !tarballs/README.md
+!tarballs/download_*.sh
 *users_list.txt
 vault
 .molecule
