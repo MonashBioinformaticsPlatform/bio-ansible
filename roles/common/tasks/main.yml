@@ -1,5 +1,5 @@
 ---
-
+- include: sh_is_bash.yml
 - include: apt.yml
 - include: pip.yml
 - include: pip3.yml
