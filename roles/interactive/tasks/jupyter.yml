@@ -15,24 +15,23 @@
 
   tags: jupyter
 
-#TODO and NOTE looks like npm ansible module is broken 
-# and I can't install configureable-http-proxy
-# I'll do so manually for now
-#- name: install configurable-http-proxy for jupyterhub
-#  npm:
-#    name: configurable-http-proxy
-#    executable: "{{ apps_dir }}/node-{{ nodejs_version }}/npm"
-#    #path: "{{ source_dir }}/node-v{{ version }}-linux-x64/lib/node_modules"
-#    path: "{{ source_dir }}"
-#    state: latest
-#    #global: yes
-#  tags: jupyter
+- name: install configurable-http-proxy for jupyterhub
+  npm:
+    name: configurable-http-proxy
+    executable: "{{ apps_dir }}/node-{{ nodejs_version }}/npm"
+    path: "{{ source_dir }}/node-{{ nodejs_version }}-linux-x64/lib/node_modules"
+    # path: "{{ source_dir }}"
+    state: latest
+    #global: yes
+  tags: jupyter
 
+# TODO: Create a config for Jupyterhub, with SSL keys: https://github.com/jupyterhub/jupyterhub
+#       Setup Jupyterhub to run as a non-privileged user: https://github.com/jupyterhub/jupyterhub/wiki/Using-sudo-to-run-JupyterHub-without-root-privileges
+#       Run jupyterhub under supervisord
 - name: temporal debug message re npm install -g configurable-http-proxy 
   debug:
-    msg: "Will have to: \n
+    msg: "To start jupyterhub: \n
           sudo -s \n
-          npm install -g configurable-http-proxy \n
           source /etc/profile \n
           export PATH=/mnt/software/source/node-v6.9.1-linux-x64/lib/node_modules/configurable-http-proxy/bin:$PATH \n
           module use /mnt/software/modules/extra \n
