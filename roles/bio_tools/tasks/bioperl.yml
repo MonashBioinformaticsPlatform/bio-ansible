@@ -1,5 +1,13 @@
 ---
 
+- name: Create Bio::Perl installation directory
+  tags: bioperl
+  file:
+    dest: "{{ apps_dir }}/bioperl-{{ version }}"
+    state: directory
+    owner: "{{ main_guy }}"
+  become: yes
+
 - name: Install Bio::Perl as a module
   tags: bioperl
   cpanm:
@@ -8,6 +16,8 @@
     version: "v{{ version }}"
     installdeps: yes
     #force: yes
+  become: yes
+  become_user: "{{ main_guy }}"
 
 - name: Set bioperl module permissions
   tags: bioperl
@@ -15,6 +25,8 @@
     dest: "{{ modules_bio }}/bioperl"
     state: directory
     mode: 0755
+    owner: "{{ main_guy }}"
+  become: yes
 
 - name: bioperl {{ version }} module definition
   tags: bioperl
@@ -23,6 +35,7 @@
     dest: "{{ modules_bio }}/bioperl/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
+  become: yes
   with_items:
     - dir: 'bioperl-{{ version }}'
       perl_path: 'lib/perl5'
