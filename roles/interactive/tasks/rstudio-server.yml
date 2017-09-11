@@ -1,14 +1,13 @@
 ---
 
 - name: update apt cache
+  tags: rstudio
   apt:
     update_cache: yes
     cache_valid_time: 3600
 
-  tags: rstudio
-
 - name: download rstudio-server {{ version }}
+  tags: rstudio
   apt:
     deb: "http://download2.rstudio.org/rstudio-server-{{ version }}.deb"
-
-  tags: rstudio
+  become: yes
