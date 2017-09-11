@@ -3,6 +3,6 @@
   tags: environment
   template:
     src: bioansible_env.sh.j2
-    dest: "{{ bioansible_basepath }}/bioansible_env.sh"
+    dest: "{{ modules_dir }}/bioansible_env.sh"
     owner: "{{ main_guy }}"
     mode: 0644
