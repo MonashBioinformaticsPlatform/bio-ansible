@@ -10,3 +10,4 @@ tarballs/*
 vault
 .molecule
 *.pyc
+private

@@ -1,0 +1,31 @@
+---
+
+- name: Ensure /etc/ceph exists
+  tags: ['cephfs', 'storage']
+  file: path=/etc/ceph state=directory
+
+- name: Install ceph.conf
+  tags: ['cephfs', 'storage']
+  template:
+    src: "{{ private_vars_path }}/templates/ceph.conf.j2"
+    dest: /etc/ceph/ceph.conf
+    mode: 0644
+
+# The vaulted variables file for cephfs mounts is a dict like:
+#
+# cephfs_mounts:
+#   some-mount:
+#     secret_key: "AQDNotAnActualKeySinceItsSecret+/Q=="
+#     identifier: RDS-STOR-123
+#     share: drstrangelove
+#     local_path: /cephfs
+#     remote_path: /marketv2/RDS-STOR-123/drstrangelove
+- name: Install ceph keyring file (secret)
+  tags: ['cephfs', 'storage']
+  template:
+    src: ceph.client.cephfs.keyring.j2
+    dest: /etc/ceph/ceph.client.cephfs.{{ item.value.identifier }}.keyring
+    mode: 0600
+    owner: root
+    group: root
+  with_dict: "{{ cephfs_mounts }}"

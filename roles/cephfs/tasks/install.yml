@@ -1,0 +1,21 @@
+---
+- name: Add the Ceph Debian repo keys
+  tags: ['cephfs', 'storage']
+  apt_key: url=https://download.ceph.com/keys/release.asc
+
+- name: Add the Ceph Debian repo
+  tags: ['cephfs', 'storage']
+  apt_repository:
+    repo: "deb https://download.ceph.com/debian-{{ cephfs_version_codename }}/ {{ ansible_distribution_release }} main"
+    update_cache: yes
+    state: present
+
+- name: Install CephFS
+  tags: ['cephfs', 'storage']
+  apt:
+    pkg: "{{ item }}"
+    # TODO: Not ideal. Figure out why repo isn't authenticated and remove this line.
+    allow_unauthenticated: yes
+  with_items:
+    - ceph-fuse
+    - ceph-common
