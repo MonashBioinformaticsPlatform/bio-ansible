@@ -106,6 +106,7 @@
     - pandoc-citeproc
     - vim
     - tmux
+    - byobu
     - mosh
     - git
     - mercurial
@@ -114,5 +115,6 @@
     - zsh
     - texlive
     - texlive-latex-extra
+    - bmon
 
   tags: apt
