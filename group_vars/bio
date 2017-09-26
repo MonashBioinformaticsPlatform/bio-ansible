@@ -3,80 +3,15 @@
 # Tool versions
 #---------------------
 #
-# java version
-jdk_major: 8
-jdk_minor: 144
-java_oracle_version: "{{ jdk_major }}u{{ jdk_minor }}"
-# lmod version
-lmod_version: 7.3.9
-# R 
-r_base_version: 3.4.0
-#r_lib_path: "lib64/R/library"
-r_lib_path: "lib/R/library"
-# bio_tools versions
-star_version: 2.5.2b
-bwa_version: v0.7.15
-bowtie2_version: v2.3.2
-htslib_version: 1.4.1
-samtools_version: 1.4.1
-bcftools_version: 1.4.1
-subread_version: 1.5.2
-picard_version: 2.9.0
-gatk_version: 3.7
-fastqc_version: 0.11.5
-freebayes_version: 1.1.0
-vcflib_version: master
-sratoolkit_version: 2.8.0
-rnasik_version: 1.4.7
-qualimap_version: v2.2.1
-seqtk_version: v1.2
-igv_version: 2.3.94
-bedtools2_version: 2.25.0
-blast_version: 2.6.0
-smalt_version: 0.7.6
-snpeff_version: "4_3i"
-spades_version: 3.10.0
-vsearch_version: 2.4.0
-raxml_version: 8.2.9
-raxml_makefile: Makefile.AVX.PTHREADS.gcc
-cellranger_version: 1.3.1
-vcftools_version: 0.1.14
-muscle_version: 3.8.31
-cdhit_version: 4.6.7
-mothur_version: 1.39.5
-bcl2fastq2_version: 2.19.1
-emboss_version: 6.6.0
-#infernal_version: 1.1.2
-# python virtualenv
-mimodd_version: 0.1.7.3
-multiqc_version: 1.0
-cutadapt_version: 1.12
-macs2_version: 2.1.1.20160309
-qiime_version: 1.9.1
 
-# bds version
-bds_version: 0.99999g
-bds_config:
-  tmpDir: /tmp
-
-# perl
-biotradis_version: 1.3.3
-bioperl_version: 1.007001
-# extra packages
-stack_version: 1.2.0
-nodejs_version: v6.9.1
-maven_version: 3.3.9
-tmux_version: 2.4
-hifive_version: 1.4.0
-ant_version: 1.10.1
-go_version: 1.8.3
-
-python3_executable: "python3"
-python3_virtualenv: "virtualenv"
-# Should match Python version used above, so site-packages 
-# in the virtualenv(s) can be found
-mimodd_python_version: "python3.5"
-
-# Compilation option: NO_TBB (Thread Building Blocks vs pthreads)
-# Valid values: 1 or 0
-bowtie2_notbb: 0
+# Version variables have moved into role-specific defaults, but can still be
+# overridden for the 'bio' group of hosts here:
+#
+# See:
+# bio_tools/defaults/main.yml
+# java/defaults/main.yml
+# R/defaults/main.yml
+# bds/defaults/main.yml
+# lmod/defaults/main.yml
+# lmod_etc/defaults/main.yml
+# extra/defaults/main.yml

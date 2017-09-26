@@ -10,6 +10,7 @@ main_guy_pubkey: ""
 # Different directories variables
 #---------------------------------
 private_vars_path: "{{ playbook_dir }}/private"
+tarballs_path: "{{ playbook_dir }}/tarballs"
 local_home: "{{ ansible_env.HOME }}"
 bioansible_basepath: "{{ local_home }}/bioansible"
 source_dir: "{{ bioansible_basepath }}/software/source"
@@ -29,7 +30,8 @@ threads: 4
 del_src: "" # empty string means true and "not" negates that
 
 r_base_mirror: "https://cran.csiro.au"
-# training data, mainly for biotraining server
-r_intro_version: gh-pages
-r_more_version: gh-pages
-r_de_analysis_version: gh-pages
+
+# java version
+jdk_major: 8
+jdk_minor: 144
+java_oracle_version: "{{ jdk_major }}u{{ jdk_minor }}"
