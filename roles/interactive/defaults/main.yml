@@ -1,0 +1,10 @@
+---
+
+# interactive
+rstudio_version: 1.0.143-amd64
+rstudio_pro_version: 1.0.143-amd64
+#shiny_version: 1.5.1.834-amd64
+shiny_version: 1.5.3.838-amd64
+
+# You should keep this defined in an ansible-vault encrypted file
+rstudio_pro_key: ""

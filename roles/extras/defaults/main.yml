@@ -1,3 +1,8 @@
 ---
+stack_version: 1.2.0
+nodejs_version: v6.9.1
+maven_version: 3.3.9
+tmux_version: 2.4
+hifive_version: 1.4.0
 ant_version: 1.10.1
 go_version: 1.8.3

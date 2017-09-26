@@ -1,7 +1,8 @@
 ---
-
-is_slurm_cluster: false
+bds_version: 0.99999g
 
 bds_tmpDir: "/tmp"
 bds_cluster_wrapper_dir: "{{ apps_dir }}/BigDataScript-{{ bds_version }}/clusterGenericSLURM"
 bds_default_memory: -1
+
+is_slurm_cluster: false

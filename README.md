@@ -60,7 +60,8 @@ If running against remote host(s):
 2b. Set up your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
 2c. Edit `hosts` file to include the remote host IP addresses into the appropriate group
 3. Edit `group/all` file to include your username as `main_guy` variable
-4. Download any tar archives for non-FOSS software into `tarballs/` - 
+4. Download any tar archives for non-FOSS software into `tarballs/` (or the
+   path set in the `tarballs_path` variable) - 
 see the section on [manually downloading tarballs](#manually-downloading-tarballs) below.
 
 #### Running the playbooks
@@ -114,8 +115,10 @@ diagnose failures_
 ### Manually downloading tarballs
 
 Because of the licenses some installation files need to be manually downloaded 
-into `tarballs` directory. The `playbook.yml` will skip installation of those 
-packages if it doesn't find the archive files in that directory.
+into a 'tarballs' directory. By default this is `tarballs` in the playbook base 
+path - this location can be set using the `tarballs_path` variable if required. 
+The `playbook.yml` will skip installation of those packages if it doesn't find 
+the archive files in that directory.
 
 ### Manual scripts
 

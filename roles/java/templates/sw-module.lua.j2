@@ -9,17 +9,6 @@ local base = "{{ item.base }}"
 local base = pathJoin("{{ apps_dir }}", "{{ item.dir }}")
 {% endif %}
 
-{% if item.sik is defined %}
-load("STAR/{{ star_version  }}",
-     "subread/{{ subread_version }}",
-     "picard/{{ picard_version }}",
-     "fastqc/{{ fastqc_version }}",
-     "qualimap/{{ qualimap_version }}",
-     "samtools/{{ samtools_version }}",
-     "BigDataScript/{{ bds_version }}"
-    )
-{% endif %}
-
 {% if item.java is defined %}
   prepend_path("JAVA_HOME",base)
   prepend_path("JAVA_ROOT",base)
