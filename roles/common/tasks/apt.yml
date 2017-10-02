@@ -18,6 +18,8 @@
     - make
     - cmake
     - unzip
+    # security
+    - fail2ban
     # non essential, useful
     - sysstat
     - ethtool
