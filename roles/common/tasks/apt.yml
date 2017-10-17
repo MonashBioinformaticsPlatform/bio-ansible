@@ -18,6 +18,7 @@
     - make
     - cmake
     - unzip
+    - realpath
     # security
     - fail2ban
     # non essential, useful
