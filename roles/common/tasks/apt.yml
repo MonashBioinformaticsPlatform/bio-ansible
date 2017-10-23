@@ -79,6 +79,7 @@
     - libxmu-dev
     - libglu1-mesa-dev
     - libcgal-dev
+    - libnetcdf-dev
     # RStudio deps
     - libgstreamer-plugins-base0.10-0
     - libgstreamer0.10-0
