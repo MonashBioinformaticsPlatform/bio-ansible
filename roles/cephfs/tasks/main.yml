@@ -3,9 +3,11 @@
   tags: ['cephfs', 'storage']
   include_vars: "{{ item }}"
   with_first_found:
-    - "{{ private_vars_path }}/host_vars/{{ inventory_hostname }}/vault_cephfs.yml"
-    - "{{ private_vars_path }}/vars/vault_cephfs.yml"
-    # - "cephfs.yml"
+    - files:
+      - "{{ private_vars_path }}/host_vars/{{ inventory_hostname }}/vault_cephfs.yml"
+      - "{{ private_vars_path }}/vars/vault_cephfs.yml"
+      # - "vault_cephfs.yml"
+      skip: true
 
 - include: install.yml
 - include: configure.yml

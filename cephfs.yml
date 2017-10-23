@@ -1,0 +1,9 @@
+- name: Install and mount CephFS
+  hosts: common
+  remote_user: "{{ sudo_guy }}"
+  become: true
+  roles:
+    # make container for all other installation
+    # - common
+    # lmod as a module
+    - cephfs
