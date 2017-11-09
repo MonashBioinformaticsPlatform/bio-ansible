@@ -25,7 +25,7 @@
   shell: export JAVA_HOME={{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}; cd {{ source_dir }}/BigDataScript-{{ version }}/; ./scripts/install.sh
   args:
     creates: "{{ local_home }}/.bds/bds"
-  when: java_tar.stat.isdir 
+  when: java_tar.stat.isdir is defined and java_tar.stat.isdir
 
 - name: build BigDataScript {{ version }} with java_local
   tags: bds

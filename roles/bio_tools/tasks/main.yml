@@ -1,7 +1,7 @@
 ---
 - name: Find Python3 version
   tags: ["always", "python"]
-  command: python3 --version
+  command: "{{ python3_executable }} --version"
   register: python3_v_str
 
 - name: Debug find python3 version
@@ -16,7 +16,7 @@
 
 - name: Find Python2 version
   tags: ["always", "python"]
-  command: python --version
+  command: "{{ python2_executable }} --version"
   register: python2_v_str
 
 - name: Debug find python2 version
