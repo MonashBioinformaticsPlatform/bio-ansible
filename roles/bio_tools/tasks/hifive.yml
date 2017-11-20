@@ -6,6 +6,10 @@
     name: hifive
     version: "{{ version }}"
     virtualenv: "{{ apps_dir }}/hifive-{{ version }}"
+    virtualenv_python: "{{ python2_executable }}"
+    virtualenv_command: "{{ python2_virtualenv }}"
+  environment:
+    PYTHONPATH: "{{ python2_pythonpath }}"
 
 - name: Set module permissions for hifive
   tags: hifive
