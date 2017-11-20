@@ -7,6 +7,7 @@
     state: directory
     owner: "{{ main_guy }}"
   become: yes
+  become_user: "{{ main_guy }}"
 
 - name: Install Bio::Perl as a module
   tags: bioperl
@@ -27,6 +28,7 @@
     mode: 0755
     owner: "{{ main_guy }}"
   become: yes
+  become_user: "{{ main_guy }}"
 
 - name: bioperl {{ version }} module definition
   tags: bioperl
@@ -36,6 +38,7 @@
     owner: "{{ main_guy }}" 
     mode: 0644
   become: yes
+  become_user: "{{ main_guy }}"
   with_items:
     - dir: 'bioperl-{{ version }}'
       perl_path: 'lib/perl5'
