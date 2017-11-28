@@ -29,6 +29,12 @@
   tags: ["always", "python"]
   set_fact: python2_version_major_minor="{{ python2_v_str.stderr.split()[1].rsplit('.', 1)[0] }}"
 
+- name: Set conda executable path
+  tags: ["always"]
+  set_fact: conda_bin={{ apps_dir }}/conda/bin/conda
+
+- include: conda.yml
+
 - include: star.yml version={{ star_version}}
 - include: bwa.yml version={{ bwa_version }} 
 - include: bowtie2.yml version={{ bowtie2_version }} 
@@ -72,3 +78,5 @@
 - include: freebayes.yml version={{ freebayes_version }}
 - include: vcflib.yml version={{ vcflib_version }}
 - include: hifive.yml version={{ hifive_version }}
+
+- include: conda-package.yml package=gatk4 version={{ gatk4_version }} tags=["gatk4"]

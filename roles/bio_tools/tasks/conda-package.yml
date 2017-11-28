@@ -1,0 +1,37 @@
+---
+
+# The variables 'package' and 'tags' must be passed to this task when it's
+# included, like:
+#
+# - include: conda-package.yml package=gatk4 version=4.0b2 tags=["gatk4"]
+
+- name: Create conda environment for {{ package }}={{ version }}
+  tags: always
+  shell: "{{ conda_bin }} create --prefix={{ apps_dir }}/{{ package }}-{{ version }} {{ package }}={{ version }}"
+  args:
+    creates: "{{ apps_dir }}/{{ package }}-{{ version }}"
+
+- name: Create {{ package }} module directory
+  tags: always
+  file:
+    dest: "{{ modules_bio }}/{{ package }}"
+    state: directory
+    mode: 0755
+
+- name: Create {{ package }}/{{ version }} module definition
+  tags: always
+  template:
+    src: conda-module.lua.j2
+    dest: "{{ modules_bio }}/{{ package }}/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: '{{ package }}-{{ version }}'
+      help_text: 'This module loads {{ package }}'
+
+- name: Set permission of {{ apps_dir }}/{{ package }}-{{ version }}
+  tags: always
+  file:
+    dest: "{{ apps_dir }}/{{ package }}-{{ version }}"
+    state: directory
+    mode: 0755
