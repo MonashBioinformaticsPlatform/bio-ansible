@@ -55,7 +55,7 @@
 - include: smalt.yml version={{ smalt_version }}
   #- include: bcl2fastq2.yml version={{ bcl2fastq2_version }}
 - include: emboss.yml version={{ emboss_version }}
-# pythons
+# Python-based
 - include: mimodd.yml version={{ mimodd_version }}
 - include: multiqc.yml version={{ multiqc_version }}
 - include: cutadapt.yml version={{ cutadapt_version }}
@@ -73,10 +73,17 @@
 - include: muscle.yml version={{ muscle_version }}
 - include: cdhit.yml version={{ cdhit_version }}
 - include: mothur.yml version={{ mothur_version }}
-#- include: infernal.yml version={{ infernal_version }}#installation doesn't work
-# alsways keep those two at the bottom of the list as they tend to break during compilation
-- include: freebayes.yml version={{ freebayes_version }}
-- include: vcflib.yml version={{ vcflib_version }}
 - include: hifive.yml version={{ hifive_version }}
+#- include: infernal.yml version={{ infernal_version }} # broken ? replaced by bioconda version
 
-- include: conda-package.yml package=gatk4 version={{ gatk4_version }} tags=["gatk4"]
+# List of Bioconda packages available: https://bioconda.github.io/recipes.html
+- include_tasks: conda-package.yml package=gatk4 version={{ gatk4_version }}
+  tags: gatk4
+- include_tasks: conda-package.yml package=freebayes version={{ freebayes_version }}
+  tags: freebayes
+- include_tasks: conda-package.yml package=infernal version={{ infernal_version }}
+  tags: infernal
+
+# always install freebayes and vcflib last as they tend to break during compilation
+# - include: freebayes.yml version={{ freebayes_version }} # replaced by bioconda version
+- include: vcflib.yml version={{ vcflib_version }}

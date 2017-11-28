@@ -24,7 +24,7 @@ subread_version: 1.5.2
 picard_version: 2.9.0
 gatk_version: 3.7
 fastqc_version: 0.11.5
-freebayes_version: 1.1.0
+freebayes_version: 1.1.0.46
 vcflib_version: master
 sratoolkit_version: 2.8.0
 rnasik_version: 1.4.7
@@ -46,7 +46,7 @@ cdhit_version: 4.6.7
 mothur_version: 1.39.5
 bcl2fastq2_version: 2.19.1
 emboss_version: 6.6.0
-#infernal_version: 1.1.2
+infernal_version: 1.1.2
 # python virtualenv
 mimodd_version: 0.1.7.3
 multiqc_version: 1.0
