@@ -13,10 +13,12 @@
     update_cache: no
     state: present
 
-- name: Add the NeuroDebian {{ ansible_distribution_release }} repo
+- name: Add the NeuroDebian repo
   tags: ['singularity']
   apt_repository:
-    repo: "deb http://mirror.aarnet.edu.au/pub/neurodebian {{ ansible_distribution_release }} main contrib non-free"
+    # repo: "deb http://mirror.aarnet.edu.au/pub/neurodebian {{ ansible_distribution_release }} main contrib non-free"
+    # We force xenial even on early Ubuntu releases so we can get verson 2.4.x
+    repo: "deb http://mirror.aarnet.edu.au/pub/neurodebian xenial main contrib non-free"
     update_cache: yes
     state: present
 
@@ -24,6 +26,7 @@
   tags: ['singularity']
   apt:
     pkg: "{{ item }}"
+    state: latest
   with_items:
     - squashfs-tools
     - singularity-container
