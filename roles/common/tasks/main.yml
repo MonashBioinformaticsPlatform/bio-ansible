@@ -2,6 +2,7 @@
 - include: sh_is_bash.yml
 - include: sshd.yml
 - include: apt.yml
+- include: singularity-apt.yml
 - include: pip.yml
 - include: pip3.yml
 - include: email_setup.yml

@@ -1,0 +1,29 @@
+---
+
+- name: Add NeuroDebian repo keys
+  tags: ['singularity']
+  apt_key:
+    keyserver: pool.sks-keyservers.net
+    id: "0xA5D32F012649A5A9"
+
+- name: Add the NeuroDebian data repo
+  tags: ['singularity']
+  apt_repository:
+    repo: "deb http://mirror.aarnet.edu.au/pub/neurodebian data main contrib non-free"
+    update_cache: no
+    state: present
+
+- name: Add the NeuroDebian {{ ansible_distribution_release }} repo
+  tags: ['singularity']
+  apt_repository:
+    repo: "deb http://mirror.aarnet.edu.au/pub/neurodebian {{ ansible_distribution_release }} main contrib non-free"
+    update_cache: yes
+    state: present
+
+- name: Install Singularity
+  tags: ['singularity']
+  apt:
+    pkg: "{{ item }}"
+  with_items:
+    - squashfs-tools
+    - singularity-container
