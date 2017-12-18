@@ -77,12 +77,14 @@
 #- include: infernal.yml version={{ infernal_version }} # broken ? replaced by bioconda version
 
 # List of Bioconda packages available: https://bioconda.github.io/recipes.html
-- include_tasks: conda-package.yml package=gatk4 version={{ gatk4_version }}
+- include_tasks: conda-package.yml module_name=gatk4 conda_packages=['gatk4={{ gatk4_version }}'] version={{ gatk4_version }}
   tags: gatk4
-- include_tasks: conda-package.yml package=freebayes version={{ freebayes_version }}
+- include_tasks: conda-package.yml module_name=freebayes conda_packages=['freebayes={{ freebayes_version }}'] version={{ freebayes_version }}
   tags: freebayes
-- include_tasks: conda-package.yml package=infernal version={{ infernal_version }}
+- include_tasks: conda-package.yml module_name=infernal conda_packages=['infernal={{ infernal_version }}'] version={{ infernal_version }}
   tags: infernal
+- include_tasks: conda-package.yml module_name=miso conda_packages=['misopy={{ miso_version }}'] version={{ miso_version }}
+  tags: miso
 
 # always install freebayes and vcflib last as they tend to break during compilation
 # - include: freebayes.yml version={{ freebayes_version }} # replaced by bioconda version

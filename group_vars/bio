@@ -54,7 +54,7 @@ cutadapt_version: 1.12
 macs2_version: 2.1.1.20160309
 qiime_version: 1.9.1
 gatk4_version: 4.0b2
-
+miso_version: 0.5.4
 # bds version
 bds_version: 0.99999g
 bds_config:

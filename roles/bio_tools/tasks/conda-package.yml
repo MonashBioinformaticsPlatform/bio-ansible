@@ -1,34 +1,35 @@
 ---
 
-# The variable 'package' and 'version' must be passed to this task when it's
+# The variable 'module_name, 'conda_packages' (list) and 'version' must be passed to this task when it's
 # included, like:
 #
-# - include_tasks: conda-package.yml package=gatk4 version={{ gatk4_version }}
+# - include_tasks: conda-package.yml module_name=gatk4 conda_packages=['gatk4={{ gatk4_version }}'] version={{ gatk4_version }}
 #   tags: gatk4
 
-- name: Create conda environment for {{ package }}={{ version }}
-  shell: "{{ conda_bin }} create --prefix={{ apps_dir }}/{{ package }}-{{ version }} {{ package }}={{ version }}"
+- name: Create conda environment for {{ module_name }}={{ version }} & install packages
+  shell: "{{ conda_bin }} create --prefix={{ apps_dir }}/{{ module_name }}-{{ version }} {{ conda_packages|join(' ') }}"
   args:
-    creates: "{{ apps_dir }}/{{ package }}-{{ version }}"
+    creates: "{{ apps_dir }}/{{ module_name }}-{{ version }}"
+  # with_items: "{{ conda_packages }}"
 
-- name: Create {{ package }} module directory
+- name: Create {{ module_name }} module directory
   file:
-    dest: "{{ modules_bio }}/{{ package }}"
+    dest: "{{ modules_bio }}/{{ module_name }}"
     state: directory
     mode: 0755
 
-- name: Create {{ package }}/{{ version }} module definition
+- name: Create {{ module_name }}/{{ version }} module definition
   template:
     src: conda-module.lua.j2
-    dest: "{{ modules_bio }}/{{ package }}/{{ version }}.lua"
+    dest: "{{ modules_bio }}/{{ module_name }}/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:
-    - dir: '{{ package }}-{{ version }}'
-      help_text: 'This module loads {{ package }}'
+    - dir: '{{ module_name }}-{{ version }}'
+      help_text: 'This module loads {{ module_name }}'
 
-- name: Set permission of {{ apps_dir }}/{{ package }}-{{ version }}
+- name: Set permission of {{ apps_dir }}/{{ module_name }}-{{ version }}
   file:
-    dest: "{{ apps_dir }}/{{ package }}-{{ version }}"
+    dest: "{{ apps_dir }}/{{ module_name }}-{{ version }}"
     state: directory
     mode: 0755
