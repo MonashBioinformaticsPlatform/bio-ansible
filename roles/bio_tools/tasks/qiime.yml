@@ -11,6 +11,8 @@
   with_items:
     - numpy
     - six
+    # More recent versions of this dependency seem to break qiime install (20-Dec-2017)
+    - "emperor==0.9.51"
 
   tags: qiime
 
@@ -77,14 +79,14 @@
 
 # install usearch from pre-downloaded file
 - name: check usearch exists
-  local_action: stat path="{{ playbook_dir }}/tarballs/usearch5.2.236_i86linux32"
+  local_action: stat path="{{ tarballs_path }}/usearch5.2.236_i86linux32"
   register: u
 
   tags: qiime
 
 - name: copy local usearch
   copy:
-    src: "{{ playbook_dir }}/tarballs/usearch5.2.236_i86linux32"
+    src: "{{ tarballs_path }}/usearch5.2.236_i86linux32"
     dest: "{{ apps_dir }}/qiime-{{ version }}/bin/usearch"
     mode: 0755
 

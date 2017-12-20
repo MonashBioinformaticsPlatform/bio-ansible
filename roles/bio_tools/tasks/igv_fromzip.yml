@@ -3,14 +3,14 @@
 # assumes you have tarbal downloaded
 #
 - name: check IGV-{{ version }}.zip exists
-  local_action: stat path="{{ playbook_dir }}/tarballs/IGV-{{ version }}.zip"
+  local_action: stat path="{{ tarballs_path }}/IGV-{{ version }}.zip"
   register: i
 
   tags: igv
 
 - name: copy IGV-{{ version }}.zip file
   copy:
-    src: "{{ playbook_dir }}/tarballs/IGV-{{ version }}.zip"
+    src: "{{ tarballs_path }}/IGV-{{ version }}.zip"
     dest: "{{ source_dir }}/IGV-{{ version }}.zip"
   when: i.stat.exists
 

@@ -2,14 +2,14 @@
 
 
 - name: check cellranger-{{ version }}.tar.gz exists
-  local_action: stat path="{{ playbook_dir }}/tarballs/cellranger-{{ version }}.tar.gz"
+  local_action: stat path="{{ tarballs_path }}/cellranger-{{ version }}.tar.gz"
   register: c
 
   tags: cellranger
 
 - name: copy local cellranger-{{ version }}.tar.gz file
   copy:
-    src: "{{ playbook_dir }}/tarballs/cellranger-{{ version }}.tar.gz"
+    src: "{{ tarballs_path }}/cellranger-{{ version }}.tar.gz"
     dest: "{{ source_dir }}/cellranger-{{ version }}.tar.gz"
   when: c.stat.exists
 

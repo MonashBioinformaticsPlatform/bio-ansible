@@ -3,14 +3,14 @@
 # assumes you have tarbal downloaded
 #
 - name: check jdk-{{ version }}-linux-x64.tar.gz exists
-  local_action: stat path="{{ playbook_dir }}/tarballs/jdk-{{ version }}-linux-x64.tar.gz"
+  local_action: stat path="{{ tarballs_path }}/jdk-{{ version }}-linux-x64.tar.gz"
   register: j
 
   tags: java_oracle
 
 - name: copy local jdk-{{ version }}-linux-x64.tar.gz file
   copy:
-    src: "{{ playbook_dir }}/tarballs/jdk-{{ version }}-linux-x64.tar.gz"
+    src: "{{ tarballs_path }}/jdk-{{ version }}-linux-x64.tar.gz"
     dest: "{{ source_dir }}/jdk-{{ version }}-linux-x64.tar.gz"
   when: j.stat.exists
 

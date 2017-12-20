@@ -1,20 +1,20 @@
 ---
 
 - name: check GenomeAnalysisTK-{{ version }}.tar.bz2 exists
-  local_action: stat path="{{ playbook_dir }}/tarballs/GenomeAnalysisTK-{{ version }}.tar.bz2"
+  local_action: stat path="{{ tarballs_path }}/GenomeAnalysisTK-{{ version }}.tar.bz2"
   register: g
 
   tags: gatk
 
 - debug:
-    msg: "Skipping installation of GATK - tarballs/GenomeAnalysisTK-{{ version }}.tar.bz2 not found."
+    msg: "Skipping installation of GATK - {{ tarballs_path }}/GenomeAnalysisTK-{{ version }}.tar.bz2 not found."
   when: not g.stat.exists
 
   tags: gatk
 
 - name: copy local GenomeAnalysisTK-{{ version }}.tar.bz2 file
   copy:
-    src: "{{ playbook_dir }}/tarballs/GenomeAnalysisTK-{{ version }}.tar.bz2"
+    src: "{{ tarballs_path }}/GenomeAnalysisTK-{{ version }}.tar.bz2"
     dest: "{{ source_dir }}/GenomeAnalysisTK-{{ version }}.tar.bz2"
   when: g.stat.exists
 
