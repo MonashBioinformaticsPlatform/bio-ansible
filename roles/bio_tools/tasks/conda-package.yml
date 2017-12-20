@@ -3,14 +3,18 @@
 # The variable 'module_name, 'conda_packages' (list) and 'version' must be passed to this task when it's
 # included, like:
 #
-# - include_tasks: conda-package.yml module_name=gatk4 conda_packages=['gatk4={{ gatk4_version }}'] version={{ gatk4_version }}
-#   tags: gatk4
+# - include_tasks: conda-package.yml
+#   tags: miso
+#   module_name: miso
+#   version: "{{ miso_version }}"
+#   conda_packages:
+#     - 'misopy={{ miso_version }}'
+#     - bsddb
 
 - name: Create conda environment for {{ module_name }}={{ version }} & install packages
   shell: "{{ conda_bin }} create --prefix={{ apps_dir }}/{{ module_name }}-{{ version }} {{ conda_packages|join(' ') }}"
   args:
     creates: "{{ apps_dir }}/{{ module_name }}-{{ version }}"
-  # with_items: "{{ conda_packages }}"
 
 - name: Create {{ module_name }} module directory
   file:
