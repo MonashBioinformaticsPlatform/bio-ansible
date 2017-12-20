@@ -11,6 +11,8 @@
   with_items:
     - numpy
     - six
+    # More recent versions of this dependency seem to break qiime install (20-Dec-2017)
+    - "emperor==0.9.51"
 
   tags: qiime
 

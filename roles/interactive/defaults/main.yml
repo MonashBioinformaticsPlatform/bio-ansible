@@ -8,3 +8,7 @@ shiny_version: 1.5.3.838-amd64
 
 # You should keep this defined in an ansible-vault encrypted file
 rstudio_pro_key: ""
+
+# If nodejs is installed via the 'extras' role, the version defined
+# there should match this one
+nodejs_version: v6.9.1
