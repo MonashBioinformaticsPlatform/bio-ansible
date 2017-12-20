@@ -5,5 +5,6 @@
 - include: maven.yml version={{ maven_version }}
 - include: ant.yml version={{ ant_version }}
 - include: golang.yml version={{ go_version }}
+- include: gdrive.yml version=2.1.0
 - include: tmux.yml version={{ tmux_version }}
 - include: environment-script.yml

@@ -1,0 +1,61 @@
+---
+
+# Apparently 'go get' can't pull a specific git tag/commit, so we are just
+# using the binary download.
+#- name: Compile gdrive tool
+#  tags: ['gdrive']
+#  command: GOPATH={{ apps_dir }}/gdrive-{{ version }} go get github.com/prasmussen/gdrive
+
+- name: Create directory for gdrive binary
+  tags: ['gdrive']
+  file:
+    state: directory
+    path: "{{ apps_dir }}/gdrive-{{ version }}/bin"
+    mode: 0755
+    owner: "{{ main_guy }}"
+    group: "{{ main_guy }}"
+
+# Seems to be effected by this issue on Ubuntu 14.04 targets:
+# https://github.com/ansible/ansible/issues/18894
+#- name: Download gdrive binary (https://github.com/prasmussen/gdrive)
+#  tags: ['gdrive']
+#  get_url:
+#    url: "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download"
+#    checksum: sha1:4fd8391b300cac45963e53da44dcfe68da08d843
+#    dest: "{{ apps_dir }}/gdrive-{{ version }}/bin/gdrive"
+#    mode: a+x
+#    owner: "{{ main_guy }}"
+#    group: "{{ main_guy }}"
+
+# Disable this method when the issue above is resolved ?
+- name: Download gdrive binary (https://github.com/prasmussen/gdrive)
+  tags: ['gdrive']
+  shell: 'wget -O {{ apps_dir }}/gdrive-{{ version }}/bin/gdrive \
+          "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download" && \
+          chmod +x {{ apps_dir }}/gdrive-{{ version }}/bin/gdrive && \
+          chown {{ main_guy }}.{{ main_guy }} {{ apps_dir }}/gdrive-{{ version }}/bin/gdrive'
+
+- name: Set gdrive module permissions
+  tags: ['gdrive']
+  file:
+    dest: "{{ modules_bio }}/gdrive"
+    state: directory
+    mode: 0755
+
+- name: Set gdrive install directory permissions
+  tags: ['gdrive']
+  file:
+    dest: "{{ apps_dir }}/gdrive-{{ version }}"
+    state: directory
+    mode: 0755
+
+- name: gdrive {{ version }} module definition
+  tags: ['gdrive']
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_bio }}/gdrive/{{ version }}.lua"
+    owner: "{{ main_guy }}"
+    mode: 0644
+  with_items:
+    - dir: 'gdrive-{{ version }}'
+      help_text: 'This module loads gdrive {{ version }} (https://github.com/prasmussen/gdrive)'
