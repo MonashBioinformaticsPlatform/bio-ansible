@@ -1,5 +1,7 @@
 # Bio-Ansible 
 
+[![Build Status](https://travis-ci.org/MonashBioinformaticsPlatform/bio-ansible.svg?branch=master)](https://travis-ci.org/MonashBioinformaticsPlatform/bio-ansible)
+
 > Do bioinformatics not sys-admining - run the playbook and get back to work !
 
 ## Content 
