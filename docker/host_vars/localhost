@@ -1,0 +1,14 @@
+sudo_guy: root
+main_guy: root
+local_home: "/root"
+bioansible_basepath: "/bioansible"
+source_dir: "{{ bioansible_basepath }}/software/source"
+modules_dir: "{{ bioansible_basepath }}/software/modules"
+modules_core: "{{ modules_dir }}/core"
+modules_bio: "{{ modules_dir }}/bio"
+modules_extra: "{{ modules_dir }}/extra"
+apps_dir: "{{ bioansible_basepath }}/software/apps"
+
+java_flavour: "distro"
+# java_flavour: "oracle_tarball"
+# java_flavour: "oracle_ppa"

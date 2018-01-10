@@ -23,6 +23,9 @@ tmp_dir: "/tmp"
 data_dir: "/data/bio-data"
 ref_dir: "/references"
 time_zone: "Australia/Victoria"
+locale_region: "en_AU"
+locale_charset: "UTF-8"
+locale: "{{ locale_region }}.{{ locale_charset }}"
 #------------------------------
 # Other global variables
 #------------------------------

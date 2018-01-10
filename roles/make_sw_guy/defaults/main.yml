@@ -1,0 +1,6 @@
+---
+main_guy: sw-installer
+sudo_guy: "{{ main_guy }}"
+main_guy_pubkey: ""
+bioansible_basepath: "/"
+data_dir: "/data/bio-data"

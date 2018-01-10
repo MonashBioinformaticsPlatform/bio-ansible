@@ -4,7 +4,7 @@
   hosts: interactive
   remote_user: "{{ sudo_guy }}"
   roles:
-            - interactive
-            - nginx
+    - interactive
+    - nginx
 
   become: true

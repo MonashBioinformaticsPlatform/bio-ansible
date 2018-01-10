@@ -1,0 +1,65 @@
+---
+
+- name: update apt cache
+  tags: apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: apt-get python dependencies
+  tags: apt
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  environment:
+    - LANG: "{{ locale }}"
+    - LC_ALL: "{{ locale }}"
+    - LANGUAGE: "{{ locale }}"
+    - LC_CTYPE: "{{ locale }}"
+    - LC_NUMERIC: "{{ locale }}"
+    - LC_TIME: "{{ locale }}"
+    - LC_COLLATE: "{{ locale }}"
+    - LC_MONETARY: "{{ locale }}"
+    - LC_MESSAGES: "{{ locale }}"
+    - LC_PAPER: "{{ locale }}"
+    - LC_NAME: "{{ locale }}"
+    - LC_ADDRESS: "{{ locale }}"
+    - LC_TELEPHONE: "{{ locale }}"
+    - LC_MEASUREMENT: "{{ locale }}"
+    - LC_IDENTIFICATION: "{{ locale }}"
+  with_items:
+    - python-pip
+    - python-dev
+    - python3
+    - ipython
+    - ipython3
+    # qiime dep mainly, but this is general GUI package
+    - python-tk
+
+- name: apt-get python3 extras
+  tags: apt
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  environment:
+    - LANG: "{{ locale }}"
+    - LC_ALL: "{{ locale }}"
+    - LANGUAGE: "{{ locale }}"
+    - LC_CTYPE: "{{ locale }}"
+    - LC_NUMERIC: "{{ locale }}"
+    - LC_TIME: "{{ locale }}"
+    - LC_COLLATE: "{{ locale }}"
+    - LC_MONETARY: "{{ locale }}"
+    - LC_MESSAGES: "{{ locale }}"
+    - LC_PAPER: "{{ locale }}"
+    - LC_NAME: "{{ locale }}"
+    - LC_ADDRESS: "{{ locale }}"
+    - LC_TELEPHONE: "{{ locale }}"
+    - LC_MEASUREMENT: "{{ locale }}"
+    - LC_IDENTIFICATION: "{{ locale }}"
+  with_items:
+    - python3-pip
+    - python3-virtualenv
+    - python3-dev

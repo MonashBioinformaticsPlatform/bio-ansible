@@ -1,5 +1,16 @@
 ---
 
+- name: apt-get install ubuntu-release-upgrader-core
+  tags: motd
+  apt:
+    name: "{{ item }}"
+    state: present
+  environment:
+    - LANG: en_US.UTF-8
+    - LC_ALL: en_US.UTF-8
+  with_items:
+    - ubuntu-release-upgrader-core
+
 - name: turn off new releases notifications
   tags: motd
   file:

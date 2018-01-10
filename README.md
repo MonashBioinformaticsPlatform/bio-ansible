@@ -1,5 +1,7 @@
 # Bio-Ansible 
 
+[![Build Status](https://travis-ci.org/MonashBioinformaticsPlatform/bio-ansible.svg?branch=master)](https://travis-ci.org/MonashBioinformaticsPlatform/bio-ansible)
+
 > Do bioinformatics not sys-admining - run the playbook and get back to work !
 
 ## Content 
@@ -7,6 +9,7 @@
 - [Quick start](#quick-start)
 - [Introduction](#introduction)
 - [Running bio-ansible](#running-bio-ansible)
+- [Building a Docker image](#docker)
 - [Frequently asked questions](#frequently-asked-questions)
 - [Other](#other)
 
@@ -100,6 +103,47 @@ ansible-playbook -i hosts bio.yml --tags samtools,star,subread
 
 Protip: _You can always add `-v` or `-vvv` options for verbose mode to help 
 diagnose failures_
+
+## Building a Docker image
+
+To build using your current clone of `bio-ansible` (eg for testing):
+```
+docker build -t bioansible -f docker/Dockerfile-local .
+```
+
+Several of the slower steps (`r_core`, `r_extras`, `blast`) are executed as 
+separate `RUN` commands so that these get cached as intermediate Docker layers.
+This allows a single task to be tested quickly (by tag) by adding it at the 
+end of the `Dockerfile-local`. If you want to run all steps from scratch, run
+with the `--no-cache` option:
+
+```
+docker build --no-cache -t bioansible:latest -f docker/Dockerfile-local .
+```
+
+To build a production image by pulling the master branch:
+```
+docker build -t bioansible:latest -f docker/Dockerfile-repo .
+```
+
+We also have a Dockerfile for building a lighter-weight container than only
+runs the RNAsik pipeline:
+
+```
+docker build -t rnasik:latest -f docker/Dockerfile-rnasik .
+docker run -t rnasik:latest -help
+```
+
+
+## Building with Ansible Container
+
+Install  [Ansible Container](https://www.ansible.com/ansible-container) 
+(Hint: `pip install ansible-container[docker]`).
+
+Run:
+```
+ansible-container build
+```
 
 ## Frequently asked questions
 
