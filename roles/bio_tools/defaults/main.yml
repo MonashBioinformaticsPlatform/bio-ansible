@@ -47,6 +47,7 @@ cdhit_version: 4.6.7
 mothur_version: 1.39.5
 bcl2fastq2_version: 2.19.1
 emboss_version: 6.6.0
+trimmomatic_version: 0.36
 
 # python virtualenv
 mimodd_version: 0.1.7.3

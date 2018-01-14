@@ -1,0 +1,37 @@
+---
+
+- name: download trimmomatic tools {{ version }}
+  get_url:
+    url: "http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-{{ version }}.zip"
+    dest: "{{ source_dir }}/Trimmomatic-{{ version }}.zip"
+
+- name: uncompress trimmomatic {{ version }}
+  unarchive:
+      src: "{{ source_dir }}/Trimmomatic-{{ version }}.zip"
+      dest: "{{ apps_dir }}"
+      copy: no
+
+- name: trimmomatic {{ version }} wrapper script
+  template:
+    src: java-wrapper.sh.j2
+    dest: "{{ apps_dir }}/Trimmomatic-{{ version }}/trimmomatic"
+    owner: "{{ main_guy }}" 
+    mode: 0755
+  with_items:
+    - jar: "{{ apps_dir }}/Trimmomatic-{{ version }}/trimmomatic-{{ version }}.jar"
+
+- file:
+    dest: "{{ modules_bio }}/trimmomatic"
+    state: directory
+    mode: 0755
+
+- name: trimmomatic {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/trimmomatic/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'Trimmomatic-{{ version }}'
+      skip_bin: true
+      help_text: 'This module loads the Trimmomatic tool'
