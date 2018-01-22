@@ -10,4 +10,5 @@
 - include: pip3.yml
 - include: email_setup.yml
 - include: timezone.yml
-- include: motd.yml
+- include_tasks: motd.yml
+  tags: motd

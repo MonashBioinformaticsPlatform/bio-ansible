@@ -1,7 +1,6 @@
 ---
 
 - name: apt-get install ubuntu-release-upgrader-core
-  tags: motd
   apt:
     name: "{{ item }}"
     state: present
@@ -12,7 +11,6 @@
     - ubuntu-release-upgrader-core
 
 - name: turn off new releases notifications
-  tags: motd
   file:
     dest: /etc/update-motd.d/91-release-upgrade
     state: file
@@ -20,9 +18,23 @@
   ignore_errors: true
 
 - name: copy lmod notifications to /etc/update-motd.d
-  tags: motd
   template:
     src: 60-lmod-recent
     dest: /etc/update-motd.d/
     mode: 0755
     backup: yes
+
+- set_fact: host_motd_template_path="{{ private_vars_path }}/templates/{{ inventory_hostname }}/etc/update-motd.d/90-host-motd.j2"
+
+- name: Check if private host specific MOTD template is available
+  local_action: stat path="{{ host_motd_template_path }}"
+  become: no
+  register: host_motd_template
+
+- name: copy private host specific MOTD to /etc/update-motd.d
+  template:
+    src: "{{ host_motd_template_path }}"
+    dest: /etc/update-motd.d/90-host-motd
+    mode: 0755
+    backup: yes
+  when: host_motd_template.stat.exists
