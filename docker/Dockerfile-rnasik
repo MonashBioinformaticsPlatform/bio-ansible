@@ -24,7 +24,7 @@ RUN ansible-playbook -c local -i hosts common.yml --tags lmod_etc,environment &&
     ansible-playbook -c local -i hosts bio.yml --tags lmod && \
     ansible-playbook -c local -i hosts bio.yml --tags bds && \
     ansible-playbook -c local -i hosts bio.yml --tags bedtools && \
-    ansible-playbook -c local -i hosts bio.yml --tags rnasik,star,subread,samtools,htslib,picard,qualimap,fastqc,multiqc && \
+    ansible-playbook -c local -i hosts bio.yml --tags rnasik,star,bwa,subread,samtools,htslib,picard,qualimap,fastqc,multiqc && \
     rm -rf /bio-ansible && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
