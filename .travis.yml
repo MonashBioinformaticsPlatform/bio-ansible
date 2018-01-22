@@ -9,11 +9,13 @@ services:
   - docker
 
 before_install:
+  - pip install -U ansible
   # - travis_wait 300 docker build -t bio-ansbile:latest -f docker/Dockerfile-local .
   - travis_wait 300 docker build -t bio-ansbile:latest -f docker/Dockerfile-rnasik .
-  # - docker run -d bio-ansbile /bin/sh -c "source /etc/profile.d/lmod.sh; module --force try-load BigDataScript; module --force try-load RNAsik-pipe; RNAsik-pipe | grep 'RNAsik version'"
 
 script:
+  - ansible-playbook --syntax-check -c local -i hosts common.yml
+  - ansible-playbook --syntax-check -c local -i hosts bio.yml
+  - ansible-playbook --syntax-check -c local -i hosts interactive.yml
+  - ansible-playbook --syntax-check -c local -i hosts other.yml
   - docker run -d bio-ansbile /bin/sh -c "source /etc/profile.d/lmod.sh; module --force try-load BigDataScript; module --force try-load RNAsik-pipe; RNAsik-pipe | grep 'RNAsik version'"
-
-# TODO: First do a --syntax-check as per: https://www.jeffgeerling.com/blog/testing-ansible-roles-travis-ci-github
