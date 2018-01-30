@@ -78,6 +78,8 @@
     - libglu1-mesa-dev
     - libcgal-dev
     - libnetcdf-dev
+    - libmariadb-client-lgpl-dev  # 16.04
+    # - libmariadbclient-dev  # 14.04
     # RStudio deps
     - libgstreamer-plugins-base0.10-0
     - libgstreamer0.10-0
