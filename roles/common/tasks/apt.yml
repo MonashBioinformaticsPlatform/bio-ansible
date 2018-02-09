@@ -29,6 +29,10 @@
     - ethtool
     - iotop
     - bmon
+    - fio
+    - iozone3
+    - bonnie++
+    - iperf
     - xinetd
     # nfs stuff
     - nfs-common
@@ -121,3 +125,4 @@
     - zsh
     - texlive
     - texlive-latex-extra
+    - parallel
