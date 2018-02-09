@@ -33,7 +33,8 @@
   tags: ["always"]
   set_fact: conda_bin={{ apps_dir }}/conda/bin/conda
 
-- include: conda.yml
+- include_tasks: conda.yml
+  tags: ["always"]
 
 - include: star.yml version={{ star_version}}
 - include: bwa.yml version={{ bwa_version }} 
@@ -94,6 +95,13 @@
   conda_packages:
     - 'misopy={{ miso_version }}'
     - bsddb
+
+- include_tasks: conda-package.yml
+  tags: hisat2
+  module_name: hisat2
+  version: "{{ hisat2_version }}"
+  conda_packages:
+    - 'hisat2={{ hisat2_version }}'
 
 # always install freebayes and vcflib last as they tend to break during compilation
 # - include: freebayes.yml version={{ freebayes_version }} # replaced by bioconda version
