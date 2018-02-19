@@ -9,10 +9,11 @@
 - name: Install Miniconda
   tags: conda
   shell: "bash {{ source_dir }}/Miniconda3-latest-Linux-x86_64.sh -f -b -p {{ apps_dir }}/conda"
+  creates: "{{ apps_dir }}/conda/bin/conda"
 
 - name: Add Conda channels
   tags: conda
-  shell: "{{ conda_bin }} config --add channels {{ item }}"
+  shell: "{{ conda_bin }} config --file {{ apps_dir }}/conda/.condarc --add channels {{ item }}"
   with_items:
     - defaults
     - conda-forge
