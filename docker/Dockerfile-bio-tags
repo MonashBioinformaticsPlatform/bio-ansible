@@ -11,7 +11,7 @@ RUN apt-get -y update && \
 WORKDIR /bio-ansible
 ADD . /bio-ansible/
 
-RUN rm /bio-ansible/ansible.cfg
+RUN rm -f /bio-ansible/ansible.cfg
 
 # TODO: bio-ansible should really do this itself
 RUN mkdir -p /bioansible/software/modules

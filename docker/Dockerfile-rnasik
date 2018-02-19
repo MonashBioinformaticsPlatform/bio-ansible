@@ -11,7 +11,7 @@ RUN apt-get -y update && \
 ADD . /bio-ansible/
 WORKDIR /bio-ansible
 
-RUN rm /bio-ansible/ansible.cfg
+RUN rm -f /bio-ansible/ansible.cfg
 
 # We add a pre-prepared host_vars/localhost that overrides some default
 # variables for nicer paths inside the Docker container
