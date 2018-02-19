@@ -11,6 +11,11 @@ python2_virtualenv: "virtualenv"
 python2_pythonpath: ""
 # python2_version_major_minor: "2.7"
 
+# This is the default heap size (java -Xmx) used for tools that run under the Java VM
+# (via the java-wrapper.sh.j2 shell script. eg Picard, GATK, snpeff, trimmomatic).
+# Individual tasks may override this setting for the template.
+java_heap_size: 3g
+
 # Compilation option: NO_TBB (Thread Building Blocks vs pthreads)
 # Valid values: 1 or 0
 bowtie2_notbb: 0

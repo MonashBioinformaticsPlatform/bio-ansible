@@ -43,7 +43,7 @@
 - include: samtools.yml version={{ samtools_version }} htslib_v={{ htslib_version }}
 - include: bcftools.yml version={{ bcftools_version }} htslib_v={{ htslib_version }}
 - include: subread.yml version={{ subread_version }}
-- include: picard.yml version={{ picard_version }}
+- include: picard.yml version={{ picard_version }} java_heap_size=6g
 - include: gatk.yml version={{ gatk_version }}
 - include: fastqc.yml version={{ fastqc_version }}
 - include: sratoolkit.yml version={{ sratoolkit_version }}

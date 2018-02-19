@@ -3,5 +3,5 @@
 #BASE="$( cd "$( dirname "$0" )" && pwd )"/
 jar="{{ item.jar }}"
 
-exec java -Xmx3g -jar "$jar" "$@"
+exec java -Xmx{{ java_heap_size }} -jar "$jar" "$@"
 
