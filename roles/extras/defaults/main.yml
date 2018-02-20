@@ -4,5 +4,6 @@ nodejs_version: v8.10.0
 maven_version: 3.3.9
 tmux_version: 2.4
 hifive_version: 1.4.0
-ant_version: 1.10.1
+ant_version: 1.10.2
+ant_mirror_base: "https://www.apache.org/dist/ant/binaries/"
 go_version: 1.8.3

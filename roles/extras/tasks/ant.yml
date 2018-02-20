@@ -3,7 +3,7 @@
 - name: download ant {{ version }}
   tags: ['ant', 'java']
   get_url:
-    url: "http://mirror.ventraip.net.au/apache/ant/binaries/apache-ant-{{ version }}-bin.tar.bz2"
+    url: "{{ ant_mirror_base }}/apache-ant-{{ version }}-bin.tar.bz2"
     dest: "{{ source_dir }}"
 
 - name: uncompress ant {{ version }}
