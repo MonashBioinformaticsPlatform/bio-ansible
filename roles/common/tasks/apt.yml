@@ -65,7 +65,7 @@
     - gfortran-5
     - libncurses5-dev
     - libbz2-dev
-    - libsuperlu-dev 
+    - libsuperlu-dev
     - libarpack2-dev
     - libcurl4-openssl-dev
     - libxml2-dev
@@ -126,3 +126,4 @@
     - texlive
     - texlive-latex-extra
     - parallel
+    - acl
