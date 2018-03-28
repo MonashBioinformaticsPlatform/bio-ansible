@@ -28,7 +28,7 @@ htslib_version: 1.4.1
 samtools_version: 1.4.1
 bcftools_version: 1.4.1
 subread_version: 1.5.2
-picard_version: 2.17.10
+picard_version: 2.18.0
 gatk_version: 3.7
 fastqc_version: 0.11.5
 vcflib_version: master
@@ -53,6 +53,7 @@ mothur_version: 1.39.5
 bcl2fastq2_version: 2.19.1
 emboss_version: 6.6.0
 trimmomatic_version: 0.36
+skewer_version: 0.2.2
 hisat2_version: 2.1.0
 
 # python virtualenv

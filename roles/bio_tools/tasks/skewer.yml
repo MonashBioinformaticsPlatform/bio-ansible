@@ -1,0 +1,45 @@
+---
+
+- name: download skewer {{ version }}
+  git:
+    repo: https://github.com/relipmoc/skewer
+    dest: "{{ source_dir }}/skewer-{{ version }}"
+    version: "{{ version }}"
+    update: yes
+
+- file:
+    dest: "{{ apps_dir }}/skewer-{{ version }}"
+    state: directory
+    mode: 0755
+
+- name: build skewer {{ version }}
+  shell: cd {{ source_dir }}/skewer-{{ version }}; make; mv skewer {{ apps_dir }}/skewer-{{ version }}
+  args:
+    creates: "{{ apps_dir }}/skewer-{{ version }}/skewer"
+
+- file:
+    dest: "{{ modules_bio }}/skewer"
+    state: directory
+    mode: 0755
+
+- name: skewer {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/skewer/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'skewer-{{ version }}'
+      skip_bin: true
+      help_text: 'This module loads the skewer FASTQ trimmer'
+
+- name: setting register for skewer {{ version }}
+  stat:
+    path: "{{ apps_dir }}/skewer-{{ version }}/skewer"
+  register: s
+
+- name: removing skewer {{ version }} source directory
+  file:
+    dest: "{{ source_dir }}/skewer-{{ version }}"
+    state: absent
+  when: "{{ del_src }} s.stat.exists"

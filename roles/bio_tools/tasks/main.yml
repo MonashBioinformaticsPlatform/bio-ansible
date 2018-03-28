@@ -80,6 +80,9 @@
 - include_tasks: trimmomatic.yml version={{ trimmomatic_version }}
   tags: trimmomatic
 
+- include_tasks: skewer.yml version={{ skewer_version }}
+  tags: skewer
+
 # List of Bioconda packages available: https://bioconda.github.io/recipes.html
 - include_tasks: conda-package.yml module_name=gatk4 conda_packages=['gatk4={{ gatk4_version }}'] version={{ gatk4_version }}
   tags: gatk4

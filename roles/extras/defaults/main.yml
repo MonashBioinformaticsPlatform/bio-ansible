@@ -1,6 +1,6 @@
 ---
 stack_version: 1.2.0
-nodejs_version: v6.9.1
+nodejs_version: v8.10.0
 maven_version: 3.3.9
 tmux_version: 2.4
 hifive_version: 1.4.0
