@@ -13,3 +13,11 @@
             - user_auth
 
   become: true
+
+- name: installing vnc stuff...
+  hosts: gui
+  remote_user: "{{ sudo_guy }}"
+  roles:
+            - gui
+
+  become: true
