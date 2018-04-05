@@ -1,0 +1,50 @@
+---
+
+- name: download sabre {{ version }}
+  git:
+    repo: https://github.com/serine/sabre
+    dest: "{{ source_dir }}/sabre-{{ version }}"
+    version: "{{ version }}"
+    update: yes
+
+- file:
+    dest: "{{ apps_dir }}/sabre-{{ version }}"
+    state: directory
+    mode: 0755
+
+- name: build sabre {{ version }}
+  shell: cd {{ source_dir }}/sabre-{{ version }}; make
+  args:
+    creates: "{{ source_dir }}/sabre-{{ version }}/sabre"
+
+- name:  move sabre {{ version }} executables to apps directory
+  shell: cp {{ source_dir }}/sabre-{{ version }}/sabre {{ apps_dir }}/sabre-{{ version }}/
+  args:
+    creates: "{{ apps_dir }}/sabre-{{ version }}/sabre"
+
+- file:
+    dest: "{{ modules_bio }}/sabre"
+    state: directory
+    mode: 0755
+
+- name: sabre {{ version }} module definition
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/sabre/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'sabre-{{ version }}'
+      skip_bin: true
+      help_text: 'This module loads the sabre FASTQ demultiplexing and trimming tool'
+
+- name: setting register for sabre {{ version }}
+  stat:
+    path: "{{ apps_dir }}/sabre-{{ version }}/sabre"
+  register: s
+
+- name: removing sabre {{ version }} source directory
+  file:
+    dest: "{{ source_dir }}/sabre-{{ version }}"
+    state: absent
+  when: "{{ del_src }} s.stat.exists"
