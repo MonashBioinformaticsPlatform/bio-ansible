@@ -3,7 +3,7 @@ RUN apt-get -y update && \
     apt-get -y install python-pip git && \
     apt-get -y clean && \
     pip install -U pip && \
-    pip install -U ansible
+    pip install -U ansible<2.5
 WORKDIR /bio-ansible
 ADD . /bio-ansible/
 
