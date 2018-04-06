@@ -1,15 +1,19 @@
 ---
+- stat: path="{{ apps_dir }}/conda/bin/conda"
+  register: conda_binary_check
 
 - name: Download Miniconda
   tags: conda
   get_url:
     url: https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
     dest: "{{ source_dir }}/Miniconda3-latest-Linux-x86_64.sh"
+  when: conda_binary_check.stat.exists == False
 
 - name: Install Miniconda
   tags: conda
   shell: "bash {{ source_dir }}/Miniconda3-latest-Linux-x86_64.sh -f -b -p {{ apps_dir }}/conda"
-  creates: "{{ apps_dir }}/conda/bin/conda"
+  when: conda_binary_check.stat.exists == False
+  # creates: "{{ apps_dir }}/conda/bin/conda"
 
 - name: Add Conda channels
   tags: conda
