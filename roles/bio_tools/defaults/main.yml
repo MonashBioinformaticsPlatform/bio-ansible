@@ -55,7 +55,7 @@ bcl2fastq2_version: 2.19.1
 emboss_version: 6.6.0
 trimmomatic_version: 0.36
 skewer_version: 0.2.2
-sabre_version: 4b1a043
+sabre_version: 7ba39b9
 hisat2_version: 2.1.0
 
 # python virtualenv
