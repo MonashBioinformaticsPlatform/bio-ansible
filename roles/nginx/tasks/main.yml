@@ -19,16 +19,16 @@
 #and add a task to symlink it to sites-enabled
 - name: copy nginx configuration file
   template:
-    src: biotraining.erc.monash.edu
-    dest: /etc/nginx/sites-available/biotraining.erc.monash.edu
+    src: "{{ nginx_templ_name }}"
+    dest: "/etc/nginx/sites-available/{{ nginx_server_name }}"
     backup: yes
 
   tags: nginx
 #TODO set proper variables in group_vars/all
 - name: link nginx configuration file
   file:
-    src: /etc/nginx/sites-available/biotraining.erc.monash.edu
-    dest: /etc/nginx/sites-enabled/biotraining.erc.monash.edu
+    src: "/etc/nginx/sites-available/{{ nginx_server_name }}"
+    dest: "/etc/nginx/sites-enabled/{{ nginx_server_name }}"
     state: link
     mode: 0755
 
@@ -36,7 +36,7 @@
   # create directory for default / root serving directory
 - name: create default/root serving directory
   file:
-    dest: /var/www/html/biotraining.erc.monash.edu
+    dest: "/var/www/html/{{ nginx_server_name }}"
     state: directory
     mode: 0755
 
@@ -44,7 +44,7 @@
   # create directory for log files
 - name: create directory for log files
   file:
-    dest: /var/log/nginx/biotraining.erc.monash.edu
+    dest: "/var/log/nginx/{{ nginx_server_name }}"
     state: directory
     mode: 0755
 

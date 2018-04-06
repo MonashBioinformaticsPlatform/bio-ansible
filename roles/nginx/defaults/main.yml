@@ -1,0 +1,2 @@
+nginx_server_name: bio_ansible_special
+nginx_templ_name: bio_ansible_nginx.conf
