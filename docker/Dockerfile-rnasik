@@ -6,7 +6,7 @@ RUN apt-get -y update && \
                        tcl lua5.2 liblua5.2-dev lua-filesystem lua-posix && \
     apt-get -y clean && \
     pip install -U pip && \
-    pip install -U ansible<2.5
+    pip install -U "ansible<2.5"
 # RUN git clone https://github.com/MonashBioinformaticsPlatform/bio-ansible.git
 ADD . /bio-ansible/
 WORKDIR /bio-ansible
