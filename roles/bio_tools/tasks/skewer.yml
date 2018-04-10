@@ -42,4 +42,4 @@
   file:
     dest: "{{ source_dir }}/skewer-{{ version }}"
     state: absent
-  when: "{{ del_src }} and and s.stat.exists"
+  when: "del_src and and s.stat.exists"

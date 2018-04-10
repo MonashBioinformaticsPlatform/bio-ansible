@@ -67,7 +67,7 @@
   file:
     dest: "{{ source_dir }}/subread-{{ version }}-source"
     state: absent
-  when: "{{ del_src }} and and s.stat.exists"
+  when: "del_src and and s.stat.exists"
 
   tags: subread
 
@@ -75,6 +75,6 @@
   file:
     dest: "{{ source_dir }}/subread-{{ version }}-source.tar.gz"
     state: absent
-  when: "{{ del_src }} and and s.stat.exists"
+  when: "del_src and and s.stat.exists"
 
   tags: subread

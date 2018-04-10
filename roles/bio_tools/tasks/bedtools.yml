@@ -59,6 +59,6 @@
   file:
     path: "{{ source_dir }}/bedtools2-{{ version }}"
     state: absent
-  when: "{{ del_src }} and and b.stat.exists"
+  when: "del_src and and b.stat.exists"
 
   tags: bedtools

@@ -48,6 +48,6 @@
   file:
     dest: "{{ source_dir }}/qualimap_{{ version }}.zip"
     state: absent
-  when: "{{ del_src }} and and q.stat.exists"
+  when: "del_src and and q.stat.exists"
 
   tags: qualimap

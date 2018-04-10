@@ -76,6 +76,6 @@
   file:
     dest: "{{ source_dir }}/fastqc_v{{ version }}.zip"
     state: absent
-  when: "{{ del_src }} and and f.stat.exists"
+  when: "del_src and and f.stat.exists"
 
   tags: fastqc

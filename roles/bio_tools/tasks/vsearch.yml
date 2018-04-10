@@ -46,6 +46,6 @@
   file:
     dest: "{{ source_dir }}/vsearch-{{ version }}"
     state: absent
-  when: "{{ del_src }} and and v.stat.exists"
+  when: "del_src and and v.stat.exists"
 
   tags: vsearch

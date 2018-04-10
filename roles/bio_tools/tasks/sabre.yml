@@ -47,4 +47,4 @@
   file:
     dest: "{{ source_dir }}/sabre-{{ version }}"
     state: absent
-  when: "{{ del_src }} and and s.stat.exists"
+  when: "del_src and and s.stat.exists"

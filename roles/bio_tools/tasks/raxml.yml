@@ -60,6 +60,6 @@
   #  file:
   #    dest: "{{ source_dir }}/raxml-{{ version }}"
   #    state: absent
-  #  when: "{{ del_src }} and and s.stat.exists"
+  #  when: "del_src and and s.stat.exists"
   #
   #  tags: raxml

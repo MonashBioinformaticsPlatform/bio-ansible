@@ -68,6 +68,6 @@
   file:
     dest: "{{ source_dir }}/vcflib-{{ version }}"
     state: absent
-  when: "{{ del_src }} and and v.stat.isdir"
+  when: "del_src and and v.stat.isdir"
 
   tags: vcflib

@@ -60,7 +60,7 @@
   file:
     dest: "{{ source_dir }}/emboss-{{ version }}"
     state: absent
-  when: "{{ del_src }} and and s.stat.exists"
+  when: "del_src and and s.stat.exists"
 
   tags: emboss
 
@@ -68,6 +68,6 @@
   file:
     dest: "{{ source_dir }}/emboss-{{ version }}.tar.gz"
     state: absent
-  when: "{{ del_src }} and and s.stat.exists"
+  when: "del_src and and s.stat.exists"
 
   tags: emboss
