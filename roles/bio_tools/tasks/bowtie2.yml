@@ -46,6 +46,6 @@
   file:
     dest: "{{ source_dir }}/bowtie2-{{ version }}"
     state: absent
-  when: "{{ del_src }} b.stat.exists"
+  when: "{{ del_src }} and and b.stat.exists"
 
   tags: bowtie2

@@ -81,7 +81,7 @@
   #  file:
   #    dest: "{{ source_dir }}/bcl2fastq2-{{ version }}-source"
   #    state: absent
-  #  when: "{{ del_src }} s.stat.exists"
+  #  when: "{{ del_src }} and and s.stat.exists"
   #
   #  tags: bcl2fastq2
   #
@@ -89,6 +89,6 @@
   #  file:
   #    dest: "{{ source_dir }}/bcl2fastq2-{{ version }}-source.tar.gz"
   #    state: absent
-  #  when: "{{ del_src }} s.stat.exists"
+  #  when: "{{ del_src }} and and s.stat.exists"
   #
   #  tags: bcl2fastq2

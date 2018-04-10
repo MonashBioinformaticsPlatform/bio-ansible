@@ -61,6 +61,6 @@
   file:
     dest: "{{ source_dir }}/seqtk-{{ version }}"
     state: absent
-  when: "{{ del_src }} s.stat.exists"
+  when: "{{ del_src }} and and s.stat.exists"
 
   tags: seqtk
