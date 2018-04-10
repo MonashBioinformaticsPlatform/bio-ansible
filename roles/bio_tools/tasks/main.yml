@@ -109,6 +109,13 @@
   conda_packages:
     - 'hisat2={{ hisat2_version }}'
 
+- include_tasks: conda-package.yml
+  tags: je_suite
+  module_name: je-suite
+  version: "{{ je_suite_version }}"
+  conda_packages:
+    - 'je-suite={{ je_suite_version }}'
+
 # always install freebayes and vcflib last as they tend to break during compilation
 # - include: freebayes.yml version={{ freebayes_version }} # replaced by bioconda version
 - include: vcflib.yml version={{ vcflib_version }}
