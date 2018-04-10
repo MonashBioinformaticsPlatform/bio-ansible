@@ -53,7 +53,7 @@
   file:
     dest: "{{ source_dir }}/smalt-{{ version }}"
     state: absent
-  when: "del_src and and s.stat.exists"
+  when: "del_src and s.stat.exists"
 
   tags: smalt
 
@@ -61,6 +61,6 @@
   file:
     dest: "{{ source_dir }}/smalt-{{ version }}.tar.gz"
     state: absent
-  when: "del_src and and s.stat.exists"
+  when: "del_src and s.stat.exists"
 
   tags: smalt

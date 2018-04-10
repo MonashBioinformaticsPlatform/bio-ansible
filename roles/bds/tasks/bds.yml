@@ -100,4 +100,4 @@
   file:
     dest: "{{ source_dir }}/BigDataScript-{{ version }}"
     state: absent
-  when: "{{ del_src }} b.stat.exists"
+  when: "del_src and b.stat.exists"

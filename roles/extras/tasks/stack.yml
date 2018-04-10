@@ -61,12 +61,12 @@
   file:
     dest: "{{ source_dir }}/stack-{{ version }}-linux-x86_64.tar.gz"
     state: absent
-  when: "{{ del_src }} s.stat.exists"
+  when: "del_src and s.stat.exists"
 
 - name: removing stack {{ version }} source directory
   file:
     dest: "{{ source_dir }}/stack-{{ version }}-linux-x86_64"
     state: absent
-  when: "{{ del_src }} s.stat.exists"
+  when: "del_src and s.stat.exists"
 
   tags: stack

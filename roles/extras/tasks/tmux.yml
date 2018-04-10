@@ -60,6 +60,6 @@
   file:
     dest: "{{ source_dir }}/tmux-{{ version }}"
     state: absent
-  when: "{{ del_src }} b.stat.exists"
+  when: "del_src and b.stat.exists"
 
   tags: tmux

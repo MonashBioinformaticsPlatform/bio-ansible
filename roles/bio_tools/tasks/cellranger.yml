@@ -57,6 +57,6 @@
   file:
     dest: "{{ source_dir }}/cellranger-{{ version }}.tar.gz"
     state: absent
-  when: "del_src and and cr.stat.exists"
+  when: "del_src and cr.stat.exists"
 
   tags: cellranger

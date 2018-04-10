@@ -85,6 +85,6 @@
   file:
     path: "{{ source_dir }}/snpEff_{{ version }}_core.zip"
     state: absent
-  when: "del_src and and s.stat.exists"
+  when: "del_src and s.stat.exists"
 
   tags: snpeff

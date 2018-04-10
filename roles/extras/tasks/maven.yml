@@ -56,4 +56,4 @@
   file:
     dest: "{{ source_dir }}/apache-maven-{{ version }}-bin.tar.gz"
     state: absent
-  when: "{{ del_src }} m.stat.exists"
+  when: "del_src and m.stat.exists"

@@ -46,6 +46,6 @@
   file:
     dest: "{{ source_dir }}/infernal-{{ version }}"
     state: absent
-  when: "del_src and and i.stat.exists"
+  when: "del_src and i.stat.exists"
 
   tags: infernal

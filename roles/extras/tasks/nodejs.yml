@@ -70,6 +70,6 @@
   file:
     dest: "{{ source_dir }}/node-{{ version }}-linux-x86_64.tar.xz"
     state: absent
-  when: "{{ del_src }} n.stat.exists"
+  when: "del_src and n.stat.exists"
 
   tags: nodejs

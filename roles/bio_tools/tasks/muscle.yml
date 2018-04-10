@@ -60,6 +60,6 @@
   file:
     dest: "{{ source_dir }}/muscle{{ version }}_i86.linux64.tar.gz"
     state: absent
-  when: "del_src and and m.stat.exists"
+  when: "del_src and m.stat.exists"
 
   tags: muscle

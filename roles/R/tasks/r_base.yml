@@ -89,6 +89,6 @@
   file:
     dest: "{{ source_dir }}/R-{{ version }}.tar.gz"
     state: absent
-  when: "{{ del_src }} r.stat.exists"
+  when: " del_src and r.stat.exists"
 
   tags: r_base

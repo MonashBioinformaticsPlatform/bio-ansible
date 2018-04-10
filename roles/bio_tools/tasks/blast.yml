@@ -67,7 +67,7 @@
   file:
     dest: "{{ source_dir }}/ncbi-blast-{{ version }}+-src"
     state: absent
-  when: "del_src and and s.stat.exists"
+  when: "del_src and s.stat.exists"
 
   tags: blast
 
@@ -75,6 +75,6 @@
   file:
     dest: "{{ source_dir }}/ncbi-blast-{{ version }}+-src.tar.gz"
     state: absent
-  when: "del_src and and s.stat.exists"
+  when: "del_src and s.stat.exists"
 
   tags: blast

@@ -60,7 +60,7 @@
   file:
     dest: "{{ source_dir }}/sratoolkit.{{ version }}-ubuntu64"
     state: absent
-  when: "del_src and and s.stat.exists"
+  when: "del_src and s.stat.exists"
 
   tags: sratoolkit
 
@@ -68,6 +68,6 @@
   file:
     dest: "{{ source_dir }}/sratoolkit.{{ version }}-ubuntu64.tar.gz"
     state: absent
-  when: "del_src and and s.stat.exists"
+  when: "del_src and s.stat.exists"
 
   tags: sratoolkit

@@ -47,6 +47,6 @@
   file:
     path: "{{ source_dir }}/SPAdes-{{ version }}-Linux.tar.gz"
     state: absent
-  when: "del_src and and s.stat.exists"
+  when: "del_src and s.stat.exists"
 
   tags: spades

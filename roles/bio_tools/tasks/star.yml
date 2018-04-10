@@ -62,6 +62,6 @@
   file:
     dest: "{{ source_dir }}/STAR-{{ version }}"
     state: absent
-  when: "del_src and and s.stat.exists and {{ del_src }} slong.stat.exists"
+  when: "(del_src and s.stat.exists) and (del_src and slong.stat.exists)"
 
   tags: star
