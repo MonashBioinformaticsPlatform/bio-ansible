@@ -30,7 +30,7 @@ locale: "{{ locale_region }}.{{ locale_charset }}"
 # Other global variables
 #------------------------------
 threads: 4
-del_src: "" # empty string means true and "not" negates that
+del_src: True
 
 r_base_mirror: "https://cran.csiro.au"
 
