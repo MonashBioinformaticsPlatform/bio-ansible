@@ -127,3 +127,4 @@
     - texlive-latex-extra
     - parallel
     - acl
+    - qpdf
