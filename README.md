@@ -17,9 +17,10 @@
 
 Assume you know how to start new [virtual machine (vm)](https://en.wikipedia.org/wiki/Virtual_machine) instance and how to install and operate [ansible](http://docs.ansible.com/ansible/intro.html).
 
-- bring up a vm (AWS, NeCTAR, OpenStack, etc)
-- set up your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
-- edit `host` file to add vm ip address, edit `groups_vars/all` files to change vm username
+- Bring up a VM (AWS, NeCTAR, OpenStack, etc)
+- Set up your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
+- Edit the `hosts` file to add the VM IP address, edit `groups_vars/all` files to change `main_guy`
+  and `sudo_guy` to the username used to log into the remote machine.
 
 ```bash
 ansible-playbook -i hosts all.yml
@@ -138,17 +139,6 @@ runs the RNAsik pipeline:
 ```bash
 docker build -t rnasik:latest -f docker/Dockerfile-rnasik .
 docker run -t rnasik:latest -help
-```
-
-
-## Building with Ansible Container
-
-Install  [Ansible Container](https://www.ansible.com/ansible-container) 
-(Hint: `pip install ansible-container[docker]`).
-
-Run:
-```bash
-ansible-container build
 ```
 
 ## Frequently asked questions
