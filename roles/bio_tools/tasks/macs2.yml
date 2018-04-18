@@ -12,7 +12,7 @@
     PYTHONPATH: "{{ python2_pythonpath }}"
   with_items:
     - numpy
-    - macs
+    - "macs2=={{ version }}"
 
 - file:
     dest: "{{ modules_bio }}/macs2"
