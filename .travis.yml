@@ -9,7 +9,7 @@ services:
   - docker
 
 before_install:
-  - pip install -U ansible
+  - pip install -U "ansible<2.5"
   # - travis_wait 300 docker build -t bio-ansbile:latest -f docker/Dockerfile-local .
   - travis_wait 300 docker build -t bio-ansbile:latest -f docker/Dockerfile-rnasik .
 
