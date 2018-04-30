@@ -24,9 +24,12 @@ bowtie2_notbb: 0
 star_version: 2.5.2b
 bwa_version: v0.7.15
 bowtie2_version: v2.3.2
-htslib_version: 1.4.1
-samtools_version: 1.4.1
-bcftools_version: 1.4.1
+
+# samtools, htslib and bcftools should typically be all the same version
+htslib_version: 1.8
+samtools_version: 1.8
+bcftools_version: 1.8
+
 subread_version: 1.5.2
 picard_version: 2.18.0
 gatk_version: 3.7
