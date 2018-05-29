@@ -83,6 +83,8 @@
     - libcgal-dev
     - libnetcdf-dev
     - libmariadb-client-lgpl-dev  # 16.04
+    - libudunits2-0    # ChIPseeker
+    - libudunits2-dev  # ChIPseeker
     # - libmariadbclient-dev  # 14.04
     # RStudio deps
     - libgstreamer-plugins-base0.10-0
