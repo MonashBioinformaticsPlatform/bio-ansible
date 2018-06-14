@@ -4,6 +4,7 @@
 - include: sshd.yml
 - include: locales.yml
 - include: apt.yml
+- include: basemount.yml
 - include: singularity-apt.yml
 - include: python.yml
 - include: pip.yml

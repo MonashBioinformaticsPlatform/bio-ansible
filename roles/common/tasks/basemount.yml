@@ -1,0 +1,24 @@
+---
+
+- name: Add repo for basemount
+  tags: ['basemount', 'apt']
+  apt_repository:
+    repo: 'deb https://dl.bintray.com/basespace/BaseMount-DEB saucy main'
+    filename: 'basemount'
+    state: present
+
+- name: Add an Apt signing key for basemount
+  tags: ['basemount', 'apt']
+  apt_key:
+    url: https://bintray.com/user/downloadSubjectPublicKey?username=basespace
+    state: present
+
+- name: apt-get install basemount
+  tags: ['basemount', 'apt']
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+    force: yes
+  with_items:
+    - basemount
