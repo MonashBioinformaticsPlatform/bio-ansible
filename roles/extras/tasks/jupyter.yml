@@ -1,0 +1,75 @@
+---
+
+- name: pip install jupyter thing {{ version }}
+  tags: jupyter
+  pip:
+    name: "{{ item }}"
+    virtualenv: "{{ apps_dir }}/jupyter-{{ version }}"
+    virtualenv_python: "{{ python3_executable }}"
+    virtualenv_command: "{{ python3_virtualenv }}"
+
+  with_items:
+    - jupyterhub
+    - jupyterlab
+    - notebook
+    - bash_kernel
+
+  environment:
+    PYTHONPATH: "{{ python3_pythonpath }}"
+
+- name: copy jupyter configuration file
+  tags: jupyter
+  template:
+    src: "{{ jupyter_config_templ }}"
+    dest: "{{ apps_dir }}/jupyter-{{ version }}/jupyter-config.py"
+    backup: yes
+
+- name: copy jupyter bash script
+  tags: jupyter
+  template:
+    src: "{{ jupyter_script }}"
+    dest: "{{ apps_dir }}/jupyter-{{ version }}/jupyter.bash"
+    mode: 0755
+    backup: yes
+
+- name: install configurable-http-proxy for jupyter {{ version }}
+  tags: jupyter
+  npm:
+    name: configurable-http-proxy
+    executable: "{{ apps_dir }}/node-{{ nodejs_version }}/node {{ apps_dir }}/node-{{ nodejs_version }}/npm"
+    path: "{{ apps_dir }}/jupyter-{{ version }}/node_modules"
+    state: latest
+
+- name: hard code nodejs {{ nodejs_version }} path
+  tags: jupyter
+  replace:
+    path: '{{ apps_dir }}/jupyter-{{ version }}/node_modules/configurable-http-proxy/bin/configurable-http-proxy'
+    regexp: "/usr/bin/env node"
+    replace: "{{ apps_dir }}/node-{{ nodejs_version }}/node"
+
+- name: making {{ modules_extra }}/jupyter directory
+  tags: jupyter
+  file:
+    path: "{{ modules_extra }}/jupyter"
+    state: directory
+    mode: 0755
+
+- name: making jupyter.log file
+  tags: jupyter
+  copy:
+    content: ""
+    dest: "{{ apps_dir }}/jupyter-{{ version }}/jupyter.log"
+    mode: 0666
+    backup: yes
+
+- name: jupyter thing {{ version }} module definition
+  tags: jupyter
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_extra }}/jupyter/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'jupyter-{{ version }}'
+      help_text: 'loads jupyterhub/jupyterlab'
+      append: true 

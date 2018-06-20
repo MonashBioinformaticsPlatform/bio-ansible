@@ -1,9 +1,18 @@
 ---
+
+python3_executable: "python3"
+python3_virtualenv: "virtualenv"
+python3_pythonpath: ""
+
 stack_version: 1.2.0
-nodejs_version: v8.10.0
+nodejs_version: v8.11.3
 maven_version: 3.3.9
 tmux_version: 2.4
 hifive_version: 1.4.0
 ant_version: 1.10.2
 ant_mirror_base: "https://www.apache.org/dist/ant/binaries/"
 go_version: 1.8.3
+
+#jupyter_version: 20.06.2018
+jupyter_config_templ: jupyter-config.py.j2
+jupyter_script: jupyter.bash.j2

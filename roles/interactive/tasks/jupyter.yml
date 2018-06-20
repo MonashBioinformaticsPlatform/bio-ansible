@@ -1,40 +1,18 @@
 ---
 
-- name: pip3 install python packages
-  pip:
-    name: "{{ item }}"
-    state: latest
-    executable: pip3
-  with_items:
-    # upgrade pip
-    - pip
-    - notebook
-    - jupyter
-    - jupyterhub
-    - bash_kernel
-
+- name: copy jupyterhub.service template
   tags: jupyter
+  template:
+    src: "{{ jupyter_service_templ }}"
+    dest: /lib/systemd/system/jupyterhub.service
+    mode: 0755
+    
+- name: reload systemd daemon
+  systemd:
+    name: jupyterhub
+    enabled: True
+    daemon_reload: yes
 
-- name: install configurable-http-proxy for jupyterhub
-  npm:
-    name: configurable-http-proxy
-    executable: "{{ apps_dir }}/node-{{ nodejs_version }}/npm"
-    path: "{{ source_dir }}/node-{{ nodejs_version }}-linux-x64/lib/node_modules"
-    # path: "{{ source_dir }}"
-    state: latest
-    #global: yes
-  tags: jupyter
-
-# TODO: Create a config for Jupyterhub, with SSL keys: https://github.com/jupyterhub/jupyterhub
-#       Setup Jupyterhub to run as a non-privileged user: https://github.com/jupyterhub/jupyterhub/wiki/Using-sudo-to-run-JupyterHub-without-root-privileges
-#       Run jupyterhub under supervisord
-- name: temporal debug message re npm install -g configurable-http-proxy 
-  debug:
-    msg: "To start jupyterhub: \n
-          sudo -s \n
-          source /etc/profile \n
-          export PATH=/mnt/software/source/node-{{ nodejs_version }}-linux-x64/lib/node_modules/configurable-http-proxy/bin:$PATH \n
-          module use /mnt/software/modules/extra \n
-          module load node \n
-          jupyterhub -f config.py"
-  tags: jupyter
+- name: start the service
+  systemd:
+    state: started

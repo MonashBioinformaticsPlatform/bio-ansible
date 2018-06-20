@@ -11,4 +11,4 @@ rstudio_pro_key: ""
 
 # If nodejs is installed via the 'extras' role, the version defined
 # there should match this one
-nodejs_version: v6.9.1
+jupyter_service_templ: jupyterhub.service.j2

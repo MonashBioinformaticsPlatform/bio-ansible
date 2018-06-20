@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+
+#c.JupyterHub.ssl_key = '/etc/ssl/biotraining-selfsigned/biotraining-selfsigned.key'
+#c.JupyterHub.ssl_cert = '/etc/ssl/biotraining-selfsigned/biotraining-selfsigned.crt'
+
+c.JupyterHub.cookie_secret_file = '/home-local/kirill/jupyter2/jupyterhub_cookie_secret'
+
+c.JupyterHub.ip = "biotraining.erc.monash.edu"
+c.JupyterHub.port = 9393
+c.JupyterHub.base_url = '/jupyter/'
+
+#c.Authenticator.admin_users = {'kirill', 'adele', 'perry'}
+
+c.JupyterHub.proxy_cmd = ['{{ apps_dir }}/jupyter-{{ version }}/node_modules/configurable-http-proxy/bin/configurable-http-proxy']
+
+c.Spawner.cmd = ['jupyter-labhub']
