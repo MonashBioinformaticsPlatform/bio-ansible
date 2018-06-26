@@ -11,3 +11,4 @@ vault
 .molecule
 *.pyc
 private
+/private_templates
