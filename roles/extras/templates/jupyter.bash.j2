@@ -1,9 +1,11 @@
 #!/bin/bash
 
+. /etc/profile.d/lmod.sh
+
 ml use {{ modules_extra }}
 ml jupyter
 
 jconf={{ apps_dir }}/jupyter-{{ jupyter_version }}/jupyter-config.py
 jlogs={{ apps_dir }}/jupyter-{{ jupyter_version }}/jupyter.log
 
-jupyterhub --config ${jconf} > ${jlogs} 2>&1
+jupyterhub --config ${jconf} >> ${jlogs} 2>&1

@@ -29,7 +29,7 @@
   template:
     src: "{{ jupyter_script }}"
     dest: "{{ apps_dir }}/jupyter-{{ version }}/jupyter.bash"
-    mode: 0755
+    mode: 0644
     backup: yes
 
 - name: install configurable-http-proxy for jupyter {{ version }}

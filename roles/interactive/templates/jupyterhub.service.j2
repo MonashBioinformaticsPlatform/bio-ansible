@@ -3,7 +3,7 @@ Description=Jupyterhub
 
 [Service]
 User=root
-ExecStart={{ apps_dir }}/jupyter-{{ jupyter_version }}/jupyter.bash
+ExecStart=/bin/bash {{ apps_dir }}/jupyter-{{ jupyter_version }}/jupyter.bash
 
 [Install]
 WantedBy=multi-user.target
