@@ -1,6 +1,23 @@
 ---
 
+- name: apt-get install python3-pip
+  tags: pip3
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - python3-pip
+
+#- name: pip3 upgrade pip
+#  tags: pip3
+#  pip:
+#    name: pip
+#    executable: pip3
+#    state: latest
+
 - name: pip3 install python packages
+  tags: pip3
   pip:
     name: "{{ item }}"
     state: present
@@ -20,6 +37,3 @@
     - notebook
     # other
     - awscli
-
-  tags: pip3
-

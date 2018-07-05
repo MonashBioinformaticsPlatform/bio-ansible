@@ -8,14 +8,23 @@
 #
 #  tags: pip
 
-- name: pip upgrade pip
-  pip:
-    name: pip
-    state: latest
-
+- name: apt-get install python-pip
   tags: pip
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - python-pip
+
+#- name: pip upgrade pip
+#  tags: pip
+#  pip:
+#    name: pip
+#    state: latest
 
 - name: pip install python packages
+  tags: pip
   pip:
     name: "{{ item }}"
     state: present
@@ -35,6 +44,3 @@
     - pysam
     - nesoni
     - gffutils
-
-  tags: pip
-
