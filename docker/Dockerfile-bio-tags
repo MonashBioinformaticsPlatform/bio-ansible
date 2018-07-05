@@ -22,7 +22,7 @@ RUN mkdir -p /bioansible/software/apps
 # variables for nicer paths inside the Docker container
 ADD ./docker/host_vars/localhost /bio-ansible/host_vars/localhost
 
-RUN ansible-playbook -c local -i hosts bio.yml --tags $TASK_TAGS
+RUN ansible-playbook -vvv -c local -i hosts bio.yml --tags $TASK_TAGS
 
 RUN rm -rf /bio-ansbile && \
     apt-get clean && \

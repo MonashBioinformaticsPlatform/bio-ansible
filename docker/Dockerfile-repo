@@ -8,8 +8,8 @@ RUN apt-get -y update && \
 
 RUN git clone https://github.com/MonashBioinformaticsPlatform/bio-ansible.git && \
     cd bio-ansible && \
-    ansible-playbook -i hosts common.yml && \
-    ansible-playbook -i hosts bio.yml --skip-tags gatk,java_oracle,cell_ranger && \
+    ansible-playbook -vvv -i hosts common.yml && \
+    ansible-playbook -vvv -i hosts bio.yml --skip-tags gatk,java_oracle,cell_ranger && \
     rm -rf /bio-ansible && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*

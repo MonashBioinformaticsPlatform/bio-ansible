@@ -18,12 +18,12 @@ RUN mkdir -p /bioansible/software/apps
 # variables for nicer paths inside the Docker container
 ADD ./docker/host_vars/localhost /bio-ansible/host_vars/localhost
 
-RUN ansible-playbook -c local -i hosts common.yml --tags apt && \
-    ansible-playbook -c local -i hosts common.yml --tags pip && \
-    ansible-playbook -c local -i hosts common.yml --skip-tags apt,pip && \
-    ansible-playbook -c local -i hosts bio.yml --tags r_base,r_extras && \
-    ansible-playbook -c local -i hosts bio.yml --tags blast && \
-    ansible-playbook -c local -i hosts bio.yml --skip-tags r_base,r_extras,blast && \
+RUN ansible-playbook -vvv -c local -i hosts common.yml --tags apt && \
+    ansible-playbook -vvv -c local -i hosts common.yml --tags pip && \
+    ansible-playbook -vvv -c local -i hosts common.yml --skip-tags apt,pip && \
+    ansible-playbook -vvv -c local -i hosts bio.yml --tags r_base,r_extras && \
+    ansible-playbook -vvv -c local -i hosts bio.yml --tags blast && \
+    ansible-playbook -vvv -c local -i hosts bio.yml --skip-tags r_base,r_extras,blast && \
     rm -rf /bio-ansbile && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
