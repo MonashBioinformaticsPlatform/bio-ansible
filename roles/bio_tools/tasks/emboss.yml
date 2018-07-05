@@ -1,37 +1,46 @@
 ---
 
-- name: download emboss package {{ version }}
-  get_url:
-    url: ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-{{ version }}.tar.gz
-    timeout: 30
-    dest: "{{ source_dir }}/EMBOSS-{{ version }}.tar.gz"
+# EMBOSS FTP server returns "425 Security: Bad IP connecting" using get_url
+#- name: download emboss package {{ version }}
+#  tags: emboss
+#  get_url:
+#    url: ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-{{ version }}.tar.gz
+#    timeout: 30
+#    dest: "{{ source_dir }}/EMBOSS-{{ version }}.tar.gz"
 
+
+- name: download emboss package {{ version }} (wget to workaround fussy FTP server)
   tags: emboss
+  shell: wget -c -O "{{ source_dir }}/EMBOSS-{{ version }}.tar.gz" "ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-{{ version }}.tar.gz"
+  args:
+    creates: "{{ source_dir }}/EMBOSS-{{ version }}.tar.gz"
+
 
 - name: uncompress emboss {{ version }}
+  tags: emboss
   unarchive:
       src: "{{ source_dir }}/EMBOSS-{{ version }}.tar.gz"
       dest: "{{ source_dir }}"
       copy: no
 
-  tags: emboss
-
 - name: build emboss {{ version }}
+  tags: emboss
   shell: cd {{ source_dir }}/EMBOSS-{{ version }}; ./configure --prefix={{ apps_dir }}/emboss-{{ version }}; make; make install
   args:
     creates: "{{ source_dir }}/emboss-{{ version }}/bin/seqret"
 
-  tags: emboss
 
-- file:
+- name: Set EMBOSS module dir permissions
+  tags: emboss
+  file:
     dest: "{{ modules_bio }}/emboss"
     state: directory
     mode: 0755
 
-  tags: emboss
 
 - name: emboss {{ version }} module definition
-  template: 
+  tags: emboss
+  template:
     src: sw-module.lua.j2 
     dest: "{{ modules_bio }}/emboss/{{ version }}.lua"
     owner: "{{ main_guy }}" 
@@ -40,34 +49,31 @@
     - dir: 'emboss-{{ version }}'
       help_text: 'This module loads the EMBOSS bioinformatics tools'
 
+- name: Set EMBOSS app dir permissions
   tags: emboss
-
-- file:
+  file:
     dest: "{{ apps_dir }}/emboss-{{ version }}"
     state: directory
     mode: 0755
 
-  tags: emboss
-
 - name: setting register for emboss {{ version }}
+  tags: emboss
   stat:
     path: "{{ apps_dir }}/emboss-{{ version }}/bin/seqret"
   register: s
 
-  tags: emboss
 
 - name: removing emboss {{ version }} source directory
+  tags: emboss
   file:
     dest: "{{ source_dir }}/emboss-{{ version }}"
     state: absent
   when: "del_src and s.stat.exists"
 
-  tags: emboss
 
 - name: removing emboss {{ version }} tar file
+  tags: emboss
   file:
     dest: "{{ source_dir }}/emboss-{{ version }}.tar.gz"
     state: absent
   when: "del_src and s.stat.exists"
-
-  tags: emboss

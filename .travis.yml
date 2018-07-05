@@ -10,12 +10,15 @@ services:
 
 before_install:
   - pip install -U "ansible<2.5"
+  # Full build exceeds job timeout
   # - travis_wait 300 docker build -t bio-ansbile:latest -f docker/Dockerfile-local .
-  - travis_wait 300 docker build -t bio-ansbile:latest -f docker/Dockerfile-rnasik .
+  - travis_wait 300 docker build -t bio-ansbile:rnasik -f docker/Dockerfile-rnasik .
 
 script:
-  - ansible-playbook --syntax-check -c local -i hosts common.yml
-  - ansible-playbook --syntax-check -c local -i hosts bio.yml
-  - ansible-playbook --syntax-check -c local -i hosts interactive.yml
-  - ansible-playbook --syntax-check -c local -i hosts other.yml
-  - docker run -d bio-ansbile /bin/sh -c "source /etc/profile.d/lmod.sh; module --force try-load BigDataScript; module --force try-load RNAsik-pipe; RNAsik-pipe | grep 'RNAsik version'"
+  - ansible-playbook -vvv --syntax-check -c local -i hosts common.yml
+  - ansible-playbook -vvv --syntax-check -c local -i hosts bio.yml
+  - ansible-playbook -vvv --syntax-check -c local -i hosts interactive.yml
+  - ansible-playbook -vvv --syntax-check -c local -i hosts other.yml
+
+  # Functional tests of containers/tools
+  - docker run -d bio-ansbile:rnasik /bin/sh -c "source /etc/profile.d/lmod.sh; module --force try-load BigDataScript; module --force try-load RNAsik-pipe; RNAsik-pipe | grep 'RNAsik version'"

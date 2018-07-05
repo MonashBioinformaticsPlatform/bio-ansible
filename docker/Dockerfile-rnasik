@@ -22,10 +22,10 @@ RUN mkdir -p /bioansible/software/modules
 RUN mkdir -p /bioansible/software/source
 RUN mkdir -p /bioansible/software/apps
 
-RUN ansible-playbook -c local -i hosts common.yml --tags lmod_etc,environment && \
-    ansible-playbook -c local -i hosts bio.yml --tags lmod && \
-    ansible-playbook -c local -i hosts bio.yml --tags bds && \
-    ansible-playbook -c local -i hosts bio.yml --tags rnasik,star,subread,samtools,htslib,bedtools,picard,qualimap,fastqc,multiqc,bwa,hisat2 && \
+RUN ansible-playbook -vvv -c local -i hosts common.yml --tags lmod_etc,environment && \
+    ansible-playbook -vvv -c local -i hosts bio.yml --tags lmod && \
+    ansible-playbook -vvv -c local -i hosts bio.yml --tags bds && \
+    ansible-playbook -vvv -c local -i hosts bio.yml --tags rnasik,star,subread,samtools,htslib,bedtools,picard,qualimap,fastqc,multiqc,bwa,hisat2 && \
     rm -rf /bio-ansible && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
