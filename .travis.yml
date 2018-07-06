@@ -10,8 +10,9 @@ services:
 
 before_install:
   - pip install -U "ansible<2.5"
-  - travis_wait 300 docker build -t bio-ansbile:latest -f docker/Dockerfile-local .
-  # - travis_wait 300 docker build -t bio-ansbile:latest -f docker/Dockerfile-rnasik .
+  # Full build exceeds job timeout
+  # - travis_wait 300 docker build -t bio-ansbile:latest -f docker/Dockerfile-local .
+  - travis_wait 300 docker build -t bio-ansbile:latest -f docker/Dockerfile-rnasik .
 
 script:
   - ansible-playbook -vvv --syntax-check -c local -i hosts common.yml
@@ -19,3 +20,69 @@ script:
   - ansible-playbook -vvv --syntax-check -c local -i hosts interactive.yml
   - ansible-playbook -vvv --syntax-check -c local -i hosts other.yml
   - docker run -d bio-ansbile /bin/sh -c "source /etc/profile.d/lmod.sh; module --force try-load BigDataScript; module --force try-load RNAsik-pipe; RNAsik-pipe | grep 'RNAsik version'"
+  - travis_wait 300 docker build --build-arg TASK_TAGS=always -t bioansible:always -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=ant -t bioansible:ant -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=bcftools -t bioansible:bcftools -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=bds -t bioansible:bds -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=bedtools -t bioansible:bedtools -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=bioperl -t bioansible:bioperl -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=biotradis -t bioansible:biotradis -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=blast -t bioansible:blast -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=bowtie2 -t bioansible:bowtie2 -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=bwa -t bioansible:bwa -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=cdhit -t bioansible:cdhit -f docker/Dockerfile-bio-tags .
+  # - travis_wait 300 docker build --build-arg TASK_TAGS=cellranger -t bioansible:cellranger -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=cutadapt -t bioansible:cutadapt -f docker/Dockerfile-bio-tags .
+  # - travis_wait 300 docker build --build-arg TASK_TAGS=dirs -t bioansible:dirs -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=emboss -t bioansible:emboss -f docker/Dockerfile-bio-tags .
+  # - travis_wait 300 docker build --build-arg TASK_TAGS=environment -t bioansible:environment -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=fastqc -t bioansible:fastqc -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=freebayes -t bioansible:freebayes -f docker/Dockerfile-bio-tags .
+  # - travis_wait 300 docker build --build-arg TASK_TAGS=gatk -t bioansible:gatk -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=gatk4 -t bioansible:gatk4 -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=gdrive -t bioansible:gdrive -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=golang -t bioansible:golang -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=hifive -t bioansible:hifive -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=hisat2 -t bioansible:hisat2 -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=htslib -t bioansible:htslib -f docker/Dockerfile-bio-tags .
+  # - travis_wait 300 docker build --build-arg TASK_TAGS=igv -t bioansible:igv -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=infernal -t bioansible:infernal -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=java -t bioansible:java -f docker/Dockerfile-bio-tags .
+  # - travis_wait 300 docker build --build-arg TASK_TAGS=java_oracle -t bioansible:java_oracle -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=je_suite -t bioansible:je_suite -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=jupyter -t bioansible:jupyter -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=lmod -t bioansible:lmod -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=macs2 -t bioansible:macs2 -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=maven -t bioansible:maven -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=mimodd -t bioansible:mimodd -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=miso -t bioansible:miso -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=mothur -t bioansible:mothur -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=multiqc -t bioansible:multiqc -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=muscle -t bioansible:muscle -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=nodejs -t bioansible:nodejs -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=picard -t bioansible:picard -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=python -t bioansible:python -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=qiime -t bioansible:qiime -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=qualimap -t bioansible:qualimap -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=r_base -t bioansible:r_base -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=raxml -t bioansible:raxml -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=rnaseqenv -t bioansible:rnaseqenv -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=rnasik -t bioansible:rnasik -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=sabre -t bioansible:sabre -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=samtools -t bioansible:samtools -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=seqtk -t bioansible:seqtk -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=skewer -t bioansible:skewer -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=smalt -t bioansible:smalt -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=snpeff -t bioansible:snpeff -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=spades -t bioansible:spades -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=sratoolkit -t bioansible:sratoolkit -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=stack -t bioansible:stack -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=star -t bioansible:star -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=stdenv -t bioansible:stdenv -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=subread -t bioansible:subread -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=tmux -t bioansible:tmux -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=trimmomatic -t bioansible:trimmomatic -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=varcallenv -t bioansible:varcallenv -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=vcflib -t bioansible:vcflib -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=vcftools -t bioansible:vcftools -f docker/Dockerfile-bio-tags .
+  - travis_wait 300 docker build --build-arg TASK_TAGS=vsearch] -t bioansible:vsearch] -f docker/Dockerfile-bio-tags .
