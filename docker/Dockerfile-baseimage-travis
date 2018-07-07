@@ -11,8 +11,7 @@ RUN apt-get -y update && \
                        python-virtualenv python3-virtualenv \
                        build-essential git wget \
                        nodejs curl zsh cpanminus unzip tcl zlib1g-dev \
-                       tcl libtbb-dev libboost-program-options-dev \
-                       libboost-iostreams-dev && \
+                       tcl libtbb-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     pip install -U "pip==10.0.1" && \
