@@ -12,7 +12,7 @@ before_install:
   - pip install -U "ansible<2.5"
   # Full build exceeds job timeout
   # - travis_wait 300 docker build -t bio-ansbile:latest -f docker/Dockerfile-local .
-  - travis_wait 300 docker build -t bio-ansible:base -f docker/Dockerfile-baseimage .
+  - travis_wait 300 docker build -t bio-ansible:base -f docker/Dockerfile-baseimage-travis .
   # - travis_wait 300 docker build -t bio-ansbile:latest -f docker/Dockerfile-rnasik .
 
 script:
