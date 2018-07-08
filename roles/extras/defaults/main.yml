@@ -10,7 +10,7 @@ maven_version: 3.3.9
 tmux_version: 2.4
 hifive_version: 1.4.0
 ant_version: 1.10.2
-ant_mirror_base: "https://www.apache.org/dist/ant/binaries/"
+ant_mirror_base: "https://archive.apache.org/dist/ant/binaries/"
 go_version: 1.8.3
 
 #jupyter_version: 20.06.2018
