@@ -34,7 +34,6 @@ script:
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=always -t bioansible:always -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:always
 
-  # TODO: URL needs fixing (again)
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=ant -t bioansible:ant -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:ant
 
@@ -76,7 +75,7 @@ script:
   # - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=dirs -t bioansible:dirs -f docker/Dockerfile-bio-tags-travis .
   # - travis_wait 300 docker rmi bioansible:dirs
 
-  # TODO: check wget version is working
+  # TODO: Requires Xlib.h (some x11-dev type pacakge)
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=emboss -t bioansible:emboss -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:emboss
 

@@ -13,10 +13,11 @@ RUN apt-get -y update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
                        python python3 python-pip python3-pip \
                        python-virtualenv python3-virtualenv \
-                       build-essential git wget \
-                       openjdk-8-jdk-headless ant golang-go unzip \
-                       zlib1g-dev libncurses-dev libbz2-dev liblzma-dev \
-                       tcl lua5.2 liblua5.2-dev lua-filesystem lua-posix && \
+                       build-essential git wget curl \
+                       openjdk-8-jdk-headless ant golang-go cpanminus nodejs unzip \
+                       libx11-dev zlib1g-dev libncurses-dev libbz2-dev liblzma-dev libtbb-dev
+                       libboost-program-options-dev libboost-iostreams-dev \
+                       tcl lua5.2 liblua5.2-dev lua-filesystem lua-posix lua-posix-dev && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* && \
     pip install -U "pip==9.0.3" && \
