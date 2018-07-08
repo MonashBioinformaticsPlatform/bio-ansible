@@ -57,6 +57,7 @@
 - name: download blast legacy
   get_url:
     url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/2.2.26/blast-2.2.26-x64-linux.tar.gz
+    retry: 3
     timeout: 30
     dest: "{{ apps_dir }}/qiime-{{ version }}/extended/blast-2.2.26-x64-linux.tar.gz"
 
