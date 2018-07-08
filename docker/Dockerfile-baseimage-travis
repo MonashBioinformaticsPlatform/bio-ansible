@@ -15,8 +15,8 @@ RUN apt-get -y update && \
                        python-virtualenv python3-virtualenv \
                        build-essential git wget curl \
                        openjdk-8-jdk-headless ant golang-go cpanminus nodejs unzip \
-                       libx11-dev zlib1g-dev libncurses-dev libbz2-dev liblzma-dev libtbb-dev \
-                       libboost-program-options-dev libboost-iostreams-dev \
+                       libx11-dev zlib1g-dev libncurses-dev libbz2-dev liblzma-dev libtbb2 libtbb-dev \
+                       libboost-all-dev libboost-program-options-dev libboost-iostreams-dev \
                        tcl lua5.2 liblua5.2-dev lua-filesystem lua-posix lua-posix-dev && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* && \
