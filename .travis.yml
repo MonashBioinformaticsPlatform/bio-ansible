@@ -20,18 +20,36 @@ script:
   - ansible-playbook -vvv --syntax-check -c local -i hosts bio.yml
   - ansible-playbook -vvv --syntax-check -c local -i hosts interactive.yml
   - ansible-playbook -vvv --syntax-check -c local -i hosts other.yml
+
+  ####
+  # Test playbook tag for each tool
+
   ###
   # TODO: There tools have dependencies that task doesn't currently take care of
   #       Fix them by adding the extra tags to the dependency tasks (eg add bcftools tag to the htslib task)
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=bcftools,htslib -t bioansible:bcftools -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:bcftools
 
-  # TODO: Failing, some missing compile-time dependency
-  # - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=bowtie2 -t bioansible:bowtie2 -f docker/Dockerfile-bio-tags-travis .
-  # - travis_wait 300 docker rmi bioansible:bowtie2
+  # Added extra nodejs tag, should be a task dependency
+  - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=jupyter,nodejs -t bioansible:jupyter -f docker/Dockerfile-bio-tags-travis .
+  - travis_wait 300 docker rmi bioansible:jupyter
 
-  ####
-  # Test playbook tag for each tool
+  # TODO: Failing, some missing compile-time dependency
+  - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=bowtie2 -t bioansible:bowtie2 -f docker/Dockerfile-bio-tags-travis .
+  - travis_wait 300 docker rmi bioansible:bowtie2
+
+  # TODO: Failing - missing compile-time dependency (boost related ?)
+  - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=blast -t bioansible:blast -f docker/Dockerfile-bio-tags-travis .
+  - travis_wait 300 docker rmi bioansible:blast
+
+  # TODO: Failing - some missing compile-time dependency
+  - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=mimodd -t bioansible:mimodd -f docker/Dockerfile-bio-tags-travis .
+  - travis_wait 300 docker rmi bioansible:mimodd
+
+  # TODO: Requires libboost-program-options-dev and libboost-iostreams-dev
+  - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=mothur -t bioansible:mothur -f docker/Dockerfile-bio-tags-travis .
+  - travis_wait 300 docker rmi bioansible:mothur
+
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=always -t bioansible:always -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:always
 
@@ -40,26 +58,21 @@ script:
 
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=bds -t bioansible:bds -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:bds
+
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=bedtools -t bioansible:bedtools -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:bedtools
+
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=bioperl -t bioansible:bioperl -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:bioperl
+
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=biotradis -t bioansible:biotradis -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:biotradis
-
-  # TODO: Failing - missing compile-time dependency (boost related ?)
-  # - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=blast -t bioansible:blast -f docker/Dockerfile-bio-tags-travis .
-  # - travis_wait 300 docker rmi bioansible:blast
 
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=bwa -t bioansible:bwa -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:bwa
 
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=htslib -t bioansible:htslib -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:htslib
-
-  # TODO: Failing - some missing compile-time dependency
-  # - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=mimodd -t bioansible:mimodd -f docker/Dockerfile-bio-tags-travis .
-  # - travis_wait 300 docker rmi bioansible:mimodd
 
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=cdhit -t bioansible:cdhit -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:cdhit
@@ -86,8 +99,10 @@ script:
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=freebayes -t bioansible:freebayes -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:freebayes
 
+  # Requires external (non-free) package
   # - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=gatk -t bioansible:gatk -f docker/Dockerfile-bio-tags-travis .
   # - travis_wait 300 docker rmi bioansible:gatk
+
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=gatk4 -t bioansible:gatk4 -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:gatk4
 
@@ -104,6 +119,7 @@ script:
   # - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=hisat2 -t bioansible:hisat2 -f docker/Dockerfile-bio-tags-travis .
   # - travis_wait 300 docker rmi bioansible:hisat2
 
+  # Requires external (non-free) package
   # - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=igv -t bioansible:igv -f docker/Dockerfile-bio-tags-travis .
   # - travis_wait 300 docker rmi bioansible:igv
 
@@ -113,14 +129,12 @@ script:
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=java -t bioansible:java -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:java
 
+  # Requires external (non-free) package
   # - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=java_oracle -t bioansible:java_oracle -f docker/Dockerfile-bio-tags-travis .
-  - travis_wait 300 docker rmi bioansible:java_oracle
+  # - travis_wait 300 docker rmi bioansible:java_oracle
 
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=je_suite -t bioansible:je_suite -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:je_suite
-
-  - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=jupyter -t bioansible:jupyter -f docker/Dockerfile-bio-tags-travis .
-  - travis_wait 300 docker rmi bioansible:jupyter
 
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=lmod -t bioansible:lmod -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:lmod
@@ -128,15 +142,12 @@ script:
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=macs2 -t bioansible:macs2 -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:macs2
 
-  - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=maven -t bioansible:maven -f docker/Dockerfile-bio-tags-travis .
-  - travis_wait 300 docker rmi bioansible:maven
+  # TODO: Too slow, exceeds maximum timeout (50 min) ?
+  # - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=maven -t bioansible:maven -f docker/Dockerfile-bio-tags-travis .
+  # - travis_wait 300 docker rmi bioansible:maven
 
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=miso -t bioansible:miso -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:miso
-
-  # TODO: Requires libboost-program-options-dev and libboost-iostreams-dev
-  - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=mothur -t bioansible:mothur -f docker/Dockerfile-bio-tags-travis .
-  - travis_wait 300 docker rmi bioansible:mothur
 
   - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS=multiqc -t bioansible:multiqc -f docker/Dockerfile-bio-tags-travis .
   - travis_wait 300 docker rmi bioansible:multiqc

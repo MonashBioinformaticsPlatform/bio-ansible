@@ -8,6 +8,15 @@
 ansible-playbook --list-tags bio.yml | \
   grep "TASK TAGS:" | \
   sed "s/TASK TAGS: \[//" | \
-  python3 -c "import sys; tags=sys.stdin.read().split(','); \
-              [print('  - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS={tag} -t bioansible:{tag} -f docker/Dockerfile-bio-tags-travis .\n  - travis_wait 300 docker rmi bioansible:{tag}\n'\
-              .format(tag=t.strip())) for t in tags]"
+  python3 -c '
+
+import sys
+
+template = """\
+  - travis_wait 300 docker build --pull=false --build-arg TASK_TAGS={tag} -t bioansible:{tag} -f docker/Dockerfile-bio-tags-travis .
+  - travis_wait 300 docker rmi bioansible:{tag}
+"""
+
+tags=sys.stdin.read().split(",")
+[print(template.format(tag=t.strip())) for t in tags]
+' # end python
