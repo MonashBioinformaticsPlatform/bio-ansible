@@ -130,3 +130,4 @@
     - parallel
     - acl
     - qpdf
+    - apache2-utils
