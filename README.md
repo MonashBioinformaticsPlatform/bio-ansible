@@ -55,7 +55,7 @@ virtualenv ~/.virtualenvs/ansible
 source ~/.virtualenvs/ansible/bin/activate
 pip install -U pip
 # bio-ansible currently requires Ansible 2.4.x
-pip install "ansible<2.5"
+pip install -U "ansible<2.5"
 ```
 
 2. `git clone https://github.com/MonashBioinformaticsPlatform/bio-ansible.git`
