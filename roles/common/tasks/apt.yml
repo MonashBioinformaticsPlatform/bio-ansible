@@ -43,6 +43,7 @@
     - liblua5.2-dev
     - lua-filesystem
     - lua-posix
+    - lua-posix-dev
     # lmod dep
     - tcl
     # htslib deps
