@@ -44,6 +44,7 @@
     - lua-filesystem
     - lua-posix
     - lua-posix-dev
+    - luarocks
     # lmod dep
     - tcl
     # htslib deps

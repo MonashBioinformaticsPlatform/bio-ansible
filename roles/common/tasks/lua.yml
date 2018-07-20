@@ -1,0 +1,17 @@
+---
+- name: apt-get lua & LMOD dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - lua5.2
+    - liblua5.2-dev
+    - luarocks
+    # We get these via luarocks, LMOD doesn't like the apt versions
+    #  - lua-filesystem
+    #  - lua-posix
+    #  - lua-posix-dev
+
+- name: install luarocks packages
+  shell: "luarocks install luaposix && luarocks install luafilesystem"
