@@ -8,23 +8,23 @@
 
   tags: igv
 
-- name: download bcel-5.2 lib
-  get_url:
-    url: http://www.java2s.com/Code/JarDownload/bcel/bcel-5.2.jar.zip
-    dest: "{{ source_dir }}/igv-{{ version }}/extras/bcel-5.2.jar.zip"
+  #- name: download bcel-5.2 lib
+  #get_url:
+  #  url: http://www.java2s.com/Code/JarDownload/bcel/bcel-5.2.jar.zip
+  #  dest: "{{ source_dir }}/igv-{{ version }}/extras/bcel-5.2.jar.zip"
+  #
+  #tags: igv
 
-  tags: igv
-
-- name: uncompress bcel-5.2 lib
-  unarchive:
-    src: "{{ source_dir }}/igv-{{ version }}/extras/bcel-5.2.jar.zip"
-    dest: "{{ source_dir }}/igv-{{ version }}/extras"
-    copy: no
-
-  tags: igv
+  #- name: uncompress bcel-5.2 lib
+  #unarchive:
+  #  src: "{{ source_dir }}/igv-{{ version }}/extras/bcel-5.2.jar.zip"
+  #  dest: "{{ source_dir }}/igv-{{ version }}/extras"
+  #  copy: no
+  #
+  #tags: igv
 
 - name: check that /usr/bin/java exists
-  command: /usr/bin/java
+  command: /usr/bin/java -version
   register: java_local
   ignore_errors: true
 
@@ -38,7 +38,7 @@
   tags: igv
 
 - name: build igv {{ version }}
-  shell: export JAVA_HOME={{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}; cd {{ source_dir }}/igv-{{ version }}; ant
+  shell: export JAVA_HOME={{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}; cd {{ source_dir }}/igv-{{ version }}; ./gradlew createDist  # ant
   args:
     creates: "{{ source_dir }}/igv-{{ version }}/igv.jar"
   when: java_tar.stat.isdir 
@@ -46,27 +46,27 @@
   tags: igv
 
 - name: build igv {{ version }}
-  shell: cd {{ source_dir }}/igv-{{ version }}; ant
+  shell: cd {{ source_dir }}/igv-{{ version }}; ./gradlew createDist  # ant
   args:
     creates: "{{ source_dir }}/igv-{{ version }}/igv.jar"
   when: java_local and java_tar.stat.isdir is not defined
 
   tags: igv
 
-- name: build igv {{ version }}
-  shell: export JAVA_HOME={{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}; cd {{ source_dir }}/igv-{{ version }}; ant -lib {{ source_dir }}/igv-{{ version }}/extras -f scripts/build-tools.xml
+- name: build igv tools {{ version }}
+  shell: export JAVA_HOME={{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}; cd {{ source_dir }}/igv-{{ version }}; ./gradlew createToolsDist  # ant -lib {{ source_dir }}/igv-{{ version }}/extras -f scripts/build-tools.xml
   args:
     creates: "{{ source_dir }}/igv-{{ version }}/igvtools-dist/igvtools.jar"
   when: java_tar.stat.isdir 
-
+  
   tags: igv
 
-- name: build igv {{ version }}
-  shell: cd {{ source_dir }}/igv-{{ version }}; ant -lib {{ source_dir }}/igv-{{ version }}/extras -f scripts/build-tools.xml
+- name: build igv tools {{ version }}
+  shell: cd {{ source_dir }}/igv-{{ version }}; ./gradlew createToolsDist  # ant -lib {{ source_dir }}/igv-{{ version }}/extras -f scripts/build-tools.xml
   args:
     creates: "{{ source_dir }}/igv-{{ version }}/igvtools-dist/igvtools.jar"
   when: java_local and java_tar.stat.isdir is not defined
-
+  
   tags: igv
 
 - file:
