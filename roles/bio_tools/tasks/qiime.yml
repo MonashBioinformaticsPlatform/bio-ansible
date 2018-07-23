@@ -239,7 +239,7 @@
   tags: qiime
 
 - name: build ea-utils 
-  shell: cd {{ apps_dir }}/qiime-{{ version }}/extended/ea-utils-1.04.807/clipper; make
+  shell: cd {{ apps_dir }}/qiime-{{ version }}/extended/ea-utils-1.04.807/clipper; make CPLUS_INCLUDE_PATH=`pwd`
   args:
     creates: "{{ apps_dir }}/qiime-{{ version }}/extended/ea-utils-1.04.807/clipper/fastq-join"
 

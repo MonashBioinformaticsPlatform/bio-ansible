@@ -8,11 +8,14 @@
     mode: 0755
     
 - name: reload systemd daemon
+  tags: jupyter
   systemd:
     name: jupyterhub
     enabled: True
     daemon_reload: yes
 
 - name: start the service
+  tags: jupyter
   systemd:
+    name: jupyterhub
     state: started
