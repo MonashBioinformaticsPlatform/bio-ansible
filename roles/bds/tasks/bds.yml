@@ -10,7 +10,7 @@
 
 - name: check that /usr/bin/java exists
   tags: bds
-  command: /usr/bin/java
+  command: /usr/bin/java -version
   register: java_local
   ignore_errors: true
 

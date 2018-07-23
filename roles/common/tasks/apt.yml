@@ -94,6 +94,9 @@
     # mothur and uchime C++ deps
     - libboost-program-options-dev
     - libboost-iostreams-dev
+    # blast
+    - liblmdb-dev
+    - libboost-all-dev  # just get all of Boost ...
     # vsearch
     - autoconf
     - autogen
