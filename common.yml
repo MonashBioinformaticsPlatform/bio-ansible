@@ -4,13 +4,13 @@
   hosts: common
   remote_user: "{{ sudo_guy }}"
   roles:
-            # need to have no previlidged installer guy
-            - make_sw_guy
-            # apt-get installation
-            - common
-            # lmod installed in {{ bioansible_basepath }}/software/apps directory
-            - lmod_etc
-            # - user_auth
+    # need to have no previlidged installer guy
+    - make_sw_guy
+    # apt-get installation
+    - common
+    # lmod installed in {{ bioansible_basepath }}/software/apps directory
+    - lmod_etc
+    # - user_auth
 
   become: true
 
@@ -18,6 +18,6 @@
   hosts: gui
   remote_user: "{{ sudo_guy }}"
   roles:
-            - gui
+    - gui
 
   become: true

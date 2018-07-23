@@ -21,7 +21,6 @@
     - make
     - cmake
     - unzip
-    - realpath
     # security
     - fail2ban
     # non essential, useful
@@ -82,13 +81,9 @@
     - libglu1-mesa-dev
     - libcgal-dev
     - libnetcdf-dev
-    - libmariadb-client-lgpl-dev  # 16.04
     - libudunits2-0    # ChIPseeker
     - libudunits2-dev  # ChIPseeker
-    # - libmariadbclient-dev  # 14.04
     # RStudio deps
-    - libgstreamer-plugins-base0.10-0
-    - libgstreamer0.10-0
     - libjpeg62
     - liborc-0.4-0
     - libapparmor1
@@ -131,3 +126,48 @@
     - acl
     - qpdf
     - apache2-utils
+
+- name: apt-get common dependencies (16.04+)
+  tags: apt
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - libmariadb-client-lgpl-dev
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 16
+
+- name: apt-get common dependencies (14.04)
+  tags: apt
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - libmariadbclient-dev
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '14.04'
+
+- name: apt-get common dependencies (< 18.04)
+  tags: apt
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - realpath
+    # Rstudio deps
+    - libgstreamer-plugins-base0.10-0
+    - libgstreamer0.10-0
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int < 18
+
+- name: apt-get common dependencies (18.04)
+  tags: apt
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - coreutils
+    # Rstudio deps
+    - libgstreamer-plugins-base1.0-0
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '18.04'
