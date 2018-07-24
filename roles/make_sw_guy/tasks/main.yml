@@ -41,13 +41,3 @@
     owner: "{{ main_guy }}"
     group: "{{ main_guy }}"
     mode: 0755
-
-- name: Set {{ data_dir }} permissions
-  tags: sw_guy
-  file:
-    dest: "{{ data_dir }}"
-    state: directory
-    owner: "{{ main_guy }}"
-    group: "{{ main_guy }}"
-    mode: 0755
-

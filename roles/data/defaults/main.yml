@@ -1,4 +1,6 @@
 ---
+data_dir: "/data/bio-data"
+
 # training data, mainly for biotraining server
 r_intro_version: gh-pages
 r_more_version: gh-pages
