@@ -52,7 +52,10 @@
 - include: seqtk.yml version={{ seqtk_version }}
 - include: igv.yml version={{ igv_version }}
 - include: bedtools.yml version={{ bedtools2_version }}
-- include: blast.yml version={{ blast_version }}
+
+# If for some reason you'd prefer to compile NCBI-BLAST from source (slow)
+# - include: blast.yml version={{ blast_version }}
+
 - include: smalt.yml version={{ smalt_version }}
   #- include: bcl2fastq2.yml version={{ bcl2fastq2_version }}
 - include: emboss.yml version={{ emboss_version }}
@@ -87,12 +90,34 @@
   tags: sabre
 
 # List of Bioconda packages available: https://bioconda.github.io/recipes.html
-- include_tasks: conda-package.yml module_name=gatk4 conda_packages=['gatk4={{ gatk4_version }}'] version={{ gatk4_version }}
+
+- include_tasks: conda-package.yml
+  tags: blast
+  module_name: blast
+  version: "{{ blast_version }}"
+  conda_packages:
+    - 'blast={{ blast_version }}'
+
+- include_tasks: conda-package.yml
   tags: gatk4
-- include_tasks: conda-package.yml module_name=freebayes conda_packages=['freebayes={{ freebayes_version }}'] version={{ freebayes_version }}
+  module_name: gatk4
+  version: "{{ gatk4_version }}"
+  conda_packages:
+    - 'gatk4={{ gatk4_version }}'
+
+- include_tasks: conda-package.yml
   tags: freebayes
-- include_tasks: conda-package.yml module_name=infernal conda_packages=['infernal={{ infernal_version }}'] version={{ infernal_version }}
+  module_name: freebayes
+  version: "{{ freebayes_version }}"
+  conda_packages:
+    - 'freebayes={{ freebayes_version }}'
+
+- include_tasks: conda-package.yml
   tags: infernal
+  module_name: infernal
+  version: "{{ infernal_version }}"
+  conda_packages:
+    - 'infernal={{ infernal_version }}'
 
 - include_tasks: conda-package.yml
   tags: miso
