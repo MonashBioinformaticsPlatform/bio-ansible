@@ -48,6 +48,8 @@
     # htslib deps
     - zlib1g-dev
     - libncurses-dev
+    # ncbi blast deps
+    - liblmdb-dev 
     # BigDataScript deps
     - golang-go
     - ant

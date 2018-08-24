@@ -16,8 +16,13 @@
 
   tags: blast
 
+- name: remove configured header file from previous build (ncbiconf_unix.h)
+  tags: blast
+  file: path=/mnt/software/source/ncbi-blast-2.7.1+-src/c++/ReleaseMT/inc/ncbiconf_unix.h state=absent
+ 
+# TODO: Make the --without-boost flag only 18.04+
 - name: build blast {{ version }}
-  shell: cd {{ source_dir }}/ncbi-blast-{{ version }}+-src/c++; ./configure; make # install prefix={{ apps_dir }}/blast-{{ version }}
+  shell: cd {{ source_dir }}/ncbi-blast-{{ version }}+-src/c++; ./configure --without-boost && make && make install prefix={{ apps_dir }}/blast-{{ version }}
   args:
     creates: "{{ source_dir }}/ncbi-blast-{{ version }}+-src/c++/ReleaseMT/bin/blastn"
 
