@@ -6,8 +6,9 @@
     update_cache: yes
     cache_valid_time: 3600
 
-- name: download rstudio-server {{ version }}
+- name: download and install rstudio-server {{ version }}
   tags: rstudio
   apt:
     deb: "http://download2.rstudio.org/rstudio-server-{{ version }}.deb"
   become: yes
+  # when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int <= 14
