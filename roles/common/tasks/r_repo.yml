@@ -1,0 +1,21 @@
+---
+- name: Add CRAN repo key
+  tags: r_repo
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: "E084DAB9"
+
+- name: Add CRAN repository (Ubuntu 18.04)
+  tags: r_repo
+  apt_repository:
+    repo: deb https://cran.csiro.au/bin/linux/ubuntu bionic-cran35/
+    state: present
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '18.04'
+
+- name: Install R base Ubuntu package
+  tags: r_repo
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - r-base

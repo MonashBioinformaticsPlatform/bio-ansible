@@ -6,6 +6,7 @@
 - include: apt.yml
 - include_tasks: lua.yml
   tags: ['apt', 'lua']
+- include: r_repo.yml
 - include: basemount.yml
 - include: singularity-apt.yml
 - include: python.yml
