@@ -1,41 +1,46 @@
 ---
 
 - name: download NCBI blast package {{ version }}
+  tags: blast
   get_url:
     url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/{{ version }}/ncbi-blast-{{ version }}+-src.tar.gz
     timeout: 30
     dest: "{{ source_dir }}/ncbi-blast-{{ version }}+-src.tar.gz"
 
-  tags: blast
-
 - name: uncompress blast {{ version }}
+  tags: blast
   unarchive:
     src: "{{ source_dir }}/ncbi-blast-{{ version }}+-src.tar.gz"
     dest: "{{ source_dir }}"
     copy: no
 
-  tags: blast
-
 - name: remove configured header file from previous build (ncbiconf_unix.h)
   tags: blast
   file: path=/mnt/software/source/ncbi-blast-2.7.1+-src/c++/ReleaseMT/inc/ncbiconf_unix.h state=absent
  
-# TODO: Make the --without-boost flag only 18.04+
 - name: build blast {{ version }}
+  tags: blast
+  shell: cd {{ source_dir }}/ncbi-blast-{{ version }}+-src/c++; ./configure && make && make install prefix={{ apps_dir }}/blast-{{ version }}
+  args:
+    creates: "{{ source_dir }}/ncbi-blast-{{ version }}+-src/c++/ReleaseMT/bin/blastn"
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int < 18
+
+- name: build blast (--without-boost) {{ version }}
+  tags: blast
   shell: cd {{ source_dir }}/ncbi-blast-{{ version }}+-src/c++; ./configure --without-boost && make && make install prefix={{ apps_dir }}/blast-{{ version }}
   args:
     creates: "{{ source_dir }}/ncbi-blast-{{ version }}+-src/c++/ReleaseMT/bin/blastn"
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 18
 
+- name: set blast module directory permisions
   tags: blast
-
-- file:
+  file:
     dest: "{{ modules_bio }}/blast"
     state: directory
     mode: 0755
 
-  tags: blast
-
 - name: blast {{ version }} module definition
+  tags: blast
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_bio }}/blast/{{ version }}.lua"
@@ -45,41 +50,35 @@
     - dir: 'blast-{{ version }}'
       help_text: 'This module loads the blast packages including featureCounts'
 
+- name: set blast apps directory permissions
   tags: blast
-
-- file:
+  file:
     dest: "{{ apps_dir }}/blast-{{ version }}"
     state: directory
     mode: 0755
 
-  tags: blast
-
 - name: move blast {{ version }} executable to apps directory
+  tags: blast
   shell: cp -r {{ source_dir }}/ncbi-blast-{{ version }}+-src/c++/ReleaseMT/bin {{ apps_dir }}/blast-{{ version }}
   args:
     creates: "{{ apps_dir }}/blast-{{ version }}/bin/blastn"
 
-  tags: blast
-
 - name: setting register for blast {{ version }}
+  tags: blast
   stat:
     path: "{{ apps_dir }}/blast-{{ version }}/bin/blastn"
   register: s
 
-  tags: blast
-
 - name: removing blast {{ version }} source directory
+  tags: blast
   file:
     dest: "{{ source_dir }}/ncbi-blast-{{ version }}+-src"
     state: absent
   when: "del_src and s.stat.exists"
 
-  tags: blast
-
 - name: removing blast {{ version }} tar file
+  tags: blast
   file:
     dest: "{{ source_dir }}/ncbi-blast-{{ version }}+-src.tar.gz"
     state: absent
   when: "del_src and s.stat.exists"
-
-  tags: blast

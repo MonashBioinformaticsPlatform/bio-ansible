@@ -43,6 +43,8 @@
     - liblua5.2-dev
     - lua-filesystem
     - lua-posix
+    - lua-posix-dev
+    - luarocks
     # lmod dep
     - tcl
     # htslib deps
@@ -94,6 +96,9 @@
     # mothur and uchime C++ deps
     - libboost-program-options-dev
     - libboost-iostreams-dev
+    # blast
+    - liblmdb-dev
+    - libboost-all-dev  # just get all of Boost ...
     # vsearch
     - autoconf
     - autogen
