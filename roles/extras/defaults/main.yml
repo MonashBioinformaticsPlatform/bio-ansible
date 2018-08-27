@@ -13,6 +13,6 @@ ant_version: 1.10.2
 ant_mirror_base: "https://archive.apache.org/dist/ant/binaries/"
 go_version: 1.8.3
 
-#jupyter_version: 20.06.2018
+jupyter_version: 20.06.2018
 jupyter_config_templ: jupyter-config.py.j2
 jupyter_script: jupyter.bash.j2
