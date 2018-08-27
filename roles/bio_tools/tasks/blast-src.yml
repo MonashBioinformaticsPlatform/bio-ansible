@@ -14,6 +14,10 @@
     dest: "{{ source_dir }}"
     copy: no
 
+- name: remove configured header file from previous build (ncbiconf_unix.h)
+  tags: blast
+  file: path=/mnt/software/source/ncbi-blast-{{ version }}+-src/c++/ReleaseMT/inc/ncbiconf_unix.h state=absent
+
 - name: build blast {{ version }}
   tags: blast
   shell: cd {{ source_dir }}/ncbi-blast-{{ version }}+-src/c++; ./configure && make && make install prefix={{ apps_dir }}/blast-{{ version }}

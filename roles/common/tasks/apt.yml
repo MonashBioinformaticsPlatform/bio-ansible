@@ -50,6 +50,8 @@
     # htslib deps
     - zlib1g-dev
     - libncurses-dev
+    # ncbi blast deps
+    - liblmdb-dev 
     # BigDataScript deps
     - golang-go
     - ant
@@ -86,7 +88,7 @@
     - libudunits2-0    # ChIPseeker
     - libudunits2-dev  # ChIPseeker
     # Requires PPA: sudo add-apt-repository -y ppa:ubuntugis/ppa
-    - libgdal-dev  # leaflet maps
+    # - libgdal-dev  # leaflet maps
     # RStudio deps
     - libjpeg62
     - liborc-0.4-0
