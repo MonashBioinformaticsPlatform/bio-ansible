@@ -32,6 +32,7 @@ if (length(args)==0) {
                      "viridis",
                      "optparse",
                      "plotly",
+                     "bookdown",
                      # from r-commended debian pacakge
                      "boot",
                      "class",

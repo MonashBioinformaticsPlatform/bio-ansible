@@ -7,8 +7,10 @@ biocLite(ask=FALSE)
 # Install the BioConductor packages we want
 biocLite(pkgs = c("Biostrings",
                   "GenomicRanges",
+                  "GenomicFeatures",
                   "BSgenome",
                   "rtracklayer",
+                  "plyranges",
                   "motifRG",
                   "Rsubread",
                   "edgeR",
