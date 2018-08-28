@@ -34,3 +34,8 @@
           update-locale LANG={{ locale }}"
   environment:
     - DEBIAN_FRONTEND: noninteractive
+
+- name: Set the timezone ({{ timezone }})
+  become: yes
+  become_user: root
+  shell: "timedatectl set-timezone {{ timezone }}"
