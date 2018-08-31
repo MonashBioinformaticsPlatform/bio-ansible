@@ -89,6 +89,9 @@
 - include_tasks: sabre.yml version={{ sabre_version }}
   tags: sabre
 
+- include_tasks: minimap2.yml version={{ minimap2_version }}
+  tags: minimap2
+
 # List of Bioconda packages available: https://bioconda.github.io/recipes.html
 
 - include_tasks: conda-package.yml

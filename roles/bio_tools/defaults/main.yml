@@ -60,6 +60,7 @@ trimmomatic_version: 0.36
 skewer_version: 0.2.2
 sabre_version: 7ba39b9
 hisat2_version: 2.1.0
+minimap2_version: 2.12
 
 # python virtualenv
 mimodd_version: 0.1.9  # 0.1.7.3
