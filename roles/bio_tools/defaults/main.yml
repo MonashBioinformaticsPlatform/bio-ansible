@@ -45,7 +45,7 @@ bedtools2_version: 2.25.0
 blast_version: 2.7.1  # 2.6.0
 smalt_version: 0.7.6
 snpeff_version: "4_3i"
-spades_version: 3.10.0
+spades_version: 3.12.0
 vsearch_version: 2.4.0
 raxml_version: 8.2.9
 raxml_makefile: Makefile.AVX.PTHREADS.gcc
