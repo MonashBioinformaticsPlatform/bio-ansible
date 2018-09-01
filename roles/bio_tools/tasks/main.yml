@@ -144,6 +144,13 @@
   conda_packages:
     - 'je-suite={{ je_suite_version }}'
 
+- include_tasks: conda-package.yml
+  tags: hmmer
+  module_name: hmmer
+  version: "{{ hmmer_version }}"
+  conda_packages:
+    - 'hmmer={{ hmmer_version }}'
+
 # always install freebayes and vcflib last as they tend to break during compilation
 # - include: freebayes.yml version={{ freebayes_version }} # replaced by bioconda version
 - include: vcflib.yml version={{ vcflib_version }}
