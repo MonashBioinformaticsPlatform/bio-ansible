@@ -52,7 +52,7 @@ raxml_makefile: Makefile.AVX.PTHREADS.gcc
 cellranger_version: 1.3.1
 vcftools_version: 0.1.14
 muscle_version: 3.8.31
-cdhit_version: 4.6.7
+cdhit_version: 4.6.8
 mothur_version: 1.39.5
 bcl2fastq2_version: 2.19.1
 emboss_version: 6.6.0
