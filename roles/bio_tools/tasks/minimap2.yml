@@ -1,0 +1,42 @@
+---
+
+- name: download minimap2 {{ version }}
+  git:
+    repo: https://github.com/lh3/minimap2
+    dest: "{{ source_dir }}/minimap2-{{ version }}"
+    version: "v{{ version }}"
+
+- name: build minimap2 {{ version }}
+  shell: cd {{ source_dir }}/minimap2-{{ version }}; make
+  args:
+    creates: "{{ source_dir }}/minimap2-{{ version }}/minimap2"
+
+- name: Create "{{ apps_dir }}/minimap2-{{ version }}/bin"
+  file:
+    dest: "{{ apps_dir }}/minimap2-{{ version }}/bin"
+    state: directory
+    owner: "{{ main_guy }}"
+    mode: 0755
+
+- name: Copy minimap2 binary to "{{ apps_dir }}/minimap2-{{ version }}/bin/"
+  file:
+    src: "{{ source_dir }}/minimap2-{{ version }}/minimap2"
+    dest: "{{ apps_dir }}/minimap2-{{ version }}/bin/minimap2"
+    state: link
+
+- name: Create minmap2 module directory
+  file:
+    dest: "{{ modules_bio }}/minimap2"
+    state: directory
+    mode: 0755
+
+- name: minimap2 {{ version }} lmod definition
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_bio }}/minimap2/{{ version }}.lua"
+    owner: "{{ main_guy }}"
+    mode: 0644
+  with_items:
+    - dir: 'minimap2-{{ version }}'
+      help_text: 'This module loads the minimap2 tool' 
+
