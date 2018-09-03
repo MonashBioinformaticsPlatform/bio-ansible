@@ -1,0 +1,19 @@
+---
+- name: Add duck.sh repo key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: "FE7097963FEFBE72"
+
+- name: Add duck.sh repository
+  apt_repository:
+    repo: deb https://s3.amazonaws.com/repo.deb.cyberduck.io stable main
+    state: present
+    update_cache: yes
+
+- name: Install duck
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    # essentials
+    - duck

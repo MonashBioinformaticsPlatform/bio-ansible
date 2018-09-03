@@ -16,3 +16,6 @@
 - include: timezone.yml
 - include_tasks: motd.yml
   tags: motd
+
+- include_tasks: duck.yml
+  tags: ['duck']
