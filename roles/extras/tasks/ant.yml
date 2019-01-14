@@ -38,5 +38,5 @@
   with_items:
     - dir: 'apache-ant-{{ version }}'
       env: [{name: "ANT_HOME", value: "{{ apps_dir }}/apache-ant-{{ version }}"}]
-      depend: "java"
+      depend: '"java"'
       help_text: 'This module loads Apache Ant {{ version }}'
