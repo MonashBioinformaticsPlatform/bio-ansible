@@ -30,7 +30,7 @@ htslib_version: 1.8
 samtools_version: 1.8
 bcftools_version: 1.8
 
-subread_version: 1.5.2
+subread_version: 1.6.1
 picard_version: 2.18.0
 gatk_version: 3.7
 fastqc_version: 0.11.5
