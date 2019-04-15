@@ -95,6 +95,9 @@
     - libapparmor1
     - libxml2
     - libxml2-dev
+    # For rJava
+    - default-jre
+    - default-jdk
     # mothur and uchime C++ deps
     - libboost-program-options-dev
     - libboost-iostreams-dev
