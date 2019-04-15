@@ -2,7 +2,7 @@
 
 - name: download stack {{ version }}
   get_url:
-    url: "https://github.com/commercialhaskell/stack/releases/download/v1.2.0/stack-{{ version }}-linux-x86_64.tar.gz"
+    url: "https://github.com/commercialhaskell/stack/releases/download/v{{ version }}/stack-{{ version }}-linux-x86_64.tar.gz"
     dest: "{{ source_dir }}"
 
   tags: stack

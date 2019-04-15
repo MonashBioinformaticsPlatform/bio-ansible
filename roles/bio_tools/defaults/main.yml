@@ -20,6 +20,8 @@ java_heap_size: 3g
 # Valid values: 1 or 0
 bowtie2_notbb: 0
 
+git_annex_version: 7.20190322
+
 # bio_tools versions
 star_version: 2.5.2b
 bwa_version: v0.7.15

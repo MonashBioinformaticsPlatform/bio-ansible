@@ -16,16 +16,25 @@
   args:
     creates: "{{ apps_dir }}/{{ module_name }}-{{ version }}"
 
-- name: Create {{ module_name }} module directory
+- name: Remove symlinks bin/conda, bin/activate and bin/deactivate
   file:
-    dest: "{{ modules_bio }}/{{ module_name }}"
+    dest: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/conda"
+    - "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/activate"
+    - "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/deactivate"
+
+- name: Create {{ module_section | default('bio') }}/{{ module_name }} module directory
+  file:
+    dest: "{{ modules_dir }}/{{ module_section | default('bio') }}/{{ module_name }}"
     state: directory
     mode: 0755
 
-- name: Create {{ module_name }}/{{ version }} module definition
+- name: Create {{ module_section | default('bio') }}/{{ module_name }}/{{ version }} module definition
   template:
     src: conda-module.lua.j2
-    dest: "{{ modules_bio }}/{{ module_name }}/{{ version }}.lua"
+    dest: "{{ modules_dir }}/{{ module_section | default('bio') }}/{{ module_name }}/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:
