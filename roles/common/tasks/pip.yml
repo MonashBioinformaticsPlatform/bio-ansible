@@ -38,3 +38,4 @@
     - pysam
     - nesoni
     - gffutils
+    - pyjq
