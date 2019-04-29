@@ -1,0 +1,14 @@
+---
+# See: https://shahronak47.wordpress.com/2016/12/29/install-rjava-package-in-r/
+
+# Requires system packages default-jre, default-jdk, r-cran-rjava
+
+- name: Configure rJava (system R version)
+  tags: r_java
+  shell: "R CMD javareconf"
+
+- name: Add Java library path to system environment for RStudio
+  lineinfile:
+    path: /etc/environment
+    regexp: '^LD_LIBRARY_PATH'
+    line: 'LD_LIBRARY_PATH="/usr/lib/jvm/default-java/jre/lib/amd64/"'

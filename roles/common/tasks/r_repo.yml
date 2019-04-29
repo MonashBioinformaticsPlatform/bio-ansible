@@ -19,3 +19,4 @@
     state: present
   with_items:
     - r-base
+    - r-cran-rjava

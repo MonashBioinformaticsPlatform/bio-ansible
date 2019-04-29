@@ -1,5 +1,5 @@
 ---
 r_base_mirror: "https://cran.csiro.au"
-r_base_version: 3.5.0
+r_base_version: 3.5.3
 # r_lib_path: "lib64/R/library"
 r_lib_path: "lib/R/library"

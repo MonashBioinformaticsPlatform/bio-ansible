@@ -1,0 +1,8 @@
+---
+# See: https://shahronak47.wordpress.com/2016/12/29/install-rjava-package-in-r/
+
+# Requires system packages default-jre, default-jdk, r-cran-rjava
+
+- name: Configure rJava
+  tags: r_java
+  shell: "{{ apps_dir }}/R/{{ version }}/bin/R CMD javareconf"
