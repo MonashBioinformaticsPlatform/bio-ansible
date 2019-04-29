@@ -16,15 +16,15 @@ then
     then
       if [[ -z $module_path ]]
       then
-        module_path+=$mtype
+        module_path+="${mtype}"
       else
         module_path+=":"
-        module_path+=$mtype
+        module_path+="${mtype}"
       fi
     fi
   done
 
-  export MODULEPATH=$module_path
+  export MODULEPATH="${module_path}"
   #export LMOD_PAGER="/usr/bin/less -E -F -R"
 
 fi
