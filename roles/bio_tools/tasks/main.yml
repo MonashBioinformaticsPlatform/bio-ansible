@@ -47,7 +47,6 @@
 - include: gatk.yml version={{ gatk_version }}
 - include: fastqc.yml version={{ fastqc_version }}
 - include: sratoolkit.yml version={{ sratoolkit_version }}
-- include: rnasik-pipe.yml version={{ rnasik_version }}
 - include: qualimap.yml version={{ qualimap_version }}
 - include: seqtk.yml version={{ seqtk_version }}
 - include: igv.yml version={{ igv_version }}
@@ -151,6 +150,15 @@
   conda_packages:
     - 'hmmer={{ hmmer_version }}'
 
+# More recent versions of RNAsik use the Conda installation method
+# - include: rnasik-pipe.yml version={{ rnasik_version }}
+- include_tasks: conda-package.yml
+  tags: rnasik
+  module_name: rnasik
+  version: "{{ rnasik_version }}"
+  conda_packages:
+    - 'rnasik={{ rnasik_version }}'
+    - qualimap
 
 - include_tasks: conda-package.yml
   tags: git-annex

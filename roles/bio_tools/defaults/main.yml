@@ -39,7 +39,7 @@ fastqc_version: 0.11.5
 vcflib_version: master
 sratoolkit_version: 2.8.0
 #rnasik_version: 1.4.9
-rnasik_version: 5788d51
+rnasik_version: 1.5.3
 qualimap_version: v2.2.1
 seqtk_version: v1.2
 igv_version: 2.4.10  # 2.4.13  # 2.3.94
