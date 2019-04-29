@@ -1,0 +1,25 @@
+---
+# Install a more recent libgdal, required by some R packages
+
+- name: Add ubuntugis PPA key
+  tags: gdal
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: "6B827C12C2D425E227EDCA75089EBE08314DF160"
+
+- name: Add ubuntugis PPA (for gdal)
+  tags: gdal
+  apt_repository:
+    repo: 'ppa:ubuntugis/ppa'
+    codename: xenial
+    update_cache: yes
+    state: present
+
+- name: Install libgdal (2.x) libraries
+  tags: gdal
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - libgdal20
+    - libgdal-dev
