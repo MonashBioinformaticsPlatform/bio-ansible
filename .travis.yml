@@ -22,4 +22,5 @@ script:
   - ansible-playbook -vvv --syntax-check -c local -i hosts other.yml
 
   # Functional tests of containers/tools
-  - docker run -d bio-ansbile:travis /bin/sh -c "source /etc/profile.d/lmod.sh; module --force try-load BigDataScript; module --force try-load RNAsik-pipe; RNAsik-pipe | grep 'RNAsik version'"
+  # - docker run -d bio-ansbile:travis /bin/sh -c "source /etc/profile.d/lmod.sh; module --force try-load BigDataScript; module --force try-load RNAsik-pipe; RNAsik-pipe | grep 'RNAsik version'"
+  - docker run -d bio-ansbile:travis /bin/sh -c "source /etc/profile.d/lmod.sh; module --force try-load seqtk; seqtk"
