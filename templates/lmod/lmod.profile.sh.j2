@@ -9,22 +9,22 @@ then
   # module_types=("{{ modules_core }}" "{{ modules_bio }}")
   module_types=("{{ modules_core }}" "{{ modules_bio }}" "{{ modules_extra }}")
   
-  module_path=""
+  tmp_module_path=""
   for mtype in ${module_types[@]}
   do
     if [[ -d $mtype ]]
     then
-      if [[ -z $module_path ]]
+      if [[ -z $tmp_module_path ]]
       then
-        module_path+="${mtype}"
+        tmp_module_path+="${mtype}"
       else
-        module_path+=":"
-        module_path+="${mtype}"
+        tmp_module_path+=":"
+        tmp_module_path+="${mtype}"
       fi
     fi
   done
 
-  export MODULEPATH="${module_path}"
+  export MODULEPATH="${tmp_module_path}"
   #export LMOD_PAGER="/usr/bin/less -E -F -R"
 
 fi
