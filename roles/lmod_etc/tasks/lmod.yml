@@ -2,7 +2,7 @@
 
 - name: copy lmod bash init file to /etc/profile.d/lmod.sh
   template:
-    src: lmod.profile.sh.j2
+    src: "lmod/lmod.profile.sh.j2"
     dest: /etc/profile.d/lmod.sh
     owner: root
     mode: 0644
@@ -11,7 +11,7 @@
 
 - name: copy lmod sh stdenv init file to /etc/profile.d/
   template:
-    src: z00_StdEnv.sh
+    src: "lmod/z00_StdEnv.sh"
     dest: /etc/profile.d/z00_StdEnv.sh
     owner: root
     mode: 0644
