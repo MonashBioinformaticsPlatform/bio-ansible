@@ -168,6 +168,13 @@
   conda_packages:
     - 'git-annex={{ git_annex_version }}'
 
+- include_tasks: conda-package.yml
+  tags: shovill
+  module_name: shovill
+  version: "{{ shovill_version }}"
+  conda_packages:
+    - 'shovill={{ shovill_version }}'
+
 # always install freebayes and vcflib last as they tend to break during compilation
 # - include: freebayes.yml version={{ freebayes_version }} # replaced by bioconda version
 - include: vcflib.yml version={{ vcflib_version }}

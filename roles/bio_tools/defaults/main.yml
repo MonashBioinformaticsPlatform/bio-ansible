@@ -20,8 +20,6 @@ java_heap_size: 3g
 # Valid values: 1 or 0
 bowtie2_notbb: 0
 
-git_annex_version: 7.20190322
-
 # bio_tools versions
 star_version: 2.5.2b
 bwa_version: v0.7.15
@@ -38,13 +36,10 @@ gatk_version: 3.7
 fastqc_version: 0.11.5
 vcflib_version: master
 sratoolkit_version: 2.8.0
-#rnasik_version: 1.4.9
-rnasik_version: 1.5.3
 qualimap_version: v2.2.1
 seqtk_version: v1.2
 igv_version: 2.4.10  # 2.4.13  # 2.3.94
 bedtools2_version: 2.25.0
-blast_version: 2.7.1  # 2.6.0
 smalt_version: 0.7.6
 snpeff_version: "4_3i"
 spades_version: 3.12.0
@@ -61,9 +56,7 @@ emboss_version: 6.6.0
 trimmomatic_version: 0.36
 skewer_version: 0.2.2
 sabre_version: 7ba39b9
-hisat2_version: 2.1.0
 minimap2_version: 2.12
-hmmer_version: 3.2
 
 # python virtualenv
 mimodd_version: 0.1.9  # 0.1.7.3
@@ -78,8 +71,14 @@ biotradis_version: 1.3.3
 bioperl_version: 1.007001
 
 # bioconda-based
+blast_version: 2.7.1  # 2.6.0
 freebayes_version: 1.1.0.46
 infernal_version: 1.1.2
+hisat2_version: 2.1.0
+hmmer_version: 3.2
 gatk4_version: 4.1.0.0
 miso_version: 0.5.4
 je_suite_version: 1.2
+rnasik_version: 1.5.3
+git_annex_version: 7.20190322
+shovill_version: 1.0.4
