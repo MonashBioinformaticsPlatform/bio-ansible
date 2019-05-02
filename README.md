@@ -48,35 +48,37 @@ modifications on other Debian-flavoured distros. YMMV.
 #### Setup and dependencies
 
 1. [Install ansible](http://docs.ansible.com/ansible/intro_installation.html)
+    ```bash
+    mkdir ~/.virtualenvs
+    virtualenv ~/.virtualenvs/ansible
+    source ~/.virtualenvs/ansible/bin/activate
+    pip install -U pip
+ 
+    # bio-ansible currently requires Ansible 2.4.x
+    pip install -U "ansible<2.5"
+    ```
+2. Clone the git repo:
 
-```bash
-mkdir ~/.virtualenvs
-virtualenv ~/.virtualenvs/ansible
-source ~/.virtualenvs/ansible/bin/activate
-pip install -U pip
-# bio-ansible currently requires Ansible 2.4.x
-pip install -U "ansible<2.5"
-```
+    ```bash
+    git clone https://github.com/MonashBioinformaticsPlatform/bio-ansible.git
+    ```
+3. Edit `hosts` file to include the remote host IP addresses into the appropriate group.
+   If running against remote host(s), setup your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) and use `ssh-add` to add them to the local sss-agent.
 
-2. `git clone https://github.com/MonashBioinformaticsPlatform/bio-ansible.git`
+4. Edit `group/all` file to include your username as `main_guy` variable (this is the username used to access the target host[s])
 
-If running against remote host(s):
-
-2b. Set up your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
-2c. Edit `hosts` file to include the remote host IP addresses into the appropriate group
-3. Edit `group/all` file to include your username as `main_guy` variable
-4. Download any tar archives for non-FOSS software into `tarballs/` (or the
+5. *Optional*: Download any tar archives for non-FOSS software into `tarballs/` (or the
    path set in the `tarballs_path` variable) - 
-see the section on [manually downloading tarballs](#manually-downloading-tarballs) below.
+   see the section on [manually downloading tarballs](#manually-downloading-tarballs) below.
 
 #### Running the playbooks
 
-Install everything - `sudo` privilege is required:
+Install everything - `sudo` privilege is required (on the target host[s]):
 ```bash
 ansible-playbook -i hosts all.yml
 ```
 
-Just the tools as a non-privilege user (no `sudo` required):
+Just the tools as a non-privilege user (no `sudo` required, the user defined in the `main_guy` variable is used):
 ```bash
 ansible-playbook -i hosts bio.yml
 ```
@@ -89,18 +91,14 @@ ansible-playbook -i hosts common.yml
 
 #### Installing specific tools
 
-Alternatively you can install specific tools without running the whole playbook:
-
-```bash
-ansible-playbook -i hosts bio.yml --tags samtools
-ansible-playbook -i hosts bio.yml --tags star
-ansible-playbook -i hosts bio.yml --tags subread
-```
-
-OR
+Alternatively you can install specific tools without running the whole playbook by using tags:
 
 ```bash
 ansible-playbook -i hosts bio.yml --tags samtools,star,subread
+```
+You can see all available tags for a playbook with:
+```bash
+ansible-playbook bio.yml --list-tags
 ```
 
 Protip: _You can always add `-v` or `-vvv` options for verbose mode to help 
@@ -165,9 +163,3 @@ the archive files in that directory.
 There are scripts to download various databases in `scripts/`. These have 
 deliberately not been added to ansible.
 
-Download BLAST databases
-
-```BASH
-cd /references/blast
-sudo -u sw-installer $(which update_blastdb.pl) --passive --verbose '.*'
-```
