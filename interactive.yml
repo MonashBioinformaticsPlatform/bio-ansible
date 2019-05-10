@@ -6,5 +6,6 @@
   roles:
     - interactive
     - nginx
+    # - gui
 
   become: true

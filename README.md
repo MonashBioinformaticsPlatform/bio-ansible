@@ -19,7 +19,7 @@ Assume you know how to start new [virtual machine (vm)](https://en.wikipedia.org
 
 - Bring up a VM (AWS, NeCTAR, OpenStack, etc)
 - Set up your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
-- Edit the `hosts` file to add the VM IP address, edit `groups_vars/all` files to change `main_guy`
+- Edit the `hosts` file to add the VM IP address, edit `group_vars/all` files to change `main_guy`
   and `sudo_guy` to the username used to log into the remote machine.
 
 ```bash
