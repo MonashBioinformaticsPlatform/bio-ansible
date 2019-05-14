@@ -1,8 +1,7 @@
 ---
-- include: locales.yml
 - include: sh_is_bash.yml
+- include: timezone.yml
 - include: sshd.yml
-- include: locales.yml
 - include: apt.yml
 - include: r_repo.yml
 - include: gdal_ppa.yml
@@ -15,7 +14,6 @@
 - include: pip.yml
 - include: pip3.yml
 - include: email_setup.yml
-- include: timezone.yml
 - include_tasks: motd.yml
   tags: motd
 

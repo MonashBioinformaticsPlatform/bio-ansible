@@ -1,23 +1,63 @@
 ---
+- name: update apt cache
+  tags: ['locale', 'timezone']
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
 
-- name: set time zone
+- name: apt-get install locales
+  tags: ['locale', 'timezone', 'apt']
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - locales
+    - locales-all
+    - tzdata
+
+- name: Generate locale {{ locale }}
+  tags: ['locale', 'timezone']
+  shell: "localedef -i {{ locale_region }} -c -f {{ locale_charset }} -A /usr/share/locale/locale.alias {{ locale }}"
+  # shell: "locale-gen {{ locale }}"
+
+#- name: Set default locale
+#  tags: ['apt', 'locale', 'timezone']
+#  lineinfile:
+#    path: /etc/default/locale
+#    regexp: '^LANG='
+#    line: "LANG={{ locale }}"
+
+- name: Update and set default locale
+  tags: ['locale', 'timezone']
+  shell: "dpkg-reconfigure --frontend=noninteractive locales && \
+          update-locale LANG={{ locale }}"
+  environment:
+    - DEBIAN_FRONTEND: noninteractive
+
+# Not working in 18.04 ?
+#- name: Install timedatectl
+#  tags: ['locale', 'timezone', 'apt']
+#  apt:
+#    name: "{{ item }}"
+#    state: present
+#    autoremove: yes
+#  with_items:
+#    - systemd
+#
+#- name: Set the timezone ({{ timezone }})
+#  tags: ['locale', 'timezone']
+#  become: yes
+#  become_user: root
+#  shell: "timedatectl set-timezone {{ timezone }}"
+
+- name: Write /etc/timezone
+  tags: ['locale', 'timezone']
   copy:
     content: "{{ time_zone }}"
     dest: /etc/timezone
     backup: yes
 
-  tags: timezone
-
-- name: set localtime
-  file:
-    src: /usr/share/zoneinfo/Australia/Victoria
-    dest: /etc/localtime
-    state: link
-    force: yes
-
-  tags: timezone
-
 - name: update timezone
+  tags: ['locale', 'timezone']
   command: dpkg-reconfigure --frontend noninteractive tzdata
-
-  tags: timezone
