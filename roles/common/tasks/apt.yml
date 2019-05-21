@@ -130,6 +130,7 @@
     - git
     - mercurial
     - curl
+    - aria2
     - htop
     - zsh
     - texlive
