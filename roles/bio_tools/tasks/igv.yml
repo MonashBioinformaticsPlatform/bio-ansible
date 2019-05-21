@@ -41,7 +41,7 @@
   shell: export JAVA_HOME={{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}; cd {{ source_dir }}/igv-{{ version }}; ./gradlew createDist  # ant
   args:
     creates: "{{ source_dir }}/igv-{{ version }}/igv.jar"
-  when: java_tar.stat.isdir 
+  when: java_tar.stat.isdir is defined and java_tar.stat.isdir
 
   tags: igv
 
@@ -57,7 +57,7 @@
   shell: export JAVA_HOME={{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}; cd {{ source_dir }}/igv-{{ version }}; ./gradlew createToolsDist  # ant -lib {{ source_dir }}/igv-{{ version }}/extras -f scripts/build-tools.xml
   args:
     creates: "{{ source_dir }}/igv-{{ version }}/igvtools-dist/igvtools.jar"
-  when: java_tar.stat.isdir 
+  when: java_tar.stat.isdir is defined and java_tar.stat.isdir
   
   tags: igv
 
