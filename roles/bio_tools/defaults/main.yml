@@ -67,7 +67,7 @@ qiime_version: 1.9.1
 hifive_version: 1.4.0
 
 # perl
-biotradis_version: 1.3.3
+biotradis_version: 1.4.1
 bioperl_version: 1.007001
 
 # bioconda-based

@@ -71,7 +71,7 @@
 - include: raxml.yml version={{ raxml_version }}
 - include: cellranger.yml version={{ cellranger_version }}
 - include: vcftools.yml version={{ vcftools_version }}
-- include: biotradis.yml version={{ biotradis_version }}
+# - include: biotradis.yml version={{ biotradis_version }}
 - include: bioperl.yml version={{ bioperl_version }}
 - include: muscle.yml version={{ muscle_version }}
 - include: cdhit.yml version={{ cdhit_version }}
@@ -181,6 +181,14 @@
   version: "{{ prokka_version }}"
   conda_packages:
     - 'prokka={{ prokka_version }}'
+
+- include_tasks: conda-package.yml
+  tags: biotradis
+  module_name: biotradis
+  version: "{{ biotradis_version }}"
+  conda_packages:
+    - 'biotradis={{ biotradis_version }}'
+    - bwa
 
 # always install freebayes and vcflib last as they tend to break during compilation
 # - include: freebayes.yml version={{ freebayes_version }} # replaced by bioconda version
