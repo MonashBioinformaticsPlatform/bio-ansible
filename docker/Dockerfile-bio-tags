@@ -4,7 +4,7 @@ ARG TASK_TAGS=seqtk
 
 RUN apt-get -y update && \
     apt-get -y install python python3 python-pip python-virtualenv python3-pip python3-virtualenv \
-                       build-essential git zlib1g-dev && \
+                       build-essential git zlib1g-dev default-jre-headless ant cpanminus && \
     apt-get -y clean && \
     pip install -U "pip==9.0.3" && \
     pip install -U "ansible<2.5"
