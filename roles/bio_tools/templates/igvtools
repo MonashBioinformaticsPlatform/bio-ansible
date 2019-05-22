@@ -6,7 +6,7 @@
 #Script must be in the same directory as igv.jar
 #Add the flag -Ddevelopment = true to use features still in development
 #prefix=`dirname $(readlink $0 || echo $0)`
-prefix="{{ source_dir }}/igv-{{ igv_version }}/igvtools-dist"
+prefix="{{ source_dir }}/igv-{{ igv_version }}/build/IGVTools-dist/lib"
 exec java -Xmx4g \
 	-Dapple.laf.useScreenMenuBar=true \
 	-Djava.net.preferIPv4Stack=true \
