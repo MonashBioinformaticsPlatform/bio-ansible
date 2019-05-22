@@ -28,13 +28,21 @@
 - name: get java version
   tags: igv
   shell: "/usr/bin/java -version 2>&1 | grep version | awk '{print $3}' | sed 's/\"//g'"
-  register: java_version
-  when: java_local
+  register: java_version_check_local
+  when: java_local and not using_oracle_java
+
+- set_fact: java_version="{{ java_version_check_local.stdout }}"
+  tags: igv
+  when: java_local and not using_oracle_java
 
 - name: get java version
   tags: igv
   shell: "{{ java_tar_home }}/bin/java -version 2>&1 | grep version | awk '{print $3}' | sed 's/\"//g'"
-  register: java_version
+  register: java_version_check_oracle
+  when: using_oracle_java
+
+- set_fact: java_version="{{ java_version_check_oracle.stdout }}"
+  tags: igv
   when: using_oracle_java
 
 - set_fact: extra_gradle_args=""
@@ -43,7 +51,7 @@
 # Extra args for compiling under Java 11
 - set_fact: extra_gradle_args="-b build_java11.gradle"
   tags: igv
-  when: java_version.stdout | version_compare('11', '>=')
+  when: java_version | version_compare('11', '>=')
 
 - name: build igv {{ version }}
   tags: igv
