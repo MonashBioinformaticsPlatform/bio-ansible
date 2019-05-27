@@ -140,6 +140,7 @@
     - qpdf
     - apache2-utils
     - rename
+    - sshfs
 
 - name: apt-get common dependencies (16.04+)
   tags: apt
