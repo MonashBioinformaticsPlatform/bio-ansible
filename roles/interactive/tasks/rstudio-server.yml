@@ -6,12 +6,19 @@
     update_cache: yes
     cache_valid_time: 3600
 
-- name: download and install rstudio-server {{ version }}
+- set_fact: codename="trusty"
+  tags: rstudio
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int <= 16
+
+- set_fact: codename="bionic"
+  tags: rstudio
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 18
+
+- name: install rstudio-server {{ version }}
   tags: rstudio
   apt:
-    deb: "http://download2.rstudio.org/rstudio-server-{{ version }}.deb"
+    deb: "http://download2.rstudio.org/server/{{ codename }}/amd64/rstudio-server-{{ version }}-amd64.deb"
   become: yes
-  # when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int <= 14
 
 - name: Try installing a custom /etc/rstudio/rserver.conf, if available
   tags: rstudio

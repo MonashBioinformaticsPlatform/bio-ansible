@@ -7,14 +7,14 @@
 
   tags: rstudio_pro
 
-- name: download rstudio-server-pro {{ version }}
+- name: download and install rstudio-server {{ version }}
+  tags: rstudio_pro
   apt:
-    deb: "http://download2.rstudio.org/rstudio-server-pro-{{ version }}.deb"
+    deb: "https://download2.rstudio.org/server/trusty/amd64/rstudio-server-pro-{{ version }}-amd64.deb"
+  become: yes
+  # when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int <= 16
 
-  tags: rstudio_pro
-
-
-- name: activate license
-  shell: rstudio-server license-manager activate "{{ rstudio_pro_key }}"
-
-  tags: rstudio_pro
+#- name: activate license
+#  shell: rstudio-server license-manager activate "{{ rstudio_pro_key }}"
+#
+#  tags: rstudio_pro

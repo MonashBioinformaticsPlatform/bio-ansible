@@ -1,8 +1,8 @@
 ---
 
 # interactive
-rstudio_version: 1.1.456-amd64
-rstudio_pro_version: 1.0.143-amd64
+rstudio_version: 1.2.1335
+rstudio_pro_version: 1.2.1335-1
 #shiny_version: 1.5.1.834-amd64
 shiny_version: 1.5.3.838-amd64
 
