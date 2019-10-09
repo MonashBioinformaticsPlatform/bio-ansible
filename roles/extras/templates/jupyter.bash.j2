@@ -3,9 +3,12 @@
 . /etc/profile.d/lmod.sh
 
 ml use {{ modules_extra }}
+ml R/{{ r_base_version }}
 ml jupyter
 
 jconf={{ apps_dir }}/jupyter-{{ jupyter_version }}/jupyter-config.py
 jlogs={{ apps_dir }}/jupyter-{{ jupyter_version }}/jupyter.log
+
+export LD_LIBRARY_PATH=/software/apps/R/{{ r_base_version }}/lib/R/lib/:$LD_LIBRARY_PATH
 
 jupyterhub --config ${jconf} >> ${jlogs} 2>&1

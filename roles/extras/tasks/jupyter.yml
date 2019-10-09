@@ -1,18 +1,34 @@
 ---
 
+- name: update pip in jupyter virtualenv
+  tags: jupyter
+  pip:
+    name: "{{ item }}"
+    state: latest
+    virtualenv: "{{ apps_dir }}/jupyter-{{ version }}"
+    virtualenv_python: "{{ python3_executable }}"
+    virtualenv_command: "{{ python3_virtualenv }}"
+
+  with_items:
+    - pip
+
+# TODO: We might be better off doing this in a conda env, to access more
+#       default extensions (eg jupyter_conda, so users can use their own conda envs with kernels ?)
 - name: pip install jupyter thing {{ version }}
   tags: jupyter
   pip:
     name: "{{ item }}"
+    state: forcereinstall
     virtualenv: "{{ apps_dir }}/jupyter-{{ version }}"
     virtualenv_python: "{{ python3_executable }}"
     virtualenv_command: "{{ python3_virtualenv }}"
 
   with_items:
     - jupyterhub
-    - jupyterlab
-    - notebook
+    - "jupyterlab=={{ version }}"
     - bash_kernel
+    # rpy2==3.1.0 is broken (?)
+    - rpy2==3.0.5
 
   environment:
     PYTHONPATH: "{{ python3_pythonpath }}"

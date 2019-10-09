@@ -39,4 +39,3 @@ r_base_mirror: "https://cran.csiro.au"
 jdk_major: 8
 jdk_minor: 144
 java_oracle_version: "{{ jdk_major }}u{{ jdk_minor }}"
-jupyter_version: 20.06.2018
