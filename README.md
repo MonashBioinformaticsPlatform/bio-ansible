@@ -39,7 +39,7 @@ you might need `sudo`. Also note that Ansible tasks are typically are
 changes they must in order to bring the system to the desired state. This means 
 it is safe to rerun the same playbook multiple times.
 
-These playbooks target Ubuntu 14.04 and 16.04 - they may work with small
+These playbooks target Ubuntu 16.04 and 18.04 - they may work with small
 modifications on other Debian-flavoured distros. YMMV.
 
 
