@@ -1,29 +1,25 @@
 ---
 
 - name: update apt cache
+  tags: shiny
   apt:
     update_cache: yes
     cache_valid_time: 3600
 
-  tags: shiny
-
 - name: install shiny-server {{ version }}
-  apt:
-      deb: "http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-{{ version }}.deb"
-
   tags: shiny
+  apt:
+    deb: "http://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-{{ version }}-amd64.deb"
 
 - name: copy shiny-server {{ version }} configuration file
+  tags: shiny
   template:
     src: shiny-server.conf
     dest: /etc/shiny-server
     backup: yes
 
-  tags: shiny
-
 - name: restart shiny-server {{ version }}
+  tags: shiny
   service:
     name: shiny-server
     state: restarted
-
-  tags: shiny

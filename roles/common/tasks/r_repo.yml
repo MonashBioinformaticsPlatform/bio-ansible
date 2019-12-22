@@ -3,7 +3,7 @@
   tags: r_repo
   apt_key:
     keyserver: keyserver.ubuntu.com
-    id: "E084DAB9"
+    id: "E298A3A825C0D65DFD57CBB651716619E084DAB9"
 
 - name: Add CRAN repository (Ubuntu 18.04)
   tags: r_repo
