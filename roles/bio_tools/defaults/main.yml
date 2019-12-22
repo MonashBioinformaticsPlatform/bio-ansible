@@ -79,7 +79,7 @@ hmmer_version: 3.2
 gatk4_version: 4.1.0.0
 miso_version: 0.5.4
 je_suite_version: 1.2
-rnasik_version: 1.5.3
+rnasik_version: 1.5.4
 git_annex_version: 7.20190322
 shovill_version: 1.0.4
 prokka_version: 1.13.7
