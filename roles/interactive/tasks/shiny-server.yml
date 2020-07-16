@@ -6,6 +6,12 @@
     update_cache: yes
     cache_valid_time: 3600
 
+# TODO: By default Shiny Server uses the system R (or more correctly, the R it finds on PATH)
+#       Only Shiny Pro allows setting r_path in the config.
+#       We need to install the 'shiny' R package into the version of R that Shiny Server uses,
+#       like:
+# sudo su - -c "R -e \"install.packages('shiny', repos='https://cran.rstudio.com/')\""
+
 - name: install shiny-server {{ version }}
   tags: shiny
   apt:
