@@ -6,16 +6,24 @@
 
 ## Content 
 
-- [Quick start](#quick-start)
-- [Introduction](#introduction)
-- [Running bio-ansible](#running-bio-ansible)
-- [Building a Docker image](#docker)
-- [Frequently asked questions](#frequently-asked-questions)
-- [Other](#other)
+- [Bio-Ansible](#bio-ansible)
+  - [Content](#content)
+  - [Quick start](#quick-start)
+  - [Introduction](#introduction)
+  - [Running bio-ansible](#running-bio-ansible)
+      - [Setup and dependencies](#setup-and-dependencies)
+      - [Running the playbooks](#running-the-playbooks)
+      - [Installing specific tools](#installing-specific-tools)
+  - [Building a Docker image](#building-a-docker-image)
+  - [Frequently asked questions](#frequently-asked-questions)
+  - [Other](#other)
+    - [Manually downloading tarballs](#manually-downloading-tarballs)
+    - [Manual scripts](#manual-scripts)
 
 ## Quick start
 
-Assume you know how to start new [virtual machine (vm)](https://en.wikipedia.org/wiki/Virtual_machine) instance and how to install and operate [ansible](http://docs.ansible.com/ansible/intro.html).
+Assume you know how to start new [virtual machine (vm)](https://en.wikipedia.org/wiki/Virtual_machine) 
+instance and how to install and operate [ansible](http://docs.ansible.com/ansible/intro.html).
 
 - Bring up a VM (AWS, NeCTAR, OpenStack, etc)
 - Set up your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
@@ -25,6 +33,7 @@ Assume you know how to start new [virtual machine (vm)](https://en.wikipedia.org
 ```bash
 ansible-playbook -i hosts all.yml
 ```
+
 ## Introduction
 
 This _bio-ansible_ is multi-potent as it can set up from scratch the whole army 
@@ -52,10 +61,10 @@ modifications on other Debian-flavoured distros. YMMV.
     mkdir ~/.virtualenvs
     virtualenv ~/.virtualenvs/ansible
     source ~/.virtualenvs/ansible/bin/activate
-    pip install -U pip
+    pip3 install -U pip
  
     # bio-ansible currently requires Ansible 2.4.x
-    pip install -U "ansible<2.5"
+    pip3 install -U "ansible<2.5"
     ```
 2. Clone the git repo:
 
