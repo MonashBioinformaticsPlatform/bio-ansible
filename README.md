@@ -59,7 +59,7 @@ modifications on other Debian-flavoured distros. YMMV.
 1. [Install ansible](http://docs.ansible.com/ansible/intro_installation.html)
     ```bash
     mkdir ~/.virtualenvs
-    virtualenv ~/.virtualenvs/ansible
+    virtualenv -p python3 ~/.virtualenvs/ansible
     source ~/.virtualenvs/ansible/bin/activate
     pip3 install -U pip
  
