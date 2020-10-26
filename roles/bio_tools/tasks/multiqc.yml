@@ -11,9 +11,9 @@
   environment:
     PYTHONPATH: "{{ python3_pythonpath }}"
 
-- name: WORKAROUND - ensure multiqc is really installed in the virtualenv
-  tags: multiqc
-  shell: "{{ apps_dir }}/multiqc-{{ version }}/bin/pip3 install multiqc"
+# - name: WORKAROUND - ensure multiqc is really installed in the virtualenv
+#   tags: multiqc
+#   shell: "{{ apps_dir }}/multiqc-{{ version }}/bin/pip3 install multiqc=={{ version }}"
   
 - file:
     dest: "{{ modules_bio }}/multiqc"

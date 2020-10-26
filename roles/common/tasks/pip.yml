@@ -16,6 +16,20 @@
     autoremove: yes
   with_items:
     - python-pip
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int < 20
+
+
+- name: apt-get install python-pip-whl
+  tags: pip
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - python-pip-whl
+    - virtualenv
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20
+
 
 - name: pip install python packages
   tags: pip
@@ -39,3 +53,4 @@
     - nesoni
     - gffutils
     - pyjq
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int < 20

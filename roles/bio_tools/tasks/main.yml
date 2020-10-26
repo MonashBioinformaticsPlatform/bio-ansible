@@ -59,11 +59,13 @@
   #- include: bcl2fastq2.yml version={{ bcl2fastq2_version }}
 - include: emboss.yml version={{ emboss_version }}
 # Python-based
-- include: mimodd.yml version={{ mimodd_version }}
+# - include: mimodd.yml version={{ mimodd_version }}
 - include: multiqc.yml version={{ multiqc_version }}
 - include: cutadapt.yml version={{ cutadapt_version }}
 - include: macs2.yml version={{ macs2_version }}
-- include: qiime.yml version={{ qiime_version }}
+# QIIME1 (1.9.1) is superceeded by QIIME2
+# This task always gives cross-platform compilation issues, so now using the conda version of QIIME1 instead
+# - include: qiime.yml version={{ qiime_version }}
 #
 - include: snpeff.yml version={{ snpeff_version }}
 - include: spades.yml version={{ spades_version }}
@@ -196,6 +198,13 @@
   version: "{{ snippy_version }}"
   conda_packages:
     - 'snippy={{ snippy_version }}'
+
+- include_tasks: conda-package.yml
+  tags: qiime
+  module_name: qiime
+  version: "{{ qiime_version }}"
+  conda_packages:
+    - 'qiime={{ qiime_version }}'
 
 # always install freebayes and vcflib last as they tend to break during compilation
 # - include: freebayes.yml version={{ freebayes_version }} # replaced by bioconda version

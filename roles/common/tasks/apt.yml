@@ -75,7 +75,6 @@
     - libgsl0-dev
     # R deps
     - gfortran
-    - gfortran-5
     - libncurses5-dev
     - libbz2-dev
     - libsuperlu-dev
@@ -98,7 +97,6 @@
     - libudunits2-0    # ChIPseeker
     - libudunits2-dev  # ChIPseeker
     - libmagick++-dev  # Rmagick
-    - libiomp-dev      # velocyto.R
     - libboost-dev
     - libboost-iostreams-dev
     - libboost-log-dev
@@ -159,8 +157,9 @@
     - apache2-utils
     - rename
     - sshfs
+    - net-tools
 
-- name: apt-get common dependencies (16.04+)
+- name: apt-get common dependencies (16.04+ < 20.4)
   tags: apt
   apt:
     name: "{{ item }}"
@@ -168,7 +167,7 @@
     autoremove: yes
   with_items:
     - libmariadb-client-lgpl-dev
-  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 16
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 16 and ansible_lsb.major_release|int < 20
 
 - name: apt-get common dependencies (14.04)
   tags: apt
@@ -188,10 +187,24 @@
     autoremove: yes
   with_items:
     - realpath
+    # R deps
+    - gfortran-5
     # Rstudio deps
     - libgstreamer-plugins-base0.10-0
     - libgstreamer0.10-0
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int < 18
+
+- name: apt-get common dependencies (<= 18.04)
+  tags: apt
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    # R deps
+    - gfortran-5
+    - libiomp-dev      # velocyto.R
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int <= 18
 
 - name: apt-get common dependencies (18.04)
   tags: apt
@@ -203,4 +216,23 @@
     - coreutils
     # Rstudio deps
     - libgstreamer-plugins-base1.0-0
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '18.04'
+    - libgdal-dev  # leaflet maps
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 18
+
+- name: apt-get common dependencies (20.04)
+  tags: apt
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - coreutils
+    - mariadb-client
+    # R deps
+    - gfortran-7
+    - libgdal-dev  # leaflet maps
+    # Rstudio deps
+    - libgstreamer-plugins-base1.0-0
+    # For Bio::Perl via CPAN (... ideally we'd fix the bioperl.yml task to not require this)
+    - libxml-dom-xpath-perl
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20
