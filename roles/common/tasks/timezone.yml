@@ -8,13 +8,12 @@
 - name: apt-get install locales
   tags: ['locale', 'timezone', 'apt']
   apt:
-    name: "{{ item }}"
     state: present
     autoremove: yes
-  with_items:
-    - locales
-    - locales-all
-    - tzdata
+    name:
+      - locales
+      - locales-all
+      - tzdata
 
 - name: Generate locale {{ locale }}
   tags: ['locale', 'timezone']

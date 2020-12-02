@@ -14,225 +14,218 @@
     update_cache: yes
     cache_valid_time: 3600
 
-- name: apt-get common dependencies
+- name: apt install common dependencies
   tags: apt
   apt:
-    name: "{{ item }}"
     state: present
     autoremove: yes
-  with_items:
-    # essentials
-    - apt-utils
-    - locales
-    - locales-all
-    - gcc
-    - make
-    - cmake
-    - unzip
-    - tcsh
-    - bc
-    # security
-    - fail2ban
-    # non essential, useful
-    - sysstat
-    - ethtool
-    - iotop
-    - bmon
-    - fio
-    - iozone3
-    - bonnie++
-    - iperf
-    - xinetd
-    # nfs stuff
-    - nfs-common
-    # user-auth deps
-    - libpam-krb5
-    - ldap-utils
-    # lua and its deps
-    - lua5.2
-    - liblua5.2-dev
-    - lua-filesystem
-    - lua-posix
-    - lua-posix-dev
-    - luarocks
-    # lmod dep
-    - tcl
-    # htslib deps
-    - zlib1g-dev
-    - libncurses-dev
-    # ncbi blast deps
-    - liblmdb-dev 
-    # BigDataScript deps
-    - golang-go
-    - ant
-    # tmux deps
-    - libevent-dev
-    # python deps
-    - libssl-dev
-    - libssl-doc
-    - zlib1g-dev
-    - libffi-dev
-    - libgsl0-dev
-    # R deps
-    - gfortran
-    - libncurses5-dev
-    - libbz2-dev
-    - libsuperlu-dev
-    - libarpack2-dev
-    - libcurl4-openssl-dev
-    - libxml2-dev
-    - libxt-dev
-    - libcairo2-dev
-    - tcl8.6-dev
-    - tk8.6-dev
-    - texinfo
-    - texlive-fonts-extra
-    - libtiff5-dev
-    - libpango1.0-dev
-    - freeglut3-dev
-    - libxmu-dev
-    - libglu1-mesa-dev
-    - libcgal-dev
-    - libnetcdf-dev
-    - libudunits2-0    # ChIPseeker
-    - libudunits2-dev  # ChIPseeker
-    - libmagick++-dev  # Rmagick
-    - libboost-dev
-    - libboost-iostreams-dev
-    - libboost-log-dev
-    - libboost-system-dev
-    - libboost-test-dev
-    - libpcre2-dev     # R 4.x
-    # Requires PPA: sudo add-apt-repository -y ppa:ubuntugis/ppa
-    # - libgdal-dev  # leaflet maps
-    # RStudio deps
-    - libjpeg62
-    - liborc-0.4-0
-    - libapparmor1
-    - libxml2
-    - libxml2-dev
-    # For rJava
-    - default-jre
-    - default-jdk
-    # mothur and uchime C++ deps
-    - libboost-program-options-dev
-    - libboost-iostreams-dev
-    # blast
-    - liblmdb-dev
-    - libboost-all-dev  # just get all of Boost ...
-    # vsearch
-    - autoconf
-    - autogen
-    # bowtie2 deps
-    - libtbb-dev
-    # aws-manage deps
-    - jq
-    # perl deps
-    - libmoo-perl
-    - liblist-moreutils-perl
-    # perl stuff
-    - cpanminus
-    # munin deps
-    - munin-node
-    - munin-common
-    # extras
-    - pandoc
-    - pandoc-citeproc
-    - vim
-    - tmux
-    - screen
-    - byobu
-    - mosh
-    - git
-    - mercurial
-    - curl
-    - aria2
-    - htop
-    - zsh
-    - texlive
-    - texlive-latex-extra
-    - parallel
-    - acl
-    - qpdf
-    - apache2-utils
-    - rename
-    - sshfs
-    - net-tools
+    name:
+      # essentials
+      - apt-utils
+      - locales
+      - locales-all
+      - gcc
+      - make
+      - cmake
+      - unzip
+      - tcsh
+      - bc
+      # security
+      - fail2ban
+      # non essential, useful
+      - sysstat
+      - ethtool
+      - iotop
+      - bmon
+      - fio
+      - iozone3
+      - bonnie++
+      - iperf
+      - xinetd
+      # nfs stuff
+      - nfs-common
+      # user-auth deps
+      - libpam-krb5
+      - ldap-utils
+      # lua and its deps
+      - lua5.2
+      - liblua5.2-dev
+      - lua-filesystem
+      - lua-posix
+      - lua-posix-dev
+      - luarocks
+      # lmod dep
+      - tcl
+      # htslib deps
+      - zlib1g-dev
+      - libncurses-dev
+      # ncbi blast deps
+      - liblmdb-dev
+      # BigDataScript deps
+      - golang-go
+      - ant
+      # tmux deps
+      - libevent-dev
+      # python deps
+      - libssl-dev
+      - libssl-doc
+      - zlib1g-dev
+      - libffi-dev
+      - libgsl0-dev
+      # R deps
+      - gfortran
+      - libncurses5-dev
+      - libbz2-dev
+      - libsuperlu-dev
+      - libarpack2-dev
+      - libcurl4-openssl-dev
+      - libxml2-dev
+      - libxt-dev
+      - libcairo2-dev
+      - tcl8.6-dev
+      - tk8.6-dev
+      - texinfo
+      - texlive-fonts-extra
+      - libtiff5-dev
+      - libpango1.0-dev
+      - freeglut3-dev
+      - libxmu-dev
+      - libglu1-mesa-dev
+      - libcgal-dev
+      - libnetcdf-dev
+      - libudunits2-0    # ChIPseeker
+      - libudunits2-dev  # ChIPseeker
+      - libmagick++-dev  # Rmagick
+      - libboost-dev
+      - libboost-iostreams-dev
+      - libboost-log-dev
+      - libboost-system-dev
+      - libboost-test-dev
+      - libpcre2-dev     # R 4.x
+      # Requires PPA: sudo add-apt-repository -y ppa:ubuntugis/ppa
+      # - libgdal-dev  # leaflet maps
+      # RStudio deps
+      - libjpeg62
+      - liborc-0.4-0
+      - libapparmor1
+      - libxml2
+      - libxml2-dev
+      # For rJava
+      - default-jre
+      - default-jdk
+      # mothur and uchime C++ deps
+      - libboost-program-options-dev
+      - libboost-iostreams-dev
+      # blast
+      - liblmdb-dev
+      - libboost-all-dev  # just get all of Boost ...
+      # vsearch
+      - autoconf
+      - autogen
+      # bowtie2 deps
+      - libtbb-dev
+      # aws-manage deps
+      - jq
+      # perl deps
+      - libmoo-perl
+      - liblist-moreutils-perl
+      # perl stuff
+      - cpanminus
+      # munin deps
+      - munin-node
+      - munin-common
+      # extras
+      - pandoc
+      - pandoc-citeproc
+      - vim
+      - tmux
+      - screen
+      - byobu
+      - mosh
+      - git
+      - mercurial
+      - curl
+      - aria2
+      - htop
+      - zsh
+      - texlive
+      - texlive-latex-extra
+      - parallel
+      - acl
+      - qpdf
+      - apache2-utils
+      - rename
+      - sshfs
+      - net-tools
 
 - name: apt-get common dependencies (16.04+ < 20.4)
   tags: apt
   apt:
-    name: "{{ item }}"
     state: present
     autoremove: yes
-  with_items:
-    - libmariadb-client-lgpl-dev
+    name:
+      - libmariadb-client-lgpl-dev
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 16 and ansible_lsb.major_release|int < 20
 
 - name: apt-get common dependencies (14.04)
   tags: apt
   apt:
-    name: "{{ item }}"
     state: present
     autoremove: yes
-  with_items:
-    - libmariadbclient-dev
+    name:
+      - libmariadbclient-dev
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '14.04'
 
 - name: apt-get common dependencies (< 18.04)
   tags: apt
   apt:
-    name: "{{ item }}"
     state: present
     autoremove: yes
-  with_items:
-    - realpath
-    # R deps
-    - gfortran-5
-    # Rstudio deps
-    - libgstreamer-plugins-base0.10-0
-    - libgstreamer0.10-0
+    name:
+      - realpath
+      # R deps
+      - gfortran-5
+      # Rstudio deps
+      - libgstreamer-plugins-base0.10-0
+      - libgstreamer0.10-0
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int < 18
 
 - name: apt-get common dependencies (<= 18.04)
   tags: apt
   apt:
-    name: "{{ item }}"
     state: present
     autoremove: yes
-  with_items:
-    # R deps
-    - gfortran-5
-    - libiomp-dev      # velocyto.R
+    name:
+      # R deps
+      - gfortran-5
+      - libiomp-dev      # velocyto.R
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int <= 18
 
 - name: apt-get common dependencies (18.04)
   tags: apt
   apt:
-    name: "{{ item }}"
     state: present
     autoremove: yes
-  with_items:
-    - coreutils
-    # Rstudio deps
-    - libgstreamer-plugins-base1.0-0
-    - libgdal-dev  # leaflet maps
+    name:
+      - coreutils
+      # Rstudio deps
+      - libgstreamer-plugins-base1.0-0
+      - libgdal-dev  # leaflet maps
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 18
 
 - name: apt-get common dependencies (20.04)
   tags: apt
   apt:
-    name: "{{ item }}"
     state: present
     autoremove: yes
-  with_items:
-    - coreutils
-    - mariadb-client
-    # R deps
-    - gfortran-7
-    - libgdal-dev  # leaflet maps
-    # Rstudio deps
-    - libgstreamer-plugins-base1.0-0
-    # For Bio::Perl via CPAN (... ideally we'd fix the bioperl.yml task to not require this)
-    - libxml-dom-xpath-perl
+    name:
+      - coreutils
+      - mariadb-client
+      # R deps
+      - gfortran-7
+      - libgdal-dev  # leaflet maps
+      # Rstudio deps
+      - libgstreamer-plugins-base1.0-0
+      # For Bio::Perl via CPAN (... ideally we'd fix the bioperl.yml task to not require this)
+      - libxml-dom-xpath-perl
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20

@@ -9,9 +9,15 @@
 - name: apt-get python dependencies
   tags: apt
   apt:
-    name: "{{ item }}"
     state: present
     autoremove: yes
+    name:
+      # - python-pip
+      - python-dev
+      - python3
+      - ipython3
+      # qiime dep mainly, but this is general GUI package
+      - python-tk
   environment:
     - LANG: "{{ locale }}"
     - LC_ALL: "{{ locale }}"
@@ -28,20 +34,16 @@
     - LC_TELEPHONE: "{{ locale }}"
     - LC_MEASUREMENT: "{{ locale }}"
     - LC_IDENTIFICATION: "{{ locale }}"
-  with_items:
-    # - python-pip
-    - python-dev
-    - python3
-    - ipython3
-    # qiime dep mainly, but this is general GUI package
-    - python-tk
 
 - name: apt-get python3 extras
   tags: apt
   apt:
-    name: "{{ item }}"
     state: present
     autoremove: yes
+    name:
+      - python3-pip
+      - python3-virtualenv
+      - python3-dev
   environment:
     - LANG: "{{ locale }}"
     - LC_ALL: "{{ locale }}"
@@ -58,28 +60,22 @@
     - LC_TELEPHONE: "{{ locale }}"
     - LC_MEASUREMENT: "{{ locale }}"
     - LC_IDENTIFICATION: "{{ locale }}"
-  with_items:
-    - python3-pip
-    - python3-virtualenv
-    - python3-dev
 
 - name: apt-get python dependencies
   tags: apt
   apt:
-    name: "{{ item }}"
     state: present
     autoremove: yes
-  with_items:
-    - python-pip
-    - ipython
+    name:
+      - python-pip
+      - ipython
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int < 20
 
 - name: apt-get python dependencies
   tags: apt
   apt:
-    name: "{{ item }}"
     state: present
     autoremove: yes
-  with_items:
-    - python-pip-whl
+    name:
+      - python-pip-whl
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20

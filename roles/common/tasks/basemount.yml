@@ -18,9 +18,8 @@
 - name: apt-get install basemount
   tags: ['basemount', 'apt']
   apt:
-    name: "{{ item }}"
     state: present
     autoremove: yes
     force: yes
-  with_items:
-    - basemount
+    name:
+      - basemount
