@@ -83,6 +83,7 @@
       - libxt-dev
       - libcairo2-dev
       - tcl8.6-dev
+      - tcl-dev
       - tk8.6-dev
       - texinfo
       - texlive-fonts-extra
