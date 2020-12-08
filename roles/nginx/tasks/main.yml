@@ -1,67 +1,66 @@
 ---
 
 - name: update apt cache
+  tags: nginx
   apt:
     update_cache: yes
     cache_valid_time: 3600
 
-  tags: nginx
-
 - name: apt install nginx
+  tags: nginx
   apt:
     name: nginx
     state: latest
     #force: yes
-  tags: nginx
 
 #TODO might want to do slightly better
-#and name your config differently 
+#and name your config differently
 #and add a task to symlink it to sites-enabled
 - name: copy nginx configuration file
+  tags: nginx
   template:
     src: "{{ nginx_templ_name }}"
     dest: "/etc/nginx/sites-available/{{ nginx_server_name }}"
+    mode: 0644
     backup: yes
 
-  tags: nginx
 #TODO set proper variables in group_vars/all
 - name: link nginx configuration file
+  tags: nginx
   file:
     src: "/etc/nginx/sites-available/{{ nginx_server_name }}"
     dest: "/etc/nginx/sites-enabled/{{ nginx_server_name }}"
     state: link
-    mode: 0755
+    mode: 0644
 
-  tags: nginx
   # create directory for default / root serving directory
 - name: create default/root serving directory
+  tags: nginx
   file:
     dest: "/var/www/html/{{ nginx_server_name }}"
     state: directory
     mode: 0755
 
-  tags: nginx
   # create directory for log files
 - name: create directory for log files
+  tags: nginx
   file:
     dest: "/var/log/nginx/{{ nginx_server_name }}"
     state: directory
     mode: 0755
 
-  tags: nginx
 
-- name: unlink default nginx configuration file 
+- name: unlink default nginx configuration file
+  tags: nginx
   file:
     dest: /etc/nginx/sites-enabled/default
     state: absent
-    mode: 0755
+    mode: 0644
 
+- name: restart nginx
   tags: nginx
-
-- name: restart nginx 
   service:
     name: nginx
     state: restarted
 
-  tags: nginx
 
