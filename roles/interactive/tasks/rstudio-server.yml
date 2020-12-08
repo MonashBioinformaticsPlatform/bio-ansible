@@ -23,9 +23,24 @@
 - name: Try installing a custom /etc/rstudio/rserver.conf, if available
   tags: rstudio
   template:
-      src: "{{ private_vars_path | default(inventory_dir) }}/templates/etc/rstudio/rserver.conf.j2"
+      src: "{{ private_vars_path | default(inventory_dir) }}/templates/{{ inventory_hostname }}/etc/rstudio/rserver.conf.j2"
       dest: /etc/rstudio/rserver.conf
       owner: root
       group: root
       mode: 0644
   ignore_errors: true
+
+- name: Try installing a custom /etc/rstudio/rsession.conf, if available
+  tags: rstudio
+  template:
+      src: "{{ private_vars_path | default(inventory_dir) }}/templates/{{ inventory_hostname }}/etc/rstudio/rsession.conf.j2"
+      dest: /etc/rstudio/session.conf
+      owner: root
+      group: root
+      mode: 0644
+  ignore_errors: true
+
+  #- name: DEBUG: list of inventory hostnames
+  #  tags: rstudio
+  #  debug:
+  #    var: inventory_hostname
