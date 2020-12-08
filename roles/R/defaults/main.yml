@@ -2,6 +2,6 @@
 r_base_mirror: "https://cran.csiro.au"
 # r_dl_url_base: "https://cran.r-project.org/src/base/R-3"  # for R 3.x
 r_dl_url_base: "https://cran.r-project.org/src/base/R-4"
-r_base_version: 4.0.2
+r_base_version: 4.0.3
 # r_lib_path: "lib64/R/library"
 r_lib_path: "lib/R/library"
