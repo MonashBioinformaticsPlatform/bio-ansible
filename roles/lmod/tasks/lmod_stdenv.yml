@@ -1,28 +1,26 @@
 ---
 
 - name: copy stdenv module definition
+  tags: stdenv
   template:
     src: StdEnv.lua
     dest: "{{ modules_core }}"
     owner: "{{ main_guy }}"
     mode: 0644
 
-  tags: stdenv
-
 - name: copy RNAseq module definition
+  tags: rnaseqenv
   template:
     src: RNAseqSuite.lua
     dest: "{{ modules_core }}"
     owner: "{{ main_guy }}"
     mode: 0644
 
-  tags: rnaseqenv
-
 - name: copy VariantCalling module definition
+  tags: varcallenv
   template:
     src: VariantCallingSuite.lua
     dest: "{{ modules_core }}"
     owner: "{{ main_guy }}"
     mode: 0644
 
-  tags: varcallenv
