@@ -7,8 +7,3 @@ shiny_version: 1.5.12.933
 
 # You should keep this defined in an ansible-vault encrypted file
 rstudio_pro_key: ""
-
-jupyter_version: 4.4.0
-# If nodejs is installed via the 'extras' role, the version defined
-# there should match this one
-jupyter_service_templ: jupyterhub.service.j2

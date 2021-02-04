@@ -1,0 +1,38 @@
+help(
+[[
+{{ item.help_text }}
+]])
+
+{% if item.base is defined %}
+local base = "{{ item.base }}"
+{% else %}
+local base = pathJoin("{{ apps_dir }}", "{{ item.dir }}")
+{% endif %}
+
+local path = pathJoin(base, "bin")
+
+{% if item.append is defined %}
+  append_path("PATH", path)
+{% else %}
+  prepend_path("PATH", path)
+{% endif %}
+
+{% if item.perl_path is defined %}
+  prepend_path("PERL5LIB", pathJoin(base, "{{item.perl_path}}"))
+{% endif %}
+
+{% if item.python_path is defined %}
+  prepend_path("PYTHONPATH", pathJoin(base, "{{item.python_path}}"))
+{% endif %}
+
+{% for e in item.env|default([]) %}
+  setenv("{{e.name}}", "{{e.value}}")
+{% endfor %}
+
+{% if item.depend is defined %}
+  load({{ item.depend }})
+{% endif %}
+
+{% if item.msg is defined %}
+  LmodMessage("{{ item.msg }}")
+{% endif %}

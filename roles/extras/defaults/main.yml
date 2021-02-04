@@ -11,8 +11,5 @@ tmux_version: 2.4
 hifive_version: 1.4.0
 ant_version: 1.10.2
 ant_mirror_base: "https://archive.apache.org/dist/ant/binaries/"
-go_version: 1.8.3
-
-jupyter_version: 1.1.3
-jupyter_config_templ: jupyter-config.py.j2
-jupyter_script: jupyter.bash.j2
+go_version: 1.15.7
+rclone_version: 1.54.0

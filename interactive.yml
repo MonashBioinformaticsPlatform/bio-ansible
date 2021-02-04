@@ -5,6 +5,7 @@
   remote_user: "{{ sudo_guy }}"
   roles:
     - interactive
+    - jupyterhub
     - nginx
     # - gui
 

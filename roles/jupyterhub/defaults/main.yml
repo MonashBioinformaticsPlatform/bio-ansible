@@ -1,0 +1,8 @@
+jupyter_version: 3.0.5
+
+jupyter_config_templ: jupyter-config.py.j2
+jupyter_script: jupyter.bash.j2
+
+# If nodejs is installed via the 'extras' role, the version defined
+# there should match this one
+jupyter_service_templ: jupyterhub.service.j2

@@ -18,4 +18,4 @@
   tags: jupyter
   systemd:
     name: jupyterhub
-    state: started
+    state: restarted

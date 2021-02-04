@@ -1,0 +1,10 @@
+---
+# - include_tasks: conda-env-add-packages.yml
+#   tags: miso
+#   module_name: miso
+#   version: "{{ miso_version }}"
+#   conda_packages:
+#     - bsddb
+
+- name: Add additional package(s) to conda environment for {{ module_name }}={{ version }}
+  shell: "{{ conda_bin }} install --yes -p {{ apps_dir }}/{{ module_name }}-{{ version }} {{ conda_packages|join(' ') }}"

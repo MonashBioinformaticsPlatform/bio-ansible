@@ -1,0 +1,48 @@
+---
+
+# The variable 'module_name, 'conda_packages' (list) and 'version' must be passed to this task when it's
+# included, like:
+#
+# - include_tasks: conda-package.yml
+#   tags: miso
+#   module_name: miso
+#   version: "{{ miso_version }}"
+#   conda_packages:
+#     - 'misopy={{ miso_version }}'
+#     - bsddb
+
+- name: Create conda environment for {{ module_name }}={{ version }} & install packages
+  shell: "{{ conda_bin }} create --prefix={{ apps_dir }}/{{ module_name }}-{{ version }} {{ conda_packages|join(' ') }}"
+  args:
+    creates: "{{ apps_dir }}/{{ module_name }}-{{ version }}"
+
+- name: Remove symlinks bin/conda, bin/activate and bin/deactivate
+  file:
+    dest: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/conda"
+    - "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/activate"
+    - "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/deactivate"
+
+- name: Create {{ module_section | default('bio') }}/{{ module_name }} module directory
+  file:
+    dest: "{{ modules_dir }}/{{ module_section | default('bio') }}/{{ module_name }}"
+    state: directory
+    mode: 0755
+
+- name: Create {{ module_section | default('bio') }}/{{ module_name }}/{{ version }} module definition
+  template:
+    src: conda-module.lua.j2
+    dest: "{{ modules_dir }}/{{ module_section | default('bio') }}/{{ module_name }}/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: '{{ module_name }}-{{ version }}'
+      help_text: 'This module loads {{ module_name }}'
+
+- name: Set permission of {{ apps_dir }}/{{ module_name }}-{{ version }}
+  file:
+    dest: "{{ apps_dir }}/{{ module_name }}-{{ version }}"
+    state: directory
+    mode: 0755

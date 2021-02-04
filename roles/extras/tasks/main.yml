@@ -5,7 +5,19 @@
 - include: maven.yml version={{ maven_version }}
 - include: ant.yml version={{ ant_version }}
 - include: golang.yml version={{ go_version }}
-- include: gdrive.yml version=2.1.0
-- include_tasks: tmux.yml version={{ tmux_version }}
+
+# https://github.com/prasmussen/gdrive is now unmaintained. Use rclone instead.
+#- include: gdrive.yml version=2.1.0
+
+- include_tasks: conda-package.yml
+  tags: rclone
+  module_name: rclone
+  module_section: extra
+  version: "{{ rclone_version }}"
+  conda_packages:
+    - 'rclone={{ rclone_version }}'
+
+# Ubuntu 20.04+ has a sufficiently modern tmux, so this isn't required anymore
+# - include_tasks: tmux.yml version={{ tmux_version }}
+
 - include: environment-script.yml
-- include: jupyter.yml version={{ jupyter_version }}
