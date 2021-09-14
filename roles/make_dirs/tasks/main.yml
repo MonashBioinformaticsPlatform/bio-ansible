@@ -6,6 +6,8 @@
     state: directory
     mode: 0755
     owner: "{{ main_guy }}"
+  become: yes
+  become_user: "{{ sudo_guy }}"
   with_items:
     - "{{ source_dir }}"
     - "{{ modules_dir }}"
