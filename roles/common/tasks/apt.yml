@@ -24,7 +24,7 @@
     # essentials
     - apt-utils
     - locales
-    - locales-all
+    #- locales-all
     - gcc
     - make
     - cmake
@@ -43,6 +43,7 @@
     - bonnie++
     - iperf
     - xinetd
+    - imagemagick
     # nfs stuff
     - nfs-common
     # user-auth deps
@@ -63,7 +64,7 @@
     # ncbi blast deps
     - liblmdb-dev 
     # BigDataScript deps
-    - golang-go
+    - golang-1.16
     - ant
     # tmux deps
     - libevent-dev
@@ -159,6 +160,7 @@
     - rename
     - sshfs
     - net-tools
+    - ncftp
 
 - name: apt-get common dependencies (16.04+ < 20.4)
   tags: apt
@@ -218,6 +220,7 @@
     # Rstudio deps
     - libgstreamer-plugins-base1.0-0
     - libgdal-dev  # leaflet maps
+    - gdal-bin
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 18
 
 - name: apt-get common dependencies (20.04)
@@ -230,10 +233,22 @@
     - coreutils
     - mariadb-client
     # R deps
+    - fort77
     - gfortran-7
+    #- gfortran-9
+    - gfortran-10
     - libgdal-dev  # leaflet maps
+    - gdal-bin
     # Rstudio deps
     - libgstreamer-plugins-base1.0-0
     # For Bio::Perl via CPAN (... ideally we'd fix the bioperl.yml task to not require this)
     - libxml-dom-xpath-perl
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20
+
+- name: set default gfortran (20.04)
+  tags: apt
+  shell: |
+    update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-10 60
+    update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-9 50
+    update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-7 40
+
