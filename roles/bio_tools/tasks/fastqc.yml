@@ -2,7 +2,7 @@
 
 - name: download FastQC {{ version }}
   get_url:
-    url: "http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v{{ version }}.zip"
+    url: "https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v{{ version }}.zip"
     dest: "{{ source_dir }}/fastqc_v{{ version }}.zip"
 
   tags: fastqc
