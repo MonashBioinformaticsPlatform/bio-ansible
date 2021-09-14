@@ -28,7 +28,7 @@
 #    regexp: '^LANG='
 #    line: "LANG={{ locale }}"
 
-- name: Update and set default locale
+- name: Update and set default locale to {{ locale }}
   tags: ['locale', 'timezone']
   shell: "dpkg-reconfigure --frontend=noninteractive locales && \
           update-locale LANG={{ locale }}"
@@ -51,13 +51,24 @@
 #  become_user: root
 #  shell: "timedatectl set-timezone {{ timezone }}"
 
-- name: Write /etc/timezone
-  tags: ['locale', 'timezone']
-  copy:
-    content: "{{ time_zone }}"
-    dest: /etc/timezone
-    backup: yes
+#- name: Write /etc/timezone ({{ timezone }})
+#  tags: ['locale', 'timezone']
+#  copy:
+#    # content: "{{ timezone }}"
+#    content: "Australia/Melbourne"
+#    dest: /etc/timezone
+#    force: yes
+#    # backup: yes
 
-- name: update timezone
+- name: Set timezone to {{ timezone }} (Ubuntu 20.04)
+  tags: ['locale', 'timezone']
+  shell: timedatectl set-timezone {{ timezone }}
+
+#- name: Set timezone to {{ timezone }}
+#  tags: ['locale', 'timezone']
+#  community.general.timezone:
+#    name: "{{ timezone }}"
+
+- name: Update timezone (tzdata)
   tags: ['locale', 'timezone']
   command: dpkg-reconfigure --frontend noninteractive tzdata
