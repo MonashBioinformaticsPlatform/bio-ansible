@@ -1,5 +1,37 @@
 ---
 
-- include: r_base.yml version={{ r_base_version }}
+# - include: r_base.yml version={{ r_base_version }}
 # - include: r_extras.yml version={{ r_base_version }}
-- include: r_java.yml version={{ r_base_version }}
+# - include: r_java.yml version={{ r_base_version }}
+
+# TODO: Refactor out the conda installation task from bio_tools and here into it's own role
+#       That we run as a dependency (via defaults/main.yml)
+
+- name: Set conda executable path
+  tags: ["always"]
+  set_fact: conda_bin="{{ apps_dir }}/conda/bin/conda"
+
+# TODO: Make this a role in roles/conda (and add it as a dependency in roles/R/defaults/main.yml
+#- include_tasks: conda.yml
+#  tags: ["always"]
+
+- name: Install R base
+  tags: r_base
+  include_tasks: r_base.yml
+  with_items: "{{ r_base_versions }}"
+  loop_control:
+    loop_var: version
+
+- name: Install rJava for R/{{ version }}
+  tags: ['r_base', 'r_java']
+  include_tasks: r_java.yml
+  with_items: "{{ r_base_versions }}"
+  loop_control:
+    loop_var: version
+
+- name: Install R version {{ version }} via Conda (+rJava)
+  tags: ['r_base', 'r_conda']
+  include_tasks: r-via-conda.yml
+  with_items: "{{ r_conda_base_versions }}"
+  loop_control:
+    loop_var: version

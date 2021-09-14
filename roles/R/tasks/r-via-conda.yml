@@ -1,0 +1,52 @@
+---
+
+# The variable 'module_name, 'conda_packages' (list) and 'version' must be passed to this task when it's
+# included, like:
+#
+# - include_tasks: conda-package.yml
+#   tags: miso
+#   module_name: miso
+#   version: "{{ miso_version }}"
+#   conda_packages:
+#     - 'misopy={{ miso_version }}'
+#     - bsddb
+
+- name: Create conda environment for R {{ version }} & installing
+  tags: ['r_base', 'r_conda']
+  shell: "{{ conda_bin }} create --prefix={{ apps_dir }}/R/{{ version }} -c conda-forge r-base={{ version }} r-rjava"
+  args:
+    creates: "{{ apps_dir }}/R/{{ version }}/bin/Rscript"
+
+# - name: Remove symlinks bin/conda, bin/activate and bin/deactivate
+#   file:
+#     dest: "{{ item }}"
+#     state: absent
+#   with_items:
+#     - "{{ apps_dir }}/R/{{ version }}/bin/conda"
+#     - "{{ apps_dir }}/R/{{ version }}/bin/activate"
+#     - "{{ apps_dir }}/R/{{ version }}/bin/deactivate"
+
+- name: Ensure "{{ modules_core }}/R" exists
+  tags: ['r_base', 'r_conda']
+  file:
+    dest: "{{ modules_core }}/R"
+    state: directory
+    mode: 0755
+
+- name: Create "{{ modules_core }}/R/{{ version }}" module definition
+  tags: ['r_base', 'r_conda']
+  template:
+    src: conda-module.lua.j2
+    dest: "{{ modules_core }}/R/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: "R/{{ version }}"
+      help_text: "This module loads R/{{ version }}"
+
+- name: Set permission of {{ apps_dir }}/R/{{ version }}
+  tags: ['r_base', 'r_conda']
+  file:
+    dest: "{{ apps_dir }}/R/{{ version }}"
+    state: directory
+    mode: 0755

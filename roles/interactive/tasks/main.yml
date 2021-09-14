@@ -2,4 +2,7 @@
 
 - include: rstudio-server.yml version={{ rstudio_version }}
 - include: shiny-server.yml version={{ shiny_version }}
-# - include: rstudio-server-pro.yml version={{ rstudio_pro_version}}
+#- include: rstudio-server-pro.yml version={{ rstudio_pro_version}}
+
+# TODO:
+# - include: rstudio-config.yml 

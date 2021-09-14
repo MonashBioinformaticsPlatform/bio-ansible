@@ -1,9 +1,11 @@
 ---
 
 # interactive
-rstudio_version: 1.3.1093
-rstudio_pro_version: 1.3.1093
-shiny_version: 1.5.12.933
+rstudio_version: 1.4.1717
+rstudio_pro_version: 1.4.1717-3
+shiny_version: 1.5.16.958
+# Must match a version of an installed R module
+shiny_r_version: 4.1.0
 
 # You should keep this defined in an ansible-vault encrypted file
 rstudio_pro_key: ""

@@ -1,0 +1,13 @@
+---
+
+# TODO: add lines to
+## /etc/rstudio/rserver.conf
+# auth-timeout-minutes=43200
+
+## /etc/rstudio/rsession.conf
+# session-timeout-minutes=43200
+
+# Add path to R verison in module for RStudio Pro, eg
+#
+## /etc/rstudio/r-version
+# /mnt/software/apps/R/4.0.2

@@ -1,16 +1,28 @@
 ---
 
+
+- name: Create a symbolic link from /usr/bin/R to {{ apps_dir }}/R/{{ shiny_r_version }}/bin/R
+  tags: shiny
+  file:
+    src: "{{ apps_dir }}/R/{{ shiny_r_version }}/bin/R"
+    dest: "/usr/bin/R"
+    owner: root
+    group: root
+    state: link
+
 - name: update apt cache
   tags: shiny
   apt:
     update_cache: yes
     cache_valid_time: 3600
 
-# TODO: By default Shiny Server uses the system R (or more correctly, the R it finds on PATH)
-#       Only Shiny Pro allows setting r_path in the config.
-#       We need to install the 'shiny' R package into the version of R that Shiny Server uses,
-#       like:
-# sudo su - -c "R -e \"install.packages('shiny', repos='https://cran.rstudio.com/')\""
+# By default Shiny Server uses the system R (or more correctly, the R it finds on PATH)
+# We install the 'shiny' R package into the version of R that Shiny Server uses.
+# (We can only use the system R, since only Shiny Server Pro allows setting r_path in the config)
+- name: Install 'shiny' package on system R
+  tags: shiny
+  shell: |
+    R -e "install.packages(c('shiny', 'rmarkdown'), repos='https://cran.rstudio.com/')"
 
 - name: install shiny-server {{ version }}
   tags: shiny

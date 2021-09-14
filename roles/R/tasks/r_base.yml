@@ -1,26 +1,53 @@
 ---
 
 - name: download r {{ version }}
+  tags: r_base
   get_url: 
-    url: "{{ r_dl_url_base }}/R-{{ version }}.tar.gz"
+    url: "{{ r_dl_url_base }}/R-{{ version.split('.')[0] }}/R-{{ version }}.tar.gz"
     dest: "{{ source_dir }}/R-{{ version }}.tar.gz"
 
-  tags: r_base
-
 - name: uncompress r {{ version }}
+  tags: r_base
   unarchive:
       src: "{{ source_dir }}/R-{{ version }}.tar.gz"
       dest: "{{ source_dir }}"
       copy: no
 
-  tags: r_base
+# - name: "build r {{ version }}"
+#   tags: r_base
+#   shell: |
+#     cd {{ source_dir }}/R-{{ version }}
+#     make clean
+#     ./configure --prefix={{ apps_dir }}/R/{{ version }} --enable-R-shlib --enable-memory-profiling
+#     make -j {{ threads }}; make install
+#   args:
+#     creates: "{{ apps_dir }}/R/{{ version }}/bin/Rscript"
+#   when: (ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int < 20)
 
+# For Ubuntu 20.04 (and later ?) we use gfortran-10
 - name: build r {{ version }}
-  shell: cd {{ source_dir }}/R-{{ version }}; ./configure --prefix={{ apps_dir }}/R/{{ version }} --enable-R-shlib --enable-memory-profiling; make -j {{ threads }}; make install
+  tags: r_base
+  shell: |
+    # for R 4.0.x
+    export FC=$(which gfortran-10)
+    
+    # for 3.6.x
+    # export FC=$(which gfortran-9)
+
+    # for 3.5.x ?
+    # tried fort77, gfortran-7, gfortran-9, gfortran-10 -- all failed ?
+
+    # for 3.4.x ?
+    # export FC=$(which fort77)
+    
+    cd {{ source_dir }}/R-{{ version }}
+    make clean
+    ./configure --prefix={{ apps_dir }}/R/{{ version }} --enable-R-shlib --enable-memory-profiling
+    make -j {{ threads }}
+    make install
   args:
     creates: "{{ apps_dir }}/R/{{ version }}/bin/Rscript"
-
-  tags: r_base
+  #when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 20
 
 ##
 # TODO: This extra R library stuff should probably happen only in r_extras, 
@@ -65,36 +92,38 @@
 
 #   tags: r_base
 
-- file:
+- name: Ensure "{{ modules_core }}/R" exists
+  tags: r_base
+  file:
     dest: "{{ modules_core }}/R"
     state: directory
     mode: 0755
 
-  tags: r_base
-
 - name: r {{ version }} module definition
+  tags: r_base
   template:
     src: sw-module.lua.j2
     dest: "{{ modules_core }}/R/{{ version }}.lua"
     owner: "{{ main_guy }}"
     mode: 0644
   with_items:
-    - dir: 'R/{{ version }}'
+    - dir: "R/{{ version }}"
       help_text: 'R language base'
-
-  tags: r_base
+#      env:
+#        - name: R_HOME
+#          value: "{{ apps_dir }}/R/{{ version }}/bin/R"
 
 - name: setting register for r {{ version }}
+  tags: r_base
   stat:
     path: "{{ apps_dir }}/R-{{ version }}/bin/Rscript"
   register: r
 
-  tags: r_base
-
 - name: removing r {{ version }} source file
+  tags: r_base
   file:
     dest: "{{ source_dir }}/R-{{ version }}.tar.gz"
     state: absent
-  when: " del_src and r.stat.exists"
+  when: "del_src and r.stat.exists"
 
-  tags: r_base
+

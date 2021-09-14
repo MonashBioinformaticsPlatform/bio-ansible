@@ -4,5 +4,5 @@
 # Requires system packages default-jre, default-jdk, r-cran-rjava
 
 - name: Configure rJava
-  tags: r_java
+  tags: ['r_base', 'r_java']
   shell: "{{ apps_dir }}/R/{{ version }}/bin/R CMD javareconf"
