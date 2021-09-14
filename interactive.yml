@@ -3,10 +3,10 @@
 - name: Installing interactive bits e.g RStudio, nginx etc...
   hosts: interactive
   remote_user: "{{ sudo_guy }}"
+  become: true
   roles:
     - interactive
     - jupyterhub
     - nginx
     # - gui
 
-  become: true
