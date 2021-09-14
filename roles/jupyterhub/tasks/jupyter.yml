@@ -50,12 +50,22 @@
   module_name: jupyter
   version: "{{ jupyter_version }}"
   conda_packages:
+    - jupyter_console
     - bash_kernel
     - rpy2
     - xeus-python
-    - nglview
+    #- nglview
     - jupytext
-    # - jupyterlab-git
+    #- jupyterlab-git
+
+#- name: Install jupyter extensions using pip
+#  tags: jupyter
+#  pip:
+#    name: "{{ item }}"
+#    state: latest
+#    virtualenv_python: "{{ apps_dir }}/jupyter-{{ version }}/bin/python"
+#  with_items:
+#    - rsconnect_jupyter
 
 # - name: Install jupyterlab-git via pip
 #   tags: jupyter
@@ -86,10 +96,11 @@
   with_items:
     - "@jupyterlab/celltags"
     - "@jupyterlab/toc"
-    # - "@jupyterlab/git"
+    #- "@jupyterlab/git"
     - "@jupyterlab/fasta-extension"
     - "@jupyter-widgets/jupyterlab-manager"
-    - "nglview-js-widgets"
+    # - "nglview-js-widgets"
+
 
 - name: Run jupyter lab build to ensure extensions are built
   tags: jupyter
