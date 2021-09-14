@@ -33,6 +33,16 @@
   tags: ["always"]
   set_fact: conda_bin={{ apps_dir }}/conda/bin/conda
 
+- stat: path="{{ apps_dir }}/conda/bin/mamba"
+  tags: ["always"]
+  register: mamba_binary_check
+
+- name: Use mamba instead of conda when available
+  tags: ["always"]
+  set_fact: conda_bin={{ apps_dir }}/conda/bin/mamba
+  when: mamba_binary_check.stat.exists == True
+
+# TODO: Make this it's own role in roles/conda, include it as a dependency in roles/bio_tools/default/main
 - include_tasks: conda.yml
   tags: ["always"]
 
@@ -44,7 +54,7 @@
 - include: bcftools.yml version={{ bcftools_version }} htslib_v={{ htslib_version }}
 - include: subread.yml version={{ subread_version }}
 - include: picard.yml version={{ picard_version }} java_heap_size=6g
-- include: gatk.yml version={{ gatk_version }}
+# - include: gatk.yml version={{ gatk_version }}
 - include: fastqc.yml version={{ fastqc_version }}
 - include: sratoolkit.yml version={{ sratoolkit_version }}
 - include: qualimap.yml version={{ qualimap_version }}
@@ -61,8 +71,8 @@
 # Python-based
 # - include: mimodd.yml version={{ mimodd_version }}
 - include: multiqc.yml version={{ multiqc_version }}
-- include: cutadapt.yml version={{ cutadapt_version }}
-- include: macs2.yml version={{ macs2_version }}
+#- include: cutadapt.yml version={{ cutadapt_version }}
+#- include: macs2.yml version={{ macs2_version }}
 # QIIME1 (1.9.1) is superceeded by QIIME2
 # This task always gives cross-platform compilation issues, so now using the conda version of QIIME1 instead
 # - include: qiime.yml version={{ qiime_version }}
@@ -70,15 +80,15 @@
 - include: snpeff.yml version={{ snpeff_version }}
 - include: spades.yml version={{ spades_version }}
 - include: vsearch.yml version={{ vsearch_version }}
-- include: raxml.yml version={{ raxml_version }}
+#- include: raxml.yml version={{ raxml_version }}
 - include: cellranger.yml version={{ cellranger_version }}
 - include: vcftools.yml version={{ vcftools_version }}
 # - include: biotradis.yml version={{ biotradis_version }}
-- include: bioperl.yml version={{ bioperl_version }}
+#- include: bioperl.yml version={{ bioperl_version }}
 - include: muscle.yml version={{ muscle_version }}
 - include: cdhit.yml version={{ cdhit_version }}
 - include: mothur.yml version={{ mothur_version }}
-- include: hifive.yml version={{ hifive_version }}
+#- include: hifive.yml version={{ hifive_version }}
 #- include: infernal.yml version={{ infernal_version }} # broken ? replaced by bioconda version
 
 - include_tasks: trimmomatic.yml version={{ trimmomatic_version }}
@@ -94,6 +104,34 @@
   tags: minimap2
 
 # List of Bioconda packages available: https://bioconda.github.io/recipes.html
+
+- include_tasks: conda-package.yml
+  tags: raxml
+  module_name: raxml
+  version: "{{ raxml_version }}"
+  conda_packages:
+    - 'raxml={{ raxml_version }}'
+
+- include_tasks: conda-package.yml
+  tags: macs2
+  module_name: macs2
+  version: "{{ macs2_version }}"
+  conda_packages:
+    - 'macs2={{ macs2_version }}'
+
+- include_tasks: conda-package.yml
+  tags: cutadapt
+  module_name: cutadapt
+  version: "{{ cutadapt_version }}"
+  conda_packages:
+    - 'cutadapt={{ cutadapt_version }}'
+
+- include_tasks: conda-package.yml
+  tags: hifive
+  module_name: hifive
+  version: "{{ hifive_version }}"
+  conda_packages:
+    - 'hifive={{ hifive_version }}'
 
 - include_tasks: conda-package.yml
   tags: blast
@@ -208,4 +246,5 @@
 
 # always install freebayes and vcflib last as they tend to break during compilation
 # - include: freebayes.yml version={{ freebayes_version }} # replaced by bioconda version
-- include: vcflib.yml version={{ vcflib_version }}
+# Seems broken in Ubuntu 20.04
+# - include: vcflib.yml version={{ vcflib_version }}

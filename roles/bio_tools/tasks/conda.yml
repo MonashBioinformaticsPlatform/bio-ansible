@@ -15,6 +15,14 @@
   when: conda_binary_check.stat.exists == False
   # creates: "{{ apps_dir }}/conda/bin/conda"
 
+#- name: Add Mamba package to base conda env
+#  tags: conda
+#  shell: |
+#    {{ apps_dir }}/conda/bin/conda upgrade --yes
+#    {{ apps_dir }}/conda/bin/conda install --yes -c conda-forge {{ item }}
+#  with_items:
+#    - mamba
+
 - name: Add Conda channels
   tags: conda
   shell: "{{ conda_bin }} config --file {{ apps_dir }}/conda/.condarc --add channels {{ item }}"
@@ -24,3 +32,10 @@
     - bioconda
     - r
     - serine
+
+- stat: path="{{ apps_dir }}/conda/bin/mamba"
+  register: mamba_binary_check
+
+- name: Use mamba instead of conda when available
+  set_fact: conda_bin={{ apps_dir }}/conda/bin/mamba
+  when: mamba_binary_check.stat.exists == True
