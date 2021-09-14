@@ -17,3 +17,12 @@
     mode: 0644
 
   tags: lmod_etc
+
+- name: Ensure /etc/profile.d/lmod.sh is also sourced by zsh
+  tags: lmod_etc
+  lineinfile:
+    path: /etc/zsh/zprofile
+    line: emulate sh -c 'source /etc/profile'
+    insertafter: EOF
+    state: present
+    create: yes
