@@ -12,5 +12,5 @@
     autoremove: yes
   with_items:
     - tightvncserver
-    - openbox
+    - fluxbox
     - firefox
