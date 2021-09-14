@@ -6,7 +6,7 @@ python3_pythonpath: ""
 # Should be set automatically
 # python3_version_major_minor: "3.6"
 
-python2_executable: "python"
+python2_executable: "python2"
 python2_virtualenv: "virtualenv"
 python2_pythonpath: ""
 # python2_version_major_minor: "2.7"
@@ -26,14 +26,14 @@ bwa_version: v0.7.15
 bowtie2_version: v2.3.4.1  # v2.3.2
 
 # samtools, htslib and bcftools should typically be all the same version
-htslib_version: 1.8
-samtools_version: 1.8
-bcftools_version: 1.8
+htslib_version: 1.12
+samtools_version: 1.12
+bcftools_version: 1.12
 
 subread_version: 1.6.1
 picard_version: 2.18.0
 gatk_version: 3.7
-fastqc_version: 0.11.5
+fastqc_version: 0.11.9
 vcflib_version: master
 sratoolkit_version: 2.8.0
 qualimap_version: v2.2.1
@@ -61,10 +61,10 @@ minimap2_version: 2.12
 # python virtualenv
 mimodd_version: 0.1.9  # 0.1.7.3
 multiqc_version: 1.9
-cutadapt_version: 1.12
-macs2_version: 2.1.1.20160309
+cutadapt_version: 3.4
+macs2_version: 2.2.7.1
 qiime_version: 1.9.1
-hifive_version: 1.4.0
+hifive_version: 1.5.7
 
 # perl
 biotradis_version: 1.4.1
