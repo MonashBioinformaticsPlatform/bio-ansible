@@ -3,12 +3,13 @@
 - include: timezone.yml
 - include: sshd.yml
 - include: apt.yml
-- include: r_repo.yml
+# Only use R in modules, not system
+# - include: r_repo.yml
 - include: gdal_ppa.yml
 - include_tasks: lua.yml
   tags: ['apt', 'lua']
-- include: r_repo.yml
-- include: basemount.yml
+# Needs fix
+#- include: basemount.yml
 - include: singularity-apt.yml
 - include: python.yml
 - include: pip.yml
