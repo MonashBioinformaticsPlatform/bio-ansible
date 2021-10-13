@@ -153,6 +153,8 @@
     - zsh
     - texlive
     - texlive-latex-extra
+    # required to knit RMarkdown -> PDF with Unicode using `latex_engine: xelatex`
+    - texlive-xetex
     - parallel
     - acl
     - qpdf
@@ -161,6 +163,9 @@
     - sshfs
     - net-tools
     - ncftp
+    - shellcheck
+    # credential management for docker login: https://github.com/docker/docker-credential-helpers
+    - pass
 
 - name: apt-get common dependencies (16.04+ < 20.4)
   tags: apt
