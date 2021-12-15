@@ -134,9 +134,6 @@
     - liblist-moreutils-perl
     # perl stuff
     - cpanminus
-    # munin deps
-    - munin-node
-    - munin-common
     # extras
     - pandoc
     - pandoc-citeproc
