@@ -161,6 +161,7 @@
     - net-tools
     - ncftp
     - shellcheck
+    - tree
     # credential management for docker login: https://github.com/docker/docker-credential-helpers
     - pass
 
