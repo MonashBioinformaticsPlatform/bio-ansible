@@ -1,121 +1,61 @@
 ---
 
-- name: download igv {{ version }}
+- name: download IGV package {{ version }}
   tags: igv
-  git:
-    repo: https://github.com/igvteam/igv
-    dest: "{{ source_dir }}/igv-{{ version }}"
-    version: "v{{ version }}"
+  get_url:
+    url: "https://data.broadinstitute.org/igv/projects/downloads/{{ '.'.join(version.split('.')[0:2]) }}/IGV_{{ version }}.zip"
+    timeout: 30
+    dest: "{{ source_dir }}/IGV_{{ version }}.zip"
 
-- set_fact: java_tar_home="{{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}"
+- name: uncompress igv {{ version }}
   tags: igv
+  unarchive:
+      src: "{{ source_dir }}/IGV_{{ version }}.zip"
+      dest: "{{ source_dir }}"
+      copy: no
+  creates: "{{ source_dir }}/IGV_{{ version }}"
 
-- name: check that /usr/bin/java exists
+- name: move igv directory to {{ apps_dir }}
   tags: igv
-  command: /usr/bin/java -version
-  register: java_local
-  ignore_errors: true
+  shell: 'mv "{{ source_dir }}/IGV_{{ version }}" "{{ apps_dir }}/igv-{{ version }}"'
 
-- name: check oracle java exists
+- name: ensure igv module directory exists
   tags: igv
-  stat:
-    path: "{{ java_tar_home }}"
-  register: java_tar
-
-- set_fact: using_oracle_java="{{ java_tar.stat.isdir is defined and java_tar.stat.isdir }}"
-  tags: igv
-
-- name: get java version
-  tags: igv
-  shell: "/usr/bin/java -version 2>&1 | grep version | awk '{print $3}' | sed 's/\"//g'"
-  register: java_version_check_local
-  when: java_local and not using_oracle_java
-
-- set_fact: java_version="{{ java_version_check_local.stdout }}"
-  tags: igv
-  when: java_local and not using_oracle_java
-
-- name: get java version
-  tags: igv
-  shell: "{{ java_tar_home }}/bin/java -version 2>&1 | grep version | awk '{print $3}' | sed 's/\"//g'"
-  register: java_version_check_oracle
-  when: using_oracle_java
-
-- set_fact: java_version="{{ java_version_check_oracle.stdout }}"
-  tags: igv
-  when: using_oracle_java
-
-- set_fact: extra_gradle_args=""
-  tags: igv
-
-# Extra args for compiling under Java 11
-- set_fact: extra_gradle_args="-b build_java11.gradle"
-  tags: igv
-  when: java_version | version_compare('11', '>=')
-
-- name: build igv {{ version }}
-  tags: igv
-  shell: export JAVA_HOME={{ java_tar_home }}; cd {{ source_dir }}/igv-{{ version }}; ./gradlew createDist  # ant
-  args:
-    creates: "{{ source_dir }}/igv-{{ version }}/igv.jar"
-  when: using_oracle_java
-
-- name: build igv {{ version }}
-  tags: igv
-  shell: cd {{ source_dir }}/igv-{{ version }}; ./gradlew {{ extra_gradle_args }} createDist
-  args:
-    creates: "{{ source_dir }}/igv-{{ version }}/igv.jar"
-  when: java_local and not using_oracle_java
-
-- name: build igv tools {{ version }}
-  tags: igv
-  shell: export JAVA_HOME={{ java_tar_home }}; cd {{ source_dir }}/igv-{{ version }}; ./gradlew {{ extra_gradle_args }} createToolsDist
-  args:
-    creates: "{{ source_dir }}/igv-{{ version }}/igvtools-dist/igvtools.jar"
-  when: using_oracle_java
-  
-- name: build igv tools {{ version }}
-  tags: igv
-  shell: cd {{ source_dir }}/igv-{{ version }}; ./gradlew createToolsDist  # ant -lib {{ source_dir }}/igv-{{ version }}/extras -f scripts/build-tools.xml
-  args:
-    creates: "{{ source_dir }}/igv-{{ version }}/igvtools-dist/igvtools.jar"
-  when: java_local and not using_oracle_java
-  
-- file:
-    dest: "{{ apps_dir }}/igv-{{ version }}"
+  file:
+    dest: "{{ modules_core }}/igv"
     state: directory
-    mode: 0755
-  tags: igv
-
-- name: copy igv {{ version }} shell file
-  tags: igv
-  template:
-    src: igv
-    dest: "{{ apps_dir }}/igv-{{ version }}"
-    mode: 0755
-
-- name: copy igvtools {{ version }} shell file
-  tags: igv
-  template:
-    src: igvtools
-    dest: "{{ apps_dir }}/igv-{{ version }}"
-    mode: 0755
-
-- file:
-    dest: "{{ modules_bio }}/igv"
-    state: directory
-    mode: 0755
-  tags: igv
 
 - name: igv {{ version }} module definition
   tags: igv
-  template:
+  template: 
     src: sw-module.lua.j2 
-    dest: "{{ modules_bio }}/igv/{{ version }}.lua"
+    dest: "{{ modules_core }}/igv/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
   with_items:
     - dir: 'igv-{{ version }}'
-      #java: true # not sure if I should co-load java, since it may not be installed
+      igv: true
       skip_bin: true
       help_text: 'This module loads the igv data viewing tool'
+
+  #- file:
+  #    dest: "{{ apps_dir }}/igv-{{ version }}"
+  #    state: directory
+  #    mode: 0755
+  #
+  #  tags: igv
+  #
+  #- name: copy igv {{ version }} shell file
+  #  template:
+  #    src: igv
+  #    dest: "{{ apps_dir }}/igv-{{ version }}"
+  #    mode: 0755
+  #
+  #  tags: igv
+  #
+  #- file:
+  #    dest: "{{ modules_bio }}/igv"
+  #    state: directory
+  #    mode: 0755
+  #
+  #  tags: igv

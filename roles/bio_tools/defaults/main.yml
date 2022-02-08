@@ -38,7 +38,7 @@ vcflib_version: master
 sratoolkit_version: 2.8.0
 qualimap_version: v2.2.1
 seqtk_version: v1.2
-igv_version: 2.5.2  # 2.4.10  # 2.4.13  # 2.3.94
+igv_version: 2.12.0
 bedtools2_version: 2.25.0
 smalt_version: 0.7.6
 snpeff_version: "4_3i"
