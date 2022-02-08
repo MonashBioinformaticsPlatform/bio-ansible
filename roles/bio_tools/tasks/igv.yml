@@ -6,6 +6,7 @@
     url: "https://data.broadinstitute.org/igv/projects/downloads/{{ '.'.join(version.split('.')[0:2]) }}/IGV_{{ version }}.zip"
     timeout: 30
     dest: "{{ source_dir }}/IGV_{{ version }}.zip"
+  creates: "{{ source_dir }}/IGV_{{ version }}.zip"
 
 - name: uncompress igv {{ version }}
   tags: igv
@@ -15,9 +16,17 @@
       copy: no
   creates: "{{ source_dir }}/IGV_{{ version }}"
 
+- name: check {{ source_dir }}/IGV_{{ version }} exists
+  tags: igv
+  stat: 
+    path: "{{ source_dir }}/IGV_{{ version }}"
+  register: igv_src
+
 - name: move igv directory to {{ apps_dir }}
   tags: igv
-  shell: 'mv "{{ source_dir }}/IGV_{{ version }}" "{{ apps_dir }}/igv-{{ version }}"'
+  shell: 'mv -n "{{ source_dir }}/IGV_{{ version }}" "{{ apps_dir }}/igv-{{ version }}"'
+  when: igv_src.stat.exists == True 
+  creates: "{{ apps_dir }}/igv-{{ version }}"
 
 - name: ensure igv module directory exists
   tags: igv
