@@ -1,32 +1,23 @@
 ---
 
-- name: Add NeuroDebian repo keys
-  tags: ['singularity']
-  apt_key:
-    keyserver: pool.sks-keyservers.net
-    id: "0xA5D32F012649A5A9"
-
-- name: Add the NeuroDebian data repo
-  tags: ['singularity']
-  apt_repository:
-    repo: "deb http://mirror.aarnet.edu.au/pub/neurodebian data main contrib non-free"
-    update_cache: no
-    state: present
-
-- name: Add the NeuroDebian repo
-  tags: ['singularity']
-  apt_repository:
-    # repo: "deb http://mirror.aarnet.edu.au/pub/neurodebian {{ ansible_distribution_release }} main contrib non-free"
-    # We force xenial even on early Ubuntu releases so we can get verson 2.4.x
-    repo: "deb http://mirror.aarnet.edu.au/pub/neurodebian xenial main contrib non-free"
-    update_cache: yes
-    state: present
-
-- name: Install Singularity
-  tags: ['singularity']
+- name: Install Singularity dependencies
+  tags: ['singularity', 'apt']
   apt:
     pkg: "{{ item }}"
     state: latest
+    update_cache: yes
   with_items:
     - squashfs-tools
-    - singularity-container
+    - libseccomp2
+    - cryptsetup-bin
+
+- name: Remove any old singularity-container package
+  tags: ['singularity', 'apt']
+  apt:
+    name: singularity-container
+    state: absent
+
+- name: Install Singularity deb
+  tags: ['singularity', 'apt']
+  apt:
+    deb: "{{ singularity_deb_url }}"
