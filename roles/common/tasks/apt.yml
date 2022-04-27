@@ -48,6 +48,7 @@
     - nfs-common
     # user-auth deps
     - libpam-krb5
+    - libpam-tmpdir
     - ldap-utils
     # lua and its deps
     - lua5.2
@@ -240,7 +241,7 @@
     - gfortran-7
     #- gfortran-9
     - gfortran-10
-    - libgdal-dev  # leaflet maps
+    - libgdal-dev  # leaflet, sf
     - gdal-bin
     # Rstudio deps
     - libgstreamer-plugins-base1.0-0
