@@ -1,0 +1,6 @@
+- name: sshd config
+  hosts: all
+  remote_user: "{{ sudo_guy }}"
+  roles:
+    - sshd
+  become: true
