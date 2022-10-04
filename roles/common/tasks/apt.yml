@@ -1,12 +1,7 @@
 ---
 
-# TODO: Add NeuroDebian PPAs to simplify getting up-to-date singularity,
-#       git-annex, etc.
+# TODO: Add NeuroDebian PPAs to simplify getting up-to-date git-annex, etc.
 # http://neuro.debian.net/install_pkg.html?p=git-annex-standalone
-#
-# TODO: Add the git ppa for an up-to-date git
-#       sudo add-apt-repository ppa:git-core/ppa
-#       sudo apt-get update
 
 - name: update apt cache
   tags: apt
@@ -106,6 +101,8 @@
     - libboost-test-dev
     - libpcre2-dev     # R 4.x
     - libgit2-dev      # r-lib/gert
+    - libharfbuzz-dev  # devtools
+    - libfribidi-dev   # devtools
     # Requires PPA: sudo add-apt-repository -y ppa:ubuntugis/ppa
     # - libgdal-dev  # leaflet maps
     # RStudio deps
@@ -114,6 +111,8 @@
     - libapparmor1
     - libxml2
     - libxml2-dev
+    - libglpk40
+    - libglpk-dev
     # For rJava
     - default-jre
     - default-jdk
