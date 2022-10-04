@@ -17,7 +17,7 @@
 - name: install rstudio-server {{ version }}
   tags: rstudio
   apt:
-    deb: "http://download2.rstudio.org/server/{{ use_codename }}/amd64/rstudio-server-{{ version }}-amd64.deb"
+    deb: "https://download2.rstudio.org/server/{{ use_codename }}/amd64/rstudio-server-{{ version }}-amd64.deb"
   become: yes
 
 - name: Try installing a custom /etc/rstudio/rserver.conf, if available

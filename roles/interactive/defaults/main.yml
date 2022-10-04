@@ -1,8 +1,8 @@
 ---
 
 # interactive
-rstudio_version: 1.4.1717
-rstudio_pro_version: 1.4.1717-3
+rstudio_version: 2022.07.1-554
+rstudio_pro_version: 2022.07.1-554.pro3
 shiny_version: 1.5.16.958
 # Must match a version of an installed R module
 shiny_r_version: 4.1.0
