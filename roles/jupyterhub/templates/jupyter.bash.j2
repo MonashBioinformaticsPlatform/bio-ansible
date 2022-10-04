@@ -6,6 +6,6 @@ ml use {{ modules_extra }}
 ml jupyter/{{ jupyter_version }}
 
 jconf={{ apps_dir }}/jupyter-{{ jupyter_version }}/jupyter-config.py
-jlogs={{ apps_dir }}/jupyter-{{ jupyter_version }}/jupyter.log
+jlogs=/var/logs/jupyter.log
 
 jupyterhub --config ${jconf} >> ${jlogs} 2>&1

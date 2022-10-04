@@ -1,4 +1,4 @@
-jupyter_version: 3.0.5
+jupyter_version: 3.4.6
 
 jupyter_config_templ: jupyter-config.py.j2
 jupyter_script: jupyter.bash.j2

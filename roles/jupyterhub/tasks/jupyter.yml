@@ -32,11 +32,6 @@
   # environment:
   #   PYTHONPATH: "{{ python3_pythonpath }}"
 
-- name: Set conda executable path
-  tags: ["always"]
-  set_fact:
-    conda_bin: "{{ apps_dir }}/conda/bin/conda"
-
 - include_tasks: conda-package.yml
   tags: jupyter
   module_name: jupyter
@@ -96,10 +91,11 @@
   with_items:
     - "@jupyterlab/celltags"
     - "@jupyterlab/toc"
-    #- "@jupyterlab/git"
+    - "@jupyterlab/git"
     - "@jupyterlab/fasta-extension"
     - "@jupyter-widgets/jupyterlab-manager"
     # - "nglview-js-widgets"
+    - "@mamba-org/gator-lab"
 
 
 - name: Run jupyter lab build to ensure extensions are built
