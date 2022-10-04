@@ -29,6 +29,11 @@
   loop_control:
     loop_var: version
 
+# These conda versions of R aren't all that useful without also installing
+# all the r-{package} library packages you might also need via conda also. 
+# This is because conda envs don't contain all the required header files 
+# to compile R packages from CRAN, so install.packages() frequently fails.
+#
 - name: Install R version {{ version }} via Conda (+rJava)
   tags: ['r_base', 'r_conda']
   include_tasks: r-via-conda.yml
