@@ -1,7 +1,0 @@
----
-
-- name: getting data
-  hosts: other
-  remote_user: "{{ main_guy }}"
-  roles:
-    - data

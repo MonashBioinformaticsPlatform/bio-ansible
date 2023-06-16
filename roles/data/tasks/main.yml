@@ -1,4 +1,0 @@
----
-
-- include_tasks: create_data_directory.yml
-- include_tasks: r_data.yml

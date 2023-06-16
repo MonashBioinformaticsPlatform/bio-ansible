@@ -1,9 +1,0 @@
----
-- name: Create { data_dir }}, set permissions
-  tags: ['data', 'r-data']
-  file:
-    dest: "{{ data_dir }}"
-    state: directory
-    owner: "{{ main_guy }}"
-    group: "{{ main_guy }}"
-    mode: 0755
