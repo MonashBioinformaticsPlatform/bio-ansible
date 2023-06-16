@@ -105,6 +105,7 @@
     - libharfbuzz-dev  # devtools
     - libfribidi-dev   # devtools
     - libfftw3-dev     # qqconf  
+    - libsqlite0-dev
     # RStudio deps
     - libjpeg62
     - liborc-0.4-0
