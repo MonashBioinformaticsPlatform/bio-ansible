@@ -1,0 +1,32 @@
+---
+
+- include_tasks: stack.yml
+  args: {apply: { tags: stack }}
+  vars:
+    version: "{{ stack_version }}"
+
+- include_tasks: nodejs.yml
+  args: {apply: { tags: nodejs }}
+  vars:
+    version: "{{ nodejs_version }}"
+
+- include_tasks: maven.yml
+  args: {apply: { tags: ['maven','java'] }}
+  vars:
+    version: "{{ maven_version }}"
+
+- include_tasks: ant.yml
+  args: {apply: { tags: ['ant','java'] }}
+  vars:
+    version: "{{ ant_version }}"
+
+- include_tasks: golang.yml
+  args: {apply: { tags: golang }}
+  vars:
+    version: "{{ go_version }}"
+
+# Installed system-wide via deb package instead
+#- include_tasks: rclone-conda.yml
+#  tags: rclone
+
+- include: environment-script.yml

@@ -10,6 +10,8 @@
     - squashfs-tools
     - libseccomp2
     - cryptsetup-bin
+    - runc
+    - uidmap
 
 - name: Remove any old singularity-container package
   tags: ['singularity', 'apt']
@@ -17,7 +19,26 @@
     name: singularity-container
     state: absent
 
+- set_fact: singularity_deb_url="https://github.com/sylabs/singularity/releases/download/v{{ version }}/singularity-ce_{{ version }}-{{ ansible_lsb.codename }}_amd64.deb"
+  tags: ['singularity', 'apt']
+
 - name: Install Singularity deb
   tags: ['singularity', 'apt']
   apt:
     deb: "{{ singularity_deb_url }}"
+
+- name: /etc/singularity/singularity.conf; mount hostfs = yes
+  tags: ['singularity']
+  ansible.builtin.lineinfile:
+    path: /etc/singularity/singularity.conf
+    regexp: '^mount hostfs ='
+    line: 'mount hostfs = yes'
+    state: present
+  when: singularity_mount_all_hostfs
+
+- name: Configure /etc/singularity/singularity.conf (bindpaths)
+  tags: ['singularity']
+  ansible.builtin.lineinfile:
+    path: /etc/singularity/singularity.conf
+    line: "bind path = {{ item }}"
+  with_items: "{{ singularity_bindpaths | default([]) }}"

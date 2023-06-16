@@ -14,19 +14,8 @@
     codename: xenial
     update_cache: yes
     state: present
-  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int < 20
 
-- name: Install libgdal (2.x) libraries
-  tags: gdal
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - libgdal20
-    - libgdal-dev
-  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int < 20
-
-- name: Install libgdal (2.x) libraries
+- name: Install libgdal (2.x) libraries (Ubuntu 20.04)
   tags: gdal
   apt:
     name: "{{ item }}"
@@ -34,4 +23,5 @@
   with_items:
     - libgdal26
     - libgdal-dev
+    - gdal-bin
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20

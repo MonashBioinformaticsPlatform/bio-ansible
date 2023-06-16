@@ -1,0 +1,198 @@
+---
+##
+# List of Bioconda packages available: https://bioconda.github.io/recipes.html
+##
+
+- include_tasks: conda-package.yml
+  tags: skewer
+  args: {apply: { tags: skewer }}
+  vars:
+    module_name: skewer
+    version: "{{ skewer_version }}"
+    conda_packages:
+      - 'skewer={{ skewer_version }}'
+
+- include_tasks: conda-package.yml
+  tags: mothur
+  args: {apply: { tags: mothur }}
+  vars:
+    module_name: mothur
+    version: "{{ mothur_version }}"
+    conda_packages:
+      - 'mothur={{ mothur_version }}'
+
+- include_tasks: conda-package.yml
+  tags: igv
+  args: {apply: { tags: igv }}
+  vars:
+    module_name: igv
+    version: "{{ igv_version }}"
+    conda_packages:
+      - 'igv={{ igv_version }}'
+      - 'igvtools={{ igvtools_version }}'
+
+- include_tasks: conda-package.yml
+  tags: raxml
+  args: {apply: { tags: raxml }}
+  vars:
+    module_name: raxml
+    version: "{{ raxml_version }}"
+    conda_packages:
+      - 'raxml={{ raxml_version }}'
+
+- include_tasks: conda-package.yml
+  tags: macs2
+  args: {apply: { tags: macs2 }}
+  vars:
+    module_name: macs2
+    version: "{{ macs2_version }}"
+    conda_packages:
+      - 'macs2={{ macs2_version }}'
+
+- include_tasks: conda-package.yml
+  tags: cutadapt
+  args: {apply: { tags: cutadapt }}
+  vars:
+    module_name: cutadapt
+    version: "{{ cutadapt_version }}"
+    conda_packages:
+      - 'cutadapt={{ cutadapt_version }}'
+
+- include_tasks: conda-package.yml
+  tags: hifive
+  args: {apply: { tags: hifive }}
+  vars:
+    module_name: hifive
+    version: "{{ hifive_version }}"
+    conda_packages:
+      - 'hifive={{ hifive_version }}'
+
+- include_tasks: conda-package.yml
+  tags: blast
+  args: {apply: { tags: blast }}
+  vars:
+    module_name: blast
+    version: "{{ blast_version }}"
+    conda_packages:
+      - 'blast={{ blast_version }}'
+
+- include_tasks: conda-package.yml
+  tags: gatk4
+  args: {apply: { tags: gatk4 }}
+  vars:
+    module_name: gatk4
+    version: "{{ gatk4_version }}"
+    conda_packages:
+      - 'gatk4={{ gatk4_version }}'
+
+- include_tasks: conda-package.yml
+  tags: freebayes
+  args: {apply: { tags: freebayes }}
+  vars:
+    module_name: freebayes
+    version: "{{ freebayes_version }}"
+    conda_packages:
+      - 'freebayes={{ freebayes_version }}'
+
+- include_tasks: conda-package.yml
+  tags: infernal
+  args: {apply: { tags: infernal }}
+  vars:
+    module_name: infernal
+    version: "{{ infernal_version }}"
+    conda_packages:
+      - 'infernal={{ infernal_version }}'
+
+- include_tasks: conda-package.yml
+  tags: miso
+  args: {apply: { tags: miso }}
+  vars:
+    module_name: miso
+    version: "{{ miso_version }}"
+    conda_packages:
+      - 'misopy={{ miso_version }}'
+
+- include_tasks: conda-package.yml
+  tags: hisat2
+  args: {apply: { tags: hisat2 }}
+  vars:
+    module_name: hisat2
+    version: "{{ hisat2_version }}"
+    conda_packages:
+      - 'hisat2={{ hisat2_version }}'
+
+- include_tasks: conda-package.yml
+  tags: je_suite
+  args: {apply: { tags: je_suite }}
+  vars:
+    module_name: je-suite
+    version: "{{ je_suite_version }}"
+    conda_packages:
+      - 'je-suite={{ je_suite_version }}'
+
+- include_tasks: conda-package.yml
+  tags: hmmer
+  args: {apply: { tags: hmmer }}
+  vars:
+    module_name: hmmer
+    version: "{{ hmmer_version }}"
+    conda_packages:
+      - 'hmmer={{ hmmer_version }}'
+
+- include_tasks: conda-package.yml
+  tags: rnasik
+  args: {apply: { tags: rnasik }}
+  vars:
+    module_name: rnasik
+    version: "{{ rnasik_version }}"
+    conda_packages:
+      - 'rnasik={{ rnasik_version }}'
+      - qualimap
+
+- include_tasks: conda-package.yml
+  tags: git_annex
+  args: {apply: { tags: git_annex }}
+  vars:
+    module_name: git-annex
+    module_section: extra
+    version: "{{ git_annex_version }}"
+    conda_packages:
+      - 'git-annex={{ git_annex_version }}'
+
+- include_tasks: conda-package.yml
+  tags: shovill
+  args: {apply: { tags: shovill }}
+  vars:
+    module_name: shovill
+    version: "{{ shovill_version }}"
+    conda_packages:
+      - 'shovill={{ shovill_version }}'
+
+- include_tasks: conda-package.yml
+  tags: prokka
+  args: {apply: { tags: prokka }}
+  vars:
+    module_name: prokka
+    version: "{{ prokka_version }}"
+    conda_packages:
+      - 'prokka={{ prokka_version }}'
+
+- include_tasks: conda-package.yml
+  tags: biotradis
+  args: {apply: { tags: biotradis }}
+  vars:
+    module_name: biotradis
+    version: "{{ biotradis_version }}"
+    conda_packages:
+      - 'biotradis={{ biotradis_version }}'
+      - bwa
+
+- include_tasks: conda-package.yml
+  tags: snippy
+  args: {apply: { tags: snippy }}
+  vars:
+    module_name: snippy
+    version: "{{ snippy_version }}"
+    conda_packages:
+      - 'snippy={{ snippy_version }}'
+

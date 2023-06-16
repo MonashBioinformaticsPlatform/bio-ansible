@@ -1,0 +1,51 @@
+---
+
+- name: Install Apache web server
+  apt: pkg={{item}} state=present
+  with_items:
+    - apache2
+    - libapache2-mod-proxy-uwsgi
+    - libapache2-mod-auth-openidc
+
+- name: Install libapache2-mod-wsgi
+  apt: pkg={{item}} state=present
+  with_items:
+    - libapache2-mod-wsgi
+  when: ansible_lsb.major_release|int < 22
+
+- name: Install libapache2-mod-wsgi-py3
+  apt: pkg={{item}} state=present
+  with_items:
+    - libapache2-mod-wsgi-py3
+  when: ansible_lsb.major_release|int >= 22
+
+- name: Enable Apache modules
+  apache2_module: name={{item}} state=present
+  with_items:
+    - ssl
+    - alias
+    - rewrite
+    - proxy
+    - proxy_http
+    - auth_basic
+    - userdir
+    - headers
+    - cgid
+    - wsgi
+    - proxy_uwsgi
+    - ldap
+    - authnz_ldap
+    - authz_core
+
+# - name: Ensure /etc/apache2/htaccess exists
+#   file: dest=/etc/apache2/htaccess
+#         state=directory
+#         owner=root
+#         group=root
+
+# - name: Copy htaccess files to Apache config
+#   copy: src="{{ role_path }}/files/htaccess/"
+#         dest=/etc/apache2/htaccess
+#         owner=root
+#         group=root
+#         backup=yes

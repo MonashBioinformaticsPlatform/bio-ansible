@@ -1,0 +1,4 @@
+---
+
+- include_tasks: set-authorized-key.yml
+  tags: add-public-key

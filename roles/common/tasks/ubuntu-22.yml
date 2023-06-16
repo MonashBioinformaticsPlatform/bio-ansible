@@ -1,0 +1,35 @@
+---
+
+# These are packages that tend to change name between distro releases
+# We can add specific tasks fro Ubuntu 22.04 here
+- name: apt-get common dependencies (22.04)
+  tags: apt
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - coreutils
+    - mariadb-client
+    # R deps
+    - fort77
+    - gfortran-9
+    - gfortran-10
+    - gfortran-12
+    # libgdal etc (for the R 'sf' package, etc) - for more recent versions can use PPA (gdal_ppa.yml tasks)
+    - libgdal-dev  # leaflet, sf
+    - libgdal30
+    - gdal-bin
+    # Rstudio deps
+    - libgstreamer-plugins-base1.0-0
+    # For Bio::Perl via CPAN
+    - libxml-dom-xpath-perl
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 22
+
+- name: set default gfortran (22.04)
+  tags: ['apt']
+  shell: |
+    update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-12 50
+    update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-10 40
+    update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-9 30
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 22

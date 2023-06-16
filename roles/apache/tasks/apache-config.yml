@@ -1,0 +1,10 @@
+---
+
+- name: Write the Apache config files
+  tags: ['apache', 'apache_config']
+  template:
+    src: 000-default.conf.j2
+    dest: /etc/apache2/sites-available/000-default.conf
+    backup: yes
+  notify:
+    - reload apache config

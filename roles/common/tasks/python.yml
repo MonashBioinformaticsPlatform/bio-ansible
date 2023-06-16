@@ -1,81 +1,33 @@
 ---
+# From Ubuntu 20.04 onward we are assuming that the 'python' binary is a 3.x version
+# Any legacy scripts will need to be updated to explicitly use /usr/bin/env python2 or
+# run inside a conda environment with Python 2.x as the default 'python' binary
 
 - name: update apt cache
-  tags: apt
+  tags: ['apt', 'python']
   apt:
     update_cache: yes
     cache_valid_time: 3600
 
 - name: apt-get python dependencies
-  tags: apt
+  tags: ['apt', 'python']
   apt:
     name: "{{ item }}"
     state: present
     autoremove: yes
-  environment:
-    - LANG: "{{ locale }}"
-    - LC_ALL: "{{ locale }}"
-    - LANGUAGE: "{{ locale }}"
-    - LC_CTYPE: "{{ locale }}"
-    - LC_NUMERIC: "{{ locale }}"
-    - LC_TIME: "{{ locale }}"
-    - LC_COLLATE: "{{ locale }}"
-    - LC_MONETARY: "{{ locale }}"
-    - LC_MESSAGES: "{{ locale }}"
-    - LC_PAPER: "{{ locale }}"
-    - LC_NAME: "{{ locale }}"
-    - LC_ADDRESS: "{{ locale }}"
-    - LC_TELEPHONE: "{{ locale }}"
-    - LC_MEASUREMENT: "{{ locale }}"
-    - LC_IDENTIFICATION: "{{ locale }}"
   with_items:
-    # - python-pip
-    - python-dev
+    - python-is-python3
+    - python-dev-is-python3
     - python3
-    - ipython3
-    # qiime dep mainly, but this is general GUI package
-    - python-tk
-
-- name: apt-get python3 extras
-  tags: apt
-  apt:
-    name: "{{ item }}"
-    state: present
-    autoremove: yes
-  environment:
-    - LANG: "{{ locale }}"
-    - LC_ALL: "{{ locale }}"
-    - LANGUAGE: "{{ locale }}"
-    - LC_CTYPE: "{{ locale }}"
-    - LC_NUMERIC: "{{ locale }}"
-    - LC_TIME: "{{ locale }}"
-    - LC_COLLATE: "{{ locale }}"
-    - LC_MONETARY: "{{ locale }}"
-    - LC_MESSAGES: "{{ locale }}"
-    - LC_PAPER: "{{ locale }}"
-    - LC_NAME: "{{ locale }}"
-    - LC_ADDRESS: "{{ locale }}"
-    - LC_TELEPHONE: "{{ locale }}"
-    - LC_MEASUREMENT: "{{ locale }}"
-    - LC_IDENTIFICATION: "{{ locale }}"
-  with_items:
     - python3-pip
     - python3-virtualenv
     - python3-dev
+    - ipython3
+    - virtualenv
+    - python-tk
 
-- name: apt-get python dependencies
-  tags: apt
-  apt:
-    name: "{{ item }}"
-    state: present
-    autoremove: yes
-  with_items:
-    - python-pip
-    - ipython
-  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int < 20
-
-- name: apt-get python dependencies
-  tags: apt
+- name: apt-get python dependencies (Ubuntu 20.04 specific)
+  tags: ['apt', 'python']
   apt:
     name: "{{ item }}"
     state: present
@@ -83,3 +35,26 @@
   with_items:
     - python-pip-whl
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20
+
+- name: apt-get python dependencies (Ubuntu 22.04 specific)
+  tags: ['apt', 'python']
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - python3-pip-whl
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 22
+
+- name: apt-get legacy python2 packages
+  tags: ['apt', 'python']
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - python-is-python3
+    - python-dev-is-python3
+    - python2
+    - python2-dev
+    - python-tk

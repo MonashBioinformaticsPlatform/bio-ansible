@@ -1,44 +1,62 @@
 ---
 
 - name: download skewer {{ version }}
+  tags: skewer
   git:
     repo: https://github.com/relipmoc/skewer
     dest: "{{ source_dir }}/skewer-{{ version }}"
     version: "{{ version }}"
     update: yes
 
-- file:
+- name: create skewer directory
+  tags: skewer
+  file:
     dest: "{{ apps_dir }}/skewer-{{ version }}"
     state: directory
     mode: 0755
 
-- name: build skewer {{ version }}
-  shell: cd {{ source_dir }}/skewer-{{ version }}; make; mv skewer {{ apps_dir }}/skewer-{{ version }}
+- name: compile skewer {{ version }}
+  tags: skewer
+  shell: |
+    cd {{ source_dir }}/skewer-{{ version }}
+    make -j 4
+  args:
+    creates: "{{ source_dir }}/skewer-{{ version }}/skewer"
+
+- name: install skewer {{ version }}
+  tags: skewer
+  command: mv {{ source_dir }}/skewer-{{ version }}/skewer {{ apps_dir }}/skewer-{{ version }}
   args:
     creates: "{{ apps_dir }}/skewer-{{ version }}/skewer"
 
-- file:
+
+- name: create skewer module directory
+  tags: skewer
+  file:
     dest: "{{ modules_bio }}/skewer"
     state: directory
     mode: 0755
 
 - name: skewer {{ version }} module definition
+  tags: skewer
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_bio }}/skewer/{{ version }}.lua"
     owner: "{{ main_guy }}" 
     mode: 0644
-  with_items:
-    - dir: 'skewer-{{ version }}'
-      skip_bin: true
-      help_text: 'This module loads the skewer FASTQ trimmer'
+  vars:
+    dir: 'skewer-{{ version }}'
+    skip_bin: true
+    help_text: 'This module loads the skewer FASTQ trimmer'
 
 - name: setting register for skewer {{ version }}
+  tags: skewer
   stat:
     path: "{{ apps_dir }}/skewer-{{ version }}/skewer"
   register: s
 
 - name: removing skewer {{ version }} source directory
+  tags: skewer
   file:
     dest: "{{ source_dir }}/skewer-{{ version }}"
     state: absent

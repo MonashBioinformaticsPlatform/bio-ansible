@@ -1,0 +1,16 @@
+- name: update apt cache
+  tags: ['vnc', 'apt']
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: apt-get common dependencies
+  tags: ['vnc', 'apt']
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - tightvncserver
+    - fluxbox
+    - firefox

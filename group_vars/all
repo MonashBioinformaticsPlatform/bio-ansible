@@ -7,6 +7,11 @@ main_guy: sw-installer
 sudo_guy: "{{ main_guy }}"
 # need to specify private key if you planing to setyp a launching server
 main_guy_pubkey: ""
+
+# Point this to a public key and it will be added to the
+# ~/.ssh/authorized_keys for the sudo_guy user
+#authorized_public_key_path: ~/.ssh/id_rsa.pub
+
 #ansible_python_interpreter: /usr/bin/python2
 #---------------------------------
 # Different directories variables
@@ -37,9 +42,44 @@ timezone: "Australia/Melbourne"
 threads: 4
 del_src: True
 
+# Overide some defaults from roles/R/defaults/main.yml
 r_base_mirror: "https://cran.csiro.au"
+r_base_version: 4.2.3
 
-# java version
-jdk_major: 8
-jdk_minor: 144
-java_oracle_version: "{{ jdk_major }}u{{ jdk_minor }}"
+# Set to true if you are lucky enough to have an RStudio Server license
+use_rstudio_pro: false
+# rstudio_pro_key: "" # this should be defined in an ansible-vault file
+
+# When true, singularity.conf is set to make all host filesystems accessible
+# from inside singularity containers
+singularity_mount_all_hostfs: true
+
+# These are additional filesystems listed as bind paths in singularity.conf
+# If singularity_mount_all_hostfs is false, add any mounted filesystems to 
+# this list that you want accessible by tools inside singularity containers
+#
+#singularity_bindpaths:
+# - /mnt
+
+###############################################################################
+#### For Apache webserver
+
+server_admin_email: root@localhost
+# This should be the domain name (or just localhost)
+webserver_fqdn: localhost
+# This could be an IP, or a second domain name
+webserver_alt_fqdn: 127.0.0.1
+
+# Automatically generate a robots.txt to deter search engines
+# via the Apache config
+no_robots: true
+
+webserver_allow_google_auth: false
+# Values from the Google Cloud console if an OAuth2 provider has been setup
+google_oauth_client_id: ""
+google_oauth_client_secret: ""
+google_oauth_redirect_uri: ""
+google_oidc_crypto_passphrase: ""
+
+####
+################################################################################

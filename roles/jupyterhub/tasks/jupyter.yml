@@ -34,24 +34,26 @@
 
 - include_tasks: conda-package.yml
   tags: jupyter
-  module_name: jupyter
-  version: "{{ jupyter_version }}"
-  conda_packages:
-    - 'jupyterlab={{ jupyter_version }}'
-    - jupyterhub
+  vars:
+    module_name: jupyter
+    version: "{{ jupyter_version }}"
+    conda_packages:
+      - 'jupyterlab={{ jupyter_version }}'
+      - jupyterhub
 
 - include_tasks: conda-env-add-packages.yml
   tags: jupyter
-  module_name: jupyter
-  version: "{{ jupyter_version }}"
-  conda_packages:
-    - jupyter_console
-    - bash_kernel
-    - rpy2
-    - xeus-python
-    #- nglview
-    - jupytext
-    #- jupyterlab-git
+  vars:
+    module_name: jupyter
+    version: "{{ jupyter_version }}"
+    conda_packages:
+      - jupyter_console
+      - bash_kernel
+      - rpy2
+      - xeus-python
+      #- nglview
+      - jupytext
+      #- jupyterlab-git
 
 #- name: Install jupyter extensions using pip
 #  tags: jupyter
@@ -72,30 +74,31 @@
 
 - include_tasks: conda-env-add-packages.yml
   tags: jupyter
-  module_name: jupyter
-  version: "{{ jupyter_version }}"
-  conda_packages:
-    - nodejs
+  vars:
+    module_name: jupyter
+    version: "{{ jupyter_version }}"
+    conda_packages:
+      - nodejs
 
-- name: Install extensions
-  tags: jupyter
-  shell: |
-    # Activate the conda environment
-    . $(dirname {{ conda_bin }})/activate {{ apps_dir }}/jupyter-{{ version }}
+# - name: Install extensions
+#   tags: jupyter
+#   shell: |
+#     # Activate the conda environment
+#     . $(dirname {{ conda_bin }})/activate {{ apps_dir }}/jupyter-{{ version }}
     
-    # Ensure conda env is on PATH, so the correct npm is found
-    PATH={{ apps_dir }}/jupyter-{{ version }}/bin:$PATH
+#     # Ensure conda env is on PATH, so the correct npm is found
+#     PATH={{ apps_dir }}/jupyter-{{ version }}/bin:$PATH
     
-    {{ apps_dir }}/jupyter-{{ version }}/bin/jupyter labextension install {{ item }}
+#     {{ apps_dir }}/jupyter-{{ version }}/bin/jupyter labextension install {{ item }}
 
-  with_items:
-    - "@jupyterlab/celltags"
-    - "@jupyterlab/toc"
-    - "@jupyterlab/git"
-    - "@jupyterlab/fasta-extension"
-    - "@jupyter-widgets/jupyterlab-manager"
-    # - "nglview-js-widgets"
-    - "@mamba-org/gator-lab"
+#   with_items:
+#     - "@jupyterlab/celltags"
+#     - "@jupyterlab/toc"
+#     - "@jupyterlab/git"
+#     - "@jupyterlab/fasta-extension"
+#     - "@jupyter-widgets/jupyterlab-manager"
+#     # - "nglview-js-widgets"
+#     - "@mamba-org/gator-lab"
 
 
 - name: Run jupyter lab build to ensure extensions are built

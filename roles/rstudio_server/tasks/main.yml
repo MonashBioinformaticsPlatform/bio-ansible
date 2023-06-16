@@ -1,0 +1,15 @@
+---
+
+- include_tasks: rstudio-deps.yml
+
+- include_tasks: rstudio-server.yml
+  vars:
+    version: "{{ rstudio_version }}"
+  when: not use_rstudio_pro
+
+- include_tasks: rstudio-server-pro.yml
+  vars:
+    version: "{{ rstudio_pro_version }}"
+  when: use_rstudio_pro
+
+- include_tasks: rstudio-config.yml 

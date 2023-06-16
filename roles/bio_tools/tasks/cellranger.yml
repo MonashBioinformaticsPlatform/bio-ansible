@@ -2,37 +2,38 @@
 
 
 - name: check cellranger-{{ version }}.tar.gz exists
+  tags: cellranger
+  become: false
   local_action: stat path="{{ tarballs_path }}/cellranger-{{ version }}.tar.gz"
   register: c
 
-  tags: cellranger
-
 - name: copy local cellranger-{{ version }}.tar.gz file
+  tags: cellranger
   copy:
     src: "{{ tarballs_path }}/cellranger-{{ version }}.tar.gz"
     dest: "{{ source_dir }}/cellranger-{{ version }}.tar.gz"
+    user: "{{ main_guy }}"
+    group: "{{ main_guy }}"
   when: c.stat.exists
 
-  tags: cellranger
-
 - name: uncompress cellranger {{ version }}
+  tags: cellranger
   unarchive:
       src: "{{ source_dir }}/cellranger-{{ version }}.tar.gz"
       dest: "{{ apps_dir }}"
       copy: no
   when: c.stat.exists
 
+- name: Create cellranger module directory
   tags: cellranger
-
-- file:
+  file:
     dest: "{{ modules_bio }}/cellranger"
     state: directory
     mode: 0755
   when: c.stat.exists
 
-  tags: cellranger
-
 - name: cellranger {{ version }} module definition
+  tags: cellranger
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_bio }}/cellranger/{{ version }}.lua"
@@ -44,19 +45,15 @@
       help_text: 'This module loads the cellranger from 10x Genomics'
   when: c.stat.exists
 
-  tags: cellranger
-
 - name: setting register for cellranger {{ version }}
+  tags: cellranger
   stat:
     path: "{{ apps_dir }}/cellranger-{{ version }}/bin/cellranger"
   register: cr
 
-  tags: cellranger
-
 - name: removing cellranger {{ version }} source directory
+  tags: cellranger
   file:
     dest: "{{ source_dir }}/cellranger-{{ version }}.tar.gz"
     state: absent
   when: "del_src and cr.stat.exists"
-
-  tags: cellranger

@@ -1,0 +1,34 @@
+---
+
+# These are packages that tend to change name between distro releases
+# We can add specific tasks fro Ubuntu 20.04 here
+- name: apt-get common dependencies (20.04)
+  tags: apt
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - coreutils
+    - mariadb-client
+    # R deps
+    - fort77
+    #- gfortran-7
+    - gfortran-9
+    - gfortran-10
+    # libgdal etc (for the R 'sf' package, etc) - for more recent versions can use PPA (gdal_ppa.yml tasks)
+    - libgdal-dev  # leaflet, sf
+    - libgdal26
+    - gdal-bin
+    # Rstudio deps
+    - libgstreamer-plugins-base1.0-0
+    # For Bio::Perl via CPAN
+    - libxml-dom-xpath-perl
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20
+
+- name: set default gfortran (20.04)
+  tags: ['apt']
+  shell: |
+    update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-10 50
+    update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-9 40
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20

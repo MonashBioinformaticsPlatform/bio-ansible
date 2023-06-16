@@ -33,7 +33,7 @@
   shell: "dpkg-reconfigure --frontend=noninteractive locales && \
           update-locale LANG={{ locale }}"
   environment:
-    - DEBIAN_FRONTEND: noninteractive
+    DEBIAN_FRONTEND: noninteractive
 
 # Not working in 18.04 ?
 #- name: Install timedatectl
@@ -55,7 +55,7 @@
 #  tags: ['locale', 'timezone']
 #  copy:
 #    # content: "{{ timezone }}"
-#    content: "Australia/Melbourne"
+#    content: "{{ timezone }}"
 #    dest: /etc/timezone
 #    force: yes
 #    # backup: yes

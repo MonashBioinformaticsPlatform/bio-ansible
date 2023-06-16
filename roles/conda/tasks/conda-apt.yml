@@ -1,0 +1,20 @@
+- name: Add conda repo
+  become: true
+  block:
+    - name: Add anaconda apt key | no apt key
+      ansible.builtin.get_url:
+        url: https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc
+        dest: /etc/apt/trusted.gpg.d/anaconda.asc
+
+    - name: anaconda | apt source
+      ansible.builtin.apt_repository:
+        repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/anaconda.asc] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main"
+        state: present
+
+- name: Install conda (system-wide)
+  become: true
+  ansible.builtin.apt:
+    update_cache: yes
+    autoclean: yes
+    pkg:
+      - conda

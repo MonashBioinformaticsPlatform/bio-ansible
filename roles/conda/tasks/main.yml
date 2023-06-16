@@ -1,0 +1,6 @@
+---
+- include_tasks: conda-apt.yml
+  tags: ['conda', 'apt']
+
+- include_tasks: condarc.yml
+  tags: conda

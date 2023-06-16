@@ -1,0 +1,72 @@
+---
+
+# TODO:
+#  - Settings to ensure user containers aren't on NFS: https://www.redhat.com/sysadmin/rootless-podman-nfs
+#  - Populate /etc/subuid and /etc/subgid for key users: https://www.redhat.com/sysadmin/rootless-podman
+#    - We need to ensure these uid ranges don't clash with any in use on the host (eg high Authcate UIDs)
+#    - We need to ensure these uid/gid ranges don't overlap
+#    - We probably want a smaller range per user than the default 65536
+#    - Maximum UID is 4,294,967,296 
+#      - systemd and Debian reserve some ranges around ~60000-65536, so avoid those.
+#      - snapd maps to 524288-589823 so avoid those.
+#  - Helper script to properly add a user to /etc/subuid and /etc/subgid, create non-NFS container directory
+
+- name: Add the Kubic podman repos key
+  get_url:
+    url: "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_{{ ansible_lsb.release }}/Release.key"
+    dest: /etc/apt/keyrings/podman-kubic.asc
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Add the Kubic repos for podman
+  tags: podman
+  ansible.builtin.apt_repository:
+    repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_{{ ansible_lsb.release }}/ /"
+    filename: podman-kubic
+    state: present
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 18
+
+
+- name: apt-get install podman
+  tags: podman
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+    update_cache: yes
+  with_items:
+    - podman
+
+- name: apt-get install containers-storage (Ubuntu 22.04)
+  tags: podman
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+    update_cache: yes
+  with_items:
+    - containers-storage
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 22
+
+- name: Remove rootless_storage_path from /etc/containers/storage.conf, for replacement
+  tags: podman
+  lineinfile:
+    path: /etc/containers/storage.conf
+    state: absent
+    regexp: "^rootless_storage_path"
+    backup: yes
+
+- name: Setup (non-NFS) path for user container storage in /etc/containers/storage.conf
+  tags: podman
+  lineinfile:
+    path: /etc/containers/storage.conf
+    state: present
+    line: "rootless_storage_path = \"{{ podman_rootless_storage_path }}\""
+
+- name: Create user container path ({{ podman_rootless_storage_path_base }}) with sticky bit
+  file:
+    state: directory
+    path: "{{ podman_rootless_storage_path_base }}"
+    mode: "a+rwt"
+  when: podman_rootless_storage_path_base != ''

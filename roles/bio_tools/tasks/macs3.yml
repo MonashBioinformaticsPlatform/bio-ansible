@@ -1,0 +1,35 @@
+---
+
+- name: pip install macs3 {{ version }}
+  tags: macs3
+  pip:
+    name: "{{ item }}"
+    virtualenv: "{{ apps_dir }}/macs3-{{ version }}"
+    virtualenv_python: "{{ python3_executable }}"
+    virtualenv_command: "{{ python3_virtualenv }}"
+    virtualenv_site_packages: no
+  environment:
+    PYTHONPATH: "{{ python3_pythonpath }}"
+  with_items:
+    - numpy
+    - "macs3=={{ version }}"
+
+- name: Create macs3 module directory
+  tags: macs3
+  file:
+    dest: "{{ modules_bio }}/macs3"
+    state: directory
+    mode: 0755
+
+
+- name: macs3 {{ version }} module definition
+  tags: macs3
+  template:
+    src: sw-module.lua.j2
+    dest: "{{ modules_bio }}/macs3/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'macs3-{{ version }}'
+      help_text: 'loads macs3 Chip-Seq tool'
+      append: true 

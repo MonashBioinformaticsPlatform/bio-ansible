@@ -1,0 +1,46 @@
+---
+
+- name: Download qiime2 yml file
+  tags: qiime2
+  get_url:
+    url: "https://data.qiime2.org/distro/core/qiime2-{{ version }}-py38-linux-conda.yml"
+    dest: "{{ source_dir }}/qiime2-{{ version }}-py38-linux-conda.yml"
+
+- name: Create qiime2 conda environment
+  tags: qiime2
+  shell: |
+    {{ conda_bin }} env create \
+      --prefix={{ apps_dir }}/qiime2-{{ version }} \
+      --file={{ source_dir }}/qiime2-{{ version }}-py38-linux-conda.yml
+  args:
+    creates: "{{ apps_dir }}/qiime2-{{ version }}"
+
+- name: Remove symlinks bin/conda, bin/activate and bin/deactivate
+  tags: qiime2
+  file:
+    dest: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ apps_dir }}/qiime2-{{ version }}/bin/conda"
+    - "{{ apps_dir }}/qiime2-{{ version }}/bin/activate"
+    - "{{ apps_dir }}/qiime2-{{ version }}/bin/deactivate"
+
+- name: Create qiime2 module directory
+  tags: qiime2
+  file:
+    dest: "{{ modules_bio }}/qiime2"
+    state: directory
+    mode: 0755
+
+- name: qiime2 {{ version }} module definition
+  tags: qiime2
+  template: 
+    src: sw-module.lua.j2 
+    dest: "{{ modules_bio }}/qiime2/{{ version }}.lua"
+    owner: "{{ main_guy }}" 
+    mode: 0644
+  with_items:
+    - dir: 'qiime2-{{ version }}'
+      skip_bin: true
+      help_text: 'This module loads the cd-hit'
+

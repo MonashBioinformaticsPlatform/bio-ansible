@@ -1,16 +1,22 @@
 ---
-- name: Add duck.sh repo key
-  apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: "FE7097963FEFBE72"
+- name: Download and add duck.sh repo key
+  tags: duck
+  get_url:
+    url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xFE7097963FEFBE72"
+    dest: "/etc/apt/keyrings/duck.asc"
+    owner: root
+    group: root
+    mode: '0644'
 
 - name: Add duck.sh repository
+  tags: duck
   apt_repository:
     repo: deb https://s3.amazonaws.com/repo.deb.cyberduck.io stable main
     state: present
     update_cache: yes
 
 - name: Install duck
+  tags: duck
   apt:
     name: "{{ item }}"
     state: present

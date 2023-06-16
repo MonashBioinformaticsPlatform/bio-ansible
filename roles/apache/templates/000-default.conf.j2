@@ -1,0 +1,210 @@
+<VirtualHost *:80>
+        ServerName {{ webserver_fqdn }}
+        ServerAlias {{ webserver_alt_fqdn }}
+        Redirect permanent "/" "https://{{ webserver_fqdn }}/"
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName {{ webserver_fqdn }}
+    ServerAlias {{ webserver_alt_fqdn }}
+
+    ServerAdmin {{ server_admin_email }}
+    DocumentRoot /var/www/html
+    # ErrorDocument 404 /404.html
+
+    SSLEngine on
+    SSLCertificateKeyFile {{ ssl_key }}
+    SSLCertificateFile {{ ssl_cert }}
+
+    # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+    # error, crit, alert, emerg.
+    # It is also possible to configure the loglevel for particular
+    # modules, e.g.
+    #LogLevel info ssl:warn
+    #LogLevel debug
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    # Disable deprecated TLS protocols
+    SSLProtocol all -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
+    
+    # HSTS header: https://https.cio.gov/hsts/#configuration-for-common-web-servers
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+    # CSP header: https://content-security-policy.com/
+    Header always set Content-Security-Policy "default-src https: * 'unsafe-eval' 'unsafe-inline' data: blob:; font-src * data: blob:; img-src * data: blob:; script-src * 'unsafe-inline' 'unsafe-eval' data: blob:; style-src * 'unsafe-inline' data: blob:;"
+
+    # For Let's Encrypt http-01 challenge
+    AliasMatch ^/.well-known/acme-challenge/(.*) /var/www/html/.well-known/acme-challenge/$1
+    <Directory /var/www/html/.well-known/acme-challenge/*>
+        Order Allow,Deny
+        Allow from all
+        <Limit GET POST OPTIONS>
+            Require all granted
+        </Limit>
+        <LimitExcept GET POST OPTIONS>
+            Require all denied
+        </LimitExcept>
+    </Directory>
+
+    {% if no_robots %}
+    Alias "/robots.txt" "/var/www/robots.txt"
+
+    <Directory "/var/www/">
+        <Files "robots.txt">
+            AllowOverride None
+            Require all granted
+        </Files>
+    </Directory>
+
+    <Location "/robots.txt">
+        RewriteEngine On
+        RewriteBase /
+        RewriteRule .* "User-agent: *\nDisallow: /" [L]
+    </Location>
+    {% endif %}
+
+    {% if webserver_allow_google_auth %}
+    ########################################################################################
+    OIDCProviderMetadataURL https://accounts.google.com/.well-known/openid-configuration
+    OIDCClientID {{ google_oauth_client_id }}
+    OIDCClientSecret {{ google_oauth_client_secret }}
+    # Default is 5 mins
+    OIDCSessionInactivityTimeout 28800      
+    # Default 8hrs
+    #OIDCSessionMaxDuration <seconds>        # Default 8hrs
+
+    OIDCScope "openid email"
+    
+    OIDCRedirectURI {{ google_oauth_redirect_uri }}
+    OIDCCryptoPassphrase {{ google_oidc_crypto_passphrase }}
+    
+    <Location /openid>
+       AuthType openid-connect
+       Require valid-user
+    </Location>
+    # This allows ppl to have their own .htaccess to limit access to specific google accounts, eg.
+    # AuthType openid-connect
+    # Require claim email:david.powell@monash.edu
+    ########################################################################################
+    {% endif %}
+
+    ########################################################################################
+    # User directories to publish ~/www to the web
+    # Files in ~/www appear at:
+    #   https://{{ webserver_fqdn }}/home/myusername
+    #   https://{{ webserver_fqdn }}/~myusername
+    # (where myusername is the name of an actual user with a ~/www directory)
+    #
+    # Please note, files in ~/www must be readable by the Apache web server process, otherwise 
+    # you'll get a Forbidden 403 error when trying to access {{ webserver_fqdn }}/home/myusername
+    #
+    # You may need to do do:
+    #   find ~/www/ -type d -exec chmod 755 {} \;
+    #   find ~/www/ -type f -exec chmod 644 {} \;
+    #   chmod a+x ~
+    # for users that want a ~/www folder.
+    # 
+    # .htaccess files can be used in ~/www or subdirectories to restrict access and 
+    # allow index pages to be shown.
+    # eg. creating an .htaccess file containing:
+    # 
+    #  Options +Indexes
+    # 
+    # will show an index page of all the files in that directory on the web.
+    # You can also create an index.html file with whatever web page you want.
+    # Be conscious of your configuration here, this may or may not be what you want.
+    #
+    # You can also password protect directories using and .htaccess with:
+    # 
+    # AuthType Basic  
+    # AuthName "Protected Resource"  
+    # AuthUserFile /home/{insert_my_username}/my_htpasswd_file
+    # Require valid-user
+    #
+    # and add username/password pairs with:
+    # htpasswd -c $HOME/my_htpasswd_file some_username
+    #
+
+    <IfModule mod_userdir.c>
+        UserDir www
+    </IfModule>
+
+    AliasMatch ^/~([^/]+)/(.*) /home/$1/www/$2
+    AliasMatch ^/home/([^/]+)/(.*) /home/$1/www/$2
+    # AliasMatch ^/home/([a-zA-Z0-9\-_.]+)/?(.*) /home/$1/www/$2
+    # AliasMatch ^/~([a-zA-Z0-9\-_.]+)/?(.*) /home/$1/www/$2
+
+    <Directory /home/*/www/>
+        Options MultiViews SymLinksIfOwnerMatch IncludesNoExec
+        AllowOverride FileInfo AuthConfig Limit Indexes Options
+        Require all granted
+        DirectoryIndex index.html
+
+        # CORS headers to allow viewing data on the QIIME2 site
+        # https://view.qiime2.org/about/#headers
+        Header set Access-Control-Allow-Origin "view.qiime2.org"
+        Header set Access-Control-Allow-Methods "GET, HEAD"
+
+        <Limit GET OPTIONS>
+            Require all granted
+        </Limit>
+        <LimitExcept GET OPTIONS>
+            Require all denied
+        </LimitExcept>
+    </Directory>
+
+    <IfModule mod_proxy.c>
+        <IfModule mod_proxy_http.c>
+            ProxyPass /rstudio/ http://localhost:8787/
+            ProxyPassReverse /rstudio/ http://localhost:8787/
+
+            ProxyPass /jupyter/ http://localhost:8888/
+            ProxyPassReverse /jupyter/ http://localhost:8888/
+
+            # ProxyPass /shiny/ http://localhost:3838/
+            # ProxyPassReverse /shiny/ http://localhost:3838/
+        </IfModule>
+    </IfModule>
+
+    # Example of a Dockerized app on port 8080
+    # with username/password access 
+    # (via htpassd) in /etc/apache2/htaccess/my_app_htaccess
+    # /apps/my_app
+    # <Proxy "http://localhost:8080/*">
+    #   Order deny,allow
+    #   Allow from all
+    #   Authtype Basic
+    #   Authname "Restricted Content"
+    #   AuthUserFile /etc/apache2/htaccess/my_app_htaccess
+    #   Require valid-user
+    # </Proxy>
+
+    # Rewrite rules
+    RewriteEngine on
+    ProxyAddHeaders off
+
+    # Let's Encrypt certbot webroot
+    RewriteRule ^/.well-known/acme-challenge - [L,NC]
+
+    # Local resources
+    RewriteRule ^/home/ - [L,NC]     # User-dir
+    RewriteRule ^/~ - [L,NC]         # User-dir
+    
+    RewriteRule ^/rstudio$ /rstudio/ [R]
+    RewriteRule ^/rstudio/(.*)$ http://localhost:8787/$1 [P]
+
+    RewriteRule ^/jupyter$ /jupyter/ [R]
+    RewriteRule ^/jupyter/(.*)$ http://localhost:8888/$1 [P]
+
+    # RewriteRule ^/shiny$ /shiny/ [R]
+    # RewriteRule ^/shiny/(.*)$ http://localhost:3838/$1 [P]
+
+    # Example of a Dockerized app on port 8080
+    # RewriteRule ^/apps/my_app$ /apps/my_app/ [P]
+    # RewriteRule ^/apps/my_app/(.*)$ "http://localhost:8080/$1" [P]
+
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet

@@ -39,12 +39,13 @@
     - iperf
     - xinetd
     - imagemagick
+    - rustc
+    - cargo
+    - awscli
     # nfs stuff
     - nfs-common
-    # user-auth deps
-    - libpam-krb5
+    # some extra security against tempfile vulns
     - libpam-tmpdir
-    - ldap-utils
     # lua and its deps
     - lua5.2
     - liblua5.2-dev
@@ -60,7 +61,7 @@
     # ncbi blast deps
     - liblmdb-dev 
     # BigDataScript deps
-    - golang-1.16
+    - golang
     - ant
     # tmux deps
     - libevent-dev
@@ -104,8 +105,6 @@
     - libharfbuzz-dev  # devtools
     - libfribidi-dev   # devtools
     - libfftw3-dev     # qqconf  
-    # Requires PPA: sudo add-apt-repository -y ppa:ubuntugis/ppa
-    # - libgdal-dev  # leaflet maps
     # RStudio deps
     - libjpeg62
     - liborc-0.4-0
@@ -114,7 +113,7 @@
     - libxml2-dev
     - libglpk40
     - libglpk-dev
-    # For rJava
+    # Java
     - default-jre
     - default-jdk
     # mothur and uchime C++ deps
@@ -165,94 +164,3 @@
     - tree
     # credential management for docker login: https://github.com/docker/docker-credential-helpers
     - pass
-
-- name: apt-get common dependencies (16.04+ < 20.4)
-  tags: apt
-  apt:
-    name: "{{ item }}"
-    state: present
-    autoremove: yes
-  with_items:
-    - libmariadb-client-lgpl-dev
-  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 16 and ansible_lsb.major_release|int < 20
-
-- name: apt-get common dependencies (14.04)
-  tags: apt
-  apt:
-    name: "{{ item }}"
-    state: present
-    autoremove: yes
-  with_items:
-    - libmariadbclient-dev
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '14.04'
-
-- name: apt-get common dependencies (< 18.04)
-  tags: apt
-  apt:
-    name: "{{ item }}"
-    state: present
-    autoremove: yes
-  with_items:
-    - realpath
-    # R deps
-    - gfortran-5
-    # Rstudio deps
-    - libgstreamer-plugins-base0.10-0
-    - libgstreamer0.10-0
-  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int < 18
-
-- name: apt-get common dependencies (<= 18.04)
-  tags: apt
-  apt:
-    name: "{{ item }}"
-    state: present
-    autoremove: yes
-  with_items:
-    # R deps
-    - gfortran-5
-    - libiomp-dev      # velocyto.R
-  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int <= 18
-
-- name: apt-get common dependencies (18.04)
-  tags: apt
-  apt:
-    name: "{{ item }}"
-    state: present
-    autoremove: yes
-  with_items:
-    - coreutils
-    # Rstudio deps
-    - libgstreamer-plugins-base1.0-0
-    - libgdal-dev  # leaflet maps
-    - gdal-bin
-  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 18
-
-- name: apt-get common dependencies (20.04)
-  tags: apt
-  apt:
-    name: "{{ item }}"
-    state: present
-    autoremove: yes
-  with_items:
-    - coreutils
-    - mariadb-client
-    # R deps
-    - fort77
-    - gfortran-7
-    #- gfortran-9
-    - gfortran-10
-    - libgdal-dev  # leaflet, sf
-    - gdal-bin
-    # Rstudio deps
-    - libgstreamer-plugins-base1.0-0
-    # For Bio::Perl via CPAN (... ideally we'd fix the bioperl.yml task to not require this)
-    - libxml-dom-xpath-perl
-  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20
-
-- name: set default gfortran (20.04)
-  tags: apt
-  shell: |
-    update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-10 60
-    update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-9 50
-    update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-7 40
-

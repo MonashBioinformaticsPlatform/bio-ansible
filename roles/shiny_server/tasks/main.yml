@@ -1,0 +1,3 @@
+---
+
+- include: shiny-server.yml version={{ shiny_version }}

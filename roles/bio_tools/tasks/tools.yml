@@ -1,0 +1,231 @@
+---
+
+- include_tasks: star.yml
+  tags: star
+  args: {apply: { tags: star }}
+  vars: { version: "{{ star_version }}" }
+
+- include_tasks: bwa.yml
+  tags: bwa
+  args: {apply: { tags: bwa }}
+  vars: { version: "{{ bwa_version }}" }
+
+- include_tasks: bowtie2.yml
+  tags: bowtie2
+  args: {apply: { tags: bowtie2 }}
+  vars: { version: "{{ bowtie2_version }}" }
+
+- include_tasks: htslib.yml
+  tags: htslib
+  args: {apply: { tags: htslib }}
+  vars: { version: "{{ htslib_version }}" }
+
+- include_tasks: samtools.yml
+  tags: samtools
+  args: {apply: { tags: samtools }}
+  vars: 
+    version: "{{ samtools_version }}"
+    htslib_v: "{{ htslib_version }}"
+
+- include_tasks: bcftools.yml
+  tags: bcftools
+  args: {apply: { tags: bcftools }}
+  vars: 
+    version: "{{ bcftools_version }}"
+    htslib_v: "{{ htslib_version }}"
+
+- include_tasks: subread.yml
+  tags: subread
+  args: {apply: { tags: subread }}
+  vars: { version: "{{ subread_version }}" }
+
+- include_tasks: picard.yml
+  tags: picard
+  args: {apply: { tags: picard }}
+  vars: 
+    version: "{{ picard_version }}"
+    java_heap_size: "6g"
+
+# - include_tasks: gatk.yml
+#   tags: gatk
+#   args: {apply: { tags: gatk }}
+#   vars: { version: "{{ gatk_version }}" }
+
+- include_tasks: fastqc.yml
+  tags: fastqc
+  args: {apply: { tags: fastqc }}
+  vars: { version: "{{ fastqc_version }}" }
+
+- include_tasks: sratoolkit.yml
+  tags: sratoolkit
+  args: {apply: { tags: sratoolkit }}
+  vars: { version: "{{ sratoolkit_version }}" }
+
+- include_tasks: qualimap.yml
+  tags: qualimap
+  args: {apply: { tags: qualimap }}
+  vars: { version: "{{ qualimap_version }}" }
+
+- include_tasks: seqtk.yml
+  tags: seqtk
+  args: {apply: { tags: seqtk }}
+  vars: { version: "{{ seqtk_version }}" }
+
+# - include_tasks: igv.yml
+#   tags: igv
+#   args: {apply: { tags: igv }}
+#   vars: { version: "{{ igv_version }}" }
+
+# - include_tasks: igv_github.yml
+#   tags: igv
+#   args: {apply: { tags: igv }}
+#   vars: { version: "{{ igv_version }}" }
+
+- include_tasks: bedtools.yml
+  tags: bedtools
+  args: {apply: { tags: bedtools }}
+  vars: { version: "{{ bedtools_version }}" }
+
+# If for some reason you'd prefer to compile NCBI-BLAST from source (slow)
+# - include_tasks: blast.yml
+#   tags: blast
+#   args: {apply: { tags: blast }}
+#   vars: { version: "{{ blast_version }}" }
+
+- include_tasks: smalt.yml
+  tags: smalt
+  args: {apply: { tags: smalt }}
+  vars: { version: "{{ smalt_version }}" }
+
+# - include_tasks: bcl2fastq2.yml
+#   tags: bcl2fastq2
+#   args: {apply: { tags: bcl2fastq2 }}
+#   vars: { version: "{{ bcl2fastq2_version }}" }
+
+- include_tasks: emboss.yml
+  tags: emboss
+  args: {apply: { tags: emboss }}
+  vars: { version: "{{ emboss_version }}" }
+
+# Python-based
+# - include_tasks: mimodd.yml
+#   tags: mimodd
+#   args: {apply: { tags: mimodd }}
+#   vars: { version: "{{ mimodd_version }}" }
+
+- include_tasks: multiqc.yml
+  tags: multiqc
+  args: {apply: { tags: multiqc }}
+  vars: { version: "{{ multiqc_version }}" }
+
+# - include_tasks: cutadapt.yml
+#   tags: cutadapt
+#   args: {apply: { tags: cutadapt }}
+#   vars: { version: "{{ cutadapt_version }}" }
+
+# - include_tasks: macs2.yml
+#   tags: macs2
+#   args: {apply: { tags: macs2 }}
+#   vars: { version: "{{ macs2_version }}" }
+
+- include_tasks: macs3.yml
+  tags: macs3
+  args: {apply: { tags: macs3 }}
+  vars: { version: "{{ macs3_version }}" }
+
+# QIIME1 (1.9.1) is superceeded by QIIME2
+# This task always gives cross-platform compilation issues, so now using the conda version of QIIME1 instead
+# - include_tasks: qiime.yml
+#   tags: qiime
+#   args: {apply: { tags: qiime }}
+#   vars: { version: "{{ qiime_version }}" }
+
+- include_tasks: snpeff.yml
+  tags: snpeff
+  args: {apply: { tags: snpeff }}
+  vars: { version: "{{ snpeff_version }}" }
+
+- include_tasks: spades.yml
+  tags: spades
+  args: {apply: { tags: spades }}
+  vars: { version: "{{ spades_version }}" }
+
+- include_tasks: vsearch.yml
+  tags: vsearch
+  args: {apply: { tags: vsearch }}
+  vars: { version: "{{ vsearch_version }}" }
+
+# - include_tasks: raxml.yml
+#   tags: raxml
+#   args: {apply: { tags: raxml }}
+#   vars: { version: "{{ raxml_version }}" }
+
+- include_tasks: cellranger.yml
+  tags: cellranger
+  args: {apply: { tags: cellranger }}
+  vars: { version: "{{ cellranger_version }}" }
+
+- include_tasks: vcftools.yml
+  tags: vcftools
+  args: {apply: { tags: vcftools }}
+  vars: { version: "{{ vcftools_version }}" }
+
+# - include_tasks: biotradis.yml
+#   tags: biotradis
+#   args: {apply: { tags: biotradis }}
+#   vars: { version: "{{ biotradis_version }}" }
+
+# - include_tasks: bioperl.yml
+#   tags: bioperl
+#   args: {apply: { tags: bioperl }}
+#   vars: { version: "{{ bioperl_version }}" }
+
+- include_tasks: muscle.yml
+  tags: muscle
+  args: {apply: { tags: muscle }}
+  vars: { version: "{{ muscle_version }}" }
+
+- include_tasks: cdhit.yml
+  tags: cdhit
+  args: {apply: { tags: cdhit }}
+  vars: { version: "{{ cdhit_version }}" }
+
+# - include_tasks: mothur.yml
+#   tags: mothur
+#   args: {apply: { tags: mothur }}
+#   vars: { version: "{{ mothur_version }}" }
+
+# - include_tasks: hifive.yml
+#   tags: hifive
+#   args: {apply: { tags: hifive }}
+#   vars: { version: "{{ hifive_version }}" }
+
+# - include_tasks: infernal.yml
+#   tags: infernal
+#   args: {apply: { tags: infernal }}
+#   vars: { version: "{{ infernal_version }}" }
+
+- include_tasks: trimmomatic.yml
+  tags: trimmomatic
+  args: {apply: { tags: trimmomatic }}
+  vars: { version: "{{ trimmomatic_version }}" }
+
+# - include_tasks: skewer.yml
+#   tags: skewer
+#   args: {apply: { tags: skewer }}
+#   vars: { version: "{{ skewer_version }}" }
+
+- include_tasks: sabre.yml
+  tags: sabre
+  args: {apply: { tags: sabre }}
+  vars: { version: "{{ sabre_version }}" }
+
+- include_tasks: minimap2.yml
+  tags: minimap2
+  args: {apply: { tags: minimap2 }}
+  vars: { version: "{{ minimap2_version }}" }
+
+- include_tasks: qiime2.yml
+  tags: qiime2
+  args: {apply: { tags: qiime2 }}
+  vars: { version: "{{ qiime2_version }}" }

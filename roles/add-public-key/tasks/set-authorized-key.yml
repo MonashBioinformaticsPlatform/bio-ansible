@@ -1,0 +1,7 @@
+---
+
+- name: Set authorized key for admin user
+  ansible.posix.authorized_key:
+    user: "{{ sudo_guy }}"
+    state: present
+    key: "{{ lookup('file', authorized_public_key_path) }}"

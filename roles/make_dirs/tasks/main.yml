@@ -1,13 +1,13 @@
 ---
 
 - name: Create required directories
+  tags: dirs
   file:
     dest: "{{ item }}"
     state: directory
     mode: 0755
     owner: "{{ main_guy }}"
-  become: yes
-  become_user: "{{ sudo_guy }}"
+  become: true
   with_items:
     - "{{ source_dir }}"
     - "{{ modules_dir }}"
@@ -15,5 +15,3 @@
     - "{{ modules_bio }}"
     - "{{ modules_extra }}"
     - "{{ apps_dir }}"
-
-  tags: dirs

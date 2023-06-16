@@ -1,0 +1,8 @@
+---
+- name: Setup admin public key access
+  hosts: 
+    - all
+  remote_user: "{{ sudo_guy }}"
+  become: true
+  roles:
+    - add-public-key

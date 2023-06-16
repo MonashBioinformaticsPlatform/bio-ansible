@@ -1,0 +1,9 @@
+---
+use_rstudio_pro: false
+
+# interactive
+rstudio_version: 2023.03.1-446
+rstudio_pro_version: 2022.07.1-554.pro3
+
+# You should keep this defined in an ansible-vault encrypted file
+rstudio_pro_key: ""

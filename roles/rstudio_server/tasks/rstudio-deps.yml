@@ -1,0 +1,90 @@
+---
+
+# Here we try to install everything and the kitchen sink in terms of
+# -dev packages that might be required to install CRAN source packages
+
+- name: update apt cache
+  tags: ['apt', 'rstudio']
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: apt-get common dependencies
+  tags: ['apt', 'rstudio']
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - build-essential
+    - gfortran
+    - autoconf
+    - autogen
+    - libpq5
+    - libssl-dev
+    - libssl-doc
+    - libclang-dev
+    - zlib1g-dev
+    - libncurses-dev
+    - liblmdb-dev 
+    - libffi-dev
+    - libgsl0-dev
+    - libncurses5-dev
+    - libbz2-dev
+    - libsuperlu-dev
+    - libarpack2-dev
+    - libcurl4-openssl-dev
+    - libxml2-dev
+    - libxt-dev
+    - libcairo2-dev
+    - tcl8.6-dev
+    - tk8.6-dev
+    - texinfo
+    - texlive-fonts-extra
+    - libtiff5-dev
+    - libpango1.0-dev
+    - freeglut3-dev
+    - libxmu-dev
+    - libglu1-mesa-dev
+    - libcgal-dev
+    - libnetcdf-dev
+    - libudunits2-0    # ChIPseeker
+    - libudunits2-dev  # ChIPseeker
+    - libmagick++-dev  # Rmagick
+    - libboost-dev
+    - libboost-iostreams-dev
+    - libboost-log-dev
+    - libboost-system-dev
+    - libboost-test-dev
+    - libpcre2-dev     # R 4.x
+    - libgit2-dev      # r-lib/gert
+    - libharfbuzz-dev  # devtools
+    - libfribidi-dev   # devtools
+    - libfftw3-dev     # qqconf  
+    - libgdal-dev  # leaflet maps
+    - gdal-bin
+    # RStudio deps
+    - libjpeg62
+    - liborc-0.4-0
+    - libapparmor1
+    - libxml2
+    - libxml2-dev
+    - libglpk40
+    - libglpk-dev
+    # For rJava
+    - default-jre
+    - default-jdk
+    # mothur and uchime C++ deps
+    - libboost-program-options-dev
+    - libboost-iostreams-dev
+    # blast
+    - liblmdb-dev
+    - libboost-all-dev  # just get all of Boost ...
+    # bowtie2 deps
+    - libtbb-dev
+    # extras
+    - pandoc
+    - pandoc-citeproc
+    - texlive
+    - texlive-latex-extra
+    # required to knit RMarkdown -> PDF with Unicode using `latex_engine: xelatex`
+    - texlive-xetex

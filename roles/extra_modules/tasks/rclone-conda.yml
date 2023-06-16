@@ -1,0 +1,8 @@
+- include_tasks: conda-package.yml
+  args: {apply: { tags: rclone }}
+  vars:
+    module_name: rclone
+    module_section: extra
+    version: "{{ rclone_version }}"
+    conda_packages:
+      - 'rclone={{ rclone_version }}'

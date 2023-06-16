@@ -5,8 +5,8 @@
   get_url:
     url: "https://data.broadinstitute.org/igv/projects/downloads/{{ '.'.join(version.split('.')[0:2]) }}/IGV_{{ version }}.zip"
     timeout: 30
+    validate_certs: false
     dest: "{{ source_dir }}/IGV_{{ version }}.zip"
-  creates: "{{ source_dir }}/IGV_{{ version }}.zip"
 
 - name: uncompress igv {{ version }}
   tags: igv
@@ -14,7 +14,6 @@
       src: "{{ source_dir }}/IGV_{{ version }}.zip"
       dest: "{{ source_dir }}"
       copy: no
-  creates: "{{ source_dir }}/IGV_{{ version }}"
 
 - name: check {{ source_dir }}/IGV_{{ version }} exists
   tags: igv
@@ -26,7 +25,6 @@
   tags: igv
   shell: 'mv -n "{{ source_dir }}/IGV_{{ version }}" "{{ apps_dir }}/igv-{{ version }}"'
   when: igv_src.stat.exists == True 
-  creates: "{{ apps_dir }}/igv-{{ version }}"
 
 - name: ensure igv module directory exists
   tags: igv
@@ -34,7 +32,7 @@
     dest: "{{ modules_core }}/igv"
     state: directory
 
-- name: igv {{ version }} module definition
+- name: igv "{{ version }}" module definition
   tags: igv
   template: 
     src: sw-module.lua.j2 

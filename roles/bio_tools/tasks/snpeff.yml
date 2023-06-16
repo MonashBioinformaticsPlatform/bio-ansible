@@ -1,38 +1,36 @@
 ---
 
 - name: download snpEff package {{ version }}
+  tags: snpeff
   get_url:
     url: http://sourceforge.net/projects/snpeff/files/snpEff_v{{ version }}_core.zip
     timeout: 30
     dest: "{{ source_dir }}/snpEff_{{ version }}_core.zip"
 
-  tags: snpeff
-
 - name: uncompress snpEff {{ version }}
+  tags: snpeff
   unarchive:
       src: "{{ source_dir }}/snpEff_{{ version }}_core.zip"
       dest: "{{ apps_dir }}"
       copy: no
 
-  tags: snpeff
-
 - name: rename snpEff directory to reflecte version number {{ version }}
+  tags: snpeff
   command: mv {{ apps_dir }}/snpEff {{ apps_dir }}/snpEff-{{ version }}
   args:
     creates: "{{ apps_dir }}/snpEff-{{ version }}/snpEff.jar"
 
+- name: Create snpEff data directory
   tags: snpeff
-
-- file:
+  file:
     src: "{{ apps_dir }}/snpEff-{{ version }}"
     dest: "{{ apps_dir }}/snpEff-{{ version }}/data"
     state: directory
     mode: 0777
   ignore_errors: true
 
-  tags: snpeff
-
 - name: snpEff {{ version }} wrapper script
+  tags: snpeff
   template:
     src: java-wrapper.sh.j2
     dest: "{{ apps_dir }}/snpEff-{{ version }}/snpEff"
@@ -41,9 +39,8 @@
   with_items:
     - jar: "{{ apps_dir }}/snpEff-{{ version }}/snpEff.jar"
 
-  tags: snpeff
-
 - name: snpSift {{ version }} wrapper script
+  tags: snpeff
   template:
     src: java-wrapper.sh.j2
     dest: "{{ apps_dir }}/snpEff-{{ version }}/SnpSift"
@@ -52,16 +49,15 @@
   with_items:
     - jar: "{{ apps_dir }}/snpEff-{{ version }}/SnpSift.jar"
 
+- name: Create snpEff module directory
   tags: snpeff
-
-- file:
+  file:
     dest: "{{ modules_bio }}/snpEff"
     state: directory
     mode: 0755
 
-  tags: snpeff
-
 - name: snpEff {{ version }} module definition
+  tags: snpeff
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_bio }}/snpEff/{{ version }}.lua"
@@ -72,19 +68,15 @@
       skip_bin: true
       help_text: 'This module loads snpEff'
 
-  tags: snpeff
-
 - name: setting register for snpEff2 {{ version }}
+  tags: snpeff
   stat:
     path: "{{ apps_dir }}/snpEff-{{ version }}/snpEff.jar"
   register: s
-
-  tags: snpeff
       
 - name: removing snpEff2 {{ version }} source directory
+  tags: snpeff
   file:
     path: "{{ source_dir }}/snpEff_{{ version }}_core.zip"
     state: absent
   when: "del_src and s.stat.exists"
-
-  tags: snpeff

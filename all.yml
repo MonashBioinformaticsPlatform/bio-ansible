@@ -1,6 +1,5 @@
 ---
 
 - include: common.yml
-- include: interactive.yml
-  #- include: other.yml
 - include: bio.yml
+- include: interactive.yml

@@ -22,13 +22,13 @@
 
 ## Quick start
 
-Assume you know how to start new [virtual machine (vm)](https://en.wikipedia.org/wiki/Virtual_machine) 
-instance and how to install and operate [ansible](http://docs.ansible.com/ansible/intro.html).
+We assume some familiarity with [Ansible](http://docs.ansible.com/ansible/intro.html).
 
-- Bring up a VM (AWS, NeCTAR, OpenStack, etc)
-- Set up your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
-- Edit the `hosts` file to add the VM IP address, edit `group_vars/all` files to change `main_guy`
-  and `sudo_guy` to the username used to log into the remote machine.
+- Bring up a VM (AWS, OpenStack / NeCTAR, etc)
+- Add your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) to `~/.ssh/authorized_keys` on the instance
+- Edit the `hosts` file to add the target VM IP address, edit `group_vars/all` files to change:
+  - `sudo_guy` to the username used to log into the remote machine
+  - `main_guy` to a username that will be created for installing software (can be the same as `sudo_guy`)
 
 ```bash
 ansible-playbook -i hosts all.yml
@@ -43,13 +43,13 @@ as a non-privileged user, in particular if you are just installing bio-tools in
 your home directory on a shared system (eg HPC).
 
 However you still might need to install some "common" dependencies and for that 
-you might need `sudo`. Also note that Ansible tasks are typically are 
+you might need `sudo`. Also note that Ansible tasks are intended to be 
 ‘idempotent’, meaning if you run them again, they will generally only make the 
 changes they must in order to bring the system to the desired state. This means 
 it is safe to rerun the same playbook multiple times.
 
-These playbooks target Ubuntu 16.04 and 18.04 - they may work with small
-modifications on other Debian-flavoured distros. YMMV.
+These playbooks target Ubuntu 20.04 and 22.04 - they may work with small
+modifications on newer Ubuntu releases and other Debian-flavoured distros. YMMV.
 
 
 ## Running bio-ansible
@@ -63,8 +63,8 @@ modifications on other Debian-flavoured distros. YMMV.
     source ~/.virtualenvs/ansible/bin/activate
     pip3 install -U pip
  
-    # bio-ansible currently requires Ansible 2.4.x
-    pip3 install -U "ansible<2.5"
+    # bio-ansible requires Ansible 8 (ansible-core 2.15.x), newer versions may work
+    pip3 install -U "ansible==8"
     ```
 2. Clone the git repo:
 
@@ -82,20 +82,29 @@ modifications on other Debian-flavoured distros. YMMV.
 
 #### Running the playbooks
 
-Install everything - `sudo` privilege is required (on the target host[s]):
-```bash
-ansible-playbook -i hosts all.yml
-```
+Install many bioinformatics tools as 'modules'. 
+This is often possible as a non-privileged user without `sudo`. 
+The user defined in the `main_guy` variable is used:
 
-Just the tools as a non-privilege user (no `sudo` required, the user defined in the `main_guy` variable is used):
 ```bash
 ansible-playbook -i hosts bio.yml
 ```
 
-Just the dependencies - `sudo` privilege is required:
+Install system-wide dependencies and packages - `sudo` privilege is required:
 
 ```bash
 ansible-playbook -i hosts common.yml
+```
+
+Interacive web-based services - `sudo` privilege is required:
+
+```bash
+ansible-playbook -i hosts common.yml
+```
+
+**Or**, if you want to try installing everything above in one go (`sudo` privilege is required on the target host[s]):
+```bash
+ansible-playbook -i hosts all.yml
 ```
 
 #### Installing specific tools
@@ -115,38 +124,7 @@ diagnose failures_
 
 ## Building a Docker image
 
-To build using your current clone of `bio-ansible` (eg for testing):
-```bash
-docker build -t bioansible -f docker/Dockerfile-local .
-```
-
-Several of the slower steps (`r_core`, `r_extras`, `blast`) are executed as 
-separate `RUN` commands so that these get cached as intermediate Docker layers.
-This allows a single task to be tested quickly (by tag) by adding it at the 
-end of the `Dockerfile-local`. If you want to run all steps from scratch, run
-with the `--no-cache` option:
-
-```bash
-docker build --no-cache -t bioansible:latest -f docker/Dockerfile-local .
-```
-
-To test a specific tag(s) in the `bio.yml` playbook (eg hisat2 and muscle):
-```bash
-docker build --build-arg TASK_TAGS=hisat2,muscle -t bioansible -f docker/Dockerfile-bio-tags .
-```
-
-To build a production image by pulling the master branch:
-```bash
-docker build -t bioansible:latest -f docker/Dockerfile-repo .
-```
-
-We also have a Dockerfile for building a lighter-weight container than only
-runs the RNAsik pipeline:
-
-```bash
-docker build -t rnasik:latest -f docker/Dockerfile-rnasik .
-docker run -t rnasik:latest -help
-```
+See [README.docker.md](README.docker.md)
 
 ## Frequently asked questions
 

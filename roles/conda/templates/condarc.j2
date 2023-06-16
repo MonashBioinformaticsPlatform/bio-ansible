@@ -1,0 +1,12 @@
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+pkg_dirs:
+  - {{ conda_base }}/pkgs
+  - $HOME/.conda/pkgs
+  - $HOME/miniconda3/conda/pkgs
+envs_dirs:
+  - {{ conda_base }}/envs
+  - $HOME/.conda/envs
+  - $HOME/miniconda3/conda/envs

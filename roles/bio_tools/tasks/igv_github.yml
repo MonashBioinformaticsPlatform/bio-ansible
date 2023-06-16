@@ -1,14 +1,11 @@
 ---
 
-- name: download igv {{ version }}
+- name: git clone igv {{ version }}
   tags: igv
   git:
     repo: https://github.com/igvteam/igv
     dest: "{{ source_dir }}/igv-{{ version }}"
     version: "v{{ version }}"
-
-- set_fact: java_tar_home="{{ apps_dir }}/jdk1.{{ jdk_major }}.0_{{ jdk_minor }}"
-  tags: igv
 
 - name: check that /usr/bin/java exists
   tags: igv
@@ -16,70 +13,33 @@
   register: java_local
   ignore_errors: true
 
-- name: check oracle java exists
-  tags: igv
-  stat:
-    path: "{{ java_tar_home }}"
-  register: java_tar
-
-- set_fact: using_oracle_java="{{ java_tar.stat.isdir is defined and java_tar.stat.isdir }}"
-  tags: igv
-
 - name: get java version
   tags: igv
   shell: "/usr/bin/java -version 2>&1 | grep version | awk '{print $3}' | sed 's/\"//g'"
   register: java_version_check_local
-  when: java_local and not using_oracle_java
 
-- set_fact: java_version="{{ java_version_check_local.stdout }}"
-  tags: igv
-  when: java_local and not using_oracle_java
+# - set_fact: java_version="{{ java_version_check_local.stdout }}"
+#   tags: igv
 
-- name: get java version
-  tags: igv
-  shell: "{{ java_tar_home }}/bin/java -version 2>&1 | grep version | awk '{print $3}' | sed 's/\"//g'"
-  register: java_version_check_oracle
-  when: using_oracle_java
+# - set_fact: extra_gradle_args=""
+#   tags: igv
 
-- set_fact: java_version="{{ java_version_check_oracle.stdout }}"
-  tags: igv
-  when: using_oracle_java
-
-- set_fact: extra_gradle_args=""
-  tags: igv
-
-# Extra args for compiling under Java 11
-- set_fact: extra_gradle_args="-b build_java11.gradle"
-  tags: igv
-  when: java_version | version_compare('11', '>=')
+# # Extra args for compiling under Java 11
+# - set_fact: extra_gradle_args="-b build_java11.gradle"
+#   tags: igv
+#   when: java_version | version_compare('11', '>=')
 
 - name: build igv {{ version }}
   tags: igv
-  shell: export JAVA_HOME={{ java_tar_home }}; cd {{ source_dir }}/igv-{{ version }}; ./gradlew createDist  # ant
+  shell: cd {{ source_dir }}/igv-{{ version }}; ./gradlew createDist
   args:
     creates: "{{ source_dir }}/igv-{{ version }}/igv.jar"
-  when: using_oracle_java
-
-- name: build igv {{ version }}
-  tags: igv
-  shell: cd {{ source_dir }}/igv-{{ version }}; ./gradlew {{ extra_gradle_args }} createDist
-  args:
-    creates: "{{ source_dir }}/igv-{{ version }}/igv.jar"
-  when: java_local and not using_oracle_java
-
-- name: build igv tools {{ version }}
-  tags: igv
-  shell: export JAVA_HOME={{ java_tar_home }}; cd {{ source_dir }}/igv-{{ version }}; ./gradlew {{ extra_gradle_args }} createToolsDist
-  args:
-    creates: "{{ source_dir }}/igv-{{ version }}/igvtools-dist/igvtools.jar"
-  when: using_oracle_java
   
-- name: build igv tools {{ version }}
-  tags: igv
-  shell: cd {{ source_dir }}/igv-{{ version }}; ./gradlew createToolsDist  # ant -lib {{ source_dir }}/igv-{{ version }}/extras -f scripts/build-tools.xml
-  args:
-    creates: "{{ source_dir }}/igv-{{ version }}/igvtools-dist/igvtools.jar"
-  when: java_local and not using_oracle_java
+# - name: build igv tools {{ version }}
+#   tags: igv
+#   shell: cd {{ source_dir }}/igv-{{ version }}; ./gradlew createToolsDist  # ant -lib {{ source_dir }}/igv-{{ version }}/extras -f scripts/build-tools.xml
+#   args:
+#     creates: "{{ source_dir }}/igv-{{ version }}/igvtools-dist/igvtools.jar"
   
 - file:
     dest: "{{ apps_dir }}/igv-{{ version }}"
@@ -116,6 +76,6 @@
     mode: 0644
   with_items:
     - dir: 'igv-{{ version }}'
-      #java: true # not sure if I should co-load java, since it may not be installed
+      #java: true # if java is actually an lmod module
       skip_bin: true
       help_text: 'This module loads the igv data viewing tool'

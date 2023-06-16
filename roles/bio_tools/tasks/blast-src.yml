@@ -18,19 +18,12 @@
   tags: blast
   file: path=/mnt/software/source/ncbi-blast-{{ version }}+-src/c++/ReleaseMT/inc/ncbiconf_unix.h state=absent
 
-- name: build blast {{ version }}
-  tags: blast
-  shell: cd {{ source_dir }}/ncbi-blast-{{ version }}+-src/c++; ./configure && make && make install prefix={{ apps_dir }}/blast-{{ version }}
-  args:
-    creates: "{{ source_dir }}/ncbi-blast-{{ version }}+-src/c++/ReleaseMT/bin/blastn"
-  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int < 18
-
 - name: build blast (--without-boost) {{ version }}
   tags: blast
   shell: cd {{ source_dir }}/ncbi-blast-{{ version }}+-src/c++; ./configure --without-boost && make && make install prefix={{ apps_dir }}/blast-{{ version }}
   args:
     creates: "{{ source_dir }}/ncbi-blast-{{ version }}+-src/c++/ReleaseMT/bin/blastn"
-  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 18
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 20
 
 - name: set blast module directory permisions
   tags: blast

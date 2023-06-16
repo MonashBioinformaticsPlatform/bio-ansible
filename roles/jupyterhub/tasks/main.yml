@@ -1,4 +1,10 @@
 
+---
 
-- include: jupyter.yml version={{ jupyter_version }}
+- include: jupyter.yml
+  tags: jupyter
+  vars:
+    version: "{{ jupyter_version }}"
+
 - include: jupyterhub-service.yml
+  tags: jupyter

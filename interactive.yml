@@ -1,12 +1,14 @@
 ---
 # This playbook install common dependencies
-- name: Installing interactive bits e.g RStudio, nginx etc...
+- name: Installing interactive web services e.g RStudio etc...
   hosts: interactive
   remote_user: "{{ sudo_guy }}"
   become: true
   roles:
-    - interactive
+    - rstudio_server
     - jupyterhub
-    - nginx
-    # - gui
+    - apache
+    # - nginx  # deprecated
+    # - shiny_server
+    - vnc
 

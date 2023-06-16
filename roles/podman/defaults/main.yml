@@ -1,0 +1,13 @@
+---
+# This needs to be a path to a non-NFS (non-GPFS) filesystem for rootless podman to behave correctly
+# See: https://github.com/containers/podman/blob/master/rootless.md
+podman_rootless_storage_path: "$HOME/.local/share/containers/storage"
+podman_rootless_storage_path_base: ''
+
+# podman_rootless_storage_path: "/var/lib/containers/rootless_storage/$USER"
+# podman_rootless_storage_path_base: "/var/lib/containers/rootless_storage"
+
+# If true, create the base path for rootless_storage_path (with $USER stripped),
+# with a sticky bit (chmod a+rwt). Useful if not using the default where containers
+# are stored in home directories
+create_common_rootless_storage_base: true

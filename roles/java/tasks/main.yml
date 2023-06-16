@@ -1,4 +1,0 @@
----
-
-#- include: oracle_java_ppa.yml
-- include: oracle.yml version={{ java_oracle_version }}

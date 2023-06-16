@@ -3,18 +3,18 @@
 - name: Installing bioinformatics tools 
   hosts: bio
   remote_user: "{{ main_guy }}"
+  become: yes
+  become_user: "{{ main_guy }}"
   roles:
           # make container for all other installation
           - make_dirs
           # lmod as a module
           - lmod
-          # java as a module
-          - java
           # installing R language base 
           - R
           # installing BigDataScript
-          - bds
+          # - bds
           # install everyting into one container
           - bio_tools
           # install extra packages, not necessary biology relate
-          - extras
+          - extra_modules

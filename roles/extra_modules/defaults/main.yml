@@ -1,0 +1,14 @@
+---
+
+python3_executable: "python3"
+python3_virtualenv: "virtualenv"
+python3_pythonpath: ""
+
+stack_version: 1.9.3
+nodejs_version: v8.11.3
+maven_version: 3.3.9
+tmux_version: 2.4
+ant_version: 1.10.2
+ant_mirror_base: "https://archive.apache.org/dist/ant/binaries/"
+go_version: 1.20.4
+rclone_version: 1.62.2

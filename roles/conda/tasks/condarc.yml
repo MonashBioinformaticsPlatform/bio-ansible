@@ -1,0 +1,7 @@
+- name: Setup custom system-wide condarc
+  ansible.builtin.template:
+    src: condarc.j2
+    dest: "{{ conda_base }}/.condarc"
+    owner: root
+    group: root
+    mode: '0644'

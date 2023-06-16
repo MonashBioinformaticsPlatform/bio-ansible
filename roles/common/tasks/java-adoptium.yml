@@ -1,0 +1,14 @@
+---
+
+- name: Add Adoptium repo
+  tags: java
+  block:
+    - name: Add Apt signing key for Adoptium
+      get_url:
+        url: https://packages.adoptium.net/artifactory/api/gpg/key/public
+        dest: /etc/apt/trusted.gpg.d/adoptium.asc
+    - name: Add Java Adoptium repo
+      apt_repository:
+        repo: "deb [signed-by=/etc/apt/trusted.gpg.d/adoptium.asc] https://packages.adoptium.net/artifactory/deb {{ ansible_distribution_release }} main"
+        filename: adoptium
+        state: present

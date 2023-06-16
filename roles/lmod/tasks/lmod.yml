@@ -1,31 +1,40 @@
 ---
 
 - name: download lmod {{ version }}
+  tags: lmod
   git:
     repo: https://github.com/TACC/Lmod
     dest: "{{ source_dir }}/Lmod-{{ version }}"
     version: "{{ version }}"
     update: no
 
+- name: Find lua dev header path (Ubuntu 22.04, lua5.4)
   tags: lmod
+  set_fact: lua_headers="/usr/include/lua5.4"
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 22
+
+- name: Find lua dev header path (Ubuntu 20.04, lua5.3)
+  tags: lmod
+  set_fact: lua_headers="/usr/include/lua5.3"
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20
 
 - name: compile and install lmod {{ version }}
-  shell: cd {{ source_dir }}/Lmod-{{ version }}; ./configure --prefix={{ apps_dir }} --with-mpathSearch=YES --with-caseIndependentSorting=YES && make install LUA_INCLUDE=/usr/include/lua5.2
+  tags: lmod
+  shell: |
+    cd {{ source_dir }}/Lmod-{{ version }}
+    ./configure --prefix={{ apps_dir }} --with-mpathSearch=YES --with-caseIndependentSorting=YES && \
+    LUA_INCLUDE={{ lua_headers }} make install
   args:
     creates: "{{ apps_dir }}/lmod/{{ lmod_version }}"
 
-  tags: lmod
-
 - name: copy lmod bash init file to {{ apps_dir }}/lmod/{{ lmod_version }}
+  tags: lmod
   template:
     src: "lmod/lmod.profile.sh.j2"
     dest: "{{ apps_dir }}/lmod/{{ lmod_version }}/lmod.sh"
 
-  tags: lmod
-
 - name: copy lmod sh stdenv init file to {{ apps_dir }}/lmod/{{ lmod_version }}
+  tags: lmod
   template:
     src: "lmod/z00_StdEnv.sh"
     dest: "{{ apps_dir }}/lmod/{{ lmod_version }}/z00_StdEnv.sh"
-
-  tags: lmod

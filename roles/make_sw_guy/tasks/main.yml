@@ -1,11 +1,11 @@
 ---
 # Make sw-installer guy and allowing him to install software
 - name: Ensure group "{{ main_guy }}" group exists with the correct gid
-  tag: sw_guy
+  tags: sw_guy
   group:
     name: "{{ main_guy }}"
-    state: present
     gid: 1047
+    state: present
 
 - name: create {{ main_guy }} user
   tags: sw_guy
@@ -15,6 +15,7 @@
     group: "{{ main_guy }}"
     shell: /bin/bash
     comment: "software install user"
+    state: present
 
 - name: set authorized key from file
   tags: sw_guy
@@ -42,7 +43,7 @@
   #    mode: 0755
   #
 
-- name: Set {{ bioansible_basepath }}/software permissions
+- name: Set "{{ bioansible_basepath }}/software" permissions
   tags: sw_guy
   file:
     dest: "{{ bioansible_basepath }}/software"

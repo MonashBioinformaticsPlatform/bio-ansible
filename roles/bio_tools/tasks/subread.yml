@@ -1,36 +1,44 @@
 ---
 
-- name: download subread package {{ version }}
-  get_url:
-    url: https://sourceforge.net/projects/subread/files/subread-{{ version }}/subread-{{ version }}-source.tar.gz/download
-    timeout: 30
-    dest: "{{ source_dir }}/subread-{{ version }}-source.tar.gz"
+# - name: download subread binary package {{ version }}
+#   tags: subread
+#   get_url:
+#     url: https://github.com/ShiLab-Bioinformatics/subread/releases/download/{{ version }}/subread-{{ version }}-Linux-x86_64.tar.gz
+#     timeout: 30
+#     dest: "{{ source_dir }}/subread-{{ version }}-Linux-x86_64.tar.gz"
 
+# - name: uncompress subread {{ version }}
+#   tags: subread
+#   unarchive:
+#       src: "{{ source_dir }}/subread-{{ version }}-Linux-x86_64.tar.gz"
+#       dest: "{{ apps_dir }}"
+#       copy: no
+
+- name: download subread {{ version }}
   tags: subread
-
-- name: uncompress subread {{ version }}
-  unarchive:
-      src: "{{ source_dir }}/subread-{{ version }}-source.tar.gz"
-      dest: "{{ source_dir }}"
-      copy: no
-
-  tags: subread
+  git:
+    repo: https://github.com/ShiLab-Bioinformatics/subread.git
+    dest: "{{ source_dir }}/subread-{{ version }}"
+    version: "{{ version }}"
+    update: yes
 
 - name: build subread {{ version }}
-  shell: cd {{ source_dir }}/subread-{{ version }}-source/src; make -f Makefile.Linux
-  args:
-    creates: "{{ source_dir }}/subread-{{ version }}-source/bin/featureCounts"
-
   tags: subread
+  shell: |
+    cd {{ source_dir }}/subread-{{ version }}/src
+    make -f Makefile.Linux
+  args:
+    creates: "{{ source_dir }}/subread-{{ version }}/bin/featureCounts"
 
-- file:
+- name: Create subread module directory
+  tags: subread
+  file:
     dest: "{{ modules_bio }}/subread"
     state: directory
     mode: 0755
 
-  tags: subread
-
 - name: subread {{ version }} module definition
+  tags: subread
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_bio }}/subread/{{ version }}.lua"
@@ -40,41 +48,28 @@
     - dir: 'subread-{{ version }}'
       help_text: 'This module loads the subread packages including featureCounts'
 
+- name: Create subread app directory
   tags: subread
-
-- file:
+  file:
     dest: "{{ apps_dir }}/subread-{{ version }}"
     state: directory
     mode: 0755
 
-  tags: subread
-
 - name: move subread {{ version }} executable to apps directory
-  shell: cp -r {{ source_dir }}/subread-{{ version }}-source/bin {{ apps_dir }}/subread-{{ version }}
+  tags: subread
+  shell: cp -r {{ source_dir }}/subread-{{ version }}/bin {{ apps_dir }}/subread-{{ version }}
   args:
     creates: "{{ apps_dir }}/subread-{{ version }}/subread/bin"
 
-  tags: subread
-
 - name: setting register for subread {{ version }}
+  tags: subread
   stat:
     path: "{{ apps_dir }}/subread-{{ version }}/bin/featureCounts"
   register: s
 
-  tags: subread
-
-- name: removing subread {{ version }} source directory
-  file:
-    dest: "{{ source_dir }}/subread-{{ version }}-source"
-    state: absent
-  when: "del_src and s.stat.exists"
-
-  tags: subread
-
-- name: removing subread {{ version }} tar file
-  file:
-    dest: "{{ source_dir }}/subread-{{ version }}-source.tar.gz"
-    state: absent
-  when: "del_src and s.stat.exists"
-
-  tags: subread
+# - name: removing subread {{ version }} source directory
+#   tags: subread
+#   file:
+#     dest: "{{ source_dir }}/subread-{{ version }}"
+#     state: absent
+#   when: "del_src and s.stat.exists"

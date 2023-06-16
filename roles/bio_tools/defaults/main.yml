@@ -22,15 +22,15 @@ bowtie2_notbb: 0
 
 # bio_tools versions
 star_version: 2.5.2b
-bwa_version: v0.7.15
-bowtie2_version: v2.3.4.1  # v2.3.2
+bwa_version: v0.7.17
+bowtie2_version: v2.5.1 #v2.3.4.1  # v2.3.2
 
 # samtools, htslib and bcftools should typically be all the same version
 htslib_version: 1.12
 samtools_version: 1.12
 bcftools_version: 1.12
 
-subread_version: 1.6.1
+subread_version: 2.0.2
 picard_version: 2.18.0
 gatk_version: 3.7
 fastqc_version: 0.11.9
@@ -38,8 +38,9 @@ vcflib_version: master
 sratoolkit_version: 2.11.3  # 2.8.0
 qualimap_version: v2.2.1
 seqtk_version: v1.2
-igv_version: 2.12.0
-bedtools2_version: 2.25.0
+igv_version: 2.13.2  # 2.16.1
+igvtools_version: 2.14.1
+bedtools_version: 2.31.0
 smalt_version: 0.7.6
 snpeff_version: "4_3i"
 spades_version: 3.12.0
@@ -50,7 +51,7 @@ cellranger_version: 5.0.1
 vcftools_version: 0.1.14
 muscle_version: 3.8.31
 cdhit_version: 4.6.8
-mothur_version: 1.39.5
+mothur_version: 1.48.0
 bcl2fastq2_version: 2.19.1
 emboss_version: 6.6.0
 trimmomatic_version: 0.36
@@ -60,10 +61,10 @@ minimap2_version: 2.12
 
 # python virtualenv
 mimodd_version: 0.1.9  # 0.1.7.3
-multiqc_version: 1.9
+multiqc_version: 1.14
 cutadapt_version: 3.4
 macs2_version: 2.2.7.1
-qiime_version: 1.9.1
+macs3_version: 3.0.0b1
 hifive_version: 1.5.7
 
 # perl
@@ -84,3 +85,5 @@ git_annex_version: 7.20190322
 shovill_version: 1.0.4
 prokka_version: 1.13.7
 snippy_version: 4.3.6
+
+qiime2_version: 2023.5

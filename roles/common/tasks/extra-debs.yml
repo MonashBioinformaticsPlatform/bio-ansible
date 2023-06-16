@@ -1,0 +1,19 @@
+---
+
+# Some packages that (currently) don't have up-to-date versions in the
+# official distro repositories
+
+- name: Install du-dust deb
+  tags: ['apt', 'dust']
+  apt:
+    deb: "{{ du_dust_deb_url }}"
+
+- name: Install rclone deb
+  tags: ['apt', 'rclone']
+  apt:
+    deb: "{{ rclone_deb_url }}"
+
+- name: Install quarto deb
+  tags: ['apt', 'quarto']
+  apt:
+    deb: "{{ quarto_deb_url }}"

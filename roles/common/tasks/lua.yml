@@ -1,17 +1,62 @@
 ---
-- name: apt-get lua & LMOD dependencies
+- name: Set target lua version (Ubuntu 22.04, lua5.4)
+  tags: ['lua', 'apt']
+  set_fact: lua_version="5.4"
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 22
+
+- name: Set target lua version  (Ubuntu 20.04, lua5.3)
+  tags: ['lua', 'apt']
+  set_fact: lua_version="5.3"
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20
+
+- name: apt-get lua & LMOD dependencies (Ubuntu 20.04)
+  tags: ['lua', 'apt']
   apt:
     name: "{{ item }}"
     state: present
     autoremove: yes
   with_items:
-    - lua5.2
-    - liblua5.2-dev
+    - lua5.3
+    - liblua5.3-dev
     - luarocks
     # We get these via luarocks, LMOD doesn't like the apt versions
     #  - lua-filesystem
     #  - lua-posix
     #  - lua-posix-dev
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20
+
+- name: apt-get lua & LMOD dependencies (Ubuntu 22.04)
+  tags: ['lua', 'apt']
+  apt:
+    name: "{{ item }}"
+    state: present
+    autoremove: yes
+  with_items:
+    - lua5.4
+    - liblua5.4-dev
+    - luarocks
+    # We get these via luarocks, LMOD doesn't like the apt versions
+    #  - lua-filesystem
+    #  - lua-posix
+    #  - lua-posix-dev
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 22
+
+- name: set default lua (20.04)
+  tags: ['lua']
+  shell: |
+    sudo update-alternatives --remove-all lua-interpreter
+    sudo update-alternatives --install /usr/bin/lua lua /usr/bin/lua5.3 90
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20
+
+- name: set default lua (22.04)
+  tags: ['lua']
+  shell: |
+    sudo update-alternatives --remove-all lua-interpreter
+    sudo update-alternatives --install /usr/bin/lua lua /usr/bin/lua5.4 90
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 22
 
 - name: install luarocks packages
-  shell: "luarocks install luaposix && luarocks install luafilesystem"
+  tags: ['lua']
+  shell: |
+    luarocks --lua-version {{ lua_version }} install luaposix
+    luarocks --lua-version {{ lua_version }} install luafilesystem

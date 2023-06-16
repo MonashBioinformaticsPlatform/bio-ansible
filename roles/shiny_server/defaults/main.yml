@@ -1,0 +1,5 @@
+---
+
+shiny_version: 1.5.16.958
+# Must match a version of an installed R module
+shiny_r_version: 4.1.0

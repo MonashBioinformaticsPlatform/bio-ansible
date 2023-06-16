@@ -26,7 +26,7 @@
   when: mamba_binary_check.stat.exists
 
 - name: Create conda environment for {{ module_name }}={{ version }} & install packages
-  shell: "{{ conda_bin }} create --prefix={{ apps_dir }}/{{ module_name }}-{{ version }} {{ conda_packages|join(' ') }}"
+  shell: "{{ conda_bin }} create --yes --prefix={{ apps_dir }}/{{ module_name }}-{{ version }} {{ conda_packages|join(' ') }}"
   args:
     creates: "{{ apps_dir }}/{{ module_name }}-{{ version }}"
 

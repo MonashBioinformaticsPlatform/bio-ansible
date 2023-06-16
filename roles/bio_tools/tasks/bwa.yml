@@ -1,43 +1,46 @@
 ---
 
 - name: download bwa {{ version }}
+  tags: bwa
   git:
     repo: https://github.com/lh3/bwa/
     dest: "{{ source_dir }}/bwa-{{ version }}"
     version: "{{ version }}"
     update: yes
 
-  tags: bwa
-
+# TODO: Remove CFLAGS='-fcommon' for BWA versions >0.7.17
+#       This is a temporary GCC 10 workaround that won't apply to
+#       later BWA releases
 - name: build bwa {{ version }}
-  shell: cd {{ source_dir }}/bwa-{{ version }}; make -j {{ threads }}
+  tags: bwa
+  shell: |
+    cd {{ source_dir }}/bwa-{{ version }}
+    make -j {{ threads }} CFLAGS='-fcommon'
   args:
     creates: "{{ source_dir }}/bwa-{{ version }}/bwa"
 
+- name: Create bwa module directory
   tags: bwa
-
-- file:
+  file:
     dest: "{{ modules_bio }}/bwa"
     state: directory
     mode: 0755
 
+- name: Create bwa app directory
   tags: bwa
-
-- file:
+  file:
     dest: "{{ apps_dir }}/bwa-{{ version }}"
     state: directory
     mode: 0755
 
-  tags: bwa
-
 - name: move bwa {{ version }} executables to apps directory
+  tags: bwa
   shell: cp {{ source_dir }}/bwa-{{ version }}/bwa {{ source_dir }}/bwa-{{ version }}/qualfa2fq.pl {{ source_dir }}/bwa-{{ version }}/xa2multi.pl {{ apps_dir }}/bwa-{{ version }}
   args:
     creates: "{{ apps_dir }}/bwa-{{ version }}/bwa"
 
-  tags: bwa
-
 - name: bwa {{ version }} module definition
+  tags: bwa
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_bio }}/bwa/{{ version }}.lua"
@@ -48,19 +51,15 @@
       skip_bin: true
       help_text: 'This module loads the BWA aligner'
 
-  tags: bwa
-
 - name: setting register for bwa {{ version }}
+  tags: bwa
   stat:
     path: "{{ apps_dir }}/bwa-{{ version }}/bwa"
   register: b
 
-  tags: bwa
-
 - name: removing bwa {{ version }}  source directory
+  tags: bwa
   file:
     dest: "{{ source_dir }}/bwa-{{ version }}"
     state: absent
   when: "del_src and b.stat.exists"
-
-  tags: bwa

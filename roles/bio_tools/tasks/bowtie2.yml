@@ -1,29 +1,32 @@
 ---
 
 - name: download bowtie2 {{ version }}
+  tags: bowtie2
   git:
     repo: https://github.com/BenLangmead/bowtie2
     dest: "{{ source_dir }}/bowtie2-{{ version }}"
     version: "{{ version }}"
     update: yes
 
-  tags: bowtie2
-
 - name: build bowtie2 {{ version }}
-  shell: cd {{ source_dir }}/bowtie2-{{ version }}; make install NO_TBB={{ bowtie2_notbb }} prefix={{ apps_dir }}/bowtie2-{{ version }}
+  tags: bowtie2
+  shell: |
+    cd {{ source_dir }}/bowtie2-{{ version }}
+    make static-libs
+    make STATIC_BUILD=1
+    make install PREFIX={{ apps_dir }}/bowtie2-{{ version }} NO_TBB={{ bowtie2_notbb }}
   args:
     creates: "{{ apps_dir }}/bowtie2-{{ version }}/bin/bowtie2"
 
+- name: Create bowtie2 modules directory
   tags: bowtie2
-
-- file:
+  file:
     dest: "{{ modules_bio }}/bowtie2"
     state: directory
     mode: 0755
 
-  tags: bowtie2
-
 - name: bowtie2 {{ version }} module definition
+  tags: bowtie2
   template: 
     src: sw-module.lua.j2 
     dest: "{{ modules_bio }}/bowtie2/{{ version }}.lua"
@@ -33,19 +36,15 @@
     - dir: 'bowtie2-{{ version }}'
       help_text: 'This module loads the bowtie2 aligner'
 
-  tags: bowtie2
-
 - name: setting register for bowtie2 {{ version }}
+  tags: bowtie2
   stat:
     path: "{{ apps_dir }}/bowtie2-{{ version }}/bin/bowtie2"
   register: b
 
-  tags: bowtie2
-
 - name: removing bowtie2 {{ version }}  source directory
+  tags: bowtie2
   file:
     dest: "{{ source_dir }}/bowtie2-{{ version }}"
     state: absent
   when: "del_src and b.stat.exists"
-
-  tags: bowtie2

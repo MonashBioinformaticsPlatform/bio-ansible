@@ -5,19 +5,19 @@
     keyserver: keyserver.ubuntu.com
     id: "E298A3A825C0D65DFD57CBB651716619E084DAB9"
 
-- name: Add CRAN repository (R 3.6.x, Ubuntu 18.04)
+- name: Add CRAN repository (R 4.0.x)
   tags: r_repo
   apt_repository:
-    repo: deb https://cran.csiro.au/bin/linux/ubuntu bionic-cran35/
+    repo: "deb https://cran.csiro.au/bin/linux/ubuntu {{ ansible_lsb.release }}-cran40/"
     state: present
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '18.04'
 
-- name: Add CRAN repository (R 4.0.x, Ubuntu 20.04)
+- name: Add R CRAN package PPA (c2d4u.team/c2d4u4.0+)
   tags: r_repo
   apt_repository:
-    repo: deb https://cran.csiro.au/bin/linux/ubuntu focal-cran40/
+    repo: 'ppa:c2d4u.team/c2d4u4.0+'
+    codename: "{{ ansible_lsb.release }}"
+    update_cache: yes
     state: present
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04'
 
 - name: Install R base Ubuntu package
   tags: r_repo
@@ -27,4 +27,5 @@
   with_items:
     - r-base
     - r-recommended
-  #  - r-cran-rjava
+    - r-cran-tidyverse
+    - r-cran-rjava

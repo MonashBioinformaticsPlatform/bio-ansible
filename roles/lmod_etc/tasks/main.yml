@@ -1,3 +1,6 @@
 ---
 
-- include: lmod.yml version={{ lmod_version }}
+- include_tasks: lmod_etc.yml
+  tags: ["lmod_etc", "lmod"]
+  vars:
+    version: "{{ lmod_version }}"

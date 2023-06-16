@@ -1,18 +1,11 @@
 ---
 
-- name: Add an Apt signing key for basemount
-  tags: ['basemount', 'apt']
-  apt_key:
-    id: 0A795D6FAEF4565D
-    # keyserver: keyserver.ubuntu.com
-    url: "https://bintray.com/user/downloadSubjectPublicKey?username=basespace"
-    state: present
-
 - name: Add repo for basemount
   tags: ['basemount', 'apt']
   apt_repository:
-    repo: 'deb https://dl.bintray.com/basespace/BaseMount-DEB saucy main'
+    repo: 'deb [arch=amd64 trusted=yes target=Packages] https://basemount-prod.s3.amazonaws.com/ ubuntu main'
     filename: 'basemount'
+    update_cache: true
     state: present
 
 - name: apt-get install basemount

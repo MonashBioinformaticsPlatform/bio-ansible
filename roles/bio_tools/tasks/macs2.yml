@@ -5,11 +5,11 @@
   pip:
     name: "{{ item }}"
     virtualenv: "{{ apps_dir }}/macs2-{{ version }}"
-    virtualenv_python: "{{ python2_executable }}"
-    virtualenv_command: "{{ python2_virtualenv }}"
+    virtualenv_python: "{{ python3_executable }}"
+    virtualenv_command: "{{ python3_virtualenv }}"
     virtualenv_site_packages: no
   environment:
-    PYTHONPATH: "{{ python2_pythonpath }}"
+    PYTHONPATH: "{{ python3_pythonpath }}"
   with_items:
     - numpy
     - "macs2=={{ version }}"

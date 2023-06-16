@@ -1,0 +1,35 @@
+---
+
+- name: Comment out existing rsession-which-r in /etc/rstudio/rserver.conf
+  ansible.builtin.replace:
+    path: /etc/rstudio/rserver.conf
+    regexp: '^(rsession-which-r=.*)$'
+    replace: '#\1'
+
+- name: Update /etc/rstudio/rserver.conf (rsession-which-r)
+  ansible.builtin.blockinfile:
+    path: /etc/rstudio/rserver.conf
+    block: |
+      auth-timeout-minutes=43200
+      rsession-which-r=/mnt/software/apps/R/{{ r_base_version }}/bin/R
+
+- name: Update /etc/rstudio/rsession.conf
+  tags: rstudio
+  ansible.builtin.lineinfile:
+    path: /etc/rstudio/rsession.conf
+    line: 'session-timeout-minutes=43200'
+
+- name: Update /etc/rstudio/rserver.conf (admin-enabled=1)
+  ansible.builtin.blockinfile:
+    path: /etc/rstudio/rserver.conf
+    block: |
+      admin-enabled=1
+  when: use_rstudio_pro
+
+- name: Add path to multiple R versions in RStudio Pro module
+  tags: rstudio
+  ansible.builtin.lineinfile:
+    path: /etc/rstudio/r-version
+    line: "{{ apps_dir }}/R/{{ item }}"
+  loop: "{{ r_base_versions }}"
+  when: use_rstudio_pro

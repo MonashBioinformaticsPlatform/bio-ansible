@@ -1,23 +1,44 @@
 ---
 - include: sh_is_bash.yml
 - include: timezone.yml
-# sshd config moved to it's own role and playbook
-#- include: sshd.yml
 - include: apt.yml
-# Only use R in modules, not system
+- include: ubuntu-20.yml
+- include: ubuntu-22.yml
+- include: extra-debs.yml
+
+# This installs a system-wide verison of R. It's useful for short-lived
+# throwaway VMs (eg training workshops), but it's generally a bad idea 
+# to use this for a long-term shared system since you can't easily support 
+# multiple versions of R this way, and unless you actively `apt-mark hold` 
+# the appropriate R packages, automatic updates will eventually can change 
+# the R version breaking users existing environments.
+# 
+# It's better to use the R version(s) provided by the lmod module system (roles/R).
+#
 # - include: r_repo.yml
-- include: gdal_ppa.yml
+
+# GDAL libraries appear up-to-date enough in Ubuntu 20.04, but
+# we can uncomment this if more recent system libraries are required
+# - include: gdal_ppa.yml
+
 - include_tasks: lua.yml
   tags: ['apt', 'lua']
-# Needs fix
-#- include: basemount.yml
-- include: singularity-apt.yml
-- include: python.yml
-- include: pip.yml
-- include: pip3.yml
-- include: email_setup.yml
+
+- include_tasks: singularity-apt.yml
+  tags: ['apt', 'singularity']
+  vars:
+    version: "{{ singularity_version }}"
+
+- include_tasks: python.yml
+  tags: ['apt', 'python']
+
+- include_tasks: email_setup.yml
+
 - include_tasks: motd.yml
-  tags: motd
+  tags: ['motd']
+
+- include_tasks: basemount.yml
+  tags: ['basemount']
 
 - include_tasks: duck.yml
   tags: ['duck']

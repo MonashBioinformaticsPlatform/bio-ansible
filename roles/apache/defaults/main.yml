@@ -1,0 +1,20 @@
+---
+
+# This should be the domain name (or just localhost)
+webserver_fqdn: localhost
+# This could be an IP, or a second domain name
+webserver_alt_fqdn: 127.0.0.1
+
+ssl_key: /etc/ssl/private/ssl-cert-snakeoil.key
+ssl_cert: /etc/ssl/certs/ssl-cert-snakeoil.pem
+
+# Automatically generate a robots.txt to deter search engines
+# via the Apache config
+no_robots: true
+
+webserver_allow_google_auth: false
+# Values from the Google Cloud console if an OAuth2 provider has been setup
+google_oauth_client_id: ""
+google_oauth_client_secret: ""
+google_oauth_redirect_uri: ""
+google_oidc_crypto_passphrase: ""
