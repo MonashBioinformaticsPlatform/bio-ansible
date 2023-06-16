@@ -1,11 +1,19 @@
 ---
 
-
 - name: Create a symbolic link from /usr/bin/R to {{ apps_dir }}/R/{{ shiny_r_version }}/bin/R
   tags: shiny
   file:
     src: "{{ apps_dir }}/R/{{ shiny_r_version }}/bin/R"
     dest: "/usr/bin/R"
+    owner: root
+    group: root
+    state: link
+
+- name: Create a symbolic link from /usr/bin/Rscript to {{ apps_dir }}/R/{{ shiny_r_version }}/bin/Rscript
+  tags: shiny
+  file:
+    src: "{{ apps_dir }}/R/{{ shiny_r_version }}/bin/Rscript"
+    dest: "/usr/bin/Rscript"
     owner: root
     group: root
     state: link
