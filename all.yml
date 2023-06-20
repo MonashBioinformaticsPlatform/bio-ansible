@@ -1,5 +1,5 @@
 ---
 
-- include: common.yml
-- include: bio.yml
-- include: interactive.yml
+- import_playbook: common.yml
+- import_playbook: bio.yml
+- import_playbook: interactive.yml
