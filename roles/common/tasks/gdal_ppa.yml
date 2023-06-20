@@ -24,4 +24,7 @@
     - libgdal26
     - libgdal-dev
     - gdal-bin
+    - libudunits2-dev
+    - libgeos-dev
+    - libproj-dev
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20
