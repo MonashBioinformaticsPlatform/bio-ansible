@@ -12,7 +12,7 @@
   copy:
     src: "{{ tarballs_path }}/cellranger-{{ version }}.tar.gz"
     dest: "{{ source_dir }}/cellranger-{{ version }}.tar.gz"
-    user: "{{ main_guy }}"
+    owner: "{{ main_guy }}"
     group: "{{ main_guy }}"
   when: c.stat.exists
 
