@@ -22,11 +22,10 @@
 - name: Add the Kubic repos for podman
   tags: podman
   ansible.builtin.apt_repository:
-    repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_{{ ansible_lsb.release }}/ /"
+    repo: "deb [signed-by=/etc/apt/keyrings/podman-kubic.asc] https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_{{ ansible_lsb.release }}/ /"
     filename: podman-kubic
     state: present
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 18
-
 
 - name: apt-get install podman
   tags: podman
@@ -48,6 +47,23 @@
   with_items:
     - containers-storage
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 22
+
+- name: Check if /etc/containers/storage.conf exists
+  tags: podman
+  stat:
+    path: /etc/containers/storage.conf
+  register: storage_conf
+
+- name: Copy default /usr/share/containers/storage.conf to /etc/containers/storage.conf
+  tags: podman
+  copy:
+    remote_src: yes
+    src: /usr/share/containers/storage.conf
+    dest: /etc/containers/storage.conf
+    owner: root
+    group: root
+    mode: '0644'
+  when: not storage_conf.stat.exists
 
 - name: Remove rootless_storage_path from /etc/containers/storage.conf, for replacement
   tags: podman
