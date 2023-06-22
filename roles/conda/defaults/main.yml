@@ -1,2 +1,2 @@
 # This is the path used by the apt packages
-conda_base: /opt/anaconda
+conda_base: /opt/conda
