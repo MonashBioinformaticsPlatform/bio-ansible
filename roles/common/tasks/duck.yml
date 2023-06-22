@@ -11,7 +11,7 @@
 - name: Add duck.sh repository
   tags: duck
   apt_repository:
-    repo: deb https://s3.amazonaws.com/repo.deb.cyberduck.io stable main
+    repo: "deb [signed-by=/etc/apt/keyrings/duck.asc] https://s3.amazonaws.com/repo.deb.cyberduck.io stable main"
     state: present
     update_cache: yes
 
