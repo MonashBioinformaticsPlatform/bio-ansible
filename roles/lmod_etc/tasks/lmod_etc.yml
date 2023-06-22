@@ -8,14 +8,6 @@
     owner: root
     mode: 0644
 
-# - name: copy lmod sh stdenv init file to /etc/profile.d/
-#   tags: ["lmod_etc", "lmod"]
-#   template:
-#     src: "lmod/z00_StdEnv.sh"
-#     dest: /etc/profile.d/z00_StdEnv.sh
-#     owner: root
-#     mode: 0644
-
 - name: Ensure /etc/profile.d/lmod.sh is also sourced by zsh
   tags: ["lmod_etc", "lmod"]
   lineinfile:

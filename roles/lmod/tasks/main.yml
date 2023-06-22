@@ -5,4 +5,5 @@
   vars:
     version: "{{ lmod_version }}"
 
-- include: lmod_stdenv.yml
+# This adds a standard set of modules the load by default, and some task-specific sets
+# - include: lmod_stdenv.yml

@@ -1,5 +1,11 @@
 ---
 
+- name: copy lmod sh stdenv init file to {{ apps_dir }}/lmod/{{ lmod_version }}
+  tags: lmod
+  template:
+    src: "lmod/z00_StdEnv.sh"
+    dest: "{{ apps_dir }}/lmod/{{ lmod_version }}/z00_StdEnv.sh"
+
 - name: copy stdenv module definition
   tags: stdenv
   template:
@@ -23,4 +29,3 @@
     dest: "{{ modules_core }}"
     owner: "{{ main_guy }}"
     mode: 0644
-

@@ -32,9 +32,3 @@
   template:
     src: "lmod/lmod.profile.sh.j2"
     dest: "{{ apps_dir }}/lmod/{{ lmod_version }}/lmod.sh"
-
-- name: copy lmod sh stdenv init file to {{ apps_dir }}/lmod/{{ lmod_version }}
-  tags: lmod
-  template:
-    src: "lmod/z00_StdEnv.sh"
-    dest: "{{ apps_dir }}/lmod/{{ lmod_version }}/z00_StdEnv.sh"

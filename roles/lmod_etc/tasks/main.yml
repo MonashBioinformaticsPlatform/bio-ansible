@@ -4,3 +4,7 @@
   tags: ["lmod_etc", "lmod"]
   vars:
     version: "{{ lmod_version }}"
+
+# This is if you want a set of modules loaded by default
+# - include_tasks: lmod_stdenv.yml
+#   tags: ["lmod_etc", "lmod"]
