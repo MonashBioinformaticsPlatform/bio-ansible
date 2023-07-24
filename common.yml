@@ -15,7 +15,6 @@
     # lmod installed in {{ bioansible_basepath }}/software/apps directory
     - lmod_etc
     - podman
-    - shpc
 
   become: true
 
