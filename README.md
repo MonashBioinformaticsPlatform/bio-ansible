@@ -122,6 +122,28 @@ ansible-playbook bio.yml --list-tags
 Protip: _You can always add `-v` or `-vvv` options for verbose mode to help 
 diagnose failures_
 
+## singularity-hpc (shpc)
+
+Some modules are installed via `shpc`, which formalizes wrapping up Singularity containers as LMOD modules.
+Users can also install their own modules with a small amount of configuration.
+
+Users should run:
+```bash
+shpc config inituser
+
+# Create a directory for all user shpc containers and module definitions
+mkdir $HOME/shpc
+
+shpc config set container_base $HOME/shpc/containers
+shpc config set module_base $HOME/shpc/modules
+shpc config set views_base $HOME/shpc/views
+
+# Make LMOD aware of the users module definitions
+module use $HOME/shpc/modules
+# Make the MODUPLEPATH setting more permanent
+echo -e '\nexport MODULEPATH=$HOME/shpc/modules:$MODULEPATH' >>~/.bashrc
+```
+
 ## Building a Docker image
 
 See [README.docker.md](README.docker.md)

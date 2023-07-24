@@ -16,5 +16,7 @@
           # - bds
           # install everyting into one container
           - bio_tools
-          # install extra packages, not necessary biology relate
+          # install extra packages, not necessary biology related
           - extra_modules
+          # System-wide shpc installation for containerized tools
+          - shpc

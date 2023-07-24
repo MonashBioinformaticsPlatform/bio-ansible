@@ -1,0 +1,11 @@
+---
+- include_tasks: find-mamba.yml
+  tags: shpc
+
+- include_tasks: shpc-install.yml
+  tags: shpc
+  vars:
+    version: "{{ shpc_version }}"
+
+- include_tasks: install-modules.yml
+  tags: shpc

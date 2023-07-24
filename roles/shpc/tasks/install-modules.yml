@@ -1,0 +1,40 @@
+
+- name: set_fact shpc_view_name
+  tags: shpc
+  set_fact:
+    shpc_view_name: bio
+
+# [[ -d  {{ shpc_root_dir }}/views/{{ shpc_view_name }} ]] || shpc view create {{ shpc_view_name }}
+- name: Create shpc view | {{ shpc_view_name }}
+  tags: shpc
+  shell: 
+    cmd: |
+      shpc view create {{ shpc_view_name }}
+      
+      # We could set this as a default view for all installations
+      # shpc config set default_view {{ shpc_view_name }}
+
+    creates: "{{ shpc_root_dir }}/views/{{ shpc_view_name }}"
+
+- name: Install many shpc containers+modules
+  tags: shpc
+  shell: 
+    cmd: |
+      shpc install {{ item }}
+      shpc view install {{ shpc_view_name }} {{ item }}
+  with_items: "{{ shpc_bio_modules }}"
+
+# TODO: Install into views, add to LMOD environment for nicer naming
+#       We can we remove the long name /mnt/software/shpc/modules 
+#       if everything is in a view
+#
+# shpc view create bio
+# shpc view install bio quay.io/biocontainers/samtools:1.15--h3843a85_0
+#
+# module use $(shpc view get bio)
+# ... is equivalent to ...
+# export MODULEPATH=/mnt/software/shpc/views/bio:$MODULEPATH
+
+# TODO: We could add our system modules to the shpc view ?:
+#
+#   shpc view add bio system_modules <name1> <name2>

@@ -1,0 +1,14 @@
+shpc_version: 0.1.23
+
+shpc_root_dir: "{{ bioansible_basepath }}/software/shpc"
+
+# Python version to using in shpc conda env (ensure compatibility with shpc_version)
+shpc_python_version: "3.11"
+
+# For the registry in settings.yml
+shpc_registries: ["https://github.com/singularityhub/shpc-registry"]
+
+shpc_bio_modules:
+  - quay.io/biocontainers/samtools:1.15--h3843a85_0
+  - quay.io/biocontainers/macs2:2.2.7.1--py38hbff2b2d_5
+  - quay.io/biocontainers/bakta:1.7.0--pyhdfd78af_1

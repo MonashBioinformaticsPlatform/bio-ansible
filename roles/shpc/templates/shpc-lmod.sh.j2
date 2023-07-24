@@ -1,0 +1,6 @@
+shell=`basename $SHELL`
+
+if [[ -f {{ apps_dir }}/lmod/lmod/init/$shell ]]
+then
+    export MODULEPATH="{{ shpc_root_dir }}/modules:${MODULEPATH}"
+fi

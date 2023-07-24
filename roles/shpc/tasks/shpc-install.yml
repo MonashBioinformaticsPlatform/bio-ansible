@@ -1,0 +1,73 @@
+---
+
+- name: Set module_name for shpc
+  tags: shpc
+  set_fact: 
+    module_name: shpc
+
+- name: Create conda environment for {{ module_name }}={{ version }} & install packages
+  tags: shpc
+  shell: 
+    cmd: "{{ conda_bin }} create --yes --prefix={{ apps_dir }}/{{ module_name }}-{{ version }} python={{ shpc_python_version }} ruamel.yaml"
+    creates: "{{ apps_dir }}/{{ module_name }}-{{ version }}"
+
+- name: Remove symlinks bin/conda, bin/activate and bin/deactivate
+  tags: shpc
+  file:
+    dest: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/conda"
+    - "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/activate"
+    - "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/deactivate"
+
+- name: Clone singularity-hpc repository
+  tags: shpc
+  git:
+    repo: 'https://github.com/singularityhub/singularity-hpc.git'
+    dest: "{{ source_dir }}/singularity-hpc-{{ version }}"
+    version: "{{ version }}"
+
+- name: Install singularity-hpc
+  tags: shpc
+  shell:
+    cmd: "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/python setup.py install"
+    chdir: "{{ source_dir }}/singularity-hpc-{{ version }}"
+    creates: "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/shpc"
+
+- name: Symlink to /usr/bin/shpc
+  tags: shpc
+  file:
+    src: "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/shpc"
+    dest: "/usr/bin/shpc"
+    state: link
+
+- name: Create shpc registry directory etc
+  tags: shpc
+  file:
+    dest: "{{ item }}"
+    state: directory
+    mode: 0755
+    owner: "{{ main_guy }}"
+  become: true
+  with_items:
+    - "{{ shpc_root_dir }}"
+    - "{{ shpc_root_dir }}/containers"
+    - "{{ shpc_root_dir }}/views"
+
+- name: Copy settings.yml to shpc
+  tags: shpc
+  template:
+    src: "settings.yml.j2"
+    dest: "{{ apps_dir }}/{{ module_name }}-{{ version }}/lib/python{{ shpc_python_version }}/site-packages/singularity_hpc-{{ version }}-py{{ shpc_python_version }}.egg/shpc/settings.yml"
+    mode: 0755
+    owner: "{{ main_guy }}"
+    backup: yes
+
+- name: Copy shpc lmod env init file to /etc/profile.d/shpc-lmod.sh
+  tags: shpc
+  template:
+    src: "shpc-lmod.sh.j2"
+    dest: /etc/profile.d/shpc-lmod.sh
+    owner: root
+    mode: 0644

@@ -1,0 +1,14 @@
+---
+- stat: path="{{ apps_dir }}/conda/bin/mamba"
+  tags: ["always"]
+  register: mamba_binary_check
+
+- name: Set conda executable path
+  tags: ["always"]
+  set_fact: conda_bin="{{ apps_dir }}/conda/bin/conda"
+  when: not mamba_binary_check.stat.exists
+
+- name: Use mamba instead of conda when available
+  tags: ["always"]
+  set_fact: conda_bin="{{ apps_dir }}/conda/bin/mamba"
+  when: mamba_binary_check.stat.exists
