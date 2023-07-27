@@ -4,12 +4,17 @@
   set_fact:
     shpc_view_name: bio
 
+- name: set_fact shpc_bin
+  tags: shpc
+  set_fact:
+    shpc_bin: "{{ apps_dir }}/shpc-{{ version }}/bin/shpc"
+
 # [[ -d  {{ shpc_root_dir }}/views/{{ shpc_view_name }} ]] || shpc view create {{ shpc_view_name }}
 - name: Create shpc view | {{ shpc_view_name }}
   tags: shpc
   shell: 
     cmd: |
-      shpc view create {{ shpc_view_name }}
+      {{ shpc_bin }} view create {{ shpc_view_name }}
       
       # We could set this as a default view for all installations
       # shpc config set default_view {{ shpc_view_name }}
@@ -20,8 +25,8 @@
   tags: shpc
   shell: 
     cmd: |
-      shpc install {{ item }}
-      shpc view install {{ shpc_view_name }} {{ item }}
+      {{ shpc_bin }} install {{ item }}
+      {{ shpc_bin }} view install {{ shpc_view_name }} {{ item }}
   with_items: "{{ shpc_bio_modules }}"
 
 # TODO: Install into views, add to LMOD environment for nicer naming

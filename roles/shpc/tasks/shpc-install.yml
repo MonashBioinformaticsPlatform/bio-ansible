@@ -35,13 +35,6 @@
     chdir: "{{ source_dir }}/singularity-hpc-{{ version }}"
     creates: "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/shpc"
 
-- name: Symlink to /usr/bin/shpc
-  tags: shpc
-  file:
-    src: "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/shpc"
-    dest: "/usr/bin/shpc"
-    state: link
-
 - name: Create shpc registry directory etc
   tags: shpc
   file:
@@ -64,10 +57,3 @@
     owner: "{{ main_guy }}"
     backup: yes
 
-- name: Copy shpc lmod env init file to /etc/profile.d/shpc-lmod.sh
-  tags: shpc
-  template:
-    src: "shpc-lmod.sh.j2"
-    dest: /etc/profile.d/shpc-lmod.sh
-    owner: root
-    mode: 0644

@@ -1,0 +1,23 @@
+---
+
+- name: Symlink to /usr/bin/shpc
+  tags: ['shpc', 'sudo']
+  become: yes
+  become_user: root
+  ignore_errors: yes
+  file:
+    src: "{{ apps_dir }}/shpc-{{ version }}/bin/shpc"
+    dest: "/usr/bin/shpc"
+    state: link
+
+- name: Copy shpc lmod env init file to /etc/profile.d/shpc-lmod.sh
+  tags: ['shpc', 'sudo']
+  become: yes
+  become_user: root
+  ignore_errors: yes
+  template:
+    src: "shpc-lmod.sh.j2"
+    dest: /etc/profile.d/shpc-lmod.sh
+    owner: root
+    mode: 0644
+

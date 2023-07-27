@@ -12,3 +12,4 @@ vault
 *.pyc
 private
 /private_templates
+ansible-vault-password.txt
