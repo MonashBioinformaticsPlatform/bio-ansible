@@ -36,7 +36,8 @@
     creates: "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/shpc"
 
 - name: Create shpc registry directory etc
-  tags: shpc
+  tags: ['shpc', 'sudo']
+  ignore_errors: yes
   file:
     dest: "{{ item }}"
     state: directory

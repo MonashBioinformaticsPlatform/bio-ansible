@@ -8,6 +8,7 @@
     update_cache: yes
   with_items:
     - squashfs-tools
+    # -squashfs-tools-ng  # Ubuntu 20.04
     - libseccomp2
     - cryptsetup-bin
     - runc

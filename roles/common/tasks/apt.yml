@@ -135,6 +135,8 @@
     - liblist-moreutils-perl
     # perl stuff
     - cpanminus
+    # DROMPAplus
+    - libgtkmm-3.0-dev
     # extras
     - pandoc
     - pandoc-citeproc
@@ -165,3 +167,4 @@
     - tree
     # credential management for docker login: https://github.com/docker/docker-credential-helpers
     - pass
+    - gnuplot-nox

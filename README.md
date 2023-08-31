@@ -125,7 +125,8 @@ diagnose failures_
 ## singularity-hpc (shpc)
 
 Some modules are installed via `shpc`, which formalizes wrapping up Singularity containers as LMOD modules.
-Users can also install their own modules with a small amount of configuration.
+Users can also install their own modules with a small amount of configuration. You can find many tools
+pre-packaged for shpc at the [shpc-registry](https://singularityhub.github.io/shpc-registry/).
 
 Users should run:
 ```bash

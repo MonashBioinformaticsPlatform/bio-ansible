@@ -12,3 +12,6 @@ shpc_bio_modules:
   - quay.io/biocontainers/samtools:1.15--h3843a85_0
   - quay.io/biocontainers/macs2:2.2.7.1--py38hbff2b2d_5
   - quay.io/biocontainers/bakta:1.7.0--pyhdfd78af_1
+  - quay.io/biocontainers/unicycler:0.5.0--py310h6cc9453_3
+  - quay.io/biocontainers/ragtag:2.1.0--pyhb7b1952_0
+  - quay.io/biocontainers/hisat2:2.2.1--h87f3376_4

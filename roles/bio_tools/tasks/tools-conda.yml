@@ -196,3 +196,12 @@
     conda_packages:
       - 'snippy={{ snippy_version }}'
 
+- include_tasks: conda-package.yml
+  tags: seqkit
+  args: {apply: { tags: seqkit }}
+  vars:
+    module_name: seqkit
+    version: "{{ seqkit_version }}"
+    conda_packages:
+      - 'seqkit={{ seqkit_version }}'
+

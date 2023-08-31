@@ -26,7 +26,7 @@
   shell: 
     cmd: |
       {{ shpc_bin }} install {{ item }}
-      {{ shpc_bin }} view install {{ shpc_view_name }} {{ item }}
+      {{ shpc_bin }} view --force install {{ shpc_view_name }} {{ item }}
   with_items: "{{ shpc_bio_modules }}"
 
 # TODO: Install into views, add to LMOD environment for nicer naming

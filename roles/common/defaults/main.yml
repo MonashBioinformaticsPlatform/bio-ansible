@@ -3,7 +3,7 @@ locale_region: "en_US"
 locale_charset: "UTF-8"
 locale: "{{ locale_region }}.{{ locale_charset }}"
 
-singularity_version: 3.11.3
+singularity_version: 3.11.4 
 
 du_dust_deb_url: "https://github.com/bootandy/dust/releases/download/v0.8.6/du-dust_0.8.6_amd64.deb"
 quarto_deb_url: "https://github.com/quarto-dev/quarto-cli/releases/download/v1.3.361/quarto-1.3.361-linux-amd64.deb"
