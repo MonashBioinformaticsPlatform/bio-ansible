@@ -1,0 +1,10 @@
+---
+
+# This prevents /var/log/journal filling up /
+- name: Ensure line SystemMaxUse=50M is in /etc/systemd/journald.conf
+  tags: config
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/journald.conf
+    regexp: '^SystemMaxUse='
+    line: 'SystemMaxUse=50M'
+    state: present

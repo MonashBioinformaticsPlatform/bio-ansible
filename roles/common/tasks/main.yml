@@ -1,6 +1,7 @@
 ---
 - include: sh_is_bash.yml
 - include: timezone.yml
+- include: config.yml
 - include: apt.yml
 - include: ubuntu-20.yml
 - include: ubuntu-22.yml
