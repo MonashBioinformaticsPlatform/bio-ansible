@@ -42,6 +42,9 @@
     - rustc
     - cargo
     - awscli
+    - ncbi-entrez-direct
+    - tabix
+    - gzrt
     # nfs stuff
     - nfs-common
     # some extra security against tempfile vulns
