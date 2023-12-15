@@ -1,15 +1,20 @@
 ---
 
 - include_tasks: rstudio-deps.yml
+  tags: rstudio
 
 - include_tasks: rstudio-server.yml
+  tags: rstudio
   vars:
     version: "{{ rstudio_version }}"
   when: not use_rstudio_pro
 
 - include_tasks: rstudio-server-pro.yml
+  tags: ["rstudio", "rstudio_pro"]
   vars:
     version: "{{ rstudio_pro_version }}"
   when: use_rstudio_pro
 
-- include_tasks: rstudio-config.yml 
+- include_tasks: rstudio-config.yml
+  tags: rstudio
+
