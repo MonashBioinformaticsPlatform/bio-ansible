@@ -4,3 +4,5 @@ if [[ -f {{ apps_dir }}/lmod/lmod/init/$shell ]]
 then
     export MODULEPATH="{{ shpc_root_dir }}/modules:${MODULEPATH}"
 fi
+
+module use $(shpc view get {{ shpc_default_view }})

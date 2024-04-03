@@ -1,6 +1,7 @@
 shpc_version: 0.1.23
 
 shpc_root_dir: "{{ bioansible_basepath }}/software/shpc"
+shpc_default_view: "bio"
 
 # Python version to using in shpc conda env (ensure compatibility with shpc_version)
 shpc_python_version: "3.11"

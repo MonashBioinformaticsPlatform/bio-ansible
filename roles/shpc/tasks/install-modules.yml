@@ -2,7 +2,7 @@
 - name: set_fact shpc_view_name
   tags: shpc
   set_fact:
-    shpc_view_name: bio
+    shpc_view_name: "{{ shpc_default_view }}"
 
 - name: set_fact shpc_bin
   tags: shpc
