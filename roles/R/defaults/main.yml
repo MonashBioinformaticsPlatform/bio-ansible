@@ -1,8 +1,9 @@
 ---
 r_base_mirror: "https://cran.csiro.au"
 r_dl_url_base: "https://cran.r-project.org/src/base"
-r_base_version: 4.2.3
+r_base_version: 4.3.3
 r_base_versions:
+  - 4.3.3
   - 4.3.1
   - 4.2.3
   - 4.1.3

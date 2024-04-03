@@ -2,7 +2,7 @@
 use_rstudio_pro: false
 
 # interactive
-rstudio_version: 2023.06.2-561
+rstudio_version: 2023.12.1-402
 rstudio_pro_version: 2023.06.2-561.pro5
 
 # You should keep this defined in an ansible-vault encrypted file
