@@ -3,7 +3,7 @@
 - name: download maven {{ version }}
   tags: ['maven', 'java']
   get_url:
-    url: "http://www-eu.apache.org/dist/maven/maven-3/{{ version }}/binaries/apache-maven-{{ version }}-bin.tar.gz"
+    url: "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/{{ version }}/apache-maven-{{ version }}-bin.tar.gz"
     dest: "{{ source_dir }}"
 
 - name: uncompress maven {{ version }}
