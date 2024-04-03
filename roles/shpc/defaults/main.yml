@@ -17,3 +17,4 @@ shpc_bio_modules:
   - quay.io/biocontainers/hisat2:2.2.1--h87f3376_4
   - quay.io/biocontainers/kraken2:2.1.2--pl5321h4ac6f70_4
   - ghcr.io/autamus/bracken:1.0.0
+  - quay.io/biocontainers/seqkit:2.8.0--h9ee0642_1
