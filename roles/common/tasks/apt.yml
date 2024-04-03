@@ -45,6 +45,7 @@
     - ncbi-entrez-direct
     - tabix
     - gzrt
+    - fd-find
     # nfs stuff
     - nfs-common
     # some extra security against tempfile vulns
