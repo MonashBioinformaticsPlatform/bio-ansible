@@ -50,6 +50,15 @@
       - 'macs2={{ macs2_version }}'
 
 - include_tasks: conda-package.yml
+  tags: macs3
+  args: {apply: { tags: macs3 }}
+  vars:
+    module_name: macs3
+    version: "{{ macs3_version }}"
+    conda_packages:
+      - 'macs3={{ macs3_version }}'
+
+- include_tasks: conda-package.yml
   tags: cutadapt
   args: {apply: { tags: cutadapt }}
   vars:

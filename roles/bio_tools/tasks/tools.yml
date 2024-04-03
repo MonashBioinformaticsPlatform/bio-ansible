@@ -128,10 +128,11 @@
 #   args: {apply: { tags: macs2 }}
 #   vars: { version: "{{ macs2_version }}" }
 
-- include_tasks: macs3.yml
-  tags: macs3
-  args: {apply: { tags: macs3 }}
-  vars: { version: "{{ macs3_version }}" }
+# macs3 is now installed via conda
+#- include_tasks: macs3.yml
+#  tags: macs3
+#  args: {apply: { tags: macs3 }}
+#  vars: { version: "{{ macs3_version }}" }
 
 # QIIME1 (1.9.1) is superceeded by QIIME2
 # This task always gives cross-platform compilation issues, so now using the conda version of QIIME1 instead

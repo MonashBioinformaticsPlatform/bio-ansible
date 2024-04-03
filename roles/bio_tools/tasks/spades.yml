@@ -2,7 +2,8 @@
 
 - name: download spades {{ version }}
   get_url:
-    url: "http://cab.spbu.ru/files/release{{ version }}/SPAdes-{{ version }}-Linux.tar.gz"
+    #url: "http://cab.spbu.ru/files/release{{ version }}/SPAdes-{{ version }}-Linux.tar.gz"
+    url: "https://github.com/ablab/spades/releases/download/v{{ version }}/SPAdes-{{ version }}-Linux.tar.gz"
     dest: "{{ source_dir }}"
 
   tags: spades

@@ -43,7 +43,7 @@ igvtools_version: 2.14.1
 bedtools_version: 2.31.0
 smalt_version: 0.7.6
 snpeff_version: "4_3i"
-spades_version: 3.12.0
+spades_version: 3.12.0  # 3.15.5
 vsearch_version: 2.4.0
 raxml_version: 8.2.12
 raxml_makefile: Makefile.AVX.PTHREADS.gcc
@@ -64,7 +64,7 @@ mimodd_version: 0.1.9  # 0.1.7.3
 multiqc_version: 1.14
 cutadapt_version: 3.4
 macs2_version: 2.2.7.1
-macs3_version: 3.0.0b1
+macs3_version: 3.0.1
 hifive_version: 1.5.7
 
 # perl
