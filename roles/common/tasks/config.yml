@@ -8,3 +8,13 @@
     regexp: '^SystemMaxUse='
     line: 'SystemMaxUse=50M'
     state: present
+
+- name: Set default umask to 077
+  tags: config
+  ansible.builtin.lineinfile:
+    path: /etc/profile.d/umask.sh
+    create: yes
+    line: |
+      # No group rwx by default
+      umask 077
+
