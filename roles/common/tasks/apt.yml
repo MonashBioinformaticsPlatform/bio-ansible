@@ -150,6 +150,7 @@
     - byobu
     - mosh
     - git
+    - git-lfs
     - mercurial
     - curl
     - aria2
