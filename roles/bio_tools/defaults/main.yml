@@ -47,7 +47,7 @@ spades_version: 3.12.0  # 3.15.5
 vsearch_version: 2.4.0
 raxml_version: 8.2.12
 raxml_makefile: Makefile.AVX.PTHREADS.gcc
-cellranger_version: 7.1.0  # 5.0.1
+cellranger_version: 8.0.1 # 7.1.0  # 5.0.1
 vcftools_version: 0.1.14
 muscle_version: 3.8.31
 cdhit_version: 4.6.8

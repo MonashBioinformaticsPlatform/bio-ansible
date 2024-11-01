@@ -67,16 +67,19 @@ modifications on newer Ubuntu releases and other Debian-flavoured distros. YMMV.
     pip3 install -U "ansible==8"
     ```
 2. Clone the git repo:
-
     ```bash
     git clone https://github.com/MonashBioinformaticsPlatform/bio-ansible.git
     ```
-3. Edit `hosts` file to include the remote host IP addresses into the appropriate group.
+3. Install required Ansible Galaxy roles:
+   ```bash
+   ansible-galaxy collection install community.crypto
+   ```
+4. Edit `hosts` file to include the remote host IP addresses into the appropriate group.
    If running against remote host(s), setup your [ssh-keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) and use `ssh-add` to add them to the local sss-agent.
 
-4. Edit `group/all` file to include your username as `main_guy` variable (this is the username used to access the target host[s])
+5. Edit `group/all` file to include your username as `main_guy` variable (this is the username used to access the target host[s])
 
-5. *Optional*: Download any tar archives for non-FOSS software into `tarballs/` (or the
+6. *Optional*: Download any tar archives for non-FOSS software into `tarballs/` (or the
    path set in the `tarballs_path` variable) - 
    see the section on [manually downloading tarballs](#manually-downloading-tarballs) below.
 

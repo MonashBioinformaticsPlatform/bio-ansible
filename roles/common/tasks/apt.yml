@@ -46,6 +46,7 @@
     - tabix
     - gzrt
     - fd-find
+    - ncdu
     # nfs stuff
     - nfs-common
     # some extra security against tempfile vulns
