@@ -47,3 +47,13 @@
     state: present
   notify: Restart sshd
   when: sshd_config.stat.exists
+
+- name: Set LoginGraceTime to 0 - mitigates OpenSSH CVE-2024-6387 RCE
+  tags: sshd
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^LoginGraceTime'
+    line: 'LoginGraceTime 0'
+    state: present
+  notify: Restart sshd
+  when: sshd_config.stat.exists
