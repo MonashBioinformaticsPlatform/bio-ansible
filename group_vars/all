@@ -83,3 +83,10 @@ google_oidc_crypto_passphrase: ""
 
 ####
 ################################################################################
+
+# These mean users can't see into each other's home directories
+user_umask: 077
+adduser_dir_mode: 0700
+# Debian/Ubuntu defaults - users can read (most) files in each other's home directories
+# user_umask: 022
+# adduser_dir_mode: 0750

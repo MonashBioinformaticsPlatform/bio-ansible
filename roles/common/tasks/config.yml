@@ -9,12 +9,30 @@
     line: 'SystemMaxUse=50M'
     state: present
 
-- name: Set default umask to 077
+# - name: Set default umask to 077
+#   tags: config
+#   ansible.builtin.lineinfile:
+#     path: /etc/profile.d/umask.sh
+#     create: yes
+#     line: |
+#       # No group rwx by default
+#       umask 077
+
+- name: Ensure /etc/adduser.conf has DIR_MODE set to {{ adduser_dir_mode }}
   tags: config
   ansible.builtin.lineinfile:
-    path: /etc/profile.d/umask.sh
-    create: yes
-    line: |
-      # No group rwx by default
-      umask 077
+    path: /etc/adduser.conf
+    regexp: '^DIR_MODE='
+    line: "DIR_MODE={{ adduser_dir_mode }}"
+    state: present
+    backup: yes
 
+# TODO: This replaces the /etc/profile.d/umask.sh task above
+- name: Ensure /etc/login.defs has UMASK set to {{ user_umask }}
+  tags: config
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    regexp: '^UMASK\s+'
+    line: "UMASK {{ user_umask }}"
+    state: present
+    backup: yes
