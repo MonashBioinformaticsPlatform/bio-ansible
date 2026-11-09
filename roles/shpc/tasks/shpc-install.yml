@@ -8,7 +8,7 @@
 - name: Create conda environment for {{ module_name }}={{ version }} & install packages
   tags: shpc
   shell: 
-    cmd: "{{ conda_bin }} create --yes --prefix={{ apps_dir }}/{{ module_name }}-{{ version }} python={{ shpc_python_version }} ruamel.yaml"
+    cmd: "umask 0022 && {{ conda_bin }} create --yes --prefix={{ apps_dir }}/{{ module_name }}-{{ version }} python={{ shpc_python_version }} ruamel.yaml"
     creates: "{{ apps_dir }}/{{ module_name }}-{{ version }}"
 
 - name: Remove symlinks bin/conda, bin/activate and bin/deactivate
@@ -31,9 +31,21 @@
 - name: Install singularity-hpc
   tags: shpc
   shell:
-    cmd: "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/python setup.py install"
+    cmd: |
+      umask 0022 && \
+      {{ apps_dir }}/{{ module_name }}-{{ version }}/bin/python -m pip install .[all]
+      # {{ apps_dir }}/{{ module_name }}-{{ version }}/bin/python setup.py install
+      chmod a+rx {{ apps_dir }}/{{ module_name }}-{{ version }}/bin/shpc
     chdir: "{{ source_dir }}/singularity-hpc-{{ version }}"
     creates: "{{ apps_dir }}/{{ module_name }}-{{ version }}/bin/shpc"
+
+- name: Ensure correct permissions for {{ module_name }}-{{ version }} installation
+  tags: shpc
+  file:
+    path: "{{ apps_dir }}/{{ module_name }}-{{ version }}"
+    state: directory
+    recurse: yes
+    mode: "a+rX"
 
 - name: Create shpc registry directory etc
   tags: ['shpc', 'sudo']
@@ -53,7 +65,7 @@
   tags: shpc
   template:
     src: "settings.yml.j2"
-    dest: "{{ apps_dir }}/{{ module_name }}-{{ version }}/lib/python{{ shpc_python_version }}/site-packages/singularity_hpc-{{ version }}-py{{ shpc_python_version }}.egg/shpc/settings.yml"
+    dest: "{{ apps_dir }}/{{ module_name }}-{{ version }}/lib/python{{ shpc_python_version }}/site-packages/shpc/settings.yml"
     mode: 0755
     owner: "{{ main_guy }}"
     backup: yes

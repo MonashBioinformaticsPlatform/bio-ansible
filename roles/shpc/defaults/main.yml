@@ -1,4 +1,4 @@
-shpc_version: 0.1.23
+shpc_version: 0.1.32
 
 shpc_root_dir: "{{ bioansible_basepath }}/software/shpc"
 shpc_default_view: "bio"
