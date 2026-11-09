@@ -1,0 +1,6 @@
+---
+# Reloading re-applies MemoryMax to already-active user-<uid>.slice units, so
+# existing sessions are limited without anyone needing to log out.
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes

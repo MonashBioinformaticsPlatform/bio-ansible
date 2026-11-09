@@ -1,0 +1,43 @@
+---
+# Mitigations for host-wide OOM cascades on shared multi-user compute hosts
+# (see bio2 incident, Nov 2026). Applies to any host where many users run
+# memory-hungry jobs (R mclapply, Jupyter, VS Code Remote, tmux) outside a
+# scheduler or RStudio Launcher.
+
+- name: Create systemd drop-in directories
+  tags: ['oom']
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  with_items:
+    - /etc/systemd/system/user-.slice.d
+    - /etc/systemd/user.conf.d
+
+- name: Limit memory per user slice
+  tags: ['oom']
+  copy:
+    dest: /etc/systemd/system/user-.slice.d/50-memory.conf
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      # Managed by Ansible (role user_memory_limits)
+      [Slice]
+      MemoryMax={{ user_memory_max }}
+  notify: Reload systemd
+
+- name: Set default OOM score adjustment for user service managers
+  tags: ['oom']
+  copy:
+    dest: /etc/systemd/user.conf.d/50-oom-adjust.conf
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      # Managed by Ansible (role user_memory_limits)
+      [Manager]
+      DefaultOOMScoreAdjust={{ user_default_oom_score_adjust }}
+  notify: Reload systemd

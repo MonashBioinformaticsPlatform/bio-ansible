@@ -1,0 +1,13 @@
+---
+# Maximum memory any single user (user-<uid>.slice) may use, as a percentage of
+# total RAM. Systemd accepts a percentage directly. A runaway job is then
+# OOM-killed inside its own user slice instead of triggering a host-wide OOM
+# that takes out every user's session daemons.
+user_memory_max: "90%"
+
+# Default OOM score adjustment for services in each user's `systemd --user`
+# manager. Upstream systemd defaults to +200 (manager's +100 plus 100), which on a
+# large-RAM shared host outweighs the RSS of a real memory hog and makes the OOM
+# killer pick other users' dbus-daemon/systemd/pipewire instead. 0 means victims
+# are chosen by actual memory use.
+user_default_oom_score_adjust: 0
