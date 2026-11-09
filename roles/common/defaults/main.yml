@@ -5,8 +5,11 @@ locale: "{{ locale_region }}.{{ locale_charset }}"
 
 singularity_version: 4.1.2
 
-du_dust_deb_url: "https://github.com/bootandy/dust/releases/download/v0.9.0/du-dust_0.9.0-1_amd64.deb"
-quarto_version: "1.4.551"
+du_dust_version: "1.2.0"
+du_dust_deb_url: "https://github.com/bootandy/dust/releases/download/v{{ du_dust_version }}/du-dust_{{ du_dust_version }}-1_amd64.deb"
+quarto_version: "1.7.31"
 quarto_deb_url: "https://github.com/quarto-dev/quarto-cli/releases/download/v{{ quarto_version }}/quarto-{{ quarto_version }}-linux-amd64.deb"
-rclone_version: 1.66.0
+rclone_version: "1.69.2"
 rclone_deb_url: "https://downloads.rclone.org/v{{ rclone_version }}/rclone-v{{ rclone_version }}-linux-amd64.deb"
+
+mount_s3_deb_url: "https://s3.amazonaws.com/mountpoint-s3-release/latest/x86_64/mount-s3.deb"

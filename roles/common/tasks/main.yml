@@ -1,11 +1,12 @@
 ---
-- include: sh_is_bash.yml
-- include: timezone.yml
-- include: config.yml
-- include: apt.yml
-- include: ubuntu-20.yml
-- include: ubuntu-22.yml
-- include: extra-debs.yml
+- import_tasks: sh_is_bash.yml
+- import_tasks: timezone.yml
+- import_tasks: config.yml
+- import_tasks: apt.yml
+- import_tasks: snap.yml
+- import_tasks: ubuntu-20.yml
+- import_tasks: ubuntu-22.yml
+- import_tasks: extra-debs.yml
 
 # This installs a system-wide verison of R. It's useful for short-lived
 # throwaway VMs (eg training workshops), but it's generally a bad idea 
@@ -25,10 +26,14 @@
 - include_tasks: lua.yml
   tags: ['apt', 'lua']
 
-- include_tasks: singularity-apt.yml
-  tags: ['apt', 'singularity']
-  vars:
-    version: "{{ singularity_version }}"
+# Use apptainer instead
+#- include_tasks: singularity-apt.yml
+#  tags: ['apt', 'singularity']
+#  vars:
+#    version: "{{ singularity_version }}"
+
+- include_tasks: apptainer.yml
+  tags: ['apt', 'apptainer']
 
 - include_tasks: python.yml
   tags: ['apt', 'python']
@@ -43,3 +48,5 @@
 
 - include_tasks: duck.yml
   tags: ['duck']
+
+

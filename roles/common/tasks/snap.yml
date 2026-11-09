@@ -1,0 +1,9 @@
+- name: Install common snap packages requiring classic confinement
+  tags: snap
+  become: yes
+  snap:
+    name: "{{ item }}"
+    state: present
+    classic: true
+  with_items:
+    - aws-cli
