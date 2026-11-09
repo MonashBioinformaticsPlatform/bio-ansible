@@ -8,9 +8,21 @@
     version: "{{ version }}"
     update: no
 
-- name: Find lua dev header path (Ubuntu 22.04, lua5.4)
+- name: Set target lua version for Lmod build (Ubuntu >= 22, e.g., 22.04 / 24.04 -> lua5.3)
   tags: lmod
-  set_fact: lua_headers="/usr/include/lua5.4"
+  set_fact:
+    lua_version: "5.3"
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 22
+
+- name: Set target lua version for Lmod build (Ubuntu 20.04 -> lua5.3)
+  tags: lmod
+  set_fact:
+    lua_version: "5.3"
+  when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int == 20
+
+- name: Find lua dev header path (Ubuntu >= 22, lua5.3)
+  tags: lmod
+  set_fact: lua_headers="/usr/include/lua5.3"
   when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 22
 
 - name: Find lua dev header path (Ubuntu 20.04, lua5.3)
@@ -21,11 +33,28 @@
 - name: compile and install lmod {{ version }}
   tags: lmod
   shell: |
+    set -e # Exit immediately if a command exits with a non-zero status.
     cd {{ source_dir }}/Lmod-{{ version }}
-    ./configure --prefix={{ apps_dir }} --with-mpathSearch=YES --with-caseIndependentSorting=YES && \
-    LUA_INCLUDE={{ lua_headers }} make install
+
+    # Determine the correct LUA_PATH and LUA_CPATH for modules installed by luarocks.
+    # The ";;" tells Lua to append its default built-in search path.
+    EFFECTIVE_LUA_PATH="$(luarocks --lua-version {{ lua_version }} path --lr-path);;"
+    EFFECTIVE_LUA_CPATH="$(luarocks --lua-version {{ lua_version }} path --lr-cpath);;"
+
+    echo "Using LUA_PATH for Lmod build: ${EFFECTIVE_LUA_PATH}"
+    echo "Using LUA_CPATH for Lmod build: ${EFFECTIVE_LUA_CPATH}"
+
+    # Run configure with the correct Lua paths
+    env LUA_PATH="${EFFECTIVE_LUA_PATH}" LUA_CPATH="${EFFECTIVE_LUA_CPATH}" \
+    ./configure --prefix={{ apps_dir }} --with-mpathSearch=YES --with-caseIndependentSorting=YES
+
+    # Run make install with the correct Lua paths and include directory for Lua headers
+    env LUA_PATH="${EFFECTIVE_LUA_PATH}" LUA_CPATH="${EFFECTIVE_LUA_CPATH}" \
+    LUA_INCLUDE={{ lua_headers }} \
+    make install
   args:
     creates: "{{ apps_dir }}/lmod/{{ lmod_version }}"
+    executable: /bin/bash # Ensures bash-specific syntax like $() works correctly
 
 - name: copy lmod bash init file to {{ apps_dir }}/lmod/{{ lmod_version }}
   tags: lmod
