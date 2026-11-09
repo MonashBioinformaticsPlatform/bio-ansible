@@ -49,7 +49,7 @@
     conda_packages:
       - jupyter_console
       - bash_kernel
-      - rpy2
+      # - rpy2
       - xeus-python
       #- nglview
       - jupytext
