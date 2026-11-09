@@ -29,8 +29,19 @@
       MemoryMax={{ user_memory_max }}
   notify: Reload systemd
 
+# DefaultOOMScoreAdjust= (and the +200 default it overrides) only exist in
+# systemd >= 250, i.e. Ubuntu 22.10+. On Ubuntu 22.04 (systemd 249) user
+# daemons already run at oom_score_adj=0 and the key would be unknown.
+- name: Get systemd version
+  tags: ['oom']
+  command: systemctl --version
+  register: user_memory_limits_systemd_version
+  changed_when: false
+  check_mode: no
+
 - name: Set default OOM score adjustment for user service managers
   tags: ['oom']
+  when: user_memory_limits_systemd_version.stdout_lines[0].split()[1] | int >= 250
   copy:
     dest: /etc/systemd/user.conf.d/50-oom-adjust.conf
     owner: root
