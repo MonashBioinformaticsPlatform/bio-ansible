@@ -11,3 +11,11 @@ user_memory_max: "90%"
 # killer pick other users' dbus-daemon/systemd/pipewire instead. 0 means victims
 # are chosen by actual memory use.
 user_default_oom_score_adjust: 0
+
+# systemd-oomd: kills a user's runaway cgroup when its memory pressure (PSI)
+# stays high, seconds into a stall instead of the minutes the kernel OOM
+# killer can take on a no-swap host. Set false to skip it.
+user_memory_limits_oomd: true
+# Kill when a user's slice has memory pressure above this for the duration below.
+user_oomd_memory_pressure_limit: "60%"
+user_oomd_memory_pressure_duration: "20s"
