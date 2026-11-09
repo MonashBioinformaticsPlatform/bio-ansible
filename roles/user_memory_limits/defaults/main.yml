@@ -17,5 +17,5 @@ user_default_oom_score_adjust: 0
 # killer can take on a no-swap host. Set false to skip it.
 user_memory_limits_oomd: true
 # Kill when a user's slice has memory pressure above this for the duration below.
-user_oomd_memory_pressure_limit: "60%"
+user_oomd_memory_pressure_limit: "90%"
 user_oomd_memory_pressure_duration: "20s"
