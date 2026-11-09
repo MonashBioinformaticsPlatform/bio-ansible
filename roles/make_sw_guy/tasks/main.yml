@@ -16,6 +16,7 @@
     shell: /bin/bash
     comment: "software install user"
     state: present
+  register: user_task_result
 
 - name: set authorized key from file
   tags: sw_guy
@@ -33,15 +34,15 @@
   with_fileglob: "{{ private_vars_path }}/public_keys/*.pub"
 
 #TODO check if this will work?
-  #- name: Set bioansible_basepath permissions
-  #  tags: sw_guy
-  #  file:
-  #    dest: "{{ bioansible_basepath }}"
-  #    state: directory
-  #    owner: "{{ sudo_guy }}"
-  #    group: "{{ sudo_guy }}"
-  #    mode: 0755
-  #
+#- name: Set bioansible_basepath permissions
+#  tags: sw_guy
+#  file:
+#    dest: "{{ bioansible_basepath }}"
+#    state: directory
+#    owner: "{{ sudo_guy }}"
+#    group: "{{ sudo_guy }}"
+#    mode: 0755
+#
 
 - name: Set "{{ bioansible_basepath }}/software" permissions
   tags: sw_guy
