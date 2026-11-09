@@ -1,0 +1,51 @@
+---
+# Mitigate PinTheft (RDS zcopy double-free → LPE via io_uring) — Ubuntu only
+# https://github.com/v12-security/pocs/tree/main/pintheft
+
+- name: Gather installed package facts
+  package_facts:
+    manager: auto
+
+- name: Get list of active modules
+  command: lsmod
+  register: lsmod_output
+  changed_when: false
+
+- name: Parse loaded modules into list
+  set_fact:
+    loaded_modules: "{{ lsmod_output.stdout_lines[1:] | map('split') | map('first') | list }}"
+  when: lsmod_output.stdout_lines is defined
+
+- name: Report loaded PinTheft-related kernel modules
+  debug:
+    msg: "WARNING: Kernel module '{{ item }}' is currently loaded on {{ inventory_hostname }}"
+  loop:
+    - rds
+    - rds_tcp
+  when:
+    - loaded_modules is defined
+    - item in loaded_modules
+
+- name: Attempt to unload PinTheft-related kernel modules
+  command: "modprobe -r {{ item }}"
+  loop:
+    - rds_tcp
+    - rds
+  failed_when: false
+  changed_when: false
+  when:
+    - loaded_modules is defined
+    - item in loaded_modules
+
+- name: Persistently disable PinTheft-related kernel modules
+  copy:
+    dest: /etc/modprobe.d/pintheft.conf
+    content: |
+      install rds /bin/false
+      install rds_tcp /bin/false
+    mode: "0644"
+  register: modprobe_pintheft
+
+- name: Update initramfs after PinTheft modprobe changes
+  command: update-initramfs -u
+  when: modprobe_pintheft.changed | default(false)

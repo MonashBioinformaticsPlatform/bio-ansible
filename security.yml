@@ -1,0 +1,9 @@
+---
+- name: applying security mitigations not covered by distro updates
+  hosts: [common]
+  remote_user: "{{ sudo_guy }}"
+  roles:
+    # security mitigations
+    - security
+
+  become: true

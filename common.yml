@@ -4,7 +4,9 @@
   hosts: common
   remote_user: "{{ sudo_guy }}"
   roles:
-    # need to have no previlidged installer guy
+    # security mitigations
+    - security
+    # need to have no privileged installer guy
     - make_sw_guy
     # custom sshd config (no passwords)
     - sshd

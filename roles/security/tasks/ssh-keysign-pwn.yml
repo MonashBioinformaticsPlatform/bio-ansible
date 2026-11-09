@@ -1,0 +1,30 @@
+---
+# Mitigate ssh-keysign-pwn (CVE-2026-46333) — restricts ptrace (gdb, strace, etc.)
+
+- name: Read current ptrace_scope
+  command: sysctl -n kernel.yama.ptrace_scope
+  register: ptrace_scope_current
+  changed_when: false
+  failed_when: false
+
+- name: Report insecure ptrace_scope
+  debug:
+    msg: "WARNING: kernel.yama.ptrace_scope is {{ ptrace_scope_current.stdout | trim }} (expected 3) on {{ inventory_hostname }}"
+  when:
+    - ptrace_scope_current.rc == 0
+    - ptrace_scope_current.stdout | trim != '3'
+
+- name: Set ptrace_scope at runtime
+  ansible.posix.sysctl:
+    name: kernel.yama.ptrace_scope
+    value: "3"
+    sysctl_set: true
+    state: present
+    reload: true
+
+- name: Persist ptrace_scope restriction
+  copy:
+    dest: /etc/sysctl.d/99-ssh-keysign-pwn.conf
+    content: |
+      kernel.yama.ptrace_scope = 3
+    mode: "0644"

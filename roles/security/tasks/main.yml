@@ -1,0 +1,15 @@
+---
+- import_tasks: copyfail.yml
+  tags: [copyfail, security]
+
+- import_tasks: dirtyfrag.yml
+  tags: [dirtyfrag, security]
+
+- import_tasks: ssh-keysign-pwn.yml
+  tags: [ssh-keysign-pwn, security]
+
+- import_tasks: pintheft.yml
+  tags: [pintheft, security]
+
+- import_tasks: xz_mitigation.yml
+  tags: [xz, security]
