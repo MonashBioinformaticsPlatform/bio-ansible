@@ -1,4 +1,7 @@
 ---
+- include_tasks: fix-perms.yml
+  tags: ['shpc', 'perms']
+
 - include_tasks: find-mamba.yml
   tags: shpc
 
@@ -17,3 +20,5 @@
   vars:
     version: "{{ shpc_version }}"
 
+- include_tasks: fix-perms.yml
+  tags: ['shpc', 'perms']
