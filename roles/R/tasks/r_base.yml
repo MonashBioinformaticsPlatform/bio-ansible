@@ -13,6 +13,25 @@
       dest: "{{ source_dir }}"
       copy: no
 
+- name: Check whether R {{ version }} libcurl 8 patch is already applied
+  tags: r_base
+  ansible.builtin.command:
+    cmd: grep -q 'LIBCURL_VERSION_MAJOR == 8' {{ source_dir }}/R-{{ version }}/configure
+  register: r_libcurl8_patch_applied
+  failed_when: false
+  changed_when: false
+  when: version is version('4.3.0', '<')
+
+- name: patch R {{ version }} for libcurl 8
+  tags: r_base
+  ansible.builtin.patch:
+    src: libcurl-8.patch
+    basedir: "{{ source_dir }}/R-{{ version }}"
+    strip: 0
+  when:
+    - version is version('4.3.0', '<')
+    - r_libcurl8_patch_applied.rc != 0
+
 # - name: "build r {{ version }}"
 #   tags: r_base
 #   shell: |
@@ -24,30 +43,66 @@
 #     creates: "{{ apps_dir }}/R/{{ version }}/bin/Rscript"
 #   when: (ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int < 20)
 
-# For Ubuntu 20.04 (and later ?) we use gfortran-10
 - name: build r {{ version }}
   tags: r_base
   shell: |
-    # for R 4.0.x
-    export FC=$(which gfortran-10)
-    
-    # for 3.6.x
-    # export FC=$(which gfortran-9)
+    set -euo pipefail
 
-    # for 3.5.x ?
-    # tried fort77, gfortran-7, gfortran-9, gfortran-10 -- all failed ?
+    {% if ansible_distribution == 'Ubuntu' and ansible_lsb.major_release | int >= 24 %}
+    export FC="$(command -v gfortran)"
+    {% elif ansible_distribution == 'Ubuntu' and ansible_lsb.major_release | int >= 20 %}
+    export FC="$(command -v gfortran-10 || command -v gfortran)"
+    {% else %}
+    export FC="$(command -v gfortran)"
+    {% endif %}
 
-    # for 3.4.x ?
-    # export FC=$(which fort77)
-    
+    {% if ansible_distribution == 'Ubuntu' and ansible_lsb.major_release | int >= 22 %}
+    export CPPFLAGS="${CPPFLAGS:-} -I/usr/include/tirpc"
+    export LIBS="${LIBS:-} -ltirpc"
+    {% endif %}
+
     cd {{ source_dir }}/R-{{ version }}
     make clean
     ./configure --prefix={{ apps_dir }}/R/{{ version }} --enable-R-shlib --enable-memory-profiling
     make -j {{ threads }}
     make install
   args:
+    executable: /bin/bash
     creates: "{{ apps_dir }}/R/{{ version }}/bin/Rscript"
-  #when: ansible_distribution == 'Ubuntu' and ansible_lsb.major_release|int >= 20
+  when: not static_build|bool
+
+# Experimental: Can we create static builds that better survive major Ubuntu upgrades ?
+- name: "build r {{ version }} (static)"
+  tags: r_base
+  shell: |
+    set -euo pipefail
+
+    {% if ansible_distribution == 'Ubuntu' and ansible_lsb.major_release | int >= 22 %}
+    export CPPFLAGS="${CPPFLAGS:-} -I/usr/include/tirpc"
+    export LIBS="${LIBS:-} -ltirpc"
+    {% endif %}
+
+    cd {{ source_dir }}/R-{{ version }}
+
+    # Attempt a static build. This requires static versions of all dependency libraries (zlib, pcre, curl, etc)
+    # to be installed on the build machine.
+    export LDFLAGS="-static"
+
+    make clean
+    ./configure --prefix={{ apps_dir }}/R/{{ version }} --disable-R-shlib --enable-memory-profiling
+    make -j {{ threads }}
+    make install
+  args:
+    executable: /bin/bash
+    creates: "{{ apps_dir }}/R/{{ version }}/bin/Rscript"
+  when: static_build|bool
+
+- name: Verify R {{ version }} installation
+  tags: r_base
+  command: "{{ apps_dir }}/R/{{ version }}/bin/R --version"
+  register: r_version_check
+  changed_when: false
+  failed_when: r_version_check.rc != 0
 
 - name: Ensure "{{ modules_core }}/R" exists
   tags: r_base
@@ -82,5 +137,3 @@
     dest: "{{ source_dir }}/R-{{ version }}.tar.gz"
     state: absent
   when: "del_src and r.stat.exists"
-
-
