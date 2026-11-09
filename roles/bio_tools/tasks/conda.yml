@@ -21,14 +21,6 @@
 #   shell: |
 #     {{ apps_dir }}/conda/bin/conda upgrade --yes
 
-- name: Add Mamba package to base conda env
-  tags: conda
-  shell: |
-    {{ apps_dir }}/conda/bin/conda install --yes -c conda-forge {{ item }}
-  args:
-    creates: "{{ apps_dir }}/conda/bin/mamba"
-  with_items:
-    - mamba
 
 - name: Set conda executable path
   tags: ["always"]
@@ -43,6 +35,22 @@
     - bioconda
     - r
     - serine
+
+- name: Update conda itself in base env
+  tags: conda
+  shell: "{{ conda_bin }} update -n base -c defaults --override-channels conda --yes"
+#  ignore_errors: yes
+
+- name: Upgrade all packages in base conda env
+  tags: conda
+  shell: "{{ conda_bin }} update --all --yes"
+
+- name: Add Mamba package to base conda env
+  tags: conda
+  shell: |
+    {{ conda_bin }} install --yes -c conda-forge mamba
+  args:
+    creates: "{{ apps_dir }}/conda/bin/mamba"
 
 - stat: path="{{ apps_dir }}/conda/bin/mamba"
   register: mamba_binary_check

@@ -1,0 +1,44 @@
+---
+- name: Set ownership of all files and directories to {{ main_guy }}
+  tags: perms
+  ansible.builtin.file:
+    path: "{{ apps_dir }}"
+    state: directory
+    recurse: true
+    follow: false
+    owner: "{{ main_guy }}"
+    group: "{{ main_guy }}"
+  become: true
+
+# sudo find $APPS_DIR -type d -perm /g+r -exec chmod o+r {} +
+# sudo find $APPS_DIR -type d -perm /g+x -exec chmod o+x {} +
+# sudo find $APPS_DIR -type f -perm /g+r -exec chmod o+r {} +
+# sudo find $APPS_DIR -type f -perm /g+x -exec chmod o+x {} +
+
+- name: Ensure 'other' has read permission if 'group' has read (directories)
+  tags: perms
+  ansible.builtin.shell: "find {{ item }} -type d -perm /g+r -exec chmod o+r {} +"
+  become: true
+  changed_when: false
+  with_items: [ "{{ apps_dir }}", "{{ source_dir }}" ]
+
+- name: Ensure 'other' has execute permission if 'group' has execute (directories)
+  tags: perms
+  ansible.builtin.shell: "find {{ item }} -type d -perm /g+x -exec chmod o+x {} +"
+  become: true
+  changed_when: false
+  with_items: [ "{{ apps_dir }}", "{{ source_dir }}" ]
+
+- name: Ensure 'other' has read permission if 'group' has read (files)
+  tags: perms
+  ansible.builtin.shell: "find {{ item }} -type f -perm /g+r -exec chmod o+r {} +"
+  become: true
+  changed_when: false
+  with_items: [ "{{ apps_dir }}", "{{ source_dir }}" ]
+
+- name: Ensure 'other' has execute permission if 'group' has execute (files)
+  tags: perms
+  ansible.builtin.shell: "find {{ item }} -type f -perm /g+x -exec chmod o+x {} +"
+  become: true
+  changed_when: false
+  with_items: [ "{{ apps_dir }}", "{{ source_dir }}" ]
