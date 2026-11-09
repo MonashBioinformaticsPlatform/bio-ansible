@@ -15,6 +15,8 @@
     # lmod installed in {{ bioansible_basepath }}/software/apps directory
     - lmod_etc
     - podman
+    # per-user memory cap and OOM score fix for shared multi-user hosts
+    - user_memory_limits
 
   become: true
 
