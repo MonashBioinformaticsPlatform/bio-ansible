@@ -1,0 +1,2 @@
+# sudo apt install certbot python3-certbot-apache
+# sudo certbot --apache --agree-tos --no-eff-email --non-interactive --redirect -d {{ webserver_fqdn }} -m {{ admin_email }} --post-hook "systemctl reload apache2.service"

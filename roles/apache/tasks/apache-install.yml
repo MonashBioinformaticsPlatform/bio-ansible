@@ -1,6 +1,7 @@
 ---
 
 - name: Install Apache web server
+  tags: ['apache', 'apache_install']
   apt: pkg={{item}} state=present
   with_items:
     - apache2
@@ -8,18 +9,21 @@
     - libapache2-mod-auth-openidc
 
 - name: Install libapache2-mod-wsgi
+  tags: ['apache', 'apache_install']
   apt: pkg={{item}} state=present
   with_items:
     - libapache2-mod-wsgi
   when: ansible_lsb.major_release|int < 22
 
 - name: Install libapache2-mod-wsgi-py3
+  tags: ['apache', 'apache_install']
   apt: pkg={{item}} state=present
   with_items:
     - libapache2-mod-wsgi-py3
   when: ansible_lsb.major_release|int >= 22
 
 - name: Enable Apache modules
+  tags: ['apache', 'apache_install']
   apache2_module: name={{item}} state=present
   with_items:
     - ssl

@@ -1,0 +1,37 @@
+
+
+- name: Check if host specific index.html template exists
+  tags: ['apache', 'apache_config']
+  stat:
+    path: "templates/{{ inventory_hostname }}/var/www/html/index.html.j2"
+  register: host_index_html
+
+- name: Ensure the directory for index.html exists
+  tags: ['apache', 'apache_config']
+  file:
+    path: /var/www/html
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Replace /var/www/html/index.html with role template if present
+  tags: ['apache', 'apache_config']
+  template:
+    src: "roles/apache/templates/index.html.j2"
+    dest: "/var/www/html/index.html"
+    owner: root
+    group: root
+    mode: '0644'
+  when: not host_index_html.stat.exists
+
+- name: Replace /var/www/html/index.html with inventory-specific template if role template is not present
+  tags: ['apache', 'apache_config']
+  template:
+    src: "templates/{{ inventory_hostname }}/var/www/html/index.html.j2"
+    dest: "/var/www/html/index.html"
+    owner: root
+    group: root
+    mode: '0644'
+  when: host_index_html.stat.exists
+
