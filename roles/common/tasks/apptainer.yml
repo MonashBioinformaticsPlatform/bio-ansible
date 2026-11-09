@@ -1,0 +1,43 @@
+---
+- name: Install Apptainer dependencies
+  tags: ['apptainer', 'apt']
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - squashfs-tools
+    # -squashfs-tools-ng  # Ubuntu 20.04
+    - libseccomp2
+    - cryptsetup-bin
+    - runc
+    - uidmap
+
+- name: Add Apptainer PPA repository
+  tags: apptainer
+  apt_repository:
+    repo: 'ppa:apptainer/ppa'
+    state: present
+    update_cache: yes
+
+- name: Install Apptainer package
+  tags: apptainer
+  apt:
+    name: apptainer
+    state: present 
+
+- name: /etc/apptainer/apptainer.conf; mount hostfs = yes
+  tags: ['apptainer']
+  ansible.builtin.lineinfile:
+    path: /etc/apptainer/apptainer.conf
+    regexp: '^mount hostfs ='
+    line: 'mount hostfs = yes'
+    state: present
+  when: apptainer_mount_all_hostfs
+
+- name: Configure /etc/apptainer/apptainer.conf (bindpaths)
+  tags: ['apptainer']
+  ansible.builtin.lineinfile:
+    path: /etc/apptainer/apptainer.conf
+    line: "bind path = {{ item }}"
+  with_items: "{{ apptainer_bindpaths | default([]) }}"

@@ -8,6 +8,8 @@
   apt:
     update_cache: yes
     cache_valid_time: 3600
+  environment:
+    TMPDIR: /scratch/tmp
 
 - name: apt-get common dependencies
   tags: apt
@@ -41,12 +43,14 @@
     - imagemagick
     - rustc
     - cargo
-    - awscli
+    #- awscli  # not in Ubuntu 24.04 - use snap instead
     - ncbi-entrez-direct
     - tabix
     - gzrt
     - fd-find
     - ncdu
+    - sqlite3
+    - ripgrep
     # nfs stuff
     - nfs-common
     # some extra security against tempfile vulns
@@ -110,7 +114,10 @@
     - libharfbuzz-dev  # devtools
     - libfribidi-dev   # devtools
     - libfftw3-dev     # qqconf  
-    - libsqlite0-dev
+    - libsqlite3-dev
+    - libtirpc-dev
+    - libgdal-dev      # sf
+    - libuv1-dev       # fs
     # RStudio deps
     - libjpeg62
     - liborc-0.4-0
@@ -119,9 +126,13 @@
     - libxml2-dev
     - libglpk40
     - libglpk-dev
+    - libclang-dev
     # Java
-    - default-jre
-    - default-jdk
+    #- default-jre
+    #- default-jdk
+    # A more up-to-date java than the 24.04 default
+    - openjdk-21-jre-headless
+    - openjdk-21-jdk-headless
     # mothur and uchime C++ deps
     - libboost-program-options-dev
     - libboost-iostreams-dev
@@ -144,7 +155,7 @@
     - libgtkmm-3.0-dev
     # extras
     - pandoc
-    - pandoc-citeproc
+    # - pandoc-citeproc  # not in Ubuntu 24.04
     - vim
     - tmux
     - screen

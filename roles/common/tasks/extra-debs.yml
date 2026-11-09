@@ -17,3 +17,8 @@
   tags: ['apt', 'quarto']
   apt:
     deb: "{{ quarto_deb_url }}"
+
+- name: Install mount-s3
+  tags: ['apt', 'aws', 'mount-s3']
+  apt:
+    deb: "{{ mount_s3_deb_url }}"

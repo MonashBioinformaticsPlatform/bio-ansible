@@ -50,15 +50,15 @@ r_base_version: 4.2.3
 use_rstudio_pro: false
 # rstudio_pro_key: "" # this should be defined in an ansible-vault file
 
-# When true, singularity.conf is set to make all host filesystems accessible
-# from inside singularity containers
-singularity_mount_all_hostfs: true
+# When true, apptainer.conf is set to make all host filesystems accessible
+# from inside apptainer containers
+apptainer_mount_all_hostfs: true
 
-# These are additional filesystems listed as bind paths in singularity.conf
-# If singularity_mount_all_hostfs is false, add any mounted filesystems to 
-# this list that you want accessible by tools inside singularity containers
+# These are additional filesystems listed as bind paths in apptainer.conf
+# If apptainer_mount_all_hostfs is false, add any mounted filesystems to 
+# this list that you want accessible by tools inside apptainer containers
 #
-#singularity_bindpaths:
+#apptainer_bindpaths:
 # - /mnt
 
 ###############################################################################
