@@ -3,15 +3,15 @@
 - name: Download qiime2 yml file
   tags: qiime2
   get_url:
-    url: "https://data.qiime2.org/distro/core/qiime2-{{ version }}-py38-linux-conda.yml"
-    dest: "{{ source_dir }}/qiime2-{{ version }}-py38-linux-conda.yml"
+    url: "https://raw.githubusercontent.com/qiime2/distributions/refs/heads/dev/{{ version }}/amplicon/released/qiime2-amplicon-ubuntu-latest-conda.yml"
+    dest: "{{ source_dir }}/qiime2-{{ version }}-conda.yml"
 
 - name: Create qiime2 conda environment
   tags: qiime2
   shell: |
     {{ conda_bin }} env create \
       --prefix={{ apps_dir }}/qiime2-{{ version }} \
-      --file={{ source_dir }}/qiime2-{{ version }}-py38-linux-conda.yml
+      --file={{ source_dir }}/qiime2-{{ version }}-conda.yml
   args:
     creates: "{{ apps_dir }}/qiime2-{{ version }}"
 

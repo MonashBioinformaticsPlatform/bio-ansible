@@ -1,0 +1,6 @@
+---
+
+- include_tasks: qiime2.yml
+  tags: qiime2
+  args: {apply: { tags: qiime2 }}
+  vars: { version: "{{ qiime2_version }}" }

@@ -34,10 +34,11 @@
     version: "{{ bcftools_version }}"
     htslib_v: "{{ htslib_version }}"
 
-- include_tasks: subread.yml
-  tags: subread
-  args: {apply: { tags: subread }}
-  vars: { version: "{{ subread_version }}" }
+# subread is now installed via conda
+# - include_tasks: subread.yml
+#   tags: subread
+#   args: {apply: { tags: subread }}
+#   vars: { version: "{{ subread_version }}" }
 
 - include_tasks: picard.yml
   tags: picard
@@ -81,10 +82,11 @@
 #   args: {apply: { tags: igv }}
 #   vars: { version: "{{ igv_version }}" }
 
-- include_tasks: bedtools.yml
-  tags: bedtools
-  args: {apply: { tags: bedtools }}
-  vars: { version: "{{ bedtools_version }}" }
+# No longer compiles easily on Ubuntu 24.04, moved to a bioconda version
+# - include_tasks: bedtools.yml
+#   tags: bedtools
+#   args: {apply: { tags: bedtools }}
+#   vars: { version: "{{ bedtools_version }}" }
 
 # If for some reason you'd prefer to compile NCBI-BLAST from source (slow)
 # - include_tasks: blast.yml
@@ -113,10 +115,11 @@
 #   args: {apply: { tags: mimodd }}
 #   vars: { version: "{{ mimodd_version }}" }
 
-- include_tasks: multiqc.yml
-  tags: multiqc
-  args: {apply: { tags: multiqc }}
-  vars: { version: "{{ multiqc_version }}" }
+# Using conda version of multiqc instead
+# - include_tasks: multiqc.yml
+#   tags: multiqc
+#   args: {apply: { tags: multiqc }}
+#   vars: { version: "{{ multiqc_version }}" }
 
 # - include_tasks: cutadapt.yml
 #   tags: cutadapt
@@ -141,10 +144,11 @@
 #   args: {apply: { tags: qiime }}
 #   vars: { version: "{{ qiime_version }}" }
 
-- include_tasks: snpeff.yml
-  tags: snpeff
-  args: {apply: { tags: snpeff }}
-  vars: { version: "{{ snpeff_version }}" }
+# snpeff is now installed via conda
+# - include_tasks: snpeff.yml
+#   tags: snpeff
+#   args: {apply: { tags: snpeff }}
+#   vars: { version: "{{ snpeff_version }}" }
 
 - include_tasks: spades.yml
   tags: spades
@@ -181,15 +185,17 @@
 #   args: {apply: { tags: bioperl }}
 #   vars: { version: "{{ bioperl_version }}" }
 
-- include_tasks: muscle.yml
-  tags: muscle
-  args: {apply: { tags: muscle }}
-  vars: { version: "{{ muscle_version }}" }
+# muscle is now installed via conda
+# - include_tasks: muscle.yml
+#   tags: muscle
+#   args: {apply: { tags: muscle }}
+#   vars: { version: "{{ muscle_version }}" }
 
-- include_tasks: cdhit.yml
-  tags: cdhit
-  args: {apply: { tags: cdhit }}
-  vars: { version: "{{ cdhit_version }}" }
+# cdhit is now installed via conda
+# - include_tasks: cdhit.yml
+#   tags: cdhit
+#   args: {apply: { tags: cdhit }}
+#   vars: { version: "{{ cdhit_version }}" }
 
 # - include_tasks: mothur.yml
 #   tags: mothur
@@ -225,8 +231,3 @@
   tags: minimap2
   args: {apply: { tags: minimap2 }}
   vars: { version: "{{ minimap2_version }}" }
-
-- include_tasks: qiime2.yml
-  tags: qiime2
-  args: {apply: { tags: qiime2 }}
-  vars: { version: "{{ qiime2_version }}" }

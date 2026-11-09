@@ -1,4 +1,6 @@
 ---
+- import_tasks: fix-perms.yml
+
 - name: Find Python3 version
   tags: ["always", "python"]
   command: "{{ python3_executable }} --version"
@@ -14,20 +16,28 @@
   tags: ["always", "python"]
   set_fact: python3_version_major_minor="{{ python3_v_str.stdout.split()[1].rsplit('.', 1)[0] }}"
 
+- name: Initialize python2_v_str as empty
+  tags: ["always", "python"]
+  set_fact:
+    python2_v_str: {}
+
 - name: Find Python2 version
   tags: ["always", "python"]
   command: "{{ python2_executable }} --version"
   register: python2_v_str
+  ignore_errors: yes
 
 - name: Debug find python2 version
   debug:
     msg: "{{ python2_v_str.stderr }}" 
   tags: ["always", "python"]
+  when: python2_v_str is defined and not python2_v_str.failed
 
 # Python 2.x prints --version to stderr (not stdout like Python 3.x !)
 - name: Extract Python2 major version (ie 2.6, 2.7)
   tags: ["always", "python"]
   set_fact: python2_version_major_minor="{{ python2_v_str.stderr.split()[1].rsplit('.', 1)[0] }}"
+  when: python2_v_str is defined and not python2_v_str.failed
 
 # TODO: Make this it's own role in roles/conda, include it as a dependency in roles/bio_tools/default/main
 - include_tasks: conda.yml
@@ -46,6 +56,13 @@
   set_fact: conda_bin={{ apps_dir }}/conda/bin/mamba
   when: mamba_binary_check.stat.exists == True
 
-- include: tools.yml
+- import_tasks: tools.yml
 
-- include: tools-conda.yml
+- import_tasks: tools-conda.yml
+
+# The QIIME2 conda environment is particularly slow to install,
+# so we do it and any other slow packages last
+- import_tasks: tools-slow.yml
+
+- import_tasks: fix-perms.yml
+  tags: ["always"]

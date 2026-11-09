@@ -214,3 +214,65 @@
     conda_packages:
       - 'seqkit={{ seqkit_version }}'
 
+- include_tasks: conda-package.yml
+  tags: mmseqs
+  args: {apply: { tags: mmseqs }}
+  vars:
+    module_name: mmseqs
+    version: "{{ mmseqs2_version }}"
+    conda_packages:
+      - 'mmseqs2={{ mmseqs2_version }}'
+
+- include_tasks: conda-package.yml
+  tags: bedtools
+  args: {apply: { tags: bedtools }}
+  vars:
+    module_name: bedtools
+    version: "{{ bedtools_version }}"
+    conda_packages:
+      - 'bedtools={{ bedtools_version }}'
+
+- include_tasks: conda-package.yml
+  tags: multiqc
+  args: {apply: { tags: multiqc }}
+  vars:
+    module_name: multiqc
+    version: "{{ multiqc_version }}"
+    conda_packages:
+      - 'multiqc={{ multiqc_version }}'
+
+- include_tasks: conda-package.yml
+  tags: subread
+  args: {apply: { tags: subread }}
+  vars:
+    module_name: subread
+    version: "{{ subread_version }}"
+    conda_packages:
+      - 'subread={{ subread_version }}'
+
+- include_tasks: conda-package.yml
+  tags: snpeff
+  args: {apply: { tags: snpeff }}
+  vars:
+    module_name: snpeff
+    version: "{{ snpeff_version }}"
+    conda_packages:
+      - 'snpeff={{ snpeff_version }}'
+
+- include_tasks: conda-package.yml
+  tags: muscle
+  args: {apply: { tags: muscle }}
+  vars:
+    module_name: muscle
+    version: "{{ muscle_version }}"
+    conda_packages:
+      - 'muscle={{ muscle_version }}'
+
+- include_tasks: conda-package.yml
+  tags: cdhit
+  args: {apply: { tags: cdhit }}
+  vars:
+    module_name: cdhit
+    version: "{{ cdhit_version }}"
+    conda_packages:
+      - 'cdhit={{ cdhit_version }}'
