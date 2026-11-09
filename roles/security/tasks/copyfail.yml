@@ -1,0 +1,53 @@
+---
+# Mitigate CopyFail (CVE-2026-31431) — Ubuntu only
+
+- name: Gather installed package facts
+  package_facts:
+    manager: auto
+
+- name: Set fact if Ubuntu kernel package is installed
+  set_fact:
+    kernel_installed: >-
+      {{
+        'linux-image-generic' in ansible_facts.packages or
+        'linux-image-amd64' in ansible_facts.packages
+      }}
+
+- name: Get list of active modules
+  command: lsmod
+  register: lsmod_output
+  changed_when: false
+  when: kernel_installed | bool
+
+- name: Parse loaded modules into list
+  set_fact:
+    loaded_modules: "{{ lsmod_output.stdout_lines[1:] | map('split') | map('first') | list }}"
+  when: lsmod_output.stdout_lines is defined
+
+- name: Report loaded CopyFail-related kernel module
+  debug:
+    msg: "WARNING: Kernel module 'algif_aead' is currently loaded on {{ inventory_hostname }}"
+  when:
+    - loaded_modules is defined
+    - "'algif_aead' in loaded_modules"
+
+- name: Attempt to unload algif_aead kernel module
+  command: modprobe -r algif_aead
+  failed_when: false
+  changed_when: false
+  when:
+    - loaded_modules is defined
+    - "'algif_aead' in loaded_modules"
+
+- name: Persistently disable algif_aead kernel module
+  copy:
+    dest: /etc/modprobe.d/disable-algif.conf
+    content: |
+      install algif_aead /bin/false
+    mode: "0644"
+  register: modprobe_algif
+  when: kernel_installed | bool
+
+- name: Update initramfs after CopyFail modprobe changes
+  command: update-initramfs -u
+  when: modprobe_algif.changed | default(false)

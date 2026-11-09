@@ -1,0 +1,63 @@
+---
+# Mitigate DirtyFrag (CVE-2026-43284) — Ubuntu only
+
+- name: Gather installed package facts
+  package_facts:
+    manager: auto
+
+- name: Set fact if Ubuntu kernel package is installed
+  set_fact:
+    kernel_installed: >-
+      {{
+        'linux-image-generic' in ansible_facts.packages or
+        'linux-image-amd64' in ansible_facts.packages
+      }}
+
+- name: Get list of active modules
+  command: lsmod
+  register: lsmod_output
+  changed_when: false
+  when: kernel_installed | bool
+
+- name: Parse loaded modules into list
+  set_fact:
+    loaded_modules: "{{ lsmod_output.stdout_lines[1:] | map('split') | map('first') | list }}"
+  when: lsmod_output.stdout_lines is defined
+
+- name: Report loaded DirtyFrag-related kernel modules
+  debug:
+    msg: "WARNING: Kernel module '{{ item }}' is currently loaded on {{ inventory_hostname }}"
+  loop:
+    - esp4
+    - esp6
+    - rxrpc
+  when:
+    - loaded_modules is defined
+    - item in loaded_modules
+
+- name: Attempt to unload DirtyFrag-related kernel modules
+  command: "modprobe -r {{ item }}"
+  loop:
+    - esp4
+    - esp6
+    - rxrpc
+  failed_when: false
+  changed_when: false
+  when:
+    - loaded_modules is defined
+    - item in loaded_modules
+
+- name: Persistently disable DirtyFrag-related kernel modules
+  copy:
+    dest: /etc/modprobe.d/dirtyfrag.conf
+    content: |
+      install esp4 /bin/false
+      install esp6 /bin/false
+      install rxrpc /bin/false
+    mode: "0644"
+  register: modprobe_dirtyfrag
+  when: kernel_installed | bool
+
+- name: Update initramfs after DirtyFrag modprobe changes
+  command: update-initramfs -u
+  when: modprobe_dirtyfrag.changed | default(false)

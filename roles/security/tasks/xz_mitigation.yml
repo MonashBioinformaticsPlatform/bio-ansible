@@ -1,0 +1,28 @@
+- name: Get xz version
+  tags: xz
+  shell: xz --version
+  register: xz_version_result
+
+- name: Echo xz_version_result
+  tags: xz
+  debug:
+    var: xz_version_result 
+
+- name: Fail the playbook if xz is version 5.6.0 or 5.6.1
+  tags: xz
+  fail:
+    msg: "Vulnerable xz version detected (CVE-2024-3094). Please upgrade."
+  when:
+    - "(' 5.6.0' in xz_version_result.stdout) or ('5.6.1' in xz_version_result.stdout)"
+
+- name: Add comment and line to /etc/environment
+  tags: xz
+  blockinfile:
+    path: /etc/environment
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    block: |
+      # This environment variable is a killswitch for the xz backdoor (CVE-2024-3094)
+      # While you should ensure you don't have a vulrnerable version,
+      # this is an extra precaution in case there are vulnerable userspace (eg conda)
+      # versions that have not been detected
+      yolAbejyiejuvnup=Evjtgvsh5okmkAvj
