@@ -83,7 +83,7 @@
     - libtbb-dev
     # extras
     - pandoc
-    - pandoc-citeproc
+    # - pandoc-citeproc  # not in Ubuntu 24.04
     - texlive
     - texlive-latex-extra
     # required to knit RMarkdown -> PDF with Unicode using `latex_engine: xelatex`
