@@ -4,3 +4,9 @@
 - name: Reload systemd
   systemd:
     daemon_reload: yes
+
+- name: Restart systemd-oomd
+  systemd:
+    name: systemd-oomd
+    state: restarted
+  when: not ansible_check_mode

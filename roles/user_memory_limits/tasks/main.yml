@@ -52,3 +52,70 @@
       [Manager]
       DefaultOOMScoreAdjust={{ user_default_oom_score_adjust }}
   notify: Reload systemd
+
+# --- systemd-oomd -----------------------------------------------------------
+# Needs PSI and cgroup v2 with the memory controller (present on bio1-4).
+# Only slices with ManagedOOMMemoryPressure=kill are acted on; here that is
+# every user slice. oomd kills the whole offending cgroup (e.g. an ssh
+# session scope), not a single process.
+
+- name: Install systemd-oomd
+  tags: ['oom']
+  apt:
+    name: systemd-oomd
+    state: present
+    # No update_cache here: a failing third-party apt repo (seen on bio4: expired
+    # or missing keys) makes the whole cache update fail, and the package is
+    # already in the existing index.
+  when: user_memory_limits_oomd | bool
+
+- name: Create oomd config directory
+  tags: ['oom']
+  file:
+    path: /etc/systemd/oomd.conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  when: user_memory_limits_oomd | bool
+
+- name: Set oomd memory pressure duration
+  tags: ['oom']
+  copy:
+    dest: /etc/systemd/oomd.conf.d/50-oomd.conf
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      # Managed by Ansible (role user_memory_limits)
+      [OOM]
+      DefaultMemoryPressureDurationSec={{ user_oomd_memory_pressure_duration }}
+  when: user_memory_limits_oomd | bool
+  notify: Restart systemd-oomd
+
+- name: Enable oomd memory pressure kills on user slices
+  tags: ['oom']
+  copy:
+    dest: /etc/systemd/system/user-.slice.d/60-oomd.conf
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      # Managed by Ansible (role user_memory_limits)
+      [Slice]
+      ManagedOOMMemoryPressure=kill
+      ManagedOOMMemoryPressureLimit={{ user_oomd_memory_pressure_limit }}
+  when: user_memory_limits_oomd | bool
+  notify:
+    - Reload systemd
+    - Restart systemd-oomd
+
+- name: Enable and start systemd-oomd
+  tags: ['oom']
+  systemd:
+    name: systemd-oomd
+    enabled: yes
+    state: started
+  # In --check mode the package is not installed yet, so the unit can't be found.
+  ignore_errors: "{{ ansible_check_mode }}"
+  when: user_memory_limits_oomd | bool
