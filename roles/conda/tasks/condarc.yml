@@ -1,4 +1,5 @@
 - name: Setup custom system-wide condarc
+  tags: [conda]
   ansible.builtin.template:
     src: condarc.j2
     dest: "{{ conda_base }}/.condarc"
