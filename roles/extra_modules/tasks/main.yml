@@ -29,4 +29,5 @@
 #- include_tasks: rclone-conda.yml
 #  tags: rclone
 
-- include: environment-script.yml
+- include_tasks: environment-script.yml
+  args: {apply: { tags: environment }}
