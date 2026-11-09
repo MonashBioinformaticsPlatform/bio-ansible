@@ -1,0 +1,17 @@
+---
+- name: Ensure /etc/docker directory exists
+  become: true
+  file:
+    path: /etc/docker
+    state: directory
+    mode: "0755"
+
+- name: Deploy Docker daemon.json with log rotation settings
+  become: true
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart docker

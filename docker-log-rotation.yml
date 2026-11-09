@@ -1,0 +1,12 @@
+---
+# Ensures Docker log rotation (json-file max-size/max-file) is configured on
+# every host running long-lived Docker containers.
+#
+# Run with: ansible-playbook -i hosts docker-log-rotation.yml
+#
+# Note: existing containers do not inherit daemon-level log-opts
+# retroactively - only newly created/recreated containers pick them up.
+- hosts: bio1,bio2,bio3,bio4,webserver
+  become: true
+  roles:
+    - docker_log_rotation

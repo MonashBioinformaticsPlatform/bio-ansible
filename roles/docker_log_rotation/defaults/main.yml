@@ -1,0 +1,9 @@
+---
+# Prevents unbounded growth of container json-file logs, which can
+# fill disks and data volumes.
+docker_log_max_size: "50m"
+docker_log_max_file: "5"
+
+# Per-host overrides (e.g. data-root, experimental) go in host_vars/<host>.yml
+# as docker_daemon_extra, and are merged into the generated daemon.json.
+docker_daemon_extra: {}

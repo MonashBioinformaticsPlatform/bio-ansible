@@ -1,0 +1,7 @@
+{{ docker_daemon_extra | combine({
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": docker_log_max_size,
+    "max-file": docker_log_max_file
+  }
+}) | to_nice_json }}
