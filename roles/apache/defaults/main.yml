@@ -8,6 +8,8 @@ webserver_alt_fqdn: 127.0.0.1
 ssl_key: /etc/ssl/private/ssl-cert-snakeoil.key
 ssl_cert: /etc/ssl/certs/ssl-cert-snakeoil.pem
 
+use_certbot: false
+
 # Automatically generate a robots.txt to deter search engines
 # via the Apache config
 no_robots: true

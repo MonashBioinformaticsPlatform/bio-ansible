@@ -1,7 +1,13 @@
 ---
 
-- include: apache-install.yml
-  tags: ['apache']
+- include_tasks: apache-install.yml
+  tags: ['apache', 'apache_install']
 
-- include: apache-config.yml
-  tags: ['apache_config']
+- include_tasks: apache-config.yml
+  tags: ['apache', 'apache_config']
+
+- include_tasks: apache-homepage.yml
+  tags: ['apache', 'apache_config', 'apache_homepage']
+
+- include_tasks: certbot.yml
+  tags: ['apache', 'apache_certbot']

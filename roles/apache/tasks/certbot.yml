@@ -1,0 +1,86 @@
+# TODO: If host has FDQN in vars and use_certbot: true, then do this (or use an Ansible community/galaxy module for it)
+# 
+# apt install certbot python3-certbot-apache
+# certbot --apache --agree-tos --no-eff-email --non-interactive --redirect -d www.example.com -m admin@example.com --post-hook "systemctl reload apache2.service"
+
+#
+# ansible-galaxy collection install community.general
+#
+
+- name: Install Certbot and dependencies
+  tags: ['apache', 'apache_certbot']
+  apt:
+    name: 
+      - certbot
+      - python3-certbot-apache
+    state: present
+  when: use_certbot
+
+- name: Ensure the directory for cerbot account key exists
+  tags: ['apache', 'apache_certbot']
+  file:
+    path: /etc/letsencrypt
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Check if certbot account key exists
+  stat:
+    path: /etc/letsencrypt/account.key
+  register: certbot_account_key
+  when: use_certbot
+
+- name: Generate PEM format account key for certbot account
+  tags: ['apache', 'apache_certbot']
+  community.crypto.openssl_privatekey:
+    path: /etc/letsencrypt/account.key
+    size: 4096
+    type: RSA
+    mode: '0600'
+  when: use_certbot and not (certbot_account_key.stat.exists | default(false))
+
+- name: Generate a private key
+  community.crypto.openssl_privatekey:
+    path: "/etc/letsencrypt/live/{{ webserver_fqdn }}/privkey.key"
+    type: RSA
+    size: 4096
+
+- name: Generate an OpenSSL Certificate Signing Request (CSR)
+  community.crypto.openssl_csr:
+    path: "/etc/letsencrypt/{{ webserver_fqdn }}_letsencrypt.csr"
+    privatekey_path: "/etc/letsencrypt/live/{{ webserver_fqdn }}/privkey.key"
+    common_name: "{{ webserver_fqdn }}"
+
+- name: Obtain and install SSL certificate with Certbot
+  tags: ['apache', 'apache_certbot']
+  community.crypto.acme_certificate:
+    account_email: "{{ server_admin_email }}"
+    acme_directory: https://acme-v02.api.letsencrypt.org/directory
+    acme_version: 2
+    csr: "/etc/letsencrypt/{{ webserver_fqdn }}_letsencrypt.csr"
+    #domain: "{{ webserver_fqdn }}"
+    #challenges:
+    #  - http01: {}
+    #key_size: 4096
+    fullchain_dest: /etc/letsencrypt/live/{{ webserver_fqdn }}/fullchain.pem
+    #privkey_dest: "/etc/letsencrypt/live/{{ webserver_fqdn }}/privkey.key"
+    chain_dest: /etc/letsencrypt/live/{{ webserver_fqdn }}/chain.pem
+    # generate like: 
+    account_key_src: /etc/letsencrypt/account.key
+    terms_agreed: true
+    #state: present
+  register: certbot_result
+  when:
+    - use_certbot
+    - webserver_fqdn is defined
+    - server_admin_email is defined
+
+- name: Ensure Apache is reloaded after Certbot run
+  tags: ['apache', 'apache_certbot']
+  systemd:
+    name: apache2
+    state: reloaded
+  when:
+    - use_certbot
+    - certbot_result.changed
