@@ -1,3 +1,8 @@
+# Prevent Apache advertising its version.
+# These could instead be modified in /etc/apache2/conf-enabled/security.conf
+ServerTokens Prod
+ServerSignature Off
+
 <VirtualHost *:80>
         ServerName {{ webserver_fqdn }}
         ServerAlias {{ webserver_alt_fqdn }}
