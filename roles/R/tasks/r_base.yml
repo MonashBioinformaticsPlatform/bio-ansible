@@ -62,7 +62,7 @@
     {% endif %}
 
     cd {{ source_dir }}/R-{{ version }}
-    make clean
+    if [ -f Makefile ]; then make clean; fi
     ./configure --prefix={{ apps_dir }}/R/{{ version }} --enable-R-shlib --enable-memory-profiling
     make -j {{ threads }}
     make install
@@ -88,7 +88,7 @@
     # to be installed on the build machine.
     export LDFLAGS="-static"
 
-    make clean
+    if [ -f Makefile ]; then make clean; fi
     ./configure --prefix={{ apps_dir }}/R/{{ version }} --disable-R-shlib --enable-memory-profiling
     make -j {{ threads }}
     make install
